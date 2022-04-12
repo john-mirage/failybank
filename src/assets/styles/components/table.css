@@ -1,0 +1,25 @@
+.table {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+.table__row {
+    border-bottom: 1px solid var(--color-light-divider);
+}
+
+.table__row:last-child {
+    border: none;
+}
+
+.table__cell {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.table__cell--icon {
+    text-align: right;
+}

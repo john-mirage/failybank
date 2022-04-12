@@ -6,9 +6,9 @@
 
 .text--tab {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
     color: var(--color-light-text-alt);
 }
 
@@ -22,6 +22,7 @@
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: var(--color-light-text-alt);
+    margin-bottom: 4px;
 }
 
 .dark .text--title {
@@ -29,10 +30,10 @@
 }
 
 .text--balance {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.6px;
     color: var(--color-light-text);
 }
 
@@ -40,29 +41,10 @@
     color: var(--color-dark-text);
 }
 
-.text--name {
-    font-size: 16px;
-    font-weight: 600;
+.text--normal {
+    font-size: 28px;
+    font-weight: 700;
     color: var(--color-light-text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.dark .text--name {
-    color: var(--color-dark-text);
-}
-
-.text--number {
-    font-size: 24px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    color: var(--color-light-text);
-}
-
-.dark .text--number {
-    color: var(--color-dark-text);
 }
 
 .text--green {

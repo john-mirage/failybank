@@ -12,7 +12,7 @@
     font-weight: 600;
     color: var(--color-light-text);
     background-color: var(--color-light-fg);
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .input::placeholder {
