@@ -1,16 +1,19 @@
 .button {
     box-sizing: border-box;
     display: block;
-    width: auto;
-    height: auto;
-    padding: 16px 24px;
+    width: 148px;
+    height: 48px;
     background-color: var(--color-red);
     border: none;
+    cursor: pointer;
+}
+
+.button__label {
+    box-sizing: border-box;
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
     color: var(--color-dark-text);
     text-transform: uppercase;
     letter-spacing: 1px;
-    cursor: pointer;
 }

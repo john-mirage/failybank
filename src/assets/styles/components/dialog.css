@@ -27,11 +27,11 @@
 .dialog__spinner {
     display: none;
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
+    width: 72px;
+    height: 72px;
     border-radius: 9999px;
-    border: 10px solid var(--color-light-spinner-track);
-    border-top: 10px solid var(--color-red);
+    border: 8px solid var(--color-light-spinner-track);
+    border-top: 8px solid var(--color-red);
     animation: spin 2s linear infinite;
     margin: auto;
 }
