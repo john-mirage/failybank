@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="/src/assets/images/maze.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;600;700&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FailyBank</title>
+    </head>
+
+    <body class="page">
+
+        <main class="dialog dialog--loaded">
+            
+            <div class="dialog__spinner"></div>
+
+            <div class="dialog__view">
+                <input class="dialog__tab-input" type="radio" name="tab-selector" id="tab-selector-1" checked>
+                <input class="dialog__tab-input" type="radio" name="tab-selector" id="tab-selector-2">
+                <input class="dialog__tab-input" type="radio" name="tab-selector" id="tab-selector-3">
+                <input class="dialog__tab-input" type="radio" name="tab-selector" id="tab-selector-4">
+                <input class="dialog__tab-input" type="radio" name="tab-selector" id="tab-selector-5">
+
+                <header class="tab-list">
+                    <label class="tab" for="tab-selector-1" id="tab-1">
+                        <span class="tab__text">Mon compte</span>
+                    </label>
+                    <label class="tab" for="tab-selector-2" id="tab-2">
+                        <span class="tab__text">Déposer</span>
+                    </label>
+                    <label class="tab" for="tab-selector-3" id="tab-3">
+                        <span class="tab__text">Transférer</span>
+                    </label>
+                    <label class="tab" for="tab-selector-4" id="tab-4">
+                        <span class="tab__text">Retirer</span>
+                    </label>
+                    <label class="tab" for="tab-selector-5" id="tab-5">
+                        <span class="tab__text">Entreprise</span>
+                    </label>
+                </header>
+
+                <div class="dialog__account"></div>
+            </div>
+
+        </main>
+
+        <script type="module" src="/src/main.js"></script>
+    </body>
+
+</html>

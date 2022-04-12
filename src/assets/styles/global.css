@@ -1,0 +1,18 @@
+:root {
+    --color-dark-bg: #212529;
+    --color-dark-fg: #343a40;
+    --color-dark-text: #f8f9fa;
+    --color-dark-text-alt: #dee2e6;
+
+    --color-light-bg: #f1f3f5;
+    --color-light-fg: #f8f9fa;
+    --color-light-text: #212529;
+    --color-light-text-alt: #868e96;
+    --color-light-spinner-track: #ced4da;
+
+    --color-red: #fa5252;
+}
+
+html {
+    font-family: "Red Hat Text", sans-serif;
+}
