@@ -1,0 +1,16 @@
+.button {
+    box-sizing: border-box;
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 12px 24px;
+    background-color: #ffa8a8;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-light-text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

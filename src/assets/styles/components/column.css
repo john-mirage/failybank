@@ -16,7 +16,3 @@
     height: auto;
     margin-bottom: 24px;
 }
-
-.column__section:last-child {
-    margin-bottom: 0;
-}

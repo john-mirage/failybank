@@ -1,14 +1,14 @@
-#tab-selector-1:checked ~ .tab-list > #tab-1 {border-bottom: 4px solid var(--color-red);}
-#tab-selector-2:checked ~ .tab-list > #tab-2 {border-bottom: 4px solid var(--color-red);}
-#tab-selector-3:checked ~ .tab-list > #tab-3 {border-bottom: 4px solid var(--color-red);}
-#tab-selector-4:checked ~ .tab-list > #tab-4 {border-bottom: 4px solid var(--color-red);}
-#tab-selector-5:checked ~ .tab-list > #tab-5 {border-bottom: 4px solid var(--color-red);}
+#tab-selector-1:checked ~ .dialog__header > .tab-list > #tab-1 {border-bottom: 4px solid var(--color-red);}
+#tab-selector-2:checked ~ .dialog__header > .tab-list > #tab-2 {border-bottom: 4px solid var(--color-red);}
+#tab-selector-3:checked ~ .dialog__header > .tab-list > #tab-3 {border-bottom: 4px solid var(--color-red);}
+#tab-selector-4:checked ~ .dialog__header > .tab-list > #tab-4 {border-bottom: 4px solid var(--color-red);}
+#tab-selector-5:checked ~ .dialog__header > .tab-list > #tab-5 {border-bottom: 4px solid var(--color-red);}
 
-#tab-selector-1:checked ~ .tab-list > #tab-1 > .tab__text {color: var(--color-light-text);}
-#tab-selector-2:checked ~ .tab-list > #tab-2 > .tab__text {color: var(--color-light-text);}
-#tab-selector-3:checked ~ .tab-list > #tab-3 > .tab__text {color: var(--color-light-text);}
-#tab-selector-4:checked ~ .tab-list > #tab-4 > .tab__text {color: var(--color-light-text);}
-#tab-selector-5:checked ~ .tab-list > #tab-5 > .tab__text {color: var(--color-light-text);}
+#tab-selector-1:checked ~ .dialog__header > .tab-list > #tab-1 > .text {color: var(--color-light-text);}
+#tab-selector-2:checked ~ .dialog__header > .tab-list > #tab-2 > .text {color: var(--color-light-text);}
+#tab-selector-3:checked ~ .dialog__header > .tab-list > #tab-3 > .text {color: var(--color-light-text);}
+#tab-selector-4:checked ~ .dialog__header > .tab-list > #tab-4 > .text {color: var(--color-light-text);}
+#tab-selector-5:checked ~ .dialog__header > .tab-list > #tab-5 > .text {color: var(--color-light-text);}
 
 #tab-selector-1:checked ~ #tab-content-1 {display: block;}
 #tab-selector-2:checked ~ #tab-content-2 {display: block;}

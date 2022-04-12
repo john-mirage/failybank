@@ -1,29 +1,52 @@
 .text {
+    box-sizing: border-box;
+    display: block;
     margin: 0;
 }
 
-.text--section {
-    font-size: 20px;
+.text--tab {
+    font-size: 13px;
     font-weight: 600;
-    line-height: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
     color: var(--color-light-text-alt);
+}
+
+.text--title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--color-light-text-alt);
+}
+
+.text--balance {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-light-text);
+}
+
+.text--name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-light-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .text--number {
     font-size: 24px;
-    font-weight: 700;
-    line-height: 32px;
-    color: var(--color-light-text);
-    text-transform: uppercase;
-}
-
-.text--name {
-    font-size: 24px;
     font-weight: 600;
-    line-height: 32px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
     color: var(--color-light-text);
 }
 
 .text--green {
     color: var(--color-green);
 }
+
+

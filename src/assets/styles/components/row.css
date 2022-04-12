@@ -11,6 +11,18 @@
     height: 100%;
 }
 
+.row--align-center {
+    align-items: center;
+}
+
 .row__section {
     flex: 1 1 0%;
+}
+
+.row__section--fixed {
+    flex: 0 0 auto;
+}
+
+.row__section--align-right {
+    text-align: right;
 }

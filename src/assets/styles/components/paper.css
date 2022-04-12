@@ -1,36 +1,25 @@
 .paper {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: auto;
+    height: 100%;
     background-color: var(--color-light-fg);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border: 1px solid #e9ecef;
     border-radius: 4px;
 }
 
-.paper--h-full {
-    height: 100%;
-}
-
-.paper--mt-auto {
-    margin-top: auto;
-}
-
 .paper__header {
+    flex: 0 0 auto;
     box-sizing: border-box;
     width: 100%;
     height: auto;
     padding: 16px;
-    border-bottom: 1px solid var(--color-light-spinner-track);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 24px;
-    color: var(--color-light-text-alt);
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin: 0;
+    border-bottom: 1px solid var(--color-light-divider);
 }
 
 .paper__body {
+    flex: 1 1 0%;
     box-sizing: border-box;
     width: 100%;
     height: auto;

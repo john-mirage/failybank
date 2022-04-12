@@ -6,14 +6,15 @@
 
     --color-light-bg: #f1f3f5;
     --color-light-fg: #f8f9fa;
-    --color-light-text: #212529;
+    --color-light-text: #343a40;
     --color-light-text-alt: #868e96;
+    --color-light-divider: #dee2e6;
     --color-light-spinner-track: #ced4da;
 
-    --color-red: #fa5252;
+    --color-red: #f03e3e;
     --color-green: #37b24d;
 }
 
 html {
-    font-family: "Red Hat Text", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
