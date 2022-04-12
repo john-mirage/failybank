@@ -10,6 +10,12 @@
 #tab-selector-4:checked ~ .dialog__header > .tab-list > #tab-4 > .text {color: var(--color-light-text);}
 #tab-selector-5:checked ~ .dialog__header > .tab-list > #tab-5 > .text {color: var(--color-light-text);}
 
+.dark #tab-selector-1:checked ~ .dialog__header > .tab-list > #tab-1 > .text {color: var(--color-dark-text);}
+.dark #tab-selector-2:checked ~ .dialog__header > .tab-list > #tab-2 > .text {color: var(--color-dark-text);}
+.dark #tab-selector-3:checked ~ .dialog__header > .tab-list > #tab-3 > .text {color: var(--color-dark-text);}
+.dark #tab-selector-4:checked ~ .dialog__header > .tab-list > #tab-4 > .text {color: var(--color-dark-text);}
+.dark #tab-selector-5:checked ~ .dialog__header > .tab-list > #tab-5 > .text {color: var(--color-dark-text);}
+
 #tab-selector-1:checked ~ #tab-content-1 {display: block;}
 #tab-selector-2:checked ~ #tab-content-2 {display: block;}
 #tab-selector-3:checked ~ #tab-content-3 {display: block;}

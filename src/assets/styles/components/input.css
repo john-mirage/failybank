@@ -14,6 +14,10 @@
     color: var(--color-light-text);
 }
 
+.dark .input {
+    color: var(--color-dark-text);
+}
+
 .input:focus {
     outline: none;
 }

@@ -30,7 +30,9 @@
 
                 <!-- Dialog header -->
                 <header class="dialog__header">
-                    <img class="dialog__logo" src="/src/assets/images/logo.svg" alt="Maze Bank logo">
+                    <svg class="dialog__logo" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
+                    </svg>
                     <div class="tab-list">
                         <label class="tab-list__item" for="tab-selector-1" id="tab-1">
                             <span class="text text--tab">Mon compte</span>
@@ -64,9 +66,9 @@
 
                 <!-- Dialog body / account -->
                 <div class="dialog__body" id="tab-content-1">
-                    <div class="row row--h-full">
+                    <div class="row">
                         <div class="row__section">
-                            <div class="column column--h-full">
+                            <div class="column">
                                 <div class="column__section">
                                     <h2 class="text text--title">Solde</h2>
                                     <p class="text text--balance text--green">1,000,000$</p>
@@ -82,11 +84,13 @@
                                     <p class="text text--number">0123456789</p>
                                 </div>
 
-                                <div class="paper">
-                                    <div class="paper__header">
-                                        <h3 class="text text--title">rib enregistrés</h3>
+                                <div class="column__section column__section--fluid">
+                                    <div class="paper">
+                                        <div class="paper__header">
+                                            <h3 class="text text--title">rib enregistrés</h3>
+                                        </div>
+                                        <div class="paper__body"></div>
                                     </div>
-                                    <div class="paper__body"></div>
                                 </div>
                             </div>
                         </div>

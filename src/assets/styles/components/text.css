@@ -12,6 +12,10 @@
     color: var(--color-light-text-alt);
 }
 
+.dark .text--tab {
+    color: var(--color-dark-text-alt);
+}
+
 .text--title {
     font-size: 12px;
     font-weight: 600;
@@ -20,12 +24,20 @@
     color: var(--color-light-text-alt);
 }
 
+.dark .text--title {
+    color: var(--color-dark-text-alt);
+}
+
 .text--balance {
     font-size: 32px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--color-light-text);
+}
+
+.dark .text--balance {
+    color: var(--color-dark-text);
 }
 
 .text--name {
@@ -37,6 +49,10 @@
     white-space: nowrap;
 }
 
+.dark .text--name {
+    color: var(--color-dark-text);
+}
+
 .text--number {
     font-size: 24px;
     font-weight: 600;
@@ -45,7 +61,15 @@
     color: var(--color-light-text);
 }
 
+.dark .text--number {
+    color: var(--color-dark-text);
+}
+
 .text--green {
+    color: var(--color-green);
+}
+
+.dark .text--green {
     color: var(--color-green);
 }
 

@@ -15,9 +15,14 @@
     height: 672px;
     margin: auto;
     background-color: var(--color-light-bg);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--color-light-divider);
     border-radius: 8px;
     overflow: hidden;
+}
+
+.dark .dialog {
+    background-color: var(--color-dark-bg);
+    border: 1px solid var(--color-dark-divider);
 }
 
 .dialog__spinner {
@@ -65,9 +70,15 @@
     border-bottom: 0.1px solid var(--color-light-divider);
 }
 
+.dark .dialog__header {
+    background-color: var(--color-dark-fg);
+    border-bottom: 0.1px solid var(--color-dark-divider);
+}
+
 .dialog__logo {
     width: 36px;
     height: auto;
+    color: var(--color-red);
 }
 
 .dialog__body {

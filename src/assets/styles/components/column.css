@@ -2,17 +2,20 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    gap: 24px;
     width: 100%;
-    height: auto;
-}
-
-.column--h-full {
     height: 100%;
 }
 
 .column__section {
+    flex: 0 0 auto;
     box-sizing: border-box;
     width: 100%;
     height: auto;
-    margin-bottom: 24px;
 }
+
+.column__section--fluid {
+    flex: 1 1 0%;
+}
+
+
