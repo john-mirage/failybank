@@ -57,7 +57,11 @@
     width: 12px;
     height: 12px;
     border-radius: 9999px;
-    background-color: var(--color-light-bg);
+    background-color: var(--color-light-text-alt);
+}
+
+.dark .toggle-button__handle {
+    background-color: var(--color-dark-text-alt);
 }
 
 .toggle-button__input:checked ~ .toggle-button__track > .toggle-button__handle {

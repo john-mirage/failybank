@@ -4,20 +4,28 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    margin-left: -16px;
     padding: 0 16px;
-    border: none;
+    border: 1px solid var(--color-light-divider);
     background-color: transparent;
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
     color: var(--color-light-text);
+    background-color: var(--color-light-fg);
+    border-radius: 4px;
+}
+
+.input::placeholder {
+    color: #adb5bd;
 }
 
 .dark .input {
+    border: 1px solid var(--color-dark-divider);
     color: var(--color-dark-text);
+    background-color: var(--color-dark-fg);
 }
 
 .input:focus {
     outline: none;
+    border: 1px solid var(--color-red);
 }

@@ -10,3 +10,7 @@
 .row__section {
     flex: 1 1 0%;
 }
+
+.row__section--fixed {
+    flex: 0 0 auto;
+}
