@@ -1,0 +1,22 @@
+.column {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.column--h-full {
+    height: 100%;
+}
+
+.column__section {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.column__section:last-child {
+    margin-bottom: 0;
+}

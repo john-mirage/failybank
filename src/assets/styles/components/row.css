@@ -1,0 +1,16 @@
+.row {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    width: 100%;
+    height: auto;
+}
+
+.row--h-full {
+    height: 100%;
+}
+
+.row__section {
+    flex: 1 1 0%;
+}
