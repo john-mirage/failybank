@@ -8,6 +8,7 @@
 }
 
 .table__row {
+    box-sizing: border-box;
     border-bottom: 1px solid var(--color-light-divider);
 }
 
@@ -16,6 +17,7 @@
 }
 
 .table__cell {
+    box-sizing: border-box;
     padding-top: 8px;
     padding-bottom: 8px;
 }

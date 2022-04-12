@@ -7,6 +7,10 @@
     height: 100%;
 }
 
+.column--no-gap {
+    gap: 0;
+}
+
 .column__section {
     flex: 0 0 auto;
     box-sizing: border-box;
