@@ -49,6 +49,10 @@
     line-height: 28px;
 }
 
+.dark .text--normal {
+    color: var(--color-dark-text);
+}
+
 .text--green {
     color: var(--color-green);
 }
