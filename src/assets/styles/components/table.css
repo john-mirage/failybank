@@ -26,6 +26,15 @@
     padding-bottom: 8px;
 }
 
-.table__cell--icon {
+.table__cell--large {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.table__cell--right {
     text-align: right;
+}
+
+.table__cell--top {
+    vertical-align: top;
 }

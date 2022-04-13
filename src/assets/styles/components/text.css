@@ -53,12 +53,50 @@
     color: var(--color-dark-text);
 }
 
+.text--company {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-light-text);
+    margin-bottom: 7px;
+}
+
+.text--date {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-light-text-alt);
+}
+
+.text--price {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 .text--green {
     color: var(--color-green);
 }
 
 .dark .text--green {
     color: var(--color-green);
+}
+
+.text--red {
+    color: #e64980;
+}
+
+.dark .text--red {
+    color: #e64980;
+}
+
+.text--name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-light-text);
+}
+
+.text--swift {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-light-text);
 }
 
 

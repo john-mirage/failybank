@@ -11,6 +11,7 @@ import "./assets/styles/components/column.css";
 import "./assets/styles/components/grid.css";
 import "./assets/styles/components/button.css";
 import "./assets/styles/components/icon-button.css";
+import "./assets/styles/components/icon-box.css";
 import "./assets/styles/components/input.css";
 import "./assets/styles/components/toggle-button.css";
 import "./assets/styles/components/table.css";
