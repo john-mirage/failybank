@@ -1,0 +1,26 @@
+.section {
+    box-sizing: border-box;
+    display: block;
+}
+
+.section__title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-light-text-alt);
+    margin-bottom: 12px;
+}
+
+.section__subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-light-text-alt);
+    margin-bottom: 12px;
+}
+
+.dark .section__subtitle {
+    color: var(--color-dark-text-alt);
+}

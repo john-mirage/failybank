@@ -1,0 +1,7 @@
+.view {
+    box-sizing: border-box;
+    display: none;
+    width: 100%;
+    height: calc(100% - 72px);
+    padding: 24px;
+}
