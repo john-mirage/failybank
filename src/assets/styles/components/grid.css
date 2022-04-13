@@ -13,12 +13,17 @@
 
 .grid--deposit {
     grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
 }
 
 .grid--transfer {
     grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto auto auto auto 1fr;
+}
+
+.grid--withdraw {
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto auto 1fr;
 }
 
 .grid__item {
@@ -35,6 +40,14 @@
     grid-row: span 2 / span 2;
 }
 
+.grid__item--row-span-3 {
+    grid-row: span 3 / span 3;
+}
+
 .grid__item--row-span-4 {
     grid-row: span 4 / span 4;
+}
+
+.grid__item--row-span-5 {
+    grid-row: span 5 / span 5;
 }

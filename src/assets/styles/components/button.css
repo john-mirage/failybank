@@ -1,7 +1,7 @@
 .button {
     box-sizing: border-box;
     display: block;
-    width: 148px;
+    width: 200px;
     height: 48px;
     cursor: pointer;
     font-family: inherit;
