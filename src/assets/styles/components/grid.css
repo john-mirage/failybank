@@ -26,6 +26,11 @@
     grid-template-rows: auto auto 1fr;
 }
 
+.grid--enterprise {
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto auto auto 1fr;
+}
+
 .grid__item {
     box-sizing: border-box;
     width: 100%;

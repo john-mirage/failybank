@@ -16,6 +16,10 @@
     border: 2px solid var(--color-red);
 }
 
+.button--fluid {
+    width: 100%;
+}
+
 .button__label {
     box-sizing: border-box;
     font-family: inherit;
