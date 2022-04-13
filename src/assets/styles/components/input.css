@@ -18,6 +18,10 @@
     color: #adb5bd;
 }
 
+.input--margin {
+    margin-bottom: 24px;
+}
+
 .dark .input {
     border: 1px solid var(--color-dark-divider);
     color: var(--color-dark-text);

@@ -1,11 +1,24 @@
 .grid {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto auto 1fr auto;
     width: 100%;
     height: 100%;
     gap: 24px;
+}
+
+.grid--account {
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto auto 1fr auto;
+}
+
+.grid--deposit {
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto 1fr;
+}
+
+.grid--transfer {
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: 1fr;
 }
 
 .grid__item {
@@ -18,10 +31,10 @@
     grid-column: span 2 / span 2;
 }
 
-.grid__item--row-span-4 {
-    grid-row: span 4 / span 4;
+.grid__item--row-span-2 {
+    grid-row: span 2 / span 2;
 }
 
-.grid__item--span {
-    grid-column: span 2 / span 2;
+.grid__item--row-span-4 {
+    grid-row: span 4 / span 4;
 }

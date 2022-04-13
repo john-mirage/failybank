@@ -3,17 +3,29 @@
     display: block;
     width: 148px;
     height: 48px;
-    background-color: var(--color-red);
-    border: none;
     cursor: pointer;
+    font-family: inherit;
+}
+
+.button--primary {
+    border: none;
+    background-color: var(--color-red);
+}
+
+.button--secondary {
+    border: 2px solid var(--color-red);
 }
 
 .button__label {
     box-sizing: border-box;
     font-family: inherit;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-dark-text);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.button--secondary > .button__label {
+    color: var(--color-red);
 }
