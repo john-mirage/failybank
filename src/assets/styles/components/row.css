@@ -7,22 +7,16 @@
     height: auto;
 }
 
-.row--wrap {
-    flex-wrap: wrap;
-}
-
-.row--no-gap {
-    gap: 0;
-}
-
 .row__section {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+}
+
+.row__section--fluid {
     flex: 1 1 0%;
 }
 
-.row__section--half {
-    width: 50%;
-}
-
 .row__section--fixed {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
 }

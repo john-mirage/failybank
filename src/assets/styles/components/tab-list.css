@@ -18,3 +18,15 @@
     border-bottom: 4px solid transparent;
     cursor: pointer;
 }
+
+.tab-list__label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-light-text-alt);
+}
+
+.dark .tab-list__label {
+    color: var(--color-dark-text-alt);
+}
