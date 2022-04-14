@@ -9,6 +9,10 @@
     font-family: inherit;
 }
 
+.button--bottom {
+    margin-top: auto;
+}
+
 .button--primary {
     border: none;
     background-color: var(--color-red);

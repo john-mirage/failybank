@@ -19,3 +19,17 @@ import "./assets/styles/components/table.css";
 import "./assets/styles/components/icon-button.css";
 
 import "./assets/styles/states.css";
+
+const swiftAddForm = document.getElementById("swift-add-form");
+
+swiftAddForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(swiftAddForm);
+    const swiftCode = formData.get("swift-code");
+    const search = swiftCode.search("^[0-9]{10}$");
+    if (search > -1) {
+        console.log("Swift code is valid");
+    } else {
+        console.log("Swift code is not valid");
+    }
+});
