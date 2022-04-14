@@ -17,6 +17,7 @@
 #tab-selector-2:checked ~ #tab-content-2 {display: block;}
 #tab-selector-3:checked ~ #tab-content-3 {display: block;}
 #tab-selector-4:checked ~ #tab-content-4 {display: block;}
+#tab-selector-5:checked ~ #tab-content-5 {display: block;}
 
 .app--loading > .app__spinner {
     display: block;
