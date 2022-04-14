@@ -1,0 +1,7 @@
+.divider {
+    box-sizing: border-box;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-light-divider-alt);
+    margin-top: 24px;
+}

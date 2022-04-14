@@ -9,6 +9,7 @@
     font-weight: 700;
     color: var(--color-light-text);
     line-height: 1;
+    margin-bottom: 20px;
 }
 
 .text--subtitle {
@@ -18,6 +19,7 @@
     letter-spacing: 0.6px;
     color: var(--color-light-text-alt);
     line-height: 1;
+    margin-bottom: 8px;
 }
 
 .text--name {
@@ -35,86 +37,5 @@
     line-height: 1;
 }
 
-.text--margin {
-    margin-bottom: 8px;
-}
-
-.text--margin-lg {
-    margin-bottom: 24px;
-}
-
-
-/*
-.text--balance {
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    color: var(--color-light-text);
-    line-height: 28px;
-}
-
-.dark .text--balance {
-    color: var(--color-dark-text);
-}
-
-.text--normal {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-light-text);
-    line-height: 28px;
-}
-
-.dark .text--normal {
-    color: var(--color-dark-text);
-}
-
-.text--company {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-light-text);
-    margin-bottom: 7px;
-}
-
-.text--date {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-light-text-alt);
-}
-
-.text--price {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-}
-
-.text--green {
-    color: var(--color-green);
-}
-
-.dark .text--green {
-    color: var(--color-green);
-}
-
-.text--red {
-    color: #e64980;
-}
-
-.dark .text--red {
-    color: #e64980;
-}
-
-.text--name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-light-text);
-}
-
-.text--swift {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-light-text);
-}
-*/
 
 

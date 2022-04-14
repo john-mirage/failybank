@@ -15,6 +15,10 @@
 }
 
 .input--margin {
+    margin-bottom: 16px;
+}
+
+.input--margin-lg {
     margin-bottom: 24px;
 }
 
