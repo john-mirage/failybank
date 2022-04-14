@@ -7,16 +7,19 @@
     padding-right: 24px;
     cursor: pointer;
     font-family: inherit;
-    border: none;
+    border: none;  
+}
+
+.button--primary {
     background-color: var(--color-red);
 }
 
-.button--fixed {
-    width: auto;
+.button--secondary {
+    background-color: #ffe3e3;
 }
 
 .button--half {
-    width: 50%;
+    width: calc(50% - 12px);
 }
 
 .button__label {
@@ -27,4 +30,12 @@
     color: var(--color-dark-text);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.button--primary > .button__label {
+    color: var(--color-dark-text);
+}
+
+.button--secondary > .button__label {
+    color: var(--color-red);
 }

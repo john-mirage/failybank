@@ -11,6 +11,10 @@
     height: auto;
 }
 
+.grid--margin {
+    margin-bottom: 24px;
+}
+
 .grid--account {
     grid-template-rows: auto auto 1fr auto;
 }
