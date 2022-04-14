@@ -1,96 +1,50 @@
 .grid {
     box-sizing: border-box;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
     height: 100%;
     gap: 24px;
 }
 
+.grid--auto-height {
+    height: auto;
+}
+
 .grid--account {
-    grid-template-areas:
-        "account-name       account-name       account-history"
-        "account-swift      account-swift      account-history"
-        "account-swift-list account-swift-list account-history"
-        "account-swift-add  account-swift-add  account-history"
-    ;
-    grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: auto auto 1fr auto;
 }
 
 .grid--operation {
-    grid-template-areas:
-        "operation-deposit-title   operation-deposit-title      operation-history"
-        "operation-deposit-form    operation-deposit-form       operation-history"
-        "operation-deposit-button  operation-deposit-all-button operation-history"
-        "operation-withdraw-title  operation-withdraw-title     operation-history"
-        "operation-withdraw-form   operation-withdraw-form      operation-history"
-        "operation-withdraw-button .                            operation-history"
-    ;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-rows: auto 1fr;
 }
 
 .grid--transfer {
-    grid-template-areas:
-        "transfer-title     transfer-title     transfer-swift-list"
-        "transfer-amount    transfer-swift     transfer-swift-list"
-        "transfer-reference transfer-reference transfer-swift-list"
-        "transfer-button    .                  transfer-swift-list"
-    ;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: 1fr;
 }
 
 .grid--enterprise {
-    grid-template-areas:
-        "enterprise-balance         enterprise-swift                enterprise-history"
-        "enterprise-owner           enterprise-owner                enterprise-history"
-        "enterprise-deposit-title   enterprise-deposit-title        enterprise-history"
-        "enterprise-deposit-form    enterprise-deposit-form         enterprise-history"
-        "enterprise-deposit-button  enterprise-deposit-all-button   enterprise-history"
-        "enterprise-withdraw-title  enterprise-withdraw-title       enterprise-history"
-        "enterprise-withdraw-form   enterprise-withdraw-form        enterprise-history"
-        "enterprise-withdraw-button enterprise-withdraw-all-button  enterprise-history"
-    ;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: auto auto auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto 1fr;
 }
 
-.grid__item {
+.grid__section {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
 }
 
-.grid__item--account-name         { grid-area: account-name; }
-.grid__item--account-swift        { grid-area: account-swift; }
-.grid__item--account-swift-list   { grid-area: account-swift-list; }
-.grid__item--account-swift-add    { grid-area: account-swift-add; }
-.grid__item--account-history      { grid-area: account-history; }
+.grid__section--col-span-2 {
+    grid-column: span 2 / span 2;
+}
 
-.grid__item--operation-deposit-title   { grid-area: operation-deposit-title; }
-.grid__item--operation-deposit-form    { grid-area: operation-deposit-form; }
-.grid__item--operation-deposit-button  { grid-area: operation-deposit-button; }
-.grid__item--operation-withdraw-title  { grid-area: operation-withdraw-title; }
-.grid__item--operation-withdraw-form   { grid-area: operation-withdraw-form; }
-.grid__item--operation-withdraw-button { grid-area: operation-withdraw-button; }
-.grid__item--operation-history         { grid-area: operation-history; }
+.grid__section--row-span-2 {
+    grid-row: span 2 / span 2;
+}
 
-.grid__item--transfer-title      { grid-area: transfer-title; }
-.grid__item--transfer-amount     { grid-area: transfer-amount; }
-.grid__item--transfer-swift      { grid-area: transfer-swift; }
-.grid__item--transfer-reference  { grid-area: transfer-reference; }
-.grid__item--transfer-button     { grid-area: transfer-button; }
-.grid__item--transfer-swift-list { grid-area: transfer-swift-list; }
+.grid__section--row-span-3 {
+    grid-row: span 3 / span 3;
+}
 
-.grid__item--enterprise-balance            { grid-area: enterprise-balance; }
-.grid__item--enterprise-swift              { grid-area: enterprise-swift; }
-.grid__item--enterprise-owner              { grid-area: enterprise-owner; }
-.grid__item--enterprise-deposit-title      { grid-area: enterprise-deposit-title; }
-.grid__item--enterprise-deposit-form       { grid-area: enterprise-deposit-form; }
-.grid__item--enterprise-deposit-button     { grid-area: enterprise-deposit-button; }
-.grid__item--enterprise-deposit-all-button { grid-area: enterprise-deposit-all-button; }
-.grid__item--enterprise-withdraw-title     { grid-area: enterprise-withdraw-title; }
-.grid__item--enterprise-withdraw-form      { grid-area: enterprise-withdraw-form; }
-.grid__item--enterprise-withdraw-button    { grid-area: enterprise-withdraw-button; }
-.grid__item--enterprise-history            { grid-area: enterprise-history; }
+.grid__section--row-span-4 {
+    grid-row: span 4 / span 4;
+}
