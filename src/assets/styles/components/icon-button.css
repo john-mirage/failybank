@@ -1,24 +1,36 @@
 .icon-button {
     box-sizing: border-box;
     display: inline-flex;
-    width: 32px;
-    height: 32px;
     padding: 0;
     border-radius: 9999px;
     border: none;
     background-color: transparent;
     cursor: pointer;
+    background-color: var(--color-light-bg);
 }
 
-.icon-button:hover {
-    background-color: var(--color-light-divider);
+.icon-button--sm {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-button--lg {
+    width: 48px;
+    height: 48px;
 }
 
 .icon-button__icon {
     box-sizing: border-box;
     display: block;
-    width: 16px;
     height: auto;
     margin: auto;
     color: var(--color-light-text-alt);
+}
+
+.icon-button--sm  .icon-button__icon {
+    width: 16px;
+}
+
+.icon-button--lg .icon-button__icon {
+    width: 24px;
 }
