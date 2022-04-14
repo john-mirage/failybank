@@ -7,15 +7,16 @@
     padding-right: 24px;
     cursor: pointer;
     font-family: inherit;
-    border: none;  
 }
 
 .button--primary {
+    border: none;
     background-color: var(--color-red);
 }
 
 .button--secondary {
-    background-color: #ffe3e3;
+    border: 1px solid #FFC9C9;
+    background-color: var(--color-light-red);
 }
 
 .button--half {
