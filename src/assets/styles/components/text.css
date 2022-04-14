@@ -37,5 +37,51 @@
     line-height: 1;
 }
 
+.text--entity {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-light-text);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.text--name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-light-text);
+    line-height: 1;
+}
+
+.text--swift {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-light-text-alt);
+    line-height: 1;
+    letter-spacing: 0.4px;
+}
+
+.text--date {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-light-text-alt);
+    line-height: 1;
+}
+
+.text--price {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.4px;
+    margin-top: 5px;
+}
+
+.text--decrease {
+    color: #F06595;
+}
+
+.text--increase {
+    color: #51CF66;
+}
+
 
 

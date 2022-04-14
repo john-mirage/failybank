@@ -18,6 +18,11 @@
     border: 2px solid var(--color-red);
 }
 
+.button--disabled {
+    border: none;
+    background-color: var(--color-light-red);
+}
+
 .button--half {
     width: calc(50% - 12px);
 }
@@ -38,4 +43,8 @@
 
 .button--secondary > .button__label {
     color: var(--color-red);
+}
+
+.button--disabled > .button__label {
+    color: var(--color-dark-text);
 }
