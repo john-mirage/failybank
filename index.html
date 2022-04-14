@@ -327,10 +327,10 @@
                         </div>
                     </section>
                     <section class="grid__section">
-                        <form class="row row--align-end" action="submit" id="swift-add-form">
+                        <form class="row row--align-end" id="swift-add-form">
                             <div class="row__section row__section--fluid">
                                 <label class="text text--subtitle" for="swift-add-input">Ajouter un code SWIFT</label>
-                                <input class="input" type="text" placeholder="Entrer le code SWIFT" name="swift-code" id="swift-add-input" required>
+                                <input class="input" type="text" placeholder="Entrer le code SWIFT" name="swift-code" id="swift-add-input">
                             </div>
                             <div class="row__section row__section--fluid">
                                 <button class="button button--primary" type="submit">
@@ -347,20 +347,22 @@
                 <div class="grid grid--operation">
                     <section class="grid__section">
                         <h2 class="text text--title">Effectuer un dépot</h2>
-                        <h3 class="text text--subtitle">Montant du dépot</h3>
-                        <input class="input input--margin" type="text" placeholder="Entrer le montant du dépot">
-                        <div class="grid grid--auto-height">
-                            <div class="grid__section">
-                                <button class="button button--primary">
-                                    <span class="button__label">Déposer</span>
-                                </button>
+                        <form id="deposit-form">
+                            <label class="text text--subtitle" for="deposit-input">Montant du dépot</label>
+                            <input class="input input--margin" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot">
+                            <div class="row">
+                                <div class="row__section row__section--fluid">
+                                    <button class="button button--primary" type="submit">
+                                        <span class="button__label">Déposer</span>
+                                    </button>
+                                </div>
+                                <div class="row__section row__section--fluid">
+                                    <button class="button button--secondary" type="button">
+                                        <span class="button__label">Tout déposer</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="grid__section">
-                                <button class="button button--secondary">
-                                    <span class="button__label">Tout déposer</span>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                         <div class="divider"></div>
                     </section>
                     <section class="grid__section grid__section--row-span-2">
@@ -375,11 +377,13 @@
                     </section>
                     <section class="grid__section">
                         <h2 class="text text--title">Effectuer un retrait</h2>
-                        <h3 class="text text--subtitle">Montant du retrait</h3>
-                        <input class="input input--margin" type="text" placeholder="Entrer le montant du retrait">
-                        <button class="button button--primary button--half">
-                            <span class="button__label">Retirer</span>
-                        </button>
+                        <form id="withdraw-form">
+                            <label class="text text--subtitle" for="withdraw-input">Montant du retrait</label>
+                            <input class="input input--margin" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait">
+                            <button class="button button--primary button--half">
+                                <span class="button__label">Retirer</span>
+                            </button>
+                        </form>
                     </section>
                 </div>
             </div>
@@ -389,22 +393,23 @@
                 <div class="grid grid--transfer">
                     <section class="grid__section">
                         <h2 class="text text--title">Effectuer un transfert</h2>
-                        <div class="grid grid--auto-height grid--margin">
-                            <div class="grid__section">
-                                <h3 class="text text--subtitle">Montant du transfert</h3>
-                                <input class="input" type="text" placeholder="Entrer le montant du transfert">
+                        <form id="transfer-form">
+                            <div class="row row--margin">
+                                <div class="row__section row__section--fluid">
+                                    <label class="text text--subtitle" for="transfer-amount-input">Montant du transfert</label>
+                                    <input class="input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amoun-input">
+                                </div>
+                                <div class="row__section row__section--fluid">
+                                    <label class="text text--subtitle" for="transfer-swift-input">Code SWIFT du déstinataire</label>
+                                    <input class="input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input">
+                                </div>
                             </div>
-                            <div class="grid__section">
-                                <h3 class="text text--subtitle">Code SWIFT du déstinataire</h3>
-                                <input class="input" type="text" placeholder="Entrer le code SWIFT du déstinataire">
-                            </div>
-                        </div>
-                        <h3 class="text text--subtitle">Référence du transfert</h3>
-                        <input class="input input--margin-lg" type="text"
-                            placeholder="Entrer la référence du transfert">
-                        <button class="button button--primary button--half">
-                            <span class="button__label">Transférer</span>
-                        </button>
+                            <label class="text text--subtitle" for="transfer-reference-input">Référence du transfert</label>
+                            <input class="input input--margin-lg" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input">
+                            <button class="button button--primary button--half" type="submit">
+                                <span class="button__label">Transférer</span>
+                            </button>
+                        </form>
                     </section>
                     <section class="grid__section">
                         <div class="column">
@@ -423,8 +428,8 @@
             <div class="view" id="tab-content-4">
                 <div class="grid grid--enterprise">
                     <section class="grid__section">
-                        <h3 class="text text--subtitle">Solde de l'entreprise</h3>
-                        <p class="text text--number text--increase">25,000,000$</p>
+                        <h3 class="text text--subtitle">Propriétaire de l'entreprise</h3>
+                        <p class="text text--account-name">Hubert Bonisseur de La Bath</p>
                     </section>
                     <section class="grid__section grid__section--row-span-4">
                         <div class="column">
@@ -471,8 +476,8 @@
                         </div>
                     </section>
                     <section class="grid__section">
-                        <h3 class="text text--subtitle">Propriétaire de l'entreprise</h3>
-                        <p class="text text--account-name">Hubert Bonisseur de La Bath</p>
+                        <h3 class="text text--subtitle">Solde de l'entreprise</h3>
+                        <p class="text text--number text--increase">25,000,000$</p>
                         <div class="divider"></div>
                     </section>
                     <section class="grid__section">

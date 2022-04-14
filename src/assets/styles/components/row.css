@@ -7,6 +7,10 @@
     height: auto;
 }
 
+.row--margin {
+    margin-bottom: 24px;
+}
+
 .row--align-end {
     align-items: flex-end;
 }
