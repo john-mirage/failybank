@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
   <script type="module" crossorigin src="/failybank/assets/index.c6d406a6.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.40c18020.css">
+  <link rel="stylesheet" href="/failybank/assets/index.6b346a63.css">
 </head>
 
 <!-- Screen -->
@@ -362,7 +362,49 @@
 
             <!-- View / offshore -->
             <div class="view" id="tab-content-5">
-                <h2 class="text text--title">Compte Offshore</h2>
+                <div class="grid grid--offshore">
+                    <!-- Offshore owner -->
+                    <section class="grid__section">
+                        <div class="section">
+                            <h3 class="section__title">Propriétaire du compte offshore</h3>
+                            <p class="section__text section__text--reversed">Hubert Bonisseur de La Bath</p>
+                        </div>
+                    </section>
+                    <!-- Offshore history -->
+                    <section class="grid__section grid__section--row-span-4">
+                        <div class="section section--column">
+                            <h3 class="section__title">Historique des opérations</h3>
+                            <div class="paper section__body">
+                                <div class="paper__frame"></div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Offshore balance -->
+                    <section class="grid__section grid__section--with-border">
+                        <div class="section">
+                            <h3 class="section__title">Solde de du compte offshore</h3>
+                            <p class="section__number">152,000,000$</p>
+                        </div>
+                    </section>
+                    <!-- offshore deposit form -->
+                    <section class="grid__section">
+                        <form class="form" id="offshore-deposit-form">
+                            <h2 class="form__title">Effectuer un dépot</h2>
+                            <div class="form__section form__section--margin">
+                                <label class="form__label" for="offshore-deposit-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-input" placeholder="Entrer le montant du dépot">
+                            </div>
+                            <div class="form__row">
+                                <div class="form__section form__section--fluid">
+                                    <button class="form__button form__button--primary">Déposer</button>
+                                </div>
+                                <div class="form__section form__section--fluid">
+                                    <button class="form__button form__button--secondary">Tout déposer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
             </div>
         </div>
 
