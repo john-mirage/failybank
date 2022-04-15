@@ -235,33 +235,33 @@
             <!-- View / transfer -->
             <div class="view" id="tab-content-3">
                 <div class="grid grid--transfer">
+                    <!-- Transfer form -->
                     <section class="grid__section">
-                        <h2 class="text text--title">Effectuer un transfert</h2>
-                        <form id="transfer-form">
-                            <div class="row row--margin">
-                                <div class="row__section row__section--fluid">
-                                    <label class="text text--subtitle" for="transfer-amount-input">Montant du transfert</label>
-                                    <input class="input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amoun-input">
+                        <form class="form" id="transfer-form">
+                            <h2 class="form__title">Effectuer un transfert</h2>
+                            <div class="form__row form__row--margin">
+                                <div class="form__section form__section--fluid">
+                                    <label class="form__label" for="transfer-amount-input">Montant du transfert</label>
+                                    <input class="form__input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amoun-input">
                                 </div>
-                                <div class="row__section row__section--fluid">
-                                    <label class="text text--subtitle" for="transfer-swift-input">Code SWIFT du déstinataire</label>
-                                    <input class="input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input">
+                                <div class="form__section form__section--fluid">
+                                    <label class="form__label" for="transfer-swift-input">Code SWIFT du déstinataire</label>
+                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input">
                                 </div>
                             </div>
-                            <label class="text text--subtitle" for="transfer-reference-input">Référence du transfert</label>
-                            <input class="input input--margin-lg" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input">
-                            <button class="button button--primary button--half" type="submit">
-                                <span class="button__label">Transférer</span>
-                            </button>
+                            <div class="form__section form__section--margin">
+                                <label class="form__label" for="transfer-reference-input">Référence du transfert</label>
+                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input">
+                            </div>
+                            <button class="form__button form__button--primary form__button--half" type="submit">Transférer</button>
                         </form>
                     </section>
+                    <!-- Transfer history -->
                     <section class="grid__section">
-                        <div class="column">
-                            <div class="column__section column__section--fixed">
-                                <h3 class="text text--subtitle">Liste des codes SWIFT</h3>
-                            </div>
-                            <div class="column__section column__section--fluid">
-                                <div class="paper"></div>
+                        <div class="section section--column">
+                            <h3 class="section__title">Liste des codes SWIFT</h3>
+                            <div class="paper section__body">
+                                <div class="paper__frame"></div>
                             </div>
                         </div>
                     </section>
