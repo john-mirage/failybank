@@ -8,14 +8,13 @@ import "./assets/styles/components/tab-list.css";
 import "./assets/styles/components/toggle-button.css";
 import "./assets/styles/components/view.css";
 import "./assets/styles/components/grid.css";
-import "./assets/styles/components/text.css";
 import "./assets/styles/components/column.css";
 import "./assets/styles/components/paper.css";
-import "./assets/styles/components/table.css";
 import "./assets/styles/components/icon.css";
 import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
 import "./assets/styles/components/swift.css";
+import "./assets/styles/components/log.css";
 
 import "./assets/styles/states.css";
 
