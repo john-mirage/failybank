@@ -39,6 +39,11 @@
     margin: 0;
 }
 
+.section__text--reversed {
+    text-align: right;
+    transform: rotateY(-180deg);
+}
+
 .section--column > .section__title {
     flex: 0 0 auto;
 }

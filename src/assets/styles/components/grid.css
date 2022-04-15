@@ -31,6 +31,10 @@
     grid-template-rows: auto auto auto 1fr;
 }
 
+.grid--offshore {
+    grid-template-rows: auto auto 1fr;
+}
+
 .grid__section {
     box-sizing: border-box;
     width: 100%;
