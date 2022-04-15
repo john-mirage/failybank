@@ -23,6 +23,17 @@ const depositForm = document.getElementById("deposit-form");
 const withdrawForm = document.getElementById("withdraw-form");
 const transferForm = document.getElementById("transfer-form");
 
+const transferSwiftInput = document.getElementById("transfer-swift-input");
+
+const pastToFormButtons = document.getElementsByClassName("icon--paste-to-form");
+const pastToFormValues = document.getElementsByClassName("text--swift");
+
+for(let index = 0; index < pastToFormButtons.length; index++) {
+    pastToFormButtons[index].addEventListener("click", (event) => {
+        transferSwiftInput.value = pastToFormValues[index].textContent;
+    });
+}
+
 function validateAmount(amount) {
     const search = amount.search(/^[0-9]+$/);
     return search > -1;

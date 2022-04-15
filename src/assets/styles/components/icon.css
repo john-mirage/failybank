@@ -11,6 +11,11 @@
     cursor: pointer;
 }
 
+.icon--button:hover {
+    background-color: #FFE3E3;
+    border: 1px solid #FFC9C9;
+}
+
 .icon__image {
     box-sizing: border-box;
     display: block;
