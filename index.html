@@ -10,8 +10,8 @@
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.27dc7a28.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.d8d5a8bb.css">
+  <script type="module" crossorigin src="/failybank/assets/index.c6d406a6.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.5762a62a.css">
 </head>
 
 <!-- Screen -->
@@ -193,44 +193,42 @@
             <!-- View / operation -->
             <div class="view" id="tab-content-2">
                 <div class="grid grid--operation">
-                    <section class="grid__section">
-                        <h2 class="text text--title">Effectuer un dépot</h2>
-                        <form id="deposit-form">
-                            <label class="text text--subtitle" for="deposit-input">Montant du dépot</label>
-                            <input class="input input--margin" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot">
-                            <div class="row">
-                                <div class="row__section row__section--fluid">
-                                    <button class="button button--primary" type="submit">
-                                        <span class="button__label">Déposer</span>
-                                    </button>
+                    <!-- Operation deposit form -->
+                    <section class="grid__section grid__section--with-border">
+                        <form class="form" id="deposit-form">
+                            <h2 class="form__title">Effectuer un dépot</h2>
+                            <div class="form__section form__section--margin">
+                                <label class="form__label" for="deposit-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot">
+                            </div>
+                            <div class="form__row">
+                                <div class="form__section form__section--fluid">
+                                    <button class="form__button form__button--primary" type="submit">Déposer</button>
                                 </div>
-                                <div class="row__section row__section--fluid">
-                                    <button class="button button--secondary" type="button">
-                                        <span class="button__label">Tout déposer</span>
-                                    </button>
+                                <div class="form__section form__section--fluid">
+                                    <button class="form__button form__button--secondary" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
-                        <div class="divider"></div>
                     </section>
+                    <!-- Operation History -->
                     <section class="grid__section grid__section--row-span-2">
-                        <div class="column">
-                            <div class="column__section column__section--fixed">
-                                <h3 class="text text--subtitle">Historique des opérations</h3>
-                            </div>
-                            <div class="column__section column__section--fluid">
-                                <div class="paper"></div>
+                        <div class="section section--column">
+                            <h3 class="section__title">Historique des opérations</h3>
+                            <div class="paper section__body">
+                                <div class="paper__frame"></div>
                             </div>
                         </div>
                     </section>
+                    <!-- Operation Withdraw form -->
                     <section class="grid__section">
-                        <h2 class="text text--title">Effectuer un retrait</h2>
-                        <form id="withdraw-form">
-                            <label class="text text--subtitle" for="withdraw-input">Montant du retrait</label>
-                            <input class="input input--margin" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait">
-                            <button class="button button--primary button--half">
-                                <span class="button__label">Retirer</span>
-                            </button>
+                        <form class="form" id="withdraw-form">
+                            <h2 class="form__title">Effectuer un retrait</h2>
+                            <div class="form__section form__section--margin">
+                                <label class="form__label" for="withdraw-input">Montant du retrait</label>
+                                <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait">
+                            </div>
+                            <button class="form__button form__button--primary form__button--half">Retirer</button>
                         </form>
                     </section>
                 </div>
