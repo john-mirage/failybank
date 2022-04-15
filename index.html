@@ -207,11 +207,12 @@
                     </section>
                     <!-- Account Swift add form -->
                     <section class="grid__section">
-                        <form class="form" id="swift-add-form">
+                        <form class="form" id="swift-add-form" novalidate>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="swift-add-input">Ajouter un code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le code SWIFT" name="swift-code" id="swift-add-input">
+                                    <input class="form__input" type="text" placeholder="Entrer le code SWIFT" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-input">
+                                    <p class="form__message" id="swift-add-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="form__button form__button--primary" type="submit">Ajouter</button>
@@ -227,11 +228,12 @@
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
-                        <form class="form" id="deposit-form">
+                        <form class="form" id="deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot">
+                                <input class="form__input" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="deposit-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fluid">
@@ -254,11 +256,12 @@
                     </section>
                     <!-- Operation Withdraw form -->
                     <section class="grid__section">
-                        <form class="form" id="withdraw-form">
+                        <form class="form" id="withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="withdraw-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait">
+                                <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <p class="form__message" id="withdraw-message"></p>
                             </div>
                             <button class="form__button form__button--primary form__button--half">Retirer</button>
                         </form>
@@ -271,21 +274,24 @@
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
-                        <form class="form" id="transfer-form">
+                        <form class="form" id="transfer-form" novalidate>
                             <h2 class="form__title">Effectuer un transfert</h2>
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amount-input">
+                                    <input class="form__input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amount-input" required pattern="[0-9]+">
+                                    <p class="form__message" id="transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="transfer-swift-input">Code SWIFT du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input">
+                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <p class="form__message" id="transfer-swift-message"></p>
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="transfer-reference-input">Référence du transfert</label>
-                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input">
+                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input" required maxlength="40">
+                                <p class="form__message" id="transfer-reference-message"></p>
                             </div>
                             <button class="form__button form__button--primary form__button--half" type="submit">Transférer</button>
                         </form>
