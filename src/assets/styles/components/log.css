@@ -63,7 +63,34 @@
     display: block;
     font-size: 16px;
     font-weight: 700;
-    color: var(--color-green);
     line-height: 1;
     margin: 5px 0 0 0;
+}
+
+.log__amount--up {
+    color: var(--color-green);
+}
+
+.log__amount--down {
+    color: var(--color-red);
+}
+
+.log__reference {
+    box-sizing: border-box;
+    display: inline;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-light-text);
+    line-height: 20px;
+}
+
+.log__reference-value {
+    box-sizing: border-box;
+    display: inline;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-light-text-alt);
+    line-height: 20px;
 }
