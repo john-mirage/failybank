@@ -4,6 +4,11 @@
 
 .form__title {
     box-sizing: border-box;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-light-text);
+    line-height: 1;
+    margin: 0 0 20px 0;
 }
 
 .form__row {
@@ -20,6 +25,10 @@
 .form__section {
     box-sizing: border-box;
     position: relative;
+}
+
+.form__section--margin {
+    margin-bottom: 24px;
 }
 
 .form__row > .form__section--fluid {
@@ -78,7 +87,6 @@
     font-family: inherit;
     font-size: 12px;
     font-weight: 700;
-    color: var(--color-dark-text);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -88,11 +96,13 @@
 }
 
 .form__button--primary {
+    color: var(--color-dark-text);
     border: none;
     background-color: var(--color-red);
 }
 
 .form__button--secondary {
+    color: var(--color-red);
     border: 2px solid var(--color-red);
 }
 
