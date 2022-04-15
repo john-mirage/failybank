@@ -15,6 +15,7 @@ import "./assets/styles/components/table.css";
 import "./assets/styles/components/icon.css";
 import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
+import "./assets/styles/components/swift.css";
 
 import "./assets/styles/states.css";
 
@@ -28,11 +29,11 @@ const transferSwiftInput = document.getElementById("transfer-swift-input");
 const pastToFormButtons = document.getElementsByClassName("icon--paste-to-form");
 const pastToFormValues = document.getElementsByClassName("text--swift");
 
-for(let index = 0; index < pastToFormButtons.length; index++) {
-    pastToFormButtons[index].addEventListener("click", (event) => {
+[...pastToFormButtons].forEach((button, index) => {
+    button.addEventListener("click", () => {
         transferSwiftInput.value = pastToFormValues[index].textContent;
     });
-}
+});
 
 function validateAmount(amount) {
     const search = amount.search(/^[0-9]+$/);
