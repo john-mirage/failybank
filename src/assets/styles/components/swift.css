@@ -11,6 +11,10 @@
     border-bottom: 1px solid var(--color-light-divider);
 }
 
+.swift:last-child {
+    border: none;
+}
+
 .swift__section {
     box-sizing: border-box;
     padding-top: 12px;

@@ -7,6 +7,10 @@
     border-bottom: 1px solid var(--color-light-divider);
 }
 
+.log:last-child {
+    border: none;
+}
+
 .log__header {
     box-sizing: border-box;
     display: flex;
@@ -20,7 +24,7 @@
 
 .log__body {
     box-sizing: border-box;
-    padding-top: 16px;
+    padding-top: 8px;
 }
 
 .log__icon {
