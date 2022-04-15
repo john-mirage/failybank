@@ -4,10 +4,10 @@
     width: 48px;
     height: 48px;
     background-color: var(--color-light-bg);
+    border: 1px solid var(--color-light-divider);
 }
 
 .icon--button {
-    border: 1px solid var(--color-light-divider);
     cursor: pointer;
 }
 
@@ -20,6 +20,6 @@
     box-sizing: border-box;
     display: block;
     width: 24px;
-    height: auto;
+    height: 24px;
     margin: auto;
 }
