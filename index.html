@@ -10,8 +10,8 @@
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.4877be21.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.ac3e85c8.css">
+  <script type="module" crossorigin src="/failybank/assets/index.de77bb20.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.e638f942.css">
 </head>
 
 <!-- Screen -->
@@ -213,7 +213,7 @@
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="swift-add-input">Ajouter un code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le code SWIFT" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-input">
+                                    <input class="form__input" type="text" placeholder="Entrer un code SWIFT" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-input">
                                     <p class="form__message" id="swift-add-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
@@ -387,11 +387,12 @@
                     </section>
                     <!-- Enterprise deposit form -->
                     <section class="grid__section grid__section--with-border">
-                        <form class="form" id="enterprise-deposit-form">
+                        <form class="form" id="enterprise-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-input" placeholder="Entrer le montant du dépot">
+                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="enterprise-deposit-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fluid">
@@ -405,11 +406,12 @@
                     </section>
                     <!-- Enterprise withdraw form -->
                     <section class="grid__section">
-                        <form class="form" id="enterprise-withdraw-form">
+                        <form class="form" id="enterprise-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-withdraw-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-input" placeholder="Entrer le montant du retrait">
+                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <p class="form__message" id="enterprise-withdraw-message"></p>
                             </div>
                             <button class="form__button form__button--primary form__button--half">Retirer</button>
                         </form>
@@ -445,11 +447,12 @@
                     </section>
                     <!-- offshore deposit form -->
                     <section class="grid__section">
-                        <form class="form" id="offshore-deposit-form">
+                        <form class="form" id="offshore-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="offshore-deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-input" placeholder="Entrer le montant du dépot">
+                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="offshore-deposit-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fluid">
