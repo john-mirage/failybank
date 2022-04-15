@@ -19,21 +19,29 @@ import "./assets/styles/components/swift.css";
 
 import "./assets/styles/states.css";
 
+/**
+ * Transfer past System for the swift codes.
+ */
+const transferSwiftRows = document.getElementsByClassName("swift--transfer");
+const transferSwiftTexts = document.getElementsByClassName("swift__code--transfer");
+const transferSwiftButtons = document.getElementsByClassName("icon--transfer");
+const transferSwiftInput = document.getElementById("transfer-swift-input");
+
+for (let rowIndex = 0; rowIndex < transferSwiftRows.length; rowIndex++) {
+    transferSwiftButtons[rowIndex].addEventListener("click", () => {
+        if (transferSwiftInput.value !== transferSwiftTexts[rowIndex].textContent) {
+            transferSwiftInput.value = transferSwiftTexts[rowIndex].textContent;
+        }
+    });
+}
+
+/**
+ * Input validations
+ */
 const swiftAddForm = document.getElementById("swift-add-form");
 const depositForm = document.getElementById("deposit-form");
 const withdrawForm = document.getElementById("withdraw-form");
 const transferForm = document.getElementById("transfer-form");
-
-const transferSwiftInput = document.getElementById("transfer-swift-input");
-
-const pastToFormButtons = document.getElementsByClassName("icon--paste-to-form");
-const pastToFormValues = document.getElementsByClassName("text--swift");
-
-[...pastToFormButtons].forEach((button, index) => {
-    button.addEventListener("click", () => {
-        transferSwiftInput.value = pastToFormValues[index].textContent;
-    });
-});
 
 function validateAmount(amount) {
     const search = amount.search(/^[0-9]+$/);
