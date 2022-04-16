@@ -46,6 +46,10 @@
     margin: 0;
 }
 
+.swift__name--margin {
+    margin-bottom: 6px;
+}
+
 .swift__code {
     box-sizing: border-box;
     display: block;
@@ -54,6 +58,9 @@
     font-weight: 600;
     color: var(--color-light-text-alt);
     line-height: 1;
+}
+
+.swift__code--center {
     text-align: center;
 }
 

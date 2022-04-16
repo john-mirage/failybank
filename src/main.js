@@ -244,7 +244,7 @@ function createSwiftDeleteRow(newSwift) {
     swiftCodeSection.classList.add("swift__section");
     swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
     swiftName.classList.add("swift__name");
-    swiftCode.classList.add("swift__code");
+    swiftCode.classList.add("swift__code", "swift__code--center");
     swiftDetails.classList.add("swift__details");
     swiftIconButton.classList.add("icon", "icon--small", "icon--button", "icon--delete");
     swiftTextButton.classList.add("button", "button--primary", "button--small", "swift__button");
@@ -269,24 +269,21 @@ function createSwiftDeleteRow(newSwift) {
 
 function createSwiftPasteRow(newSwift) {
     const swiftRoot = document.createElement("section");
-    const swiftNameSection = document.createElement("div");
-    const swiftCodeSection = document.createElement("div");
+    const swiftInfoSection = document.createElement("div");
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
     const swiftButtonSection = document.createElement("div");
     const swiftIconButton = document.createElement("button");
     swiftRoot.classList.add("swift", "swift--transfer");
-    swiftNameSection.classList.add("swift__section");
-    swiftCodeSection.classList.add("swift__section");
+    swiftInfoSection.classList.add("swift__section");
     swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
-    swiftName.classList.add("swift__name");
+    swiftName.classList.add("swift__name", "swift__name--margin");
     swiftCode.classList.add("swift__code");
     swiftIconButton.classList.add("icon", "icon--no-bg", "icon--paste");
-    swiftRoot.appendChild(swiftNameSection);
-    swiftRoot.appendChild(swiftCodeSection);
+    swiftRoot.appendChild(swiftInfoSection);
     swiftRoot.appendChild(swiftButtonSection);
-    swiftNameSection.appendChild(swiftName);
-    swiftCodeSection.appendChild(swiftCode);
+    swiftInfoSection.appendChild(swiftName);
+    swiftInfoSection.appendChild(swiftCode);
     swiftButtonSection.appendChild(swiftIconButton);
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
@@ -331,7 +328,7 @@ const logs = [
         icon: "police",
     },
     {
-        entity: "Owen Chapman",
+        entity: "Transfert",
         date: "21-03-2022",
         amount: 2580,
         reference: "Argent pour les qualifications des Failygames",
@@ -347,7 +344,7 @@ const logs = [
         icon: "bank",
     },
     {
-        entity: "Garry Green",
+        entity: "Transfert",
         date: "19-03-2022",
         amount: 20000,
         reference: "Argent pour les qualifications des Failygames",
@@ -361,6 +358,38 @@ const logs = [
         reference: "Achat ARC",
         type: "withdraw",
         icon: "bank",
+    },
+    {
+        entity: "Los Santos Police Department",
+        date: "17-04-2022",
+        amount: -100000,
+        reference: "Amende pour braquage de banque",
+        type: "fine",
+        icon: "police",
+    },
+    {
+        entity: "Dépot",
+        date: "17-03-2022",
+        amount: 1200,
+        reference: "Vente de la voiture",
+        type: "deposit",
+        icon: "bank",
+    },
+    {
+        entity: "Retrait",
+        date: "16-03-2022",
+        amount: -8500,
+        reference: "Achat ARC",
+        type: "withdraw",
+        icon: "bank",
+    },
+    {
+        entity: "Transfert",
+        date: "19-03-2022",
+        amount: 15000,
+        reference: "Argent pour les qualifications des Failygames",
+        type: "transfer",
+        icon: "person",
     },
 ];
 
