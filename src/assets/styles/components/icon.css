@@ -50,6 +50,10 @@
     background-image: url("/src/assets/images/police.svg");
 }
 
+.icon--bank {
+    background-image: url("/src/assets/images/bank.svg");
+}
+
 .icon--button {
     cursor: pointer;
 }

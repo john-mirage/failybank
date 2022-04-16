@@ -28,6 +28,22 @@
     align-items: flex-start;
 }
 
+.bar__section--row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bar__logo {
+    box-sizing: border-box;
+    display: block;
+    width: 36px;
+    height: auto;
+    margin-right: 16px;
+    pointer-events: none;
+}
+
 .dark .bar {
     background-color: var(--color-dark-fg);
     border-bottom: 0.1px solid var(--color-dark-divider);

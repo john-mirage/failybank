@@ -79,7 +79,7 @@
     color: var(--color-red);
 }
 
-.log__reference {
+.log__reference-label {
     box-sizing: border-box;
     display: inline;
     margin: 0 0 8px 0;
@@ -89,7 +89,7 @@
     line-height: 20px;
 }
 
-.log__reference-value {
+.log__reference {
     box-sizing: border-box;
     display: inline;
     margin: 0;

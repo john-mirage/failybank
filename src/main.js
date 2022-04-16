@@ -325,7 +325,7 @@ const logs = [
     {
         entity: "Los Santos Police Department",
         date: "22-04-2022",
-        amount: "- 2455$",
+        amount: -2455,
         reference: "Amende pour refus d'optempérer",
         type: "fine",
         icon: "police",
@@ -333,9 +333,87 @@ const logs = [
     {
         entity: "Owen Chapman",
         date: "21-03-2022",
-        amount: "+ 2580$",
+        amount: 2580,
         reference: "Argent pour les qualifications des Failygames",
         type: "transfer",
         icon: "person",
-    }
+    },
+    {
+        entity: "Dépot",
+        date: "20-03-2022",
+        amount: 15000,
+        reference: "Vente de la voiture",
+        type: "deposit",
+        icon: "bank",
+    },
+    {
+        entity: "Garry Green",
+        date: "19-03-2022",
+        amount: 20000,
+        reference: "Argent pour les qualifications des Failygames",
+        type: "transfer",
+        icon: "person",
+    },
+    {
+        entity: "Retrait",
+        date: "18-03-2022",
+        amount: -4500,
+        reference: "Achat ARC",
+        type: "withdraw",
+        icon: "bank",
+    },
 ];
+
+const globalLogList = document.getElementById("global-log-list");
+
+const numberFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+
+function createLogRow(log) {
+    const logRoot = document.createElement("details");
+    const logHeader = document.createElement("summary");
+    const logBody = document.createElement("section");
+    const logIcon = document.createElement("div");
+    const logInfo = document.createElement("div");
+    const logEntity = document.createElement("h3");
+    const logDate = document.createElement("p");
+    const logAmount = document.createElement("p");
+    const logReferenceLabel = document.createElement("h5");
+    const logReferenceText = document.createElement("p");
+    logRoot.classList.add("log");
+    logHeader.classList.add("log__header");
+    logBody.classList.add("log__body");
+    logIcon.classList.add("icon", `icon--${log.icon}`, "log__icon");
+    logInfo.classList.add("log__info");
+    logEntity.classList.add("log__entity");
+    logDate.classList.add("log__date");
+    logAmount.classList.add("log__amount", `log__amount--${log.amount > 0 ? "up" : "down"}`);
+    logReferenceLabel.classList.add("log__reference-label");
+    logReferenceText.classList.add("log__reference");
+    logEntity.textContent = log.entity;
+    logDate.textContent = log.date;
+    logAmount.textContent = numberFormatter.format(log.amount);
+    logReferenceLabel.textContent = "Référence: ";
+    logReferenceText.textContent = log.reference;
+    logRoot.appendChild(logHeader);
+    logRoot.appendChild(logBody);
+    logHeader.appendChild(logIcon);
+    logHeader.appendChild(logInfo);
+    logHeader.appendChild(logAmount);
+    logInfo.appendChild(logEntity);
+    logInfo.appendChild(logDate);
+    logBody.appendChild(logReferenceLabel);
+    logBody.appendChild(logReferenceText);
+    return logRoot;
+}
+
+function generateGlobalLogList(logs) {
+    if (globalLogList.hasChildNodes) {
+        globalLogList.innerHTML = "";
+    }
+    logs.forEach((log) => {
+        const logRow = createLogRow(log);
+        globalLogList.appendChild(logRow);
+    });
+}
+
+generateGlobalLogList(logs);
