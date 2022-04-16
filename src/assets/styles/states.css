@@ -26,3 +26,7 @@
 .app--loaded > .app__container {
     display: block;
 }
+
+.swift__switch[open] > .icon--delete {
+    background-image: url("/src/assets/images/close.svg");
+}

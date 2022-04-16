@@ -27,9 +27,6 @@ const depositMessage = document.getElementById("deposit-message");
 const withdrawForm = document.getElementById("withdraw-form");
 const withdrawInput = document.getElementById("withdraw-input");
 const withdrawMessage = document.getElementById("withdraw-message");
-const transferSwiftRows = document.getElementsByClassName("swift--transfer");
-const transferSwiftTexts = document.getElementsByClassName("swift__code--transfer");
-const transferSwiftButtons = document.getElementsByClassName("swift__icon-button--transfer");
 const transferSwiftInput = document.getElementById("transfer-swift-input");
 const transferSwiftMessage = document.getElementById("transfer-swift-message");
 const transferForm = document.getElementById("transfer-form");
@@ -94,6 +91,7 @@ swiftAddForm.addEventListener("submit", (event) => {
     if (!swiftAddInput.validity.valid) {
         displayErrorMessage("swift", swiftAddInput, swiftAddMessage);
     } else {
+        console.log("Swift Add form submitted");
         resetForm(swiftAddForm);
         resetMessage(swiftAddMessage);
     }
@@ -104,6 +102,7 @@ depositForm.addEventListener("submit", (event) => {
     if (!depositInput.validity.valid) {
         displayErrorMessage("amount", depositInput, depositMessage);
     } else {
+        console.log("Deposit form submitted");
         resetForm(depositForm);
         resetMessage(depositMessage);
     }
@@ -114,6 +113,7 @@ withdrawForm.addEventListener("submit", (event) => {
     if (!withdrawInput.validity.valid) {
         displayErrorMessage("amount", withdrawInput, withdrawMessage);
     } else {
+        console.log("Withdraw form submitted");
         resetForm(withdrawForm);
         resetMessage(withdrawMessage);
     }
@@ -140,6 +140,7 @@ transferForm.addEventListener("submit", (event) => {
     }
 
     if (transferAmountInput.validity.valid && transferSwiftInput.validity.valid && transferReferenceInput.validity.valid) {
+        console.log("Transfer form submitted");
         resetForm(transferForm);
     }
     event.preventDefault();
@@ -149,6 +150,7 @@ enterpriseDepositForm.addEventListener("submit", (event) => {
     if (!enterpriseDepositInput.validity.valid) {
         displayErrorMessage("amount", enterpriseDepositInput, enterpriseDepositMessage);
     } else {
+        console.log("Enterprise deposit form submitted");
         resetForm(enterpriseDepositForm);
         resetMessage(enterpriseDepositMessage);
     }
@@ -159,6 +161,7 @@ enterpriseWithdrawForm.addEventListener("submit", (event) => {
     if (!enterpriseWithdrawInput.validity.valid) {
         displayErrorMessage("amount", enterpriseWithdrawInput, enterpriseWithdrawMessage);
     } else {
+        console.log("Enterprise withdraw form submitted");
         resetForm(enterpriseWithdrawForm);
         resetMessage(enterpriseWithdrawMessage);
     }
@@ -169,6 +172,7 @@ offshoreDepositForm.addEventListener("submit", (event) => {
     if (!offshoreDepositInput.validity.valid) {
         displayErrorMessage("amount", offshoreDepositInput, offshoreDepositMessage);
     } else {
+        console.log("Offshore deposit form submitted");
         resetForm(offshoreDepositForm);
         resetMessage(offshoreDepositMessage);
     }
@@ -209,28 +213,25 @@ function createSwiftDeleteRow(newSwift) {
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
     const swiftSwitch = document.createElement("details");
-    const swiftDeleteButton = document.createElement("summary");
-    const swiftIcon = document.createElement("div");
-    const swiftConfirmButton = document.createElement("button");
+    const swiftIconButton = document.createElement("summary");
+    const swiftTextButton = document.createElement("button");
     swiftRoot.classList.add("swift");
     swiftInfo.classList.add("swift__info");
     swiftName.classList.add("swift__name");
     swiftCode.classList.add("swift__code");
     swiftSwitch.classList.add("swift__switch");
-    swiftDeleteButton.classList.add("swift__icon-button");
-    swiftIcon.classList.add("swift__icon", "swift__icon--delete");
-    swiftConfirmButton.classList.add("swift__button");
+    swiftIconButton.classList.add("icon", "icon--button", "icon--delete");
+    swiftTextButton.classList.add("swift__button");
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
-    swiftConfirmButton.textContent = "Confirmer";
+    swiftTextButton.textContent = "Confirmer";
     swiftRoot.appendChild(swiftInfo);
     swiftRoot.appendChild(swiftSwitch);
     swiftInfo.appendChild(swiftName);
     swiftInfo.appendChild(swiftCode);
-    swiftSwitch.appendChild(swiftDeleteButton);
-    swiftSwitch.appendChild(swiftConfirmButton);
-    swiftDeleteButton.appendChild(swiftIcon);
-    swiftConfirmButton.addEventListener("click", () => {
+    swiftSwitch.appendChild(swiftIconButton);
+    swiftSwitch.appendChild(swiftTextButton);
+    swiftTextButton.addEventListener("click", () => {
         activeSwiftList = activeSwiftList.filter((oldSwift) => oldSwift.name !== newSwift.name);
         generateSwiftDeleteList(activeSwiftList);
         generateSwiftPasteList(activeSwiftList);
@@ -244,20 +245,17 @@ function createSwiftPasteRow(newSwift) {
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
     const swiftIconButton = document.createElement("button");
-    const swiftIcon = document.createElement("span");
     swiftRoot.classList.add("swift", "swift--transfer");
     swiftInfo.classList.add("swift__info");
     swiftName.classList.add("swift__name");
     swiftCode.classList.add("swift__code");
-    swiftIconButton.classList.add("swift__icon-button");
-    swiftIcon.classList.add("swift__icon", "swift__icon--paste");
+    swiftIconButton.classList.add("icon", "icon--button", "icon--paste");
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
     swiftRoot.appendChild(swiftInfo);
     swiftRoot.appendChild(swiftIconButton);
     swiftInfo.appendChild(swiftName);
     swiftInfo.appendChild(swiftCode);
-    swiftIconButton.appendChild(swiftIcon);
     swiftIconButton.addEventListener("click", () => {
         if (transferSwiftInput.value !== newSwift.code) {
             transferSwiftInput.value = newSwift.code;
@@ -288,3 +286,20 @@ function generateSwiftPasteList(swifts) {
 
 generateSwiftDeleteList(activeSwiftList);
 generateSwiftPasteList(activeSwiftList);
+
+const logs = [
+    {
+        entity: "Los Santos Police Department",
+        date: "22-04-2022",
+        amount: "- 2455$",
+        reference: "Amende pour refus d'optempérer",
+        icon: "police",
+    },
+    {
+        entity: "Owen Chapman",
+        date: "21-03-2022",
+        amount: "+ 2580$",
+        reference: "Argent pour les qualifications des Failygames",
+        icon: "person",
+    }
+];

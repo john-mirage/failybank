@@ -48,44 +48,6 @@
     height: auto;
 }
 
-.swift__icon-button {
-    box-sizing: border-box;
-    display: inline-flex;
-    width: 48px;
-    height: 48px;
-    background-color: var(--color-light-bg);
-    border: 1px solid var(--color-light-divider);
-    cursor: pointer;
-}
-
-.swift__icon-button:hover {
-    background-color: #FFE3E3;
-    border: 1px solid #FFC9C9;
-}
-
-.swift__icon {
-    box-sizing: border-box;
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.swift__icon--delete {
-    background-image: url("/src/assets/images/delete.svg");
-}
-
-.swift__icon--paste {
-    background-image: url("/src/assets/images/paste-form.svg");
-}
-
-.swift__switch[open] > .swift__icon-button > .swift__icon--delete {
-    background-image: url("/src/assets/images/close.svg");
-}
-
 .swift__button {
     box-sizing: border-box;
     display: block;

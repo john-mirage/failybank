@@ -1,10 +1,33 @@
 .icon {
     box-sizing: border-box;
-    display: inline-flex;
+    display: block;
     width: 48px;
     height: 48px;
     background-color: var(--color-light-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
     border: 1px solid var(--color-light-divider);
+}
+
+.icon--delete {
+    background-image: url("/src/assets/images/delete.svg");
+}
+
+.icon--paste {
+    background-image: url("/src/assets/images/paste-form.svg");
+}
+
+.icon--palm-tree {
+    background-image: url("/src/assets/images/palm-tree.svg");
+}
+
+.icon--person {
+    background-image: url("/src/assets/images/person.svg");
+}
+
+.icon--police {
+    background-image: url("/src/assets/images/police.svg");
 }
 
 .icon--button {
@@ -16,10 +39,3 @@
     border: 1px solid #FFC9C9;
 }
 
-.icon__image {
-    box-sizing: border-box;
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin: auto;
-}
