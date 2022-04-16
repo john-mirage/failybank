@@ -1,0 +1,37 @@
+.button {
+    box-sizing: border-box;
+    display: block;
+    min-width: 168px;
+    height: 48px;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.button--half {
+    width: calc(50% - 12px);
+}
+
+.button--primary {
+    border: none;
+    color: var(--color-dark-text);
+    background-color: var(--color-red);
+}
+
+.button--primary:hover {
+    background-color: #FF8787;
+}
+
+.button--secondary {
+    color: var(--color-red);
+    border: 2px solid var(--color-red);
+}
+
+.button--disabled {
+
+}

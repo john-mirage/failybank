@@ -14,6 +14,7 @@ import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
 import "./assets/styles/components/swift.css";
 import "./assets/styles/components/log.css";
+import "./assets/styles/components/button.css";
 import "./assets/styles/states.css";
 
 const swiftDeleteList = document.getElementById("swift-delete-list");
@@ -245,18 +246,18 @@ function createSwiftPasteRow(newSwift) {
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
     const swiftIconButton = document.createElement("button");
-    swiftRoot.classList.add("swift", "swift--transfer");
+    swiftRoot.classList.add("swift", "swift--clickable", "swift--transfer");
     swiftInfo.classList.add("swift__info");
     swiftName.classList.add("swift__name");
     swiftCode.classList.add("swift__code");
-    swiftIconButton.classList.add("icon", "icon--button", "icon--paste");
+    swiftIconButton.classList.add("icon", "icon--no-bg", "icon--paste");
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
     swiftRoot.appendChild(swiftInfo);
     swiftRoot.appendChild(swiftIconButton);
     swiftInfo.appendChild(swiftName);
     swiftInfo.appendChild(swiftCode);
-    swiftIconButton.addEventListener("click", () => {
+    swiftRoot.addEventListener("click", () => {
         if (transferSwiftInput.value !== newSwift.code) {
             transferSwiftInput.value = newSwift.code;
         }

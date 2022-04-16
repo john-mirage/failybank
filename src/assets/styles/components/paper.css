@@ -25,7 +25,7 @@
 }
 
 .paper__frame::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 .paper__frame::-webkit-scrollbar-thumb {
