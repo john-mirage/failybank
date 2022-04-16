@@ -10,8 +10,8 @@
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.35c24c41.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.c15e71f9.css">
+  <script type="module" crossorigin src="/failybank/assets/index.5193cec1.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.72b0ba64.css">
 </head>
 
 <!-- Screen -->
@@ -33,7 +33,8 @@
 
             <!-- Bar -->
             <header class="bar">
-                <div class="bar__section">
+                <div class="bar__section bar__section--row">
+                    <img class="bar__logo" src="/failybank/assets/logo.7ff690bc.svg" alt="Maze Bank logo">
                     <!-- Balance -->
                     <div class="balance">
                         <h2 class="balance__name">Solde</h2>
@@ -93,36 +94,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame">
-                                    <details class="log">
-                                        <summary class="log__header">
-                                            <div class="icon icon--police log__icon"></div>
-                                            <div class="log__info">
-                                                <h3 class="log__entity">Los Santos Police Department</h3>
-                                                <p class="log__date">22-04-2022</p>
-                                            </div>
-                                            <p class="log__amount log__amount--down">- 450$</p>
-                                        </summary>
-                                        <section class="log__body">
-                                            <h5 class="log__reference">Réference: </h5>
-                                            <p class="log__reference-value">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, nesciunt. Mollitia, ab iste.</p>
-                                        </section>
-                                    </details>
-                                    <details class="log">
-                                        <summary class="log__header">
-                                            <div class="icon icon--person log__icon"></div>
-                                            <div class="log__info">
-                                                <h3 class="log__entity">Owen Chapman</h3>
-                                                <p class="log__date">21-04-2022</p>
-                                            </div>
-                                            <p class="log__amount log__amount--up">+ 5060$</p>
-                                        </summary>
-                                        <section class="log__body">
-                                            <h5 class="log__reference">Réference: </h5>
-                                            <p class="log__reference-value">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, nesciunt. Mollitia, ab iste.</p>
-                                        </section>
-                                    </details>
-                                </div>
+                                <div class="paper__frame" id="global-log-list"></div>
                             </div>
                         </div>
                     </section>
