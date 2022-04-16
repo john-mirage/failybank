@@ -366,7 +366,7 @@ const logs = [
 
 const globalLogList = document.getElementById("global-log-list");
 
-const numberFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+const numberFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 function createLogRow(log) {
     const logRoot = document.createElement("details");
