@@ -293,6 +293,7 @@ const logs = [
         date: "22-04-2022",
         amount: "- 2455$",
         reference: "Amende pour refus d'optempérer",
+        type: "fine",
         icon: "police",
     },
     {
@@ -300,6 +301,7 @@ const logs = [
         date: "21-03-2022",
         amount: "+ 2580$",
         reference: "Argent pour les qualifications des Failygames",
+        type: "transfer",
         icon: "person",
     }
 ];
