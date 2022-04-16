@@ -112,6 +112,9 @@ swiftAddForm.addEventListener("submit", (event) => {
 
     if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
         console.log("Swift Add form submitted");
+        activeSwiftList = [{ name: swiftAddNameInput.value, code: swiftAddCodeInput.value }, ...activeSwiftList];
+        generateSwiftDeleteList(activeSwiftList);
+        generateSwiftPasteList(activeSwiftList);
         resetForm(swiftAddForm);
     }
     event.preventDefault();
