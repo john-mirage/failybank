@@ -8,12 +8,12 @@
 - Add missing input in the swift add form.
     - change form layout
     - add input validation when done.
-- Blur balance, show on hover.
+- [x] Blur balance, show on hover.
 - Make all rows of swift list in transfer view clickable.
     - remove the background color of the buttons
     - increase size for the texts
 - For history logs, show users that he can click to expand.
-- Add styled scrollbars for the paper frames
+- [-] Add styled scrollbars for the paper frames
 
 ### Others
 
