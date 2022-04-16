@@ -211,7 +211,9 @@ const swifts = [
     },
 ];
 
-function createSwiftDeleteRow(swift) {
+let activeSwiftDeleteList = [...swifts];
+
+function createSwiftDeleteRow(newSwift) {
     const swiftRoot = document.createElement("section");
     const swiftInfo = document.createElement("div");
     const swiftName = document.createElement("h4");
@@ -228,8 +230,8 @@ function createSwiftDeleteRow(swift) {
     swiftDeleteButton.classList.add("swift__icon-button");
     swiftIcon.classList.add("swift__icon", "swift__icon--delete");
     swiftConfirmButton.classList.add("swift__button");
-    swiftName.textContent = swift.name;
-    swiftCode.textContent = swift.code;
+    swiftName.textContent = newSwift.name;
+    swiftCode.textContent = newSwift.code;
     swiftConfirmButton.textContent = "Confirmer";
     swiftRoot.appendChild(swiftInfo);
     swiftRoot.appendChild(swiftSwitch);
@@ -239,7 +241,8 @@ function createSwiftDeleteRow(swift) {
     swiftSwitch.appendChild(swiftConfirmButton);
     swiftDeleteButton.appendChild(swiftIcon);
     swiftConfirmButton.addEventListener("click", () => {
-        console.log("deleted");
+        activeSwiftDeleteList = activeSwiftDeleteList.filter((oldSwift) => oldSwift.name !== newSwift.name);
+        generateSwiftDeleteList(activeSwiftDeleteList);
     });
     return swiftRoot;
 }
@@ -254,4 +257,4 @@ function generateSwiftDeleteList(swifts) {
     });
 }
 
-generateSwiftDeleteList(swifts);
+generateSwiftDeleteList(activeSwiftDeleteList);
