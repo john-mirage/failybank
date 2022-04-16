@@ -1,5 +1,4 @@
 import "./assets/styles/global.css";
-
 import "./assets/styles/components/screen.css";
 import "./assets/styles/components/app.css";
 import "./assets/styles/components/bar.css";
@@ -15,9 +14,9 @@ import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
 import "./assets/styles/components/swift.css";
 import "./assets/styles/components/log.css";
-
 import "./assets/styles/states.css";
 
+const swiftDeleteList = document.getElementById("swift-delete-list");
 const swiftAddForm = document.getElementById("swift-add-form");
 const swiftAddInput = document.getElementById("swift-add-input");
 const swiftAddMessage = document.getElementById("swift-add-message");
@@ -61,145 +60,198 @@ for (let rowIndex = 0; rowIndex < transferSwiftRows.length; rowIndex++) {
 /**
  * Form validations
  */
+function displayErrorMessage(type, input, message) {
+    switch (type) {
+        case "amount":
+            if (input.validity.valueMissing) {
+                message.textContent = "Veuillez entrer un montant";
+            } else if (input.validity.patternMismatch) {
+                message.textContent = "Le montant ne doit comporter que des chiffres";
+            }
+            break;
+        case "swift":
+            if (input.validity.valueMissing) {
+                message.textContent = "Veuillez entrer un code SWIFT";
+            } else if (input.validity.tooShort || input.validity.tooLong) {
+                message.textContent = "Le code SWIFT doit comporter exactement 10 chiffres";
+            } else if (input.validity.patternMismatch) {
+                message.textContent = "Le code SWIFT ne doit comporter que des chiffres";
+            }
+            break;
+        case "transfer":
+            if (input.validity.valueMissing) {
+                message.textContent = "Veuillez entrer la référence du transfert";
+            } else if (input.validity.tooLong) {
+                message.textContent = "La référence du transfert ne doit exeder 40 caractères";
+            }
+            break;
+        default:
+            throw new Error("The type is not valid");
+    }
+}
+
+function resetForm(form) {
+    form.reset();
+}
+
+function resetMessage(message) {
+    if (message.textContent.length > 0) {
+        message.textContent = "";
+    }
+};
+
 swiftAddForm.addEventListener("submit", (event) => {
     if (!swiftAddInput.validity.valid) {
-        if (swiftAddInput.validity.valueMissing) {
-            swiftAddMessage.textContent = "Veuillez entrer un code SWIFT";
-        } else if (swiftAddInput.validity.tooShort || swiftAddInput.validity.tooLong) {
-            swiftAddMessage.textContent = "Le code SWIFT doit comporter exactement 10 chiffres";
-        } else if (swiftAddInput.validity.patternMismatch) {
-            swiftAddMessage.textContent = "Le code SWIFT ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("swift", swiftAddInput, swiftAddMessage);
     } else {
-        swiftAddForm.reset();
-        if (swiftAddMessage.textContent.length > 0) {
-            swiftAddMessage.textContent = "";
-        }
+        resetForm(swiftAddForm);
+        resetMessage(swiftAddMessage);
     }
     event.preventDefault();
 });
 
 depositForm.addEventListener("submit", (event) => {
     if (!depositInput.validity.valid) {
-        if (depositInput.validity.valueMissing) {
-            depositMessage.textContent = "Veuillez entrer un montant";
-        } else if (depositInput.validity.patternMismatch) {
-            depositMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", depositInput, depositMessage);
     } else {
-        depositForm.reset();
-        if (depositMessage.textContent.length > 0) {
-            depositMessage.textContent = "";
-        }
+        resetForm(depositForm);
+        resetMessage(depositMessage);
     }
     event.preventDefault();
 });
 
 withdrawForm.addEventListener("submit", (event) => {
     if (!withdrawInput.validity.valid) {
-        if (withdrawInput.validity.valueMissing) {
-            withdrawMessage.textContent = "Veuillez entrer un montant";
-        } else if (withdrawInput.validity.patternMismatch) {
-            withdrawMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", withdrawInput, withdrawMessage);
     } else {
-        withdrawForm.reset();
-        if (withdrawMessage.textContent.length > 0) {
-            withdrawMessage.textContent = "";
-        }
+        resetForm(withdrawForm);
+        resetMessage(withdrawMessage);
     }
     event.preventDefault();
 });
 
 transferForm.addEventListener("submit", (event) => {
     if (!transferAmountInput.validity.valid) {
-        if (transferAmountInput.validity.valueMissing) {
-            transferAmountMessage.textContent = "Veuillez entrer un montant";
-        } else if (transferAmountInput.validity.patternMismatch) {
-            transferAmountMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", transferAmountInput, transferAmountMessage);
     } else if (transferAmountInput.validity.valid) {
-        if (transferAmountMessage.textContent.length > 0) {
-            transferAmountMessage.textContent = "";
-        }
+        resetMessage(transferAmountMessage);
     }
 
     if (!transferSwiftInput.validity.valid) {
-        if (transferSwiftInput.validity.valueMissing) {
-            transferSwiftMessage.textContent = "Veuillez entrer un code SWIFT";
-        } else if (transferSwiftInput.validity.tooShort || transferSwiftInput.validity.tooLong) {
-            transferSwiftMessage.textContent = "Le code SWIFT doit comporter exactement 10 chiffres";
-        } else if (transferSwiftInput.validity.patternMismatch) {
-            transferSwiftMessage.textContent = "Le code SWIFT ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("swift", transferSwiftInput, transferSwiftMessage);
     } else if (transferSwiftInput.validity.valid) {
-        if (transferSwiftMessage.textContent.length > 0) {
-            transferSwiftMessage.textContent = "";
-        }
+        resetMessage(transferSwiftMessage);
     }
 
     if (!transferReferenceInput.validity.valid) {
-        if (transferReferenceInput.validity.valueMissing) {
-            transferReferenceMessage.textContent = "Veuillez entrer la référence du transfert";
-        } else if (transferReferenceInput.validity.tooLong) {
-            transferReferenceMessage.textContent = "La référence du transfert ne doit exeder 40 caractères";
-        }
+        displayErrorMessage("transfer", transferReferenceInput, transferReferenceMessage);
     } else if (transferReferenceInput.validity.valid) {
-        if (transferReferenceMessage.textContent.length > 0) {
-            transferReferenceMessage.textContent = "";
-        }
+        resetMessage(transferReferenceMessage);
     }
 
     if (transferAmountInput.validity.valid && transferSwiftInput.validity.valid && transferReferenceInput.validity.valid) {
-        transferForm.reset();
+        resetForm(transferForm);
     }
     event.preventDefault();
 });
 
 enterpriseDepositForm.addEventListener("submit", (event) => {
     if (!enterpriseDepositInput.validity.valid) {
-        if (enterpriseDepositInput.validity.valueMissing) {
-            enterpriseDepositMessage.textContent = "Veuillez entrer un montant";
-        } else if (enterpriseDepositInput.validity.patternMismatch) {
-            enterpriseDepositMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", enterpriseDepositInput, enterpriseDepositMessage);
     } else {
-        enterpriseDepositForm.reset();
-        if (enterpriseDepositMessage.textContent.length > 0) {
-            enterpriseDepositMessage.textContent = "";
-        }
+        resetForm(enterpriseDepositForm);
+        resetMessage(enterpriseDepositMessage);
     }
     event.preventDefault();
 });
 
 enterpriseWithdrawForm.addEventListener("submit", (event) => {
     if (!enterpriseWithdrawInput.validity.valid) {
-        if (enterpriseWithdrawInput.validity.valueMissing) {
-            enterpriseWithdrawMessage.textContent = "Veuillez entrer un montant";
-        } else if (enterpriseWithdrawInput.validity.patternMismatch) {
-            enterpriseWithdrawMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", enterpriseWithdrawInput, enterpriseWithdrawMessage);
     } else {
-        enterpriseWithdrawForm.reset();
-        if (enterpriseWithdrawMessage.textContent.length > 0) {
-            enterpriseWithdrawMessage.textContent = "";
-        }
+        resetForm(enterpriseWithdrawForm);
+        resetMessage(enterpriseWithdrawMessage);
     }
     event.preventDefault();
 });
 
 offshoreDepositForm.addEventListener("submit", (event) => {
     if (!offshoreDepositInput.validity.valid) {
-        if (offshoreDepositInput.validity.valueMissing) {
-            offshoreDepositMessage.textContent = "Veuillez entrer un montant";
-        } else if (offshoreDepositInput.validity.patternMismatch) {
-            offshoreDepositMessage.textContent = "Le montant ne doit comporter que des chiffres";
-        }
+        displayErrorMessage("amount", offshoreDepositInput, offshoreDepositMessage);
     } else {
-        offshoreDepositForm.reset();
-        if (offshoreDepositMessage.textContent.length > 0) {
-            offshoreDepositMessage.textContent = "";
-        }
+        resetForm(offshoreDepositForm);
+        resetMessage(offshoreDepositMessage);
     }
     event.preventDefault();
 });
+
+/**
+ * Data
+ */
+const swifts = [
+    {
+        name: "Lena Silvo",
+        code: "0123456789",
+    },
+    {
+        name: "Owen Chapman",
+        code: "1234567890",
+    },
+    {
+        name: "Garry Green",
+        code: "2345678901",
+    },
+    {
+        name: "Arthur Popov",
+        code: "3456789012",
+    },
+    {
+        name: "Quentin Coooper",
+        code: "4567890123",
+    },
+];
+
+function createSwiftDeleteRow(swift) {
+    const swiftRoot = document.createElement("section");
+    const swiftInfo = document.createElement("div");
+    const swiftName = document.createElement("h4");
+    const swiftCode = document.createElement("p");
+    const swiftSwitch = document.createElement("details");
+    const swiftDeleteButton = document.createElement("summary");
+    const swiftIcon = document.createElement("div");
+    const swiftConfirmButton = document.createElement("button");
+    swiftRoot.classList.add("swift");
+    swiftInfo.classList.add("swift__info");
+    swiftName.classList.add("swift__name");
+    swiftCode.classList.add("swift__code");
+    swiftSwitch.classList.add("swift__switch");
+    swiftDeleteButton.classList.add("swift__icon-button");
+    swiftIcon.classList.add("swift__icon", "swift__icon--delete");
+    swiftConfirmButton.classList.add("swift__button");
+    swiftName.textContent = swift.name;
+    swiftCode.textContent = swift.code;
+    swiftConfirmButton.textContent = "Confirmer";
+    swiftRoot.appendChild(swiftInfo);
+    swiftRoot.appendChild(swiftSwitch);
+    swiftInfo.appendChild(swiftName);
+    swiftInfo.appendChild(swiftCode);
+    swiftSwitch.appendChild(swiftDeleteButton);
+    swiftSwitch.appendChild(swiftConfirmButton);
+    swiftDeleteButton.appendChild(swiftIcon);
+    swiftConfirmButton.addEventListener("click", () => {
+        console.log("deleted");
+    });
+    return swiftRoot;
+}
+
+function generateSwiftDeleteList(swifts) {
+    if (swiftDeleteList.hasChildNodes) {
+        swiftDeleteList.innerHTML = "";
+    }
+    swifts.forEach((swift) => {
+        const swiftRow = createSwiftDeleteRow(swift);
+        swiftDeleteList.appendChild(swiftRow);
+    });
+}
+
+generateSwiftDeleteList(swifts);
