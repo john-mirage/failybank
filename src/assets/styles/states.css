@@ -27,6 +27,6 @@
     display: block;
 }
 
-.swift__switch[open] > .icon--delete {
+.swift__details[open] > .icon--delete {
     background-image: url("/src/assets/images/close.svg");
 }

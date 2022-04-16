@@ -10,9 +10,24 @@
     border: 1px solid var(--color-light-divider);
 }
 
+.icon--filled {
+    background-color: var(--color-red);
+    border: none;
+}
+
+.icon--small {
+    width: 36px;
+    height: 36px;
+    background-size: 16px;
+}
+
 .icon--no-bg {
     background-color: transparent;
     border: none;
+}
+
+.icon--add {
+    background-image: url("/src/assets/images/add.svg");
 }
 
 .icon--delete {
@@ -42,5 +57,10 @@
 .icon--button:hover {
     background-color: #FFE3E3;
     border: 1px solid #FFC9C9;
+}
+
+.icon--filled:hover {
+    background-color: #FF8787;
+    border: none;
 }
 

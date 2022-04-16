@@ -2,16 +2,15 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: auto;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--color-light-divider);
 }
 
-.swift--clickable {
+.swift--transfer {
     cursor: pointer;
 }
 
@@ -20,9 +19,21 @@
 }
 
 .swift__section {
+    flex: 1 1 0%;
     box-sizing: border-box;
-    padding-top: 12px;
-    padding-bottom: 12px;
+}
+
+.swift__section--align-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.swift__details {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: auto;
 }
 
 .swift__name {
@@ -31,8 +42,8 @@
     font-size: 16px;
     font-weight: 700;
     color: var(--color-light-text);
-    line-height: 1;
-    margin: 0 0 8px 0;
+    line-height: 20px;
+    margin: 0;
 }
 
 .swift__code {
@@ -43,13 +54,7 @@
     font-weight: 600;
     color: var(--color-light-text-alt);
     line-height: 1;
-}
-
-.swift__switch {
-    box-sizing: border-box;
-    position: relative;
-    width: auto;
-    height: auto;
+    text-align: center;
 }
 
 .swift__button {
@@ -57,19 +62,6 @@
     display: block;
     position: absolute;
     top: 0;
-    left: -16px;
+    left: -8px;
     transform: translateX(-100%);
-    width: auto;
-    height: 48px;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-dark-text);
-    border: none;
-    background-color: var(--color-red);
 }

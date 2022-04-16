@@ -20,8 +20,10 @@ import "./assets/styles/states.css";
 const swiftDeleteList = document.getElementById("swift-delete-list");
 const swiftPasteList = document.getElementById("swift-paste-list");
 const swiftAddForm = document.getElementById("swift-add-form");
-const swiftAddInput = document.getElementById("swift-add-input");
-const swiftAddMessage = document.getElementById("swift-add-message");
+const swiftAddNameInput = document.getElementById("swift-add-name-input");
+const swiftAddNameMessage = document.getElementById("swift-add-name-message");
+const swiftAddCodeInput = document.getElementById("swift-add-code-input");
+const swiftAddCodeMessage = document.getElementById("swift-add-code-message");
 const depositForm = document.getElementById("deposit-form");
 const depositInput = document.getElementById("deposit-input");
 const depositMessage = document.getElementById("deposit-message");
@@ -50,6 +52,13 @@ const offshoreDepositMessage = document.getElementById("offshore-deposit-message
  */
 function displayErrorMessage(type, input, message) {
     switch (type) {
+        case "name":
+            if (input.validity.valueMissing) {
+                message.textContent = "Veuillez entrer un nom";
+            } else if (input.validity.tooLong) {
+                message.textContent = "Le nom ne doit exeder 40 caractères";
+            }
+            break;
         case "amount":
             if (input.validity.valueMissing) {
                 message.textContent = "Veuillez entrer un montant";
@@ -66,7 +75,7 @@ function displayErrorMessage(type, input, message) {
                 message.textContent = "Le code SWIFT ne doit comporter que des chiffres";
             }
             break;
-        case "transfer":
+        case "reference":
             if (input.validity.valueMissing) {
                 message.textContent = "Veuillez entrer la référence du transfert";
             } else if (input.validity.tooLong) {
@@ -89,12 +98,21 @@ function resetMessage(message) {
 };
 
 swiftAddForm.addEventListener("submit", (event) => {
-    if (!swiftAddInput.validity.valid) {
-        displayErrorMessage("swift", swiftAddInput, swiftAddMessage);
+    if (!swiftAddNameInput.validity.valid) {
+        displayErrorMessage("name", swiftAddNameInput, swiftAddNameMessage);
     } else {
+        resetMessage(swiftAddNameMessage);
+    }
+
+    if (!swiftAddCodeInput.validity.valid) {
+        displayErrorMessage("swift", swiftAddCodeInput, swiftAddCodeMessage);
+    } else {
+        resetMessage(swiftAddCodeMessage);
+    }
+
+    if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
         console.log("Swift Add form submitted");
         resetForm(swiftAddForm);
-        resetMessage(swiftAddMessage);
     }
     event.preventDefault();
 });
@@ -135,7 +153,7 @@ transferForm.addEventListener("submit", (event) => {
     }
 
     if (!transferReferenceInput.validity.valid) {
-        displayErrorMessage("transfer", transferReferenceInput, transferReferenceMessage);
+        displayErrorMessage("reference", transferReferenceInput, transferReferenceMessage);
     } else if (transferReferenceInput.validity.valid) {
         resetMessage(transferReferenceMessage);
     }
@@ -201,7 +219,7 @@ const swifts = [
         code: "3456789012",
     },
     {
-        name: "Quentin Coooper",
+        name: "Quentin Cooper",
         code: "4567890123",
     },
 ];
@@ -210,28 +228,34 @@ let activeSwiftList = [...swifts];
 
 function createSwiftDeleteRow(newSwift) {
     const swiftRoot = document.createElement("section");
-    const swiftInfo = document.createElement("div");
+    const swiftNameSection = document.createElement("div");
+    const swiftCodeSection = document.createElement("div");
+    const swiftButtonSection = document.createElement("div");
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
-    const swiftSwitch = document.createElement("details");
+    const swiftDetails = document.createElement("details");
     const swiftIconButton = document.createElement("summary");
     const swiftTextButton = document.createElement("button");
     swiftRoot.classList.add("swift");
-    swiftInfo.classList.add("swift__info");
+    swiftNameSection.classList.add("swift__section");
+    swiftCodeSection.classList.add("swift__section");
+    swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
     swiftName.classList.add("swift__name");
     swiftCode.classList.add("swift__code");
-    swiftSwitch.classList.add("swift__switch");
-    swiftIconButton.classList.add("icon", "icon--button", "icon--delete");
-    swiftTextButton.classList.add("swift__button");
+    swiftDetails.classList.add("swift__details");
+    swiftIconButton.classList.add("icon", "icon--small", "icon--button", "icon--delete");
+    swiftTextButton.classList.add("button", "button--primary", "button--small", "swift__button");
+    swiftRoot.appendChild(swiftNameSection);
+    swiftRoot.appendChild(swiftCodeSection);
+    swiftRoot.appendChild(swiftButtonSection);
+    swiftNameSection.appendChild(swiftName);
+    swiftCodeSection.appendChild(swiftCode);
+    swiftButtonSection.appendChild(swiftDetails);
+    swiftDetails.appendChild(swiftIconButton);
+    swiftDetails.appendChild(swiftTextButton);
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
     swiftTextButton.textContent = "Confirmer";
-    swiftRoot.appendChild(swiftInfo);
-    swiftRoot.appendChild(swiftSwitch);
-    swiftInfo.appendChild(swiftName);
-    swiftInfo.appendChild(swiftCode);
-    swiftSwitch.appendChild(swiftIconButton);
-    swiftSwitch.appendChild(swiftTextButton);
     swiftTextButton.addEventListener("click", () => {
         activeSwiftList = activeSwiftList.filter((oldSwift) => oldSwift.name !== newSwift.name);
         generateSwiftDeleteList(activeSwiftList);
@@ -242,21 +266,27 @@ function createSwiftDeleteRow(newSwift) {
 
 function createSwiftPasteRow(newSwift) {
     const swiftRoot = document.createElement("section");
-    const swiftInfo = document.createElement("div");
+    const swiftNameSection = document.createElement("div");
+    const swiftCodeSection = document.createElement("div");
     const swiftName = document.createElement("h4");
     const swiftCode = document.createElement("p");
+    const swiftButtonSection = document.createElement("div");
     const swiftIconButton = document.createElement("button");
-    swiftRoot.classList.add("swift", "swift--clickable", "swift--transfer");
-    swiftInfo.classList.add("swift__info");
+    swiftRoot.classList.add("swift", "swift--transfer");
+    swiftNameSection.classList.add("swift__section");
+    swiftCodeSection.classList.add("swift__section");
+    swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
     swiftName.classList.add("swift__name");
     swiftCode.classList.add("swift__code");
     swiftIconButton.classList.add("icon", "icon--no-bg", "icon--paste");
+    swiftRoot.appendChild(swiftNameSection);
+    swiftRoot.appendChild(swiftCodeSection);
+    swiftRoot.appendChild(swiftButtonSection);
+    swiftNameSection.appendChild(swiftName);
+    swiftCodeSection.appendChild(swiftCode);
+    swiftButtonSection.appendChild(swiftIconButton);
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
-    swiftRoot.appendChild(swiftInfo);
-    swiftRoot.appendChild(swiftIconButton);
-    swiftInfo.appendChild(swiftName);
-    swiftInfo.appendChild(swiftCode);
     swiftRoot.addEventListener("click", () => {
         if (transferSwiftInput.value !== newSwift.code) {
             transferSwiftInput.value = newSwift.code;
