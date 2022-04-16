@@ -17,6 +17,7 @@ import "./assets/styles/components/log.css";
 import "./assets/styles/states.css";
 
 const swiftDeleteList = document.getElementById("swift-delete-list");
+const swiftPasteList = document.getElementById("swift-paste-list");
 const swiftAddForm = document.getElementById("swift-add-form");
 const swiftAddInput = document.getElementById("swift-add-input");
 const swiftAddMessage = document.getElementById("swift-add-message");
@@ -45,17 +46,6 @@ const enterpriseWithdrawMessage = document.getElementById("enterprise-withdraw-m
 const offshoreDepositForm = document.getElementById("offshore-deposit-form");
 const offshoreDepositInput = document.getElementById("offshore-deposit-input");
 const offshoreDepositMessage = document.getElementById("offshore-deposit-message");
-
-/**
- * Transfer past System for the swift codes.
- */
-for (let rowIndex = 0; rowIndex < transferSwiftRows.length; rowIndex++) {
-    transferSwiftButtons[rowIndex].addEventListener("click", () => {
-        if (transferSwiftInput.value !== transferSwiftTexts[rowIndex].textContent) {
-            transferSwiftInput.value = transferSwiftTexts[rowIndex].textContent;
-        }
-    });
-}
 
 /**
  * Form validations
@@ -211,7 +201,7 @@ const swifts = [
     },
 ];
 
-let activeSwiftDeleteList = [...swifts];
+let activeSwiftList = [...swifts];
 
 function createSwiftDeleteRow(newSwift) {
     const swiftRoot = document.createElement("section");
@@ -241,8 +231,37 @@ function createSwiftDeleteRow(newSwift) {
     swiftSwitch.appendChild(swiftConfirmButton);
     swiftDeleteButton.appendChild(swiftIcon);
     swiftConfirmButton.addEventListener("click", () => {
-        activeSwiftDeleteList = activeSwiftDeleteList.filter((oldSwift) => oldSwift.name !== newSwift.name);
-        generateSwiftDeleteList(activeSwiftDeleteList);
+        activeSwiftList = activeSwiftList.filter((oldSwift) => oldSwift.name !== newSwift.name);
+        generateSwiftDeleteList(activeSwiftList);
+        generateSwiftPasteList(activeSwiftList);
+    });
+    return swiftRoot;
+}
+
+function createSwiftPasteRow(newSwift) {
+    const swiftRoot = document.createElement("section");
+    const swiftInfo = document.createElement("div");
+    const swiftName = document.createElement("h4");
+    const swiftCode = document.createElement("p");
+    const swiftIconButton = document.createElement("button");
+    const swiftIcon = document.createElement("span");
+    swiftRoot.classList.add("swift", "swift--transfer");
+    swiftInfo.classList.add("swift__info");
+    swiftName.classList.add("swift__name");
+    swiftCode.classList.add("swift__code");
+    swiftIconButton.classList.add("swift__icon-button");
+    swiftIcon.classList.add("swift__icon", "swift__icon--paste");
+    swiftName.textContent = newSwift.name;
+    swiftCode.textContent = newSwift.code;
+    swiftRoot.appendChild(swiftInfo);
+    swiftRoot.appendChild(swiftIconButton);
+    swiftInfo.appendChild(swiftName);
+    swiftInfo.appendChild(swiftCode);
+    swiftIconButton.appendChild(swiftIcon);
+    swiftIconButton.addEventListener("click", () => {
+        if (transferSwiftInput.value !== newSwift.code) {
+            transferSwiftInput.value = newSwift.code;
+        }
     });
     return swiftRoot;
 }
@@ -257,4 +276,15 @@ function generateSwiftDeleteList(swifts) {
     });
 }
 
-generateSwiftDeleteList(activeSwiftDeleteList);
+function generateSwiftPasteList(swifts) {
+    if (swiftPasteList.hasChildNodes) {
+        swiftPasteList.innerHTML = "";
+    }
+    swifts.forEach((swift) => {
+        const swiftRow = createSwiftPasteRow(swift);
+        swiftPasteList.appendChild(swiftRow);
+    });
+}
+
+generateSwiftDeleteList(activeSwiftList);
+generateSwiftPasteList(activeSwiftList);
