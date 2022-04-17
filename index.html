@@ -10,7 +10,7 @@
         rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.e1f14364.js"></script>
+  <script type="module" crossorigin src="/failybank/assets/index.aa8cfc56.js"></script>
   <link rel="stylesheet" href="/failybank/assets/index.6964b7a8.css">
 </head>
 
@@ -38,7 +38,7 @@
                     <!-- Balance -->
                     <div class="balance">
                         <h2 class="balance__name">Solde</h2>
-                        <p class="balance__value">2,152,800$</p>
+                        <p class="balance__value" id="balance"></p>
                     </div>
                 </div>
                 <div class="bar__section bar__section--middle">
@@ -155,7 +155,7 @@
                                     <button class="button button--primary" type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--secondary">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -165,7 +165,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame"></div>
+                                <div class="paper__frame" id="operation-log-list"></div>
                             </div>
                         </div>
                     </section>
@@ -178,7 +178,7 @@
                                 <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
                                 <p class="form__message" id="withdraw-message"></p>
                             </div>
-                            <button class="button button--primary">Retirer</button>
+                            <button class="button button--primary" type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
