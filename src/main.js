@@ -165,10 +165,8 @@ const logs = [
     },
 ];
 
-let activeLogList = [...logs];
-
 function createLogRow(log) {
-    const logRoot = document.createElement("details");
+    const logElement = document.createElement("details");
     const logHeader = document.createElement("summary");
     const logBody = document.createElement("section");
     const logIcon = document.createElement("div");
@@ -178,7 +176,7 @@ function createLogRow(log) {
     const logAmount = document.createElement("p");
     const logReferenceLabel = document.createElement("h5");
     const logReferenceText = document.createElement("p");
-    logRoot.classList.add("log");
+    logElement.classList.add("log");
     logHeader.classList.add("log__header");
     logBody.classList.add("log__body");
     logIcon.classList.add("icon", `icon--${log.icon}`, "log__icon");
@@ -193,41 +191,20 @@ function createLogRow(log) {
     logAmount.textContent = numberFormatter.format(log.amount);
     logReferenceLabel.textContent = "Référence: ";
     logReferenceText.textContent = log.reference;
-    logRoot.appendChild(logHeader);
-    logRoot.appendChild(logBody);
-    logHeader.appendChild(logIcon);
-    logHeader.appendChild(logInfo);
-    logHeader.appendChild(logAmount);
-    logInfo.appendChild(logEntity);
-    logInfo.appendChild(logDate);
-    logBody.appendChild(logReferenceLabel);
-    logBody.appendChild(logReferenceText);
-    return logRoot;
+    logElement.append(logHeader, logBody);
+    logHeader.append(logIcon, logInfo, logAmount);
+    logInfo.append(logEntity, logDate);
+    logBody.append(logReferenceLabel, logReferenceText);
+    return logElement;
 }
 
-export function generateGlobalLogList(logs) {
-    if (globalLogList.hasChildNodes) {
-        globalLogList.innerHTML = "";
+logs.forEach((log) => {
+    const logNode = createLogRow(log);
+    globalLogList.appendChild(logNode);
+    if (log.type === "operation") {
+        operationLogList.appendChild(logNode.cloneNode(true));
     }
-    logs.forEach((log) => {
-        const logRow = createLogRow(log);
-        globalLogList.appendChild(logRow);
-    });
-}
-
-export function generateOperationList(logs) {
-    const filteredLogList = logs.filter((log) => log.type === "operation");
-    if (operationLogList.hasChildNodes) {
-        operationLogList.innerHTML = "";
-    }
-    filteredLogList.forEach((filteredLog) => {
-        const operationLogRow = createLogRow(filteredLog);
-        operationLogList.appendChild(operationLogRow);
-    });
-}
-
-generateGlobalLogList(activeLogList);
-generateOperationList(activeLogList);
+});
 
 /**
  * SWIFT Manager
@@ -254,8 +231,6 @@ const swifts = [
         code: "4567890123",
     },
 ];
-  
-let activeSwiftList = [...swifts];
 
 function createSwiftDeleteRow(newSwift) {
     const swiftRoot = document.createElement("section");
@@ -276,22 +251,17 @@ function createSwiftDeleteRow(newSwift) {
     swiftDetails.classList.add("swift__details");
     swiftIconButton.classList.add("icon", "icon--small", "icon--button", "icon--delete");
     swiftTextButton.classList.add("button", "button--primary", "button--small", "swift__button");
-    swiftRoot.appendChild(swiftNameSection);
-    swiftRoot.appendChild(swiftCodeSection);
-    swiftRoot.appendChild(swiftButtonSection);
+    swiftRoot.append(swiftNameSection, swiftCodeSection, swiftButtonSection);
     swiftNameSection.appendChild(swiftName);
     swiftCodeSection.appendChild(swiftCode);
     swiftButtonSection.appendChild(swiftDetails);
-    swiftDetails.appendChild(swiftIconButton);
-    swiftDetails.appendChild(swiftTextButton);
+    swiftDetails.append(swiftIconButton, swiftTextButton);
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
     swiftTextButton.textContent = "Confirmer";
     swiftTextButton.addEventListener("click", () => {
-        activeSwiftList = activeSwiftList.filter((oldSwift) => oldSwift.name !== newSwift.name);
-        generateSwiftDeleteList(activeSwiftList);
-        generateSwiftPasteList(activeSwiftList);
-    });
+        swiftDeleteList.removeChild(swiftRoot);
+    }, { once: true });
     return swiftRoot;
 }
 
@@ -308,10 +278,8 @@ function createSwiftPasteRow(newSwift) {
     swiftName.classList.add("swift__name", "swift__name--margin");
     swiftCode.classList.add("swift__code");
     swiftIconButton.classList.add("icon", "icon--no-bg", "icon--paste");
-    swiftRoot.appendChild(swiftInfoSection);
-    swiftRoot.appendChild(swiftButtonSection);
-    swiftInfoSection.appendChild(swiftName);
-    swiftInfoSection.appendChild(swiftCode);
+    swiftRoot.append(swiftInfoSection, swiftButtonSection);
+    swiftInfoSection.append(swiftName, swiftCode);
     swiftButtonSection.appendChild(swiftIconButton);
     swiftName.textContent = newSwift.name;
     swiftCode.textContent = newSwift.code;
@@ -323,28 +291,12 @@ function createSwiftPasteRow(newSwift) {
     return swiftRoot;
 }
 
-export function generateSwiftDeleteList(swifts) {
-    if (swiftDeleteList.hasChildNodes) {
-        swiftDeleteList.innerHTML = "";
-    }
-    swifts.forEach((swift) => {
-        const swiftRow = createSwiftDeleteRow(swift);
-        swiftDeleteList.appendChild(swiftRow);
-    });
-}
-
-export function generateSwiftPasteList(swifts) {
-    if (swiftPasteList.hasChildNodes) {
-        swiftPasteList.innerHTML = "";
-    }
-    swifts.forEach((swift) => {
-        const swiftRow = createSwiftPasteRow(swift);
-        swiftPasteList.appendChild(swiftRow);
-    });
-}
-
-generateSwiftDeleteList(activeSwiftList);
-generateSwiftPasteList(activeSwiftList);
+swifts.forEach((swift) => {
+    const swiftDeleteNode = createSwiftDeleteRow(swift);
+    const swiftPasteNode = createSwiftPasteRow(swift);
+    swiftDeleteList.appendChild(swiftDeleteNode);
+    swiftPasteList.appendChild(swiftPasteNode);
+});
 
 /**
  * Form manager
@@ -429,16 +381,14 @@ swiftAddForm.addEventListener("submit", (event) => {
     }
 
     if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
-        console.log("Swift Add form submitted");
-        if (activeSwiftList.length >= 5) {
+        if (swiftDeleteList.childNodes.length >= 5) {
             displayErrorMessage("tooMuchSwift", swiftAddNameInput, swiftAddNameMessage);
         } else {
-            activeSwiftList = [{
-                name: swiftAddNameInput.value,
-                code: swiftAddCodeInput.value
-            }, ...activeSwiftList];
-            generateSwiftDeleteList(activeSwiftList);
-            generateSwiftPasteList(activeSwiftList);
+            const log = { name: swiftAddNameInput.value, code: swiftAddCodeInput.value };
+            const swiftDeleteNode = createSwiftDeleteRow(log);
+            const swiftPastNode = createSwiftPasteRow(log);
+            swiftDeleteList.prepend(swiftDeleteNode);
+            swiftPasteList.prepend(swiftPastNode);
             resetForm(swiftAddForm);
         }
     }
@@ -449,23 +399,22 @@ depositForm.addEventListener("submit", (event) => {
     if (!depositInput.validity.valid) {
         displayErrorMessage("amount", depositInput, depositMessage);
     } else {
-        console.log("Deposit form submitted");
         const amount = Number(depositInput.value);
         if (amount <= 0) {
             displayErrorMessage("noAmount", depositInput, depositMessage);
         } else {
-            activeLogList = [{
+            const logNode = createLogRow({
                 entity: "Dépot",
                 date: getCurrentFormatedDate(),
                 amount: amount,
                 reference: "Dépot sur votre compte",
                 type: "operation",
                 icon: "bank",
-            }, ...activeLogList];
+            });
+            globalLogList.prepend(logNode);
+            operationLogList.prepend(logNode.cloneNode(true));
             balance += amount;
             displayBalance(balance);
-            generateGlobalLogList(activeLogList);
-            generateOperationList(activeLogList);
             resetForm(depositForm);
             resetMessage(depositMessage);
         }
@@ -484,18 +433,18 @@ withdrawForm.addEventListener("submit", (event) => {
         } else if (amount <= 0) {
             displayErrorMessage("noAmount", withdrawInput, withdrawMessage);
         } else {
-            activeLogList = [{
+            const logNode = createLogRow({
                 entity: "Retrait",
                 date: getCurrentFormatedDate(),
                 amount: -amount,
                 reference: "Retrait depuis votre compte",
                 type: "operation",
                 icon: "bank",
-            }, ...activeLogList];
+            });
+            globalLogList.prepend(logNode);
+            operationLogList.prepend(logNode.cloneNode(true));
             balance -= amount;
             displayBalance(balance);
-            generateGlobalLogList(activeLogList);
-            generateOperationList(activeLogList);
             resetForm(withdrawForm);
             resetMessage(withdrawMessage);
         }
@@ -530,18 +479,17 @@ transferForm.addEventListener("submit", (event) => {
         } else if (amount <= 0) {
             displayErrorMessage("noAmount", transferAmountInput, transferAmountMessage);
         } else {
-            activeLogList = [{
+            const logNode = createLogRow({
                 entity: "Transfert",
                 date: getCurrentFormatedDate(),
-                amount: -Number(transferAmountInput.value),
-                reference: amount,
+                amount: -amount,
+                reference: transferReferenceInput.value,
                 type: "transfert",
                 icon: "bank",
-            }, ...activeLogList];
+            });
+            globalLogList.prepend(logNode);
             balance -= amount;
             displayBalance(balance);
-            generateGlobalLogList(activeLogList);
-            generateOperationList(activeLogList);
             resetForm(transferForm);
         }
     }
