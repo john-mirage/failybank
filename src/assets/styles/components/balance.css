@@ -20,13 +20,25 @@
     font-weight: 700;
     letter-spacing: 0.8px;
     color: transparent;
-    text-shadow: 0 0 8px rgba(81, 207, 102, 1);
     text-transform: uppercase;
     line-height: 24px;
     margin: 0;
 }
 
-.balance__value:hover {
+.balance__value--positive {
+    text-shadow: 0 0 8px var(--color-green);
+}
+
+.balance__value--positive:hover {
     color: var(--color-green);
+    text-shadow: none;
+}
+
+.balance__value--negative {
+    text-shadow: 0 0 8px var(--color-red);
+}
+
+.balance__value--negative:hover {
+    color: var(--color-red);
     text-shadow: none;
 }

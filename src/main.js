@@ -80,6 +80,7 @@ const balanceText = document.getElementById("balance");
 let balance = 2152800;
 
 function displayBalance(newBalance) {
+    balanceText.classList.add(balance > 0 ? "balance__value--positive" : "balance__value--negative");
     const formatedBalance = numberFormatter.format(newBalance);
     balanceText.textContent = formatedBalance;
 }
