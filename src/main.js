@@ -373,6 +373,9 @@ function displayErrorMessage(type, input, message) {
                 message.textContent = "Le code SWIFT ne doit comporter que des chiffres";
             }
             break;
+        case "tooMuchSwift":
+            message.textContent = "Limite maximum atteinte (5)";
+            break;
         case "reference":
             if (input.validity.valueMissing) {
                 message.textContent = "Veuillez entrer la référence du transfert";
@@ -426,13 +429,17 @@ swiftAddForm.addEventListener("submit", (event) => {
 
     if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
         console.log("Swift Add form submitted");
-        activeSwiftList = [{
-            name: swiftAddNameInput.value,
-            code: swiftAddCodeInput.value
-        }, ...activeSwiftList];
-        generateSwiftDeleteList(activeSwiftList);
-        generateSwiftPasteList(activeSwiftList);
-        resetForm(swiftAddForm);
+        if (activeSwiftList.length >= 5) {
+            displayErrorMessage("tooMuchSwift", swiftAddNameInput, swiftAddNameMessage);
+        } else {
+            activeSwiftList = [{
+                name: swiftAddNameInput.value,
+                code: swiftAddCodeInput.value
+            }, ...activeSwiftList];
+            generateSwiftDeleteList(activeSwiftList);
+            generateSwiftPasteList(activeSwiftList);
+            resetForm(swiftAddForm);
+        }
     }
 });
 
