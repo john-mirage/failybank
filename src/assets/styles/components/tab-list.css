@@ -19,6 +19,10 @@
     cursor: pointer;
 }
 
+.tab-list__item--hidden {
+    display: none;
+}
+
 .tab-list__label {
     font-size: 12px;
     font-weight: 700;

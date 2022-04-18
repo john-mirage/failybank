@@ -23,11 +23,11 @@
 
         <!-- App container -->
         <div class="app__container">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-1" checked>
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-2">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-3">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-4">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-5">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-account" checked>
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-operation">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-transfer">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-enterprise">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-offshore">
 
             <!-- Bar -->
             <header class="bar">
@@ -42,16 +42,16 @@
                 <div class="bar__section bar__section--middle">
                     <!-- Tab list -->
                     <div class="tab-list">
-                        <label class="tab-list__item" for="tab-selector-1" id="tab-1">
+                        <label class="tab-list__item" for="tab-selector-account" id="tab-account">
                             <span class="tab-list__label">Mon compte</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-2" id="tab-2">
+                        <label class="tab-list__item" for="tab-selector-operation" id="tab-operation">
                             <span class="tab-list__label">Opération</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-3" id="tab-3">
+                        <label class="tab-list__item" for="tab-selector-transfer" id="tab-transfer">
                             <span class="tab-list__label">Transfert</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-4" id="tab-4">
+                        <label class="tab-list__item tab-list__item--hidden" for="tab-selector-enterprise" id="tab-enterprise">
                             <span class="tab-list__label">Entreprise</span>
                         </label>
                     </div>
@@ -78,13 +78,13 @@
             </header>
 
             <!-- View / account -->
-            <div class="view" id="tab-content-1">
+            <div class="view" id="tab-content-account">
                 <div class="grid grid--account">
                     <!-- Account owner -->
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte</h3>
-                            <p class="section__text">Hubert Bonisseur de La Bath</p>
+                            <p class="section__text" id="account-name"></p>
                         </div>
                     </section>
                     <!-- Account history -->
@@ -100,7 +100,7 @@
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Code SWIFT</h3>
-                            <p class="section__number">0123456789</p>
+                            <p class="section__number" id="account-number"></p>
                         </div>
                     </section>
                     <!-- Account Swift add form -->
@@ -139,7 +139,7 @@
             </div>
 
             <!-- View / operation -->
-            <div class="view" id="tab-content-2">
+            <div class="view" id="tab-content-operation">
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
@@ -185,7 +185,7 @@
             </div>
 
             <!-- View / transfer -->
-            <div class="view" id="tab-content-3">
+            <div class="view" id="tab-content-transfer">
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
@@ -226,7 +226,7 @@
             </div>
 
             <!-- View / enterprise -->
-            <div class="view" id="tab-content-4">
+            <div class="view" id="tab-content-enterprise">
                 <div class="grid grid--enterprise">
                     <!-- Enterprise owner -->
                     <section class="grid__section">
@@ -241,7 +241,7 @@
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame"></div>
-                                <label class="icon icon--button icon--palm-tree paper__button" for="tab-selector-5" id="tab-5"></label>
+                                <label class="icon icon--button icon--palm-tree icon--hidden paper__button" for="tab-selector-offshore" id="tab-offshore"></label>
                             </div>
                         </div>
                     </section>
@@ -287,7 +287,7 @@
             </div>
 
             <!-- View / offshore -->
-            <div class="view" id="tab-content-5">
+            <div class="view" id="tab-content-offshore">
                 <div class="grid grid--offshore">
                     <!-- Offshore owner -->
                     <section class="grid__section">
