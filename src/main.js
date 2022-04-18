@@ -85,6 +85,118 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
 });
 
 /**
+ * POVERS: remove this variable when finish to plug init function in your script.
+ */
+const data = {
+    name: "Hubert Bonisseur de La Bath",
+    balance: 2152800,
+    number: "0123456789",
+    accounts: [
+        {
+            name: "Lena Silvo",
+            code: "0123456789",
+        },
+        {
+            name: "Owen Chapman",
+            code: "1234567890",
+        },
+        {
+            name: "Garry Green",
+            code: "2345678901",
+        },
+        {
+            name: "Arthur Popov",
+            code: "3456789012",
+        },
+        {
+            name: "Quentin Cooper",
+            code: "4567890123",
+        },
+    ],
+    logs: [
+        {
+            entity: "Los Santos Police Department",
+            date: "22-04-2022",
+            amount: -2455,
+            reference: "Amende pour refus d'optempérer",
+            type: "fine",
+            icon: "police",
+        },
+        {
+            entity: "Transfert",
+            date: "21-03-2022",
+            amount: 2580,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+        {
+            entity: "Dépot",
+            date: "20-03-2022",
+            amount: 15000,
+            reference: "Vente de la voiture",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Transfert",
+            date: "19-03-2022",
+            amount: 20000,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+        {
+            entity: "Retrait",
+            date: "18-03-2022",
+            amount: -4500,
+            reference: "Achat ARC",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Los Santos Police Department",
+            date: "17-04-2022",
+            amount: -100000,
+            reference: "Amende pour braquage de banque",
+            type: "fine",
+            icon: "police",
+        },
+        {
+            entity: "Dépot",
+            date: "17-03-2022",
+            amount: 1200,
+            reference: "Vente de la voiture",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Retrait",
+            date: "16-03-2022",
+            amount: -8500,
+            reference: "Achat ARC",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Transfert",
+            date: "19-03-2022",
+            amount: 15000,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+    ],
+    hasEnterprise: true,
+    hasOffShore: true,
+};
+
+/**
+ * Current state of the account.
+ */
+let activeAccount = {};
+
+/**
  * Balance
  */
 function displayBalance(newBalance) {
@@ -286,8 +398,8 @@ depositForm.addEventListener("submit", (event) => {
                 type: "operation",
                 icon: "bank",
             }, true);
-            data.balance += amount;
-            displayBalance(data.balance);
+            activeAccount.balance += amount;
+            displayBalance(activeAccount.balance);
             resetForm(depositForm);
             resetMessage(depositMessage);
         }
@@ -314,8 +426,8 @@ withdrawForm.addEventListener("submit", (event) => {
                 type: "operation",
                 icon: "bank",
             }, true);
-            data.balance -= amount;
-            displayBalance(data.balance);
+            activeAccount.balance -= amount;
+            displayBalance(activeAccount.balance);
             resetForm(withdrawForm);
             resetMessage(withdrawMessage);
         }
@@ -358,8 +470,8 @@ transferForm.addEventListener("submit", (event) => {
                 type: "transfert",
                 icon: "bank",
             }, true);
-            data.balance -= amount;
-            displayBalance(data.balance);
+            activeAccount.balance -= amount;
+            displayBalance(activeAccount.balance);
             resetForm(transferForm);
         }
     }
@@ -399,131 +511,27 @@ offshoreDepositForm.addEventListener("submit", (event) => {
 });
 
 /**
- * Data
+ * Init
  */
-const data = {
-    name: "Hubert Bonisseur de La Bath",
-    balance: 2152800,
-    number: "0123456789",
-    accounts: [
-        {
-            name: "Lena Silvo",
-            code: "0123456789",
-        },
-        {
-            name: "Owen Chapman",
-            code: "1234567890",
-        },
-        {
-            name: "Garry Green",
-            code: "2345678901",
-        },
-        {
-            name: "Arthur Popov",
-            code: "3456789012",
-        },
-        {
-            name: "Quentin Cooper",
-            code: "4567890123",
-        },
-    ],
-    logs: [
-        {
-            entity: "Los Santos Police Department",
-            date: "22-04-2022",
-            amount: -2455,
-            reference: "Amende pour refus d'optempérer",
-            type: "fine",
-            icon: "police",
-        },
-        {
-            entity: "Transfert",
-            date: "21-03-2022",
-            amount: 2580,
-            reference: "Argent pour les qualifications des Failygames",
-            type: "transfer",
-            icon: "person",
-        },
-        {
-            entity: "Dépot",
-            date: "20-03-2022",
-            amount: 15000,
-            reference: "Vente de la voiture",
-            type: "operation",
-            icon: "bank",
-        },
-        {
-            entity: "Transfert",
-            date: "19-03-2022",
-            amount: 20000,
-            reference: "Argent pour les qualifications des Failygames",
-            type: "transfer",
-            icon: "person",
-        },
-        {
-            entity: "Retrait",
-            date: "18-03-2022",
-            amount: -4500,
-            reference: "Achat ARC",
-            type: "operation",
-            icon: "bank",
-        },
-        {
-            entity: "Los Santos Police Department",
-            date: "17-04-2022",
-            amount: -100000,
-            reference: "Amende pour braquage de banque",
-            type: "fine",
-            icon: "police",
-        },
-        {
-            entity: "Dépot",
-            date: "17-03-2022",
-            amount: 1200,
-            reference: "Vente de la voiture",
-            type: "operation",
-            icon: "bank",
-        },
-        {
-            entity: "Retrait",
-            date: "16-03-2022",
-            amount: -8500,
-            reference: "Achat ARC",
-            type: "operation",
-            icon: "bank",
-        },
-        {
-            entity: "Transfert",
-            date: "19-03-2022",
-            amount: 15000,
-            reference: "Argent pour les qualifications des Failygames",
-            type: "transfer",
-            icon: "person",
-        },
-    ],
-    hasEnterprise: true,
-    hasOffShore: true,
-};
-
-
 function initAccount(account) {
-    if (account.hasEnterprise) {
+    activeAccount = {...account};
+    if (activeAccount.hasEnterprise) {
         enterpriseTab.classList.remove("tab-list__item--hidden");
-        if (account.hasOffShore) {
+        if (activeAccount.hasOffShore) {
             offshoreTab.classList.remove("icon--hidden");
         }
     }
-    displayBalance(account.balance);
-    accountName.textContent = account.name;
-    accountNumber.textContent = account.number;
-    account.logs.forEach((log) => createLogRow(log));
-    account.accounts.forEach((swift) => {
+    displayBalance(activeAccount.balance);
+    accountName.textContent = activeAccount.name;
+    accountNumber.textContent = activeAccount.number;
+    activeAccount.logs.forEach((log) => createLogRow(log));
+    activeAccount.accounts.forEach((swift) => {
         const swiftPasteRow = createSwiftPasteRow(swift);
         createSwiftDeleteRow(swift, swiftPasteRow);
     });
 }
 
 /**
- * POVERS: remove this part
+ * POVERS: Move this part in your script.
  */
 initAccount(data);
