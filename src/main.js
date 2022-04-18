@@ -23,7 +23,6 @@ import "./assets/styles/components/button.css";
 import "./assets/styles/states.css";
 
 // SWIFT elements
-const swiftDeleteList = document.getElementById("swift-delete-list");
 const swiftPasteList = document.getElementById("swift-paste-list");
 const swiftAddForm = document.getElementById("swift-add-form");
 const swiftAddNameInput = document.getElementById("swift-add-name-input");
@@ -165,46 +164,40 @@ const logs = [
     },
 ];
 
-function createLogRow(log) {
-    const logElement = document.createElement("details");
-    const logHeader = document.createElement("summary");
-    const logBody = document.createElement("section");
-    const logIcon = document.createElement("div");
-    const logInfo = document.createElement("div");
-    const logEntity = document.createElement("h3");
-    const logDate = document.createElement("p");
-    const logAmount = document.createElement("p");
-    const logReferenceLabel = document.createElement("h5");
-    const logReferenceText = document.createElement("p");
-    logElement.classList.add("log");
-    logHeader.classList.add("log__header");
-    logBody.classList.add("log__body");
-    logIcon.classList.add("icon", `icon--${log.icon}`, "log__icon");
-    logInfo.classList.add("log__info");
-    logEntity.classList.add("log__entity");
-    logDate.classList.add("log__date");
-    logAmount.classList.add("log__amount", `log__amount--${log.amount > 0 ? "up" : "down"}`);
-    logReferenceLabel.classList.add("log__reference-label");
-    logReferenceText.classList.add("log__reference");
-    logEntity.textContent = log.entity;
+const globalLogTable = document.getElementById("global-log-table");
+const operationLogTable = document.getElementById("operation-log-table");
+const globalLogTemplate = document.getElementById("global-log-template");
+
+function createLogRow(log, prepend = false) {
+    const logTemplate = globalLogTemplate.content.cloneNode(true);
+    const logRow = logTemplate.querySelector(".log");
+    const logIcon = logRow.querySelector(".log__header > .log__icon");
+    const logType = logRow.querySelector(".log__header > .log__info > .log__type");
+    const logDate = logRow.querySelector(".log__header > .log__info > .log__date");
+    const logAmount = logRow.querySelector(".log__header > .log__amount");
+    const logReference = logRow.querySelector(".log__body > .log__reference");
+    logIcon.classList.add(`icon--${log.icon}`);
+    logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
+    logType.textContent = log.entity;
     logDate.textContent = log.date;
     logAmount.textContent = numberFormatter.format(log.amount);
-    logReferenceLabel.textContent = "Référence: ";
-    logReferenceText.textContent = log.reference;
-    logElement.append(logHeader, logBody);
-    logHeader.append(logIcon, logInfo, logAmount);
-    logInfo.append(logEntity, logDate);
-    logBody.append(logReferenceLabel, logReferenceText);
-    return logElement;
+    logReference.textContent = log.reference;
+    if (prepend) {
+        globalLogTable.prepend(logTemplate);
+        if (log.type === "operation") {
+            const operationRow = logRow.cloneNode(true);
+            operationLogTable.prepend(operationRow);
+        }
+    } else {
+        globalLogTable.appendChild(logTemplate);
+        if (log.type === "operation") {
+            const operationRow = logRow.cloneNode(true);
+            operationLogTable.appendChild(operationRow);
+        }
+    }
 }
 
-logs.forEach((log) => {
-    const logNode = createLogRow(log);
-    globalLogList.appendChild(logNode);
-    if (log.type === "operation") {
-        operationLogList.appendChild(logNode.cloneNode(true));
-    }
-});
+logs.forEach((log) => createLogRow(log));
 
 /**
  * SWIFT Manager
@@ -232,71 +225,54 @@ const swifts = [
     },
 ];
 
-function createSwiftDeleteNode(newSwift, swiftPasteNode) {
-    const swiftDeleteNode = document.createElement("section");
-    const swiftNameSection = document.createElement("div");
-    const swiftCodeSection = document.createElement("div");
-    const swiftButtonSection = document.createElement("div");
-    const swiftName = document.createElement("h4");
-    const swiftCode = document.createElement("p");
-    const swiftDetails = document.createElement("details");
-    const swiftIconButton = document.createElement("summary");
-    const swiftTextButton = document.createElement("button");
-    swiftDeleteNode.classList.add("swift");
-    swiftNameSection.classList.add("swift__section");
-    swiftCodeSection.classList.add("swift__section");
-    swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
-    swiftName.classList.add("swift__name");
-    swiftCode.classList.add("swift__code", "swift__code--center");
-    swiftDetails.classList.add("swift__details");
-    swiftIconButton.classList.add("icon", "icon--small", "icon--button", "icon--delete");
-    swiftTextButton.classList.add("button", "button--primary", "button--small", "swift__button");
-    swiftDeleteNode.append(swiftNameSection, swiftCodeSection, swiftButtonSection);
-    swiftNameSection.appendChild(swiftName);
-    swiftCodeSection.appendChild(swiftCode);
-    swiftButtonSection.appendChild(swiftDetails);
-    swiftDetails.append(swiftIconButton, swiftTextButton);
-    swiftName.textContent = newSwift.name;
-    swiftCode.textContent = newSwift.code;
-    swiftTextButton.textContent = "Confirmer";
-    swiftTextButton.addEventListener("click", () => {
-        swiftDeleteList.removeChild(swiftDeleteNode);
-        swiftPasteList.removeChild(swiftPasteNode);
+const swiftDeleteTable = document.getElementById("swift-delete-table");
+const swiftDeleteTemplate = document.getElementById("swift-delete-template");
+
+function createSwiftDeleteRow(swift, pasteRow, prepend = false) {
+    const deleteTemplate = swiftDeleteTemplate.content.cloneNode(true);
+    const deleteRow = deleteTemplate.querySelector(".swift");
+    const deleteName = deleteRow.querySelector(".swift__name");
+    const deleteCode = deleteRow.querySelector(".swift__code");
+    const deleteButton = deleteRow.querySelector(".swift__button");
+    deleteName.textContent = swift.name;
+    deleteCode.textContent = swift.code;
+    deleteButton.addEventListener("click", () => {
+        swiftDeleteTable.removeChild(deleteRow);
+        swiftPasteTable.removeChild(pasteRow);
     }, { once: true });
-    return swiftDeleteNode;
+    if (prepend) {
+        swiftDeleteTable.prepend(deleteTemplate);
+    } else {
+        swiftDeleteTable.appendChild(deleteTemplate);
+    }
 }
 
-function createSwiftPasteNode(newSwift) {
-    const swiftPasteNode = document.createElement("section");
-    const swiftInfoSection = document.createElement("div");
-    const swiftName = document.createElement("h4");
-    const swiftCode = document.createElement("p");
-    const swiftButtonSection = document.createElement("div");
-    const swiftIconButton = document.createElement("button");
-    swiftPasteNode.classList.add("swift", "swift--transfer");
-    swiftInfoSection.classList.add("swift__section");
-    swiftButtonSection.classList.add("swift__section", "swift__section--align-right");
-    swiftName.classList.add("swift__name", "swift__name--margin");
-    swiftCode.classList.add("swift__code");
-    swiftIconButton.classList.add("icon", "icon--no-bg", "icon--paste");
-    swiftPasteNode.append(swiftInfoSection, swiftButtonSection);
-    swiftInfoSection.append(swiftName, swiftCode);
-    swiftButtonSection.appendChild(swiftIconButton);
-    swiftName.textContent = newSwift.name;
-    swiftCode.textContent = newSwift.code;
-    swiftPasteNode.addEventListener("click", () => {
-        if (transferSwiftInput.value !== newSwift.code) {
-            transferSwiftInput.value = newSwift.code;
+const swiftPasteTable = document.getElementById("swift-paste-table");
+const swiftPasteTemplate = document.getElementById("swift-paste-template");
+
+function createSwiftPasteRow(swift, prepend = false) {
+    const pasteTemplate = swiftPasteTemplate.content.cloneNode(true);
+    const pasteRow = pasteTemplate.querySelector(".swift");
+    const pasteName = pasteRow.querySelector(".swift__name");
+    const pasteCode = pasteRow.querySelector(".swift__code");
+    pasteName.textContent = swift.name;
+    pasteCode.textContent = swift.code;
+    pasteRow.addEventListener("click", () => {
+        if (transferSwiftInput.value !== swift.code) {
+            transferSwiftInput.value = swift.code;
         }
     });
-    return swiftPasteNode;
+    if (prepend) {
+        swiftPasteTable.prepend(pasteTemplate);
+    } else {
+        swiftPasteTable.appendChild(pasteTemplate);
+    }
+    return pasteRow;
 }
 
 swifts.forEach((swift) => {
-    const swiftPasteNode = createSwiftPasteNode(swift);
-    const swiftDeleteNode = createSwiftDeleteNode(swift, swiftPasteNode);
-    swiftPasteList.appendChild(swiftPasteNode);
-    swiftDeleteList.appendChild(swiftDeleteNode);
+    const swiftPasteRow = createSwiftPasteRow(swift);
+    createSwiftDeleteRow(swift, swiftPasteRow);
 });
 
 /**
@@ -382,14 +358,12 @@ swiftAddForm.addEventListener("submit", (event) => {
     }
 
     if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
-        if (swiftDeleteList.childNodes.length >= 5) {
+        if (swiftDeleteTable.children.length >= 5) {
             displayErrorMessage("tooMuchSwift", swiftAddNameInput, swiftAddNameMessage);
         } else {
-            const log = { name: swiftAddNameInput.value, code: swiftAddCodeInput.value };
-            const swiftPasteNode = createSwiftPasteNode(log);
-            const swiftDeleteNode = createSwiftDeleteNode(log, swiftPasteNode);
-            swiftDeleteList.prepend(swiftDeleteNode);
-            swiftPasteList.prepend(swiftPasteNode);
+            const swift = { name: swiftAddNameInput.value, code: swiftAddCodeInput.value };
+            const swiftPasteRow = createSwiftPasteRow(swift, true);
+            createSwiftDeleteRow(swift, swiftPasteRow, true);
             resetForm(swiftAddForm);
         }
     }
@@ -404,16 +378,14 @@ depositForm.addEventListener("submit", (event) => {
         if (amount <= 0) {
             displayErrorMessage("noAmount", depositInput, depositMessage);
         } else {
-            const logNode = createLogRow({
+            createLogRow({
                 entity: "Dépot",
                 date: getCurrentFormatedDate(),
                 amount: amount,
                 reference: "Dépot sur votre compte",
                 type: "operation",
                 icon: "bank",
-            });
-            globalLogList.prepend(logNode);
-            operationLogList.prepend(logNode.cloneNode(true));
+            }, true);
             balance += amount;
             displayBalance(balance);
             resetForm(depositForm);
@@ -434,16 +406,14 @@ withdrawForm.addEventListener("submit", (event) => {
         } else if (amount <= 0) {
             displayErrorMessage("noAmount", withdrawInput, withdrawMessage);
         } else {
-            const logNode = createLogRow({
+            createLogRow({
                 entity: "Retrait",
                 date: getCurrentFormatedDate(),
                 amount: -amount,
                 reference: "Retrait depuis votre compte",
                 type: "operation",
                 icon: "bank",
-            });
-            globalLogList.prepend(logNode);
-            operationLogList.prepend(logNode.cloneNode(true));
+            }, true);
             balance -= amount;
             displayBalance(balance);
             resetForm(withdrawForm);
@@ -480,15 +450,14 @@ transferForm.addEventListener("submit", (event) => {
         } else if (amount <= 0) {
             displayErrorMessage("noAmount", transferAmountInput, transferAmountMessage);
         } else {
-            const logNode = createLogRow({
+            createLogRow({
                 entity: "Transfert",
                 date: getCurrentFormatedDate(),
                 amount: -amount,
                 reference: transferReferenceInput.value,
                 type: "transfert",
                 icon: "bank",
-            });
-            globalLogList.prepend(logNode);
+            }, true);
             balance -= amount;
             displayBalance(balance);
             resetForm(transferForm);

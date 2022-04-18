@@ -24,6 +24,7 @@
 .icon--no-bg {
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .icon--add {
