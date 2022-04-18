@@ -1,16 +1,11 @@
 .swift {
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
     height: auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
     border-bottom: 1px solid var(--color-light-divider);
 }
 
-.swift--transfer {
+.swift--clickable {
     cursor: pointer;
 }
 
@@ -19,17 +14,20 @@
 }
 
 .swift__section {
-    flex: 1 1 0%;
     box-sizing: border-box;
+    width: auto;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.swift__section--align-right {
+.swift__section--right {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.swift__details {
+.swift__accordion {
     box-sizing: border-box;
     position: relative;
     display: block;
@@ -58,10 +56,6 @@
     font-weight: 600;
     color: var(--color-light-text-alt);
     line-height: 1;
-}
-
-.swift__code--center {
-    text-align: center;
 }
 
 .swift__button {

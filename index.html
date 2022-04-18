@@ -92,7 +92,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="global-log-list"></div>
+                                <div class="paper__frame" id="global-log-table"></div>
                             </div>
                         </div>
                     </section>
@@ -129,7 +129,9 @@
                         <div class="section section--column">
                             <h3 class="section__title">Codes SWIFT enregistrés</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="swift-delete-list"></div>
+                                <div class="paper__frame">
+                                    <table class="paper__table" id="swift-delete-table"></table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -163,7 +165,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="operation-log-list"></div>
+                                <div class="paper__frame" id="operation-log-table"></div>
                             </div>
                         </div>
                     </section>
@@ -214,7 +216,9 @@
                         <div class="section section--column">
                             <h3 class="section__title">Codes SWIFT enregistrés</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="swift-paste-list"></div>
+                                <div class="paper__frame">
+                                    <table class="paper__table" id="swift-paste-table"></table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -332,6 +336,52 @@
         </div>
 
     </main>
+
+    <template id="swift-delete-template">
+        <tr class="swift">
+            <td class="swift__section">
+                <h4 class="swift__name"></h4>
+            </td>
+            <td class="swift__section">
+                <p class="swift__code"></p>
+            </td>
+            <td class="swift__section swift__section--right">
+                <details class="swift__accordion">
+                    <summary class="icon icon--button icon--small icon--delete"></summary>
+                    <button class="button button--primary button--small swift__button">Supprimer</button>
+                </details>
+            </td>
+        </tr>
+    </template>
+
+    <template id="swift-paste-template">
+        <tr class="swift swift--clickable">
+            <td class="swift__section">
+                <h4 class="swift__name swift__name--margin"></h4>
+                <p class="swift__code"></p>
+            </td>
+            <td class="swift__section swift__section--right">
+                <button class="icon icon--no-bg icon--paste"></button>
+            </td>
+        </tr>
+    </template>
+
+    <template id="global-log-template">
+        <details class="log">
+            <summary class="log__header">
+                <div class="icon log__icon"></div>
+                <div class="log__info">
+                    <h3 class="log__type"></h3>
+                    <p class="log__date"></p>
+                </div>
+                <p class="log__amount"></p>
+            </summary>
+            <div class="log__body">
+                <h5 class="log__reference-label"></h5>
+                <p class="log__reference"></p>
+            </div>
+        </details>
+    </template>
 
     <script type="module" src="/src/main.js"></script>
 </body>
