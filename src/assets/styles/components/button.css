@@ -56,3 +56,13 @@
 .fleeca.dark .button--primary {
     background-color: var(--color-dark-fleeca);
 }
+
+.button--delete {
+    color: #ffffff;
+    background-color: var(--color-light-down);
+}
+
+.dark .button--delete {
+    color: #ffffff;
+    background-color: var(--color-dark-down);
+}
