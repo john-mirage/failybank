@@ -10,16 +10,16 @@
     border: none;
 }
 
-.icon--primary {
-    background-color: var(--color-red);
-}
-
 .icon--secondary {
     background-color: var(--color-dark-bg);
 }
 
 .icon--negative-mr {
     margin-right: -12px;
+}
+
+.icon--clickable {
+    cursor: pointer;
 }
 
 .icon--hidden {
@@ -30,10 +30,6 @@
     width: 36px;
     height: 36px;
     background-size: 16px;
-}
-
-.icon--clickable {
-    cursor: pointer;
 }
 
 .icon--add {
@@ -64,10 +60,22 @@
     background-image: url("/src/assets/images/bank.svg");
 }
 
-.dark .icon--secondary {
-    background-color: var(--color-dark-icon-bg);
+.maze .icon--primary {
+    background-color: var(--color-light-maze);
 }
 
-.dark .icon--primary {
+.fleeca .icon--primary {
+    background-color: var(--color-light-fleeca);
+}
+
+.maze.dark .icon--primary {
     background-color: var(--color-dark-maze);
+}
+
+.fleeca.dark .icon--primary {
+    background-color: var(--color-dark-fleeca);
+}
+
+.dark .icon--secondary {
+    background-color: var(--color-dark-icon-bg);
 }

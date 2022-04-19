@@ -77,7 +77,6 @@
 
 .form__input:focus {
     outline: none;
-    border: 1px solid var(--color-red);
 }
 
 .form__message {
@@ -87,6 +86,22 @@
     font-weight: 700;
     color: var(--color-red);
     line-height: 16px;
+}
+
+.maze .form__input:focus {
+    border: 1px solid var(--color-light-maze);
+}
+
+.fleeca .form__input:focus {
+    border: 1px solid var(--color-light-fleeca);
+}
+
+.maze.dark .form__input:focus {
+    border: 1px solid var(--color-dark-maze);
+}
+
+.fleeca.dark .form__input:focus {
+    border: 1px solid var(--color-dark-fleeca);
 }
 
 .dark .form__title {
@@ -105,9 +120,4 @@
 
 .dark .form__input::placeholder {
     color: var(--color-dark-text-placeholder);
-}
-
-.dark .form__input:focus {
-    outline: none;
-    border: 1px solid var(--color-red);
 }
