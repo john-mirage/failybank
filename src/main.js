@@ -81,6 +81,7 @@ const accountNumber = document.getElementById("account-number");
 const numberFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
+    signDisplay: "always",
     maximumFractionDigits: 0
 });
 
@@ -228,7 +229,7 @@ function createLogRow(log, prepend = false) {
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
     logType.textContent = log.entity;
     logDate.textContent = log.date;
-    logAmount.textContent = log.amount > 0 ? `+${numberFormatter.format(log.amount)}` : numberFormatter.format(log.amount);
+    logAmount.textContent = numberFormatter.format(log.amount);
     logReference.textContent = log.reference;
     if (prepend) {
         globalLogTable.prepend(logTemplate);
