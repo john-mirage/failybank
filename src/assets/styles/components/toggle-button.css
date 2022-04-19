@@ -64,7 +64,14 @@
     width: 12px;
     height: 12px;
     border-radius: 9999px;
-    background-color: var(--color-light-toggle-button-thumb);
+}
+
+.maze .toggle-button__handle {
+    background-color: var(--color-light-maze);
+}
+
+.fleeca .toggle-button__handle {
+    background-color: var(--color-light-fleeca);
 }
 
 .toggle-button__input:checked ~ .toggle-button__track > .toggle-button__handle {
@@ -75,8 +82,12 @@
     background-color: var(--color-dark-toggle-button-track);
 }
 
-.dark .toggle-button__handle {
-    background-color: var(--color-dark-toggle-button-thumb);
+.maze.dark .toggle-button__handle {
+    background-color: var(--color-dark-maze);
+}
+
+.fleeca.dark .toggle-button__handle {
+    background-color: var(--color-dark-fleeca);
 }
 
 .toggle-button__input:hover ~ .toggle-button__icon--moon {
