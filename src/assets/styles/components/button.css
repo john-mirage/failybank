@@ -41,12 +41,12 @@
 
 .button--secondary {
     color: var(--color-light-text);
-    background-color: var(--color-dark-icon-bg);
+    background-color: var(--color-light-button-secondary);
 }
 
 .dark .button--secondary {
     color: var(--color-dark-text);
-    background-color: var(--color-dark-icon-bg);
+    background-color: var(--color-dark-button-secondary);
 }
 
 .maze.dark .button--primary {
