@@ -28,15 +28,22 @@
     box-sizing: border-box;
     width: 16px;
     height: auto;
-    color: var(--color-light-text-alt);
 }
 
-.toggle-button__input:not(:checked) ~ .toggle-button__icon--sun {
+.toggle-button__icon--sun {
+    color: var(--color-light-toggle-button-icon-active);
+}
+
+.toggle-button__icon--moon {
+    color: var(--color-light-toggle-button-icon);
+}
+
+.dark .toggle-button__icon--sun {
     color: var(--color-dark-toggle-button-icon);
 }
 
-.toggle-button__input:checked ~ .toggle-button__icon--moon {
-    color: var(--color-dark-toggle-button-icon);
+.dark .toggle-button__icon--moon {
+    color: var(--color-dark-toggle-button-icon-active);
 }
 
 .toggle-button__track {
@@ -62,10 +69,6 @@
 
 .toggle-button__input:checked ~ .toggle-button__track > .toggle-button__handle {
     transform: translateX(20px);
-}
-
-.dark .toggle-button__icon {
-    color: var(--color-dark-text-alt);
 }
 
 .dark .toggle-button__track {
