@@ -20,7 +20,7 @@
     font-weight: 700;
     letter-spacing: 0.8px;
     color: transparent;
-    text-shadow: 0 0 12px var(--color-green);
+    text-shadow: 0 0 12px var(--color-light-up);
     text-transform: uppercase;
     line-height: 24px;
     margin: 0;
@@ -45,8 +45,13 @@
     color: var(--color-dark-text);
 }
 
+.dark .balance__value {
+    text-shadow: 0 0 12px var(--color-dark-up);
+}
+
 .dark .balance__value:hover {
     color: var(--color-dark-up);
+    text-shadow: none;
 }
 
 .dark .balance__value--negative {

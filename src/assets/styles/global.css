@@ -15,6 +15,10 @@
     --color-dark-toggle-button-thumb: #CED4DA;
     --color-dark-toggle-button-icon: #868E96;
     --color-dark-toggle-button-icon-active: #fcc419;
+    --color-dark-up: #0ca678;
+    --color-dark-down: #e64980;
+    --color-dark-fleeca: #37b24d;
+    --color-dark-maze: #c92a2a;
 
     --color-light-screen: #ffffff;
     --color-light-bg: #f1f3f5;
@@ -33,16 +37,6 @@
     --color-light-toggle-button-icon: #868e96;
     --color-light-fleeca: ;
     --color-light-maze: ;
-
-    --color-dark-up: #0ca678;
-    --color-dark-down: #e64980;
-    --color-dark-fleeca: #37b24d;
-    --color-dark-maze: #c92a2a;
-
-    --color-red: #ff6b6b;
-    --color-light-red: #FFC9C9;
-    --color-green: #51cf66;
-    --color-beach: #FFF3BF;
 }
 
 html {
