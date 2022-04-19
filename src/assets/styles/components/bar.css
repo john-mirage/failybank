@@ -9,7 +9,7 @@
     padding-left: 24px;
     padding-right: 24px;
     background-color: var(--color-light-fg);
-    border-bottom: 0.1px solid var(--color-light-divider);
+    border-bottom: 0.1px solid var(--color-light-border);
 }
 
 .bar__section {
@@ -46,7 +46,7 @@
 
 .dark .bar {
     background-color: var(--color-dark-fg);
-    border-bottom: 0.1px solid var(--color-dark-divider);
+    border-bottom: 0.1px solid var(--color-dark-border);
 }
 
 .maze .bar__logo {

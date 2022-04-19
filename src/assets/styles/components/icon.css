@@ -11,7 +11,7 @@
 }
 
 .icon--secondary {
-    background-color: var(--color-dark-bg);
+    background-color: var(--color-light-icon-bg);
 }
 
 .icon--negative-mr {
