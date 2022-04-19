@@ -89,6 +89,7 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
  * POVERS: remove this variable when finish to plug init function in your script.
  */
 const data = {
+    bank: "fleeca",
     name: "Hubert Bonisseur de La Bath",
     balance: 2152800,
     number: "0123456789",
@@ -516,6 +517,7 @@ offshoreDepositForm.addEventListener("submit", (event) => {
  */
 function initAccount(account) {
     activeAccount = {...account};
+    document.documentElement.classList.add(activeAccount.bank);
     if (activeAccount.hasEnterprise) {
         enterpriseTab.classList.remove("tab-list__item--hidden");
         if (activeAccount.hasOffShore) {

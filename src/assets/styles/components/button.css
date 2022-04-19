@@ -28,8 +28,15 @@
 }
 
 .button--primary {
-    color: var(--color-light-text);
+    color: #ffffff;
+}
+
+.maze .button--primary {
     background-color: var(--color-light-maze);
+}
+
+.fleeca .button--primary {
+    background-color: var(--color-light-fleeca);
 }
 
 .button--secondary {
@@ -37,12 +44,15 @@
     background-color: var(--color-dark-icon-bg);
 }
 
-.dark .button--primary {
-    color: #ffffff;
-    background-color: var(--color-dark-maze);
-}
-
 .dark .button--secondary {
     color: var(--color-dark-text);
     background-color: var(--color-dark-icon-bg);
+}
+
+.maze.dark .button--primary {
+    background-color: var(--color-dark-maze);
+}
+
+.fleeca.dark .button--primary {
+    background-color: var(--color-dark-fleeca);
 }

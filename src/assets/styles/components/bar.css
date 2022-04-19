@@ -44,15 +44,23 @@
     pointer-events: none;
 }
 
-.bar__logo--maze {
-    color: var(--color-light-maze);
-}
-
 .dark .bar {
     background-color: var(--color-dark-fg);
     border-bottom: 0.1px solid var(--color-dark-divider);
 }
 
-.dark .bar__logo--maze {
+.maze .bar__logo {
+    color: var(--color-light-maze);
+}
+
+.maze.dark .bar__logo {
     color: var(--color-dark-maze);
+}
+
+.fleeca .bar__logo {
+    color: var(--color-light-fleeca);
+}
+
+.fleeca.dark .bar__logo {
+    color: var(--color-dark-fleeca);
 }
