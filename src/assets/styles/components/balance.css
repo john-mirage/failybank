@@ -28,19 +28,32 @@
 }
 
 .balance__value:hover {
-    color: var(--color-green);
+    color: var(--color-light-up);
     text-shadow: none;
 }
 
 .balance__value--negative {
-    text-shadow: 0 0 12px var(--color-red);
+    text-shadow: 0 0 12px var(--color-light-down);
 }
 
 .balance__value--negative:hover {
-    color: var(--color-red);
+    color: var(--color-light-down);
     text-shadow: none;
 }
 
 .dark .balance__name {
     color: var(--color-dark-text);
+}
+
+.dark .balance__value:hover {
+    color: var(--color-dark-up);
+}
+
+.dark .balance__value--negative {
+    text-shadow: 0 0 12px var(--color-dark-down);
+}
+
+.dark .balance__value--negative:hover {
+    color: var(--color-dark-down);
+    text-shadow: none;
 }

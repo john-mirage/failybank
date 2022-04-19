@@ -15,7 +15,7 @@
     height: 720px;
     margin: auto;
     background-color: var(--color-light-bg);
-    border: 1px solid var(--color-light-divider);
+    border: 1px solid var(--color-light-border-on-bg);
     overflow: hidden;
 }
 
@@ -52,5 +52,5 @@
 
 .dark .app {
     background-color: var(--color-dark-bg);
-    border: 1px solid var(--color-dark-divider);
+    border: 1px solid var(--color-dark-border-on-bg);
 }
