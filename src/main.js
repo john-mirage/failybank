@@ -535,3 +535,20 @@ function initAccount(account) {
  * POVERS: Move this part in your script.
  */
 initAccount(data);
+
+/**
+ * Dark mode
+ */
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+darkModeToggle.addEventListener("change", (event) => {
+    if (event.target.checked) {
+        if (!document.documentElement.classList.contains("dark")) {
+            document.documentElement.classList.add("dark");
+        }
+    } else {
+        if (document.documentElement.classList.contains("dark")) {
+            document.documentElement.classList.remove("dark");
+        }
+    }
+});

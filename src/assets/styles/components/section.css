@@ -58,3 +58,14 @@
     flex: 1 1 0%;
 }
 
+.dark .section__title {
+    color: var(--color-dark-text-alt);
+}
+
+.dark .section__number {
+    color: var(--color-dark-text);
+}
+
+.dark .section__text {
+    color: var(--color-dark-text);
+}

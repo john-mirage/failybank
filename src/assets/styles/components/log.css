@@ -4,7 +4,7 @@
     height: auto;
     padding-top: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--color-light-divider);
+    border-bottom: 1px solid var(--color-light-border);
 }
 
 .log:last-child {
@@ -97,4 +97,28 @@
     font-weight: 600;
     color: var(--color-light-text-alt);
     line-height: 20px;
+}
+
+.dark .log {
+    border-bottom: 1px solid var(--color-dark-border);
+}
+
+.dark .log:last-child {
+    border: none;
+}
+
+.dark .log__type {
+    color: var(--color-dark-text);
+}
+
+.dark .log__date {
+    color: var(--color-dark-text-alt);
+}
+
+.dark .log__reference-label {
+    color: var(--color-dark-text);
+}
+
+.dark .log__reference {
+    color: var(--color-dark-text-alt);
 }

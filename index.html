@@ -59,7 +59,7 @@
                 <div class="bar__section bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
-                        <input class="toggle-button__input" type="checkbox">
+                        <input class="toggle-button__input" id="dark-mode-toggle" type="checkbox">
                         <svg class="toggle-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             fill="currentColor">
                             <path
@@ -119,7 +119,7 @@
                                     <p class="form__message" id="swift-add-code-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="icon icon--filled icon--button icon--add" type="submit"></button>
+                                    <button class="icon icon--primary icon--clickable icon--add" type="submit"></button>
                                 </div>
                             </div>
                         </form>
@@ -241,7 +241,7 @@
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame"></div>
-                                <label class="icon icon--button icon--palm-tree icon--hidden paper__button" for="tab-selector-offshore" id="tab-offshore"></label>
+                                <label class="icon icon--secondary icon--clickable icon--palm-tree icon--hidden paper__button" for="tab-selector-offshore" id="tab-offshore"></label>
                             </div>
                         </div>
                     </section>
@@ -347,7 +347,7 @@
             </td>
             <td class="swift__section swift__section--right">
                 <details class="swift__accordion">
-                    <summary class="icon icon--button icon--small icon--delete"></summary>
+                    <summary class="icon icon--secondary icon--clickable icon--small icon--delete"></summary>
                     <button class="button button--primary button--small swift__button">Supprimer</button>
                 </details>
             </td>
@@ -361,7 +361,7 @@
                 <p class="swift__code"></p>
             </td>
             <td class="swift__section swift__section--right">
-                <button class="icon icon--no-bg icon--paste"></button>
+                <button class="icon icon--paste"></button>
             </td>
         </tr>
     </template>
@@ -369,7 +369,7 @@
     <template id="global-log-template">
         <details class="log">
             <summary class="log__header">
-                <div class="icon log__icon"></div>
+                <div class="icon icon--secondary log__icon"></div>
                 <div class="log__info">
                     <h3 class="log__type"></h3>
                     <p class="log__date"></p>

@@ -28,7 +28,7 @@
 
 .button--primary {
     border: none;
-    color: var(--color-dark-text);
+    color: #fff;
     background-color: var(--color-red);
 }
 
@@ -37,10 +37,7 @@
 }
 
 .button--secondary {
+    background-color: transparent;
     color: var(--color-red);
     border: 2px solid var(--color-red);
-}
-
-.button--disabled {
-
 }

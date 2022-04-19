@@ -1,18 +1,27 @@
 :root {
-    --color-dark-bg: #212529;
-    --color-dark-fg: #343a40;
-    --color-dark-text: #f8f9fa;
-    --color-dark-text-alt: #adb5bd;
-    --color-dark-divider: #495057;
-    --color-dark-spinner-track: #868e96;
+    --color-dark-screen: #1A1B1E;
+    --color-dark-bg: #121417;
+    --color-dark-fg: #191C1F;
+    --color-dark-text: #CED4DA;
+    --color-dark-text-alt: #868E96;
+    --color-dark-border: #22262A;
+    --color-dark-border-on-bg: #272B30;
+    --color-dark-scrollbar-track: #1A1B1E;
+    --color-dark-scrollbar-thumb: #272B30;
+    --color-dark-icon-bg: #272B30;
+    --color-dark-icon-bg-filled: ;
 
+    --color-light-screen: #ffffff;
     --color-light-bg: #f1f3f5;
-    --color-light-fg: #f8f9fa;
+    --color-light-fg: #ffffff;
     --color-light-text: #495057;
     --color-light-text-alt: #868e96;
-    --color-light-divider: #e9ecef;
-    --color-light-divider-alt: #dee2e6;
-    --color-light-spinner-track: #dee2e6;
+    --color-light-border: #22262A;
+    --color-light-border-on-bg: #272B30;
+    --color-light-scrollbar-track: #e9ecef;
+    --color-light-scrollbar-thumb: #495057;
+    --color-light-icon-bg: #22262A;
+    --color-light-icon-bg-filled: ;
 
     --color-red: #ff6b6b;
     --color-light-red: #FFC9C9;
