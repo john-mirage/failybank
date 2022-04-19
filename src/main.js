@@ -228,7 +228,7 @@ function createLogRow(log, prepend = false) {
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
     logType.textContent = log.entity;
     logDate.textContent = log.date;
-    logAmount.textContent = numberFormatter.format(log.amount);
+    logAmount.textContent = log.amount > 0 ? `+${numberFormatter.format(log.amount)}` : numberFormatter.format(log.amount);
     logReference.textContent = log.reference;
     if (prepend) {
         globalLogTable.prepend(logTemplate);
