@@ -12,7 +12,6 @@
     --color-dark-icon-bg: #272B30;
     --color-dark-button-secondary: #272B30;
     --color-dark-toggle-button-track: #383D43;
-    --color-dark-toggle-button-thumb: #CED4DA;
     --color-dark-toggle-button-icon: #868E96;
     --color-dark-toggle-button-icon-active: #fcc419;
     --color-dark-up: #0ca678;
@@ -33,9 +32,8 @@
     --color-light-icon-bg: #f1f3f5;
     --color-light-button-secondary: #e9ecef;
     --color-light-toggle-button-track: #dee2e6;
-    --color-light-toggle-button-thumb: #495057;
-    --color-light-toggle-button-icon: #adb5bd;
-    --color-light-toggle-button-icon-active: #fd7e14;
+    --color-light-toggle-button-icon: #9299A0;
+    --color-light-toggle-button-icon-active: #f59f00;
     --color-light-up: #20c997;
     --color-light-down: #f06595;
     --color-light-fleeca: #51cf66;
