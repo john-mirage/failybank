@@ -62,13 +62,12 @@
     height: 48px;
     margin: 0;
     padding: 0 16px;
-    border: 1px solid var(--color-light-divider);
-    background-color: transparent;
+    border: 1px solid var(--color-light-border);
+    color: var(--color-light-text);
+    background-color: var(--color-light-fg);
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
-    color: var(--color-light-text);
-    background-color: var(--color-light-fg);
 }
 
 .form__input::placeholder {
@@ -88,4 +87,27 @@
     font-weight: 700;
     color: var(--color-red);
     line-height: 16px;
+}
+
+.dark .form__title {
+    color: var(--color-dark-text);
+}
+
+.dark .form__label {
+    color: var(--color-dark-text-alt);
+}
+
+.dark .form__input {
+    border: 1px solid var(--color-dark-border);
+    color: var(--color-dark-text);
+    background-color: var(--color-dark-fg);
+}
+
+.dark .form__input::placeholder {
+    color: var(--color-dark-text-alt);
+}
+
+.dark .form__input:focus {
+    outline: none;
+    border: 1px solid var(--color-red);
 }
