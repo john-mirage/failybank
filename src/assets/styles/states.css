@@ -1,7 +1,12 @@
-#tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-red);}
-#tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-red);}
-#tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-red);}
-#tab-selector-enterprise:checked ~ .bar #tab-enterprise {border-bottom: 4px solid var(--color-red);}
+#tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-light-maze);}
+#tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-light-maze);}
+#tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-light-maze);}
+#tab-selector-enterprise:checked ~ .bar #tab-enterprise {border-bottom: 4px solid var(--color-light-maze);}
+
+.dark #tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-dark-maze);}
+.dark #tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-dark-maze);}
+.dark #tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-dark-maze);}
+.dark #tab-selector-enterprise:checked ~ .bar #tab-enterprise {border-bottom: 4px solid var(--color-dark-maze);}
 
 #tab-selector-account:checked ~ .bar #tab-account > .tab-list__label {color: var(--color-light-text);}
 #tab-selector-operation:checked ~ .bar #tab-operation > .tab-list__label {color: var(--color-light-text);}

@@ -72,11 +72,11 @@
 }
 
 .log__amount--up {
-    color: var(--color-green);
+    color: var(--color-light-up);
 }
 
 .log__amount--down {
-    color: var(--color-red);
+    color: var(--color-light-down);
 }
 
 .log__reference-label {
@@ -121,4 +121,12 @@
 
 .dark .log__reference {
     color: var(--color-dark-text-alt);
+}
+
+.dark .log__amount--up {
+    color: var(--color-dark-up);
+}
+
+.dark .log__amount--down {
+    color: var(--color-dark-down);
 }

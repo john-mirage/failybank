@@ -4,12 +4,16 @@
     --color-dark-fg: #191C1F;
     --color-dark-text: #CED4DA;
     --color-dark-text-alt: #868E96;
+    --color-dark-text-placeholder: #5D666F;
     --color-dark-border: #22262A;
     --color-dark-border-on-bg: #272B30;
     --color-dark-scrollbar-track: #1A1B1E;
     --color-dark-scrollbar-thumb: #272B30;
     --color-dark-icon-bg: #272B30;
     --color-dark-icon-bg-filled: ;
+    --color-dark-toggle-button-track: #383D43;
+    --color-dark-toggle-button-thumb: #CED4DA;
+    --color-dark-toggle-button-icon: #fcc419;
 
     --color-light-screen: #ffffff;
     --color-light-bg: #f1f3f5;
@@ -22,6 +26,17 @@
     --color-light-scrollbar-thumb: #495057;
     --color-light-icon-bg: #22262A;
     --color-light-icon-bg-filled: ;
+
+    --color-light-up: #0ca678;
+    --color-light-down: #d6336c;
+    --color-light-toggle-button-icon: #fcc419;
+    --color-light-fleeca: ;
+    --color-light-maze: ;
+
+    --color-dark-up: #0ca678;
+    --color-dark-down: #e64980;
+    --color-dark-fleeca: ;
+    --color-dark-maze: #c92a2a;
 
     --color-red: #ff6b6b;
     --color-light-red: #FFC9C9;

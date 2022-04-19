@@ -104,7 +104,7 @@
 }
 
 .dark .form__input::placeholder {
-    color: var(--color-dark-text-alt);
+    color: var(--color-dark-text-placeholder);
 }
 
 .dark .form__input:focus {

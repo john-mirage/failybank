@@ -11,6 +11,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border: none;
 }
 
 .button--small {
@@ -27,17 +28,21 @@
 }
 
 .button--primary {
-    border: none;
-    color: #fff;
-    background-color: var(--color-red);
-}
-
-.button--primary:hover {
-    background-color: #FF8787;
+    color: var(--color-light-text);
+    background-color: var(--color-light-maze);
 }
 
 .button--secondary {
-    background-color: transparent;
-    color: var(--color-red);
-    border: 2px solid var(--color-red);
+    color: var(--color-light-text);
+    background-color: var(--color-dark-icon-bg);
+}
+
+.dark .button--primary {
+    color: #ffffff;
+    background-color: var(--color-dark-maze);
+}
+
+.dark .button--secondary {
+    color: var(--color-dark-text);
+    background-color: var(--color-dark-icon-bg);
 }
