@@ -90,6 +90,7 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
  */
 const data = {
     bank: "fleeca",
+    darkMode: true,
     name: "Hubert Bonisseur de La Bath",
     balance: 2152800,
     number: "0123456789",
@@ -515,9 +516,15 @@ offshoreDepositForm.addEventListener("submit", (event) => {
 /**
  * Init
  */
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+
 function initAccount(account) {
     activeAccount = {...account};
     document.documentElement.classList.add(activeAccount.bank);
+    if (activeAccount.darkMode) {
+        darkModeToggle.checked = true;
+        document.documentElement.classList.add("dark");
+    }
     if (activeAccount.hasEnterprise) {
         enterpriseTab.classList.remove("tab-list__item--hidden");
         if (activeAccount.hasOffShore) {
@@ -542,8 +549,6 @@ initAccount(data);
 /**
  * Dark mode
  */
-const darkModeToggle = document.getElementById("dark-mode-toggle");
-
 darkModeToggle.addEventListener("change", (event) => {
     if (event.target.checked) {
         if (!document.documentElement.classList.contains("dark")) {
