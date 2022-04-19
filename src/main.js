@@ -89,7 +89,7 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
  * POVERS: remove this variable when finish to plug init function in your script.
  */
 const data = {
-    bank: "maze",
+    bank: "fleeca",
     darkMode: true,
     name: "Hubert Bonisseur de La Bath",
     balance: 2152800,

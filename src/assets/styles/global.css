@@ -6,7 +6,7 @@
     --color-dark-text-alt: #868E96;
     --color-dark-text-placeholder: #5D666F;
     --color-dark-border: #22262A;
-    --color-dark-border-on-bg: #272B30;
+    --color-dark-border-on-bg: #22262A;
     --color-dark-scrollbar-track: #1A1B1E;
     --color-dark-scrollbar-thumb: #272B30;
     --color-dark-icon-bg: #272B30;
@@ -31,35 +31,15 @@
     --color-light-scrollbar-track: #ced4da;
     --color-light-scrollbar-thumb: #dee2e6;
     --color-light-icon-bg: #f1f3f5;
-    --color-light-button-secondary: #E7EBEE;
+    --color-light-button-secondary: #e9ecef;
     --color-light-toggle-button-track: #dee2e6;
     --color-light-toggle-button-thumb: #495057;
-    --color-light-toggle-button-icon: #868E96;
+    --color-light-toggle-button-icon: #adb5bd;
     --color-light-toggle-button-icon-active: #fd7e14;
     --color-light-up: #20c997;
     --color-light-down: #f06595;
     --color-light-fleeca: #51cf66;
     --color-light-maze: #ff6b6b;
-
-    /*
-    --color-light-screen: #ffffff;
-    --color-light-bg: #f1f3f5;
-    --color-light-fg: #ffffff;
-    --color-light-text: #495057;
-    --color-light-text-alt: #868e96;
-    --color-light-border: #22262A;
-    --color-light-border-on-bg: #272B30;
-    --color-light-scrollbar-track: #e9ecef;
-    --color-light-scrollbar-thumb: #495057;
-    --color-light-icon-bg: #22262A;
-    --color-light-icon-bg-filled: ;
-
-    --color-light-up: #0ca678;
-    --color-light-down: #d6336c;
-    --color-light-toggle-button-icon: #868e96;
-    --color-light-fleeca: ;
-    --color-light-maze: ;
-    */
 }
 
 html {
