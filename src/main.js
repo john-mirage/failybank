@@ -15,7 +15,7 @@ import "./assets/styles/components/paper.css";
 import "./assets/styles/components/icon.css";
 import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
-import "./assets/styles/components/swift.css";
+import "./assets/styles/components/account.css";
 import "./assets/styles/components/log.css";
 import "./assets/styles/components/button.css";
 
@@ -87,6 +87,11 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0
 });
 
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
+    dateStyle: "long",
+    timeStyle: "short",
+});
+
 /**
  * POVERS: remove this variable when finish to plug init function in your script.
  */
@@ -121,7 +126,7 @@ const data = {
     logs: [
         {
             entity: "Los Santos Police Department",
-            date: "22-04-2022",
+            date: "2022-04-20T15:00:00",
             amount: -2455,
             reference: "Amende pour refus d'optempérer",
             type: "fine",
@@ -129,7 +134,7 @@ const data = {
         },
         {
             entity: "Transfert",
-            date: "21-03-2022",
+            date: "2022-04-19T15:00",
             amount: 2580,
             reference: "Argent pour les qualifications des Failygames",
             type: "transfer",
@@ -137,7 +142,7 @@ const data = {
         },
         {
             entity: "Dépot",
-            date: "20-03-2022",
+            date: "2022-04-18T15:00:00",
             amount: 15000,
             reference: "Vente de la voiture",
             type: "operation",
@@ -145,7 +150,7 @@ const data = {
         },
         {
             entity: "Transfert",
-            date: "19-03-2022",
+            date: "2022-04-17T15:00:00",
             amount: 20000,
             reference: "Argent pour les qualifications des Failygames",
             type: "transfer",
@@ -153,7 +158,7 @@ const data = {
         },
         {
             entity: "Retrait",
-            date: "18-03-2022",
+            date: "2022-04-16T15:00:00",
             amount: -4500,
             reference: "Achat ARC",
             type: "operation",
@@ -161,7 +166,7 @@ const data = {
         },
         {
             entity: "Los Santos Police Department",
-            date: "17-04-2022",
+            date: "2022-04-15T15:00:00",
             amount: -100000,
             reference: "Amende pour braquage de banque",
             type: "fine",
@@ -169,7 +174,7 @@ const data = {
         },
         {
             entity: "Dépot",
-            date: "17-03-2022",
+            date: "2022-04-14T15:00:00",
             amount: 1200,
             reference: "Vente de la voiture",
             type: "operation",
@@ -177,7 +182,7 @@ const data = {
         },
         {
             entity: "Retrait",
-            date: "16-03-2022",
+            date: "2022-04-13T15:00:00",
             amount: -8500,
             reference: "Achat ARC",
             type: "operation",
@@ -185,7 +190,7 @@ const data = {
         },
         {
             entity: "Transfert",
-            date: "19-03-2022",
+            date: "2022-04-12T15:00:00",
             amount: 15000,
             reference: "Argent pour les qualifications des Failygames",
             type: "transfer",
@@ -224,11 +229,7 @@ function displayBalance(newBalance) {
 
 function getCurrentFormatedDate() {
     const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const formatedMonth = month > 9 ? String(month) : `0${String(month)}`;
-    const year = date.getFullYear();
-    return `${day}-${formatedMonth}-${year}`;
+    return date.toISOString();
 }
 
 function createLogRow(log, prepend = false) {
@@ -242,7 +243,8 @@ function createLogRow(log, prepend = false) {
     logIcon.classList.add(`icon--${log.icon}`);
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
     logType.textContent = log.entity;
-    logDate.textContent = log.date;
+    const date = new Date(log.date);
+    logDate.textContent = dateTimeFormatter.format(date);
     logAmount.textContent = numberFormatter.format(log.amount);
     logReference.textContent = log.reference;
     if (prepend) {
@@ -265,10 +267,10 @@ function createLogRow(log, prepend = false) {
  */
 function createAccountDeleteRow(account, pasteRow, prepend = false) {
     const deleteTemplate = accountDeleteTemplate.content.cloneNode(true);
-    const deleteRow = deleteTemplate.querySelector(".swift");
-    const deleteName = deleteRow.querySelector(".swift__name");
-    const deleteCode = deleteRow.querySelector(".swift__code");
-    const deleteButton = deleteRow.querySelector(".swift__button");
+    const deleteRow = deleteTemplate.querySelector(".account");
+    const deleteName = deleteRow.querySelector(".account__name");
+    const deleteCode = deleteRow.querySelector(".account__code");
+    const deleteButton = deleteRow.querySelector(".account__button");
     deleteName.textContent = account.name;
     deleteCode.textContent = account.code;
     deleteButton.addEventListener("click", () => {
@@ -284,9 +286,9 @@ function createAccountDeleteRow(account, pasteRow, prepend = false) {
 
 function createAccountPasteRow(account, prepend = false) {
     const pasteTemplate = accountPasteTemplate.content.cloneNode(true);
-    const pasteRow = pasteTemplate.querySelector(".swift");
-    const pasteName = pasteRow.querySelector(".swift__name");
-    const pasteCode = pasteRow.querySelector(".swift__code");
+    const pasteRow = pasteTemplate.querySelector(".account");
+    const pasteName = pasteRow.querySelector(".account__name");
+    const pasteCode = pasteRow.querySelector(".account__code");
     pasteName.textContent = account.name;
     pasteCode.textContent = account.code;
     pasteRow.addEventListener("click", () => {
@@ -506,9 +508,9 @@ function initAccount(account) {
     accountName.textContent = activeAccount.name;
     accountNumber.textContent = activeAccount.number;
     activeAccount.logs.forEach((log) => createLogRow(log));
-    activeAccount.accounts.forEach((swift) => {
-        const swiftPasteRow = createAccountPasteRow(swift);
-        createAccountDeleteRow(swift, swiftPasteRow);
+    activeAccount.accounts.forEach((savedAccount) => {
+        const accountPasteRow = createAccountPasteRow(savedAccount);
+        createAccountDeleteRow(savedAccount, accountPasteRow);
     });
 }
 

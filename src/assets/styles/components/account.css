@@ -1,19 +1,19 @@
-.swift {
+.account {
     box-sizing: border-box;
     width: 100%;
     height: auto;
     border-bottom: 1px solid var(--color-light-border);
 }
 
-.swift--clickable {
+.account--clickable {
     cursor: pointer;
 }
 
-.swift:last-child {
+.account:last-child {
     border: none;
 }
 
-.swift__section {
+.account__section {
     box-sizing: border-box;
     width: auto;
     height: auto;
@@ -21,20 +21,20 @@
     padding-bottom: 10px;
 }
 
-.swift__section--right {
+.account__section--right {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.swift__accordion {
+.account__accordion {
     box-sizing: border-box;
     position: relative;
     display: block;
     width: auto;
 }
 
-.swift__name {
+.account__name {
     box-sizing: border-box;
     display: block;
     font-size: 16px;
@@ -44,11 +44,11 @@
     margin: 0;
 }
 
-.swift__name--margin {
+.account__name--margin {
     margin-bottom: 6px;
 }
 
-.swift__code {
+.account__code {
     box-sizing: border-box;
     display: block;
     margin: 0;
@@ -58,7 +58,7 @@
     line-height: 1;
 }
 
-.swift__button {
+.account__button {
     box-sizing: border-box;
     display: block;
     position: absolute;
@@ -67,18 +67,18 @@
     transform: translateX(-100%);
 }
 
-.dark .swift {
+.dark .account {
     border-bottom: 1px solid var(--color-dark-border);
 }
 
-.dark .swift:last-child {
+.dark .account:last-child {
     border: none;
 }
 
-.dark .swift__name {
+.dark .account__name {
     color: var(--color-dark-text);
 }
 
-.dark .swift__code {
+.dark .account__code {
     color: var(--color-dark-text-alt);
 }
