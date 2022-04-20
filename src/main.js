@@ -22,12 +22,12 @@ import "./assets/styles/components/button.css";
 // CSS / States
 import "./assets/styles/states.css";
 
-// SWIFT elements
-const swiftAddForm = document.getElementById("swift-add-form");
-const swiftAddNameInput = document.getElementById("swift-add-name-input");
-const swiftAddNameMessage = document.getElementById("swift-add-name-message");
-const swiftAddCodeInput = document.getElementById("swift-add-code-input");
-const swiftAddCodeMessage = document.getElementById("swift-add-code-message");
+// Account elements
+const accountAddForm = document.getElementById("swift-add-form");
+const accountAddNameInput = document.getElementById("swift-add-name-input");
+const accountAddNameMessage = document.getElementById("swift-add-name-message");
+const accountAddNumberInput = document.getElementById("swift-add-code-input");
+const accountAddNumberMessage = document.getElementById("swift-add-code-message");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -40,8 +40,8 @@ const withdrawInput = document.getElementById("withdraw-input");
 const withdrawMessage = document.getElementById("withdraw-message");
 
 // Transfer elements
-const transferSwiftInput = document.getElementById("transfer-swift-input");
-const transferSwiftMessage = document.getElementById("transfer-swift-message");
+const transferAccountInput = document.getElementById("transfer-swift-input");
+const transferAccountMessage = document.getElementById("transfer-swift-message");
 const transferForm = document.getElementById("transfer-form");
 const transferAmountInput = document.getElementById("transfer-amount-input");
 const transferReferenceInput = document.getElementById("transfer-reference-input");
@@ -69,11 +69,11 @@ const globalLogTable = document.getElementById("global-log-table");
 const operationLogTable = document.getElementById("operation-log-table");
 const globalLogTemplate = document.getElementById("global-log-template");
 
-const swiftDeleteTable = document.getElementById("swift-delete-table");
-const swiftDeleteTemplate = document.getElementById("swift-delete-template");
+const accountDeleteTable = document.getElementById("swift-delete-table");
+const accountDeleteTemplate = document.getElementById("swift-delete-template");
 
-const swiftPasteTable = document.getElementById("swift-paste-table");
-const swiftPasteTemplate = document.getElementById("swift-paste-template");
+const accountPasteTable = document.getElementById("swift-paste-table");
+const accountPasteTemplate = document.getElementById("swift-paste-template");
 
 const accountName = document.getElementById("account-name");
 const accountNumber = document.getElementById("account-number");
@@ -219,6 +219,16 @@ function displayBalance(newBalance) {
 /**
  * Log manager
  */
+
+function getCurrentFormatedDate() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const formatedMonth = month > 9 ? String(month) : `0${String(month)}`;
+    const year = date.getFullYear();
+    return `${day}-${formatedMonth}-${year}`;
+}
+
 function createLogRow(log, prepend = false) {
     const logTemplate = globalLogTemplate.content.cloneNode(true);
     const logRow = logTemplate.querySelector(".log");
@@ -249,43 +259,43 @@ function createLogRow(log, prepend = false) {
 }
 
 /**
- * SWIFT Manager
+ * Account Manager
  */
-function createSwiftDeleteRow(swift, pasteRow, prepend = false) {
-    const deleteTemplate = swiftDeleteTemplate.content.cloneNode(true);
+function createAccountDeleteRow(account, pasteRow, prepend = false) {
+    const deleteTemplate = accountDeleteTemplate.content.cloneNode(true);
     const deleteRow = deleteTemplate.querySelector(".swift");
     const deleteName = deleteRow.querySelector(".swift__name");
     const deleteCode = deleteRow.querySelector(".swift__code");
     const deleteButton = deleteRow.querySelector(".swift__button");
-    deleteName.textContent = swift.name;
-    deleteCode.textContent = swift.code;
+    deleteName.textContent = account.name;
+    deleteCode.textContent = account.code;
     deleteButton.addEventListener("click", () => {
-        swiftDeleteTable.removeChild(deleteRow);
-        swiftPasteTable.removeChild(pasteRow);
+        accountDeleteTable.removeChild(deleteRow);
+        accountPasteTable.removeChild(pasteRow);
     }, { once: true });
     if (prepend) {
-        swiftDeleteTable.prepend(deleteTemplate);
+        accountDeleteTable.prepend(deleteTemplate);
     } else {
-        swiftDeleteTable.appendChild(deleteTemplate);
+        accountDeleteTable.appendChild(deleteTemplate);
     }
 }
 
-function createSwiftPasteRow(swift, prepend = false) {
-    const pasteTemplate = swiftPasteTemplate.content.cloneNode(true);
+function createAccountPasteRow(account, prepend = false) {
+    const pasteTemplate = accountPasteTemplate.content.cloneNode(true);
     const pasteRow = pasteTemplate.querySelector(".swift");
     const pasteName = pasteRow.querySelector(".swift__name");
     const pasteCode = pasteRow.querySelector(".swift__code");
-    pasteName.textContent = swift.name;
-    pasteCode.textContent = swift.code;
+    pasteName.textContent = account.name;
+    pasteCode.textContent = account.code;
     pasteRow.addEventListener("click", () => {
-        if (transferSwiftInput.value !== swift.code) {
-            transferSwiftInput.value = swift.code;
+        if (transferAccountInput.value !== account.code) {
+            transferAccountInput.value = account.code;
         }
     });
     if (prepend) {
-        swiftPasteTable.prepend(pasteTemplate);
+        accountPasteTable.prepend(pasteTemplate);
     } else {
-        swiftPasteTable.appendChild(pasteTemplate);
+        accountPasteTable.appendChild(pasteTemplate);
     }
     return pasteRow;
 }
@@ -293,223 +303,179 @@ function createSwiftPasteRow(swift, prepend = false) {
 /**
  * Form manager
  */
-function displayErrorMessage(type, input, message) {
-    switch (type) {
-        case "name":
-            if (input.validity.valueMissing) {
-                message.textContent = "Veuillez entrer un nom";
-            } else if (input.validity.tooLong) {
-                message.textContent = "Le nom ne doit exeder 40 caractères";
-            }
-            break;
-        case "amount":
-            if (input.validity.valueMissing) {
-                message.textContent = "Veuillez entrer un montant";
-            } else if (input.validity.patternMismatch) {
-                message.textContent = "Le montant ne doit comporter que des chiffres";
-            }
-            break;
-        case "swift":
-            if (input.validity.valueMissing) {
-                message.textContent = "Veuillez entrer un code SWIFT";
-            } else if (input.validity.tooShort || input.validity.tooLong) {
-                message.textContent = "Le code SWIFT doit comporter exactement 10 chiffres";
-            } else if (input.validity.patternMismatch) {
-                message.textContent = "Le code SWIFT ne doit comporter que des chiffres";
-            }
-            break;
-        case "tooMuchSwift":
-            message.textContent = "Limite maximum atteinte (5)";
-            break;
-        case "reference":
-            if (input.validity.valueMissing) {
-                message.textContent = "Veuillez entrer la référence du transfert";
-            } else if (input.validity.tooLong) {
-                message.textContent = "La référence du transfert ne doit exeder 40 caractères";
-            }
-            break;
-        case "noAmount":
-            message.textContent = "Le montant doit être supérieur à 0";
-            break;
-        case "noFund":
-            message.textContent = "Vous n'avez pas les fonds nécessaires";
-            break;
-        default:
-            throw new Error("The message type is not valid");
-    }
-}
-
-function resetForm(form) {
-    form.reset();
-}
-
-function resetMessage(message) {
-    if (message.textContent.length > 0) {
-        message.textContent = "";
-    }
-};
-
-function getCurrentFormatedDate() {
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const formatedMonth = month > 9 ? String(month) : `0${String(month)}`;
-    const year = date.getFullYear();
-    return `${day}-${formatedMonth}-${year}`;
-}
-
-swiftAddForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!swiftAddNameInput.validity.valid) {
-        displayErrorMessage("name", swiftAddNameInput, swiftAddNameMessage);
-    } else {
-        resetMessage(swiftAddNameMessage);
-    }
-
-    if (!swiftAddCodeInput.validity.valid) {
-        displayErrorMessage("swift", swiftAddCodeInput, swiftAddCodeMessage);
-    } else {
-        resetMessage(swiftAddCodeMessage);
-    }
-
-    if (swiftAddNameInput.validity.valid && swiftAddCodeInput.validity.valid) {
-        if (swiftDeleteTable.children.length >= 5) {
-            displayErrorMessage("tooMuchSwift", swiftAddNameInput, swiftAddNameMessage);
+function checkAccountNameField(input, message) {
+    if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+            message.textContent = "Veuillez entrer un nom";
+        } else if (input.validity.tooLong) {
+            message.textContent = "Le nom ne doit pas exeder 40 caractères";
         } else {
-            const swift = { name: swiftAddNameInput.value, code: swiftAddCodeInput.value };
-            const swiftPasteRow = createSwiftPasteRow(swift, true);
-            createSwiftDeleteRow(swift, swiftPasteRow, true);
-            resetForm(swiftAddForm);
+            message.textContent = "Il y a une erreur";
         }
+        return false;
+    }
+    if (message.textContent.length > 0) message.textContent = "";
+    return true;
+}
+
+function checkAccountNumberField(input, message) {
+    if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+            message.textContent = "Veuillez entrer un numéro de compte";
+        } else if (input.validity.tooShort || input.validity.tooLong) {
+            message.textContent = "Le numéro de compte doit comporter 10 chiffres";
+        } else if (input.validity.patternMismatch) {
+            message.textContent = "Le numéro de compte ne comporte que des chiffres";
+        } else {
+            message.textContent = "Il y a une erreur";
+        }
+        return false;
+    }
+    if (message.textContent.length > 0) message.textContent = "";
+    return true;
+}
+
+function checkSavedAccountNumber(table, message) {
+    if (table.children.length >= 5) {
+        message.textContent = "Limite de compte atteinte";
+        return false;
+    }
+    if (message.textContent.length > 0) message.textContent = "";
+    return true;
+}
+
+function checkAmountField(input, message) {
+    if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+            message.textContent = "Veuillez entrer un montant";
+        } else if (input.validity.patternMismatch) {
+            message.textContent = "Le montant ne doit comporter que des chiffres";
+        } else if (Number(input.value) < 50) {
+            message.textContent = "Le montant doit être supérieur à 50";
+        } else {
+            message.textContent = "Il y a une erreur";
+        }
+        return false;
+    }
+    if (message.textContent.length > 0) message.textContent = "";
+    return true;
+}
+
+function checkWithdrawAmount(input, message) {
+    const amount = Number(input.value);
+    if (balance < amount) {
+        message.textContent = "Vous n'avez pas les fonds nécessaire";
+    }
+}
+
+function checkReferenceField(input, message) {
+    if (!input.validity.valid) {
+        if (input.validity.valueMissing) {
+            message.textContent = "Veuillez entrer la référence du transfert";
+        } else if (input.validity.tooLong) {
+            message.textContent = "La référence du transfert ne doit exeder 40 caractères";
+        } else {
+            message.textContent = "Il y a une erreur";
+        }
+        return false;
+    }
+    if (message.textContent.length > 0) message.textContent = "";
+    return true;
+}
+
+accountAddForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
+    const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
+    const savedAccountNumberIsValid = checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage);
+    if (accountNameFieldIsValid && accountNumberFieldIsValid && savedAccountNumberIsValid) {
+        const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
+        const accountPasteRow = createAccountPasteRow(account, true);
+        createAccountDeleteRow(account, accountPasteRow, true);
+        accountAddForm.reset();
     }
 });
 
 depositForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!depositInput.validity.valid) {
-        displayErrorMessage("amount", depositInput, depositMessage);
-    } else {
-        const amount = Number(depositInput.value);
-        if (amount <= 0) {
-            displayErrorMessage("noAmount", depositInput, depositMessage);
-        } else {
-            createLogRow({
-                entity: "Dépot",
-                date: getCurrentFormatedDate(),
-                amount: amount,
-                reference: "Dépot sur votre compte",
-                type: "operation",
-                icon: "bank",
-            }, true);
-            activeAccount.balance += amount;
-            displayBalance(activeAccount.balance);
-            resetForm(depositForm);
-            resetMessage(depositMessage);
-        }
+    const amountFieldIsValid = checkAmountField(depositInput, depositMessage);
+    if (amountFieldIsValid) {
+        createLogRow({
+            entity: "Dépot",
+            date: getCurrentFormatedDate(),
+            amount: amount,
+            reference: "Dépot sur votre compte",
+            type: "operation",
+            icon: "bank",
+        }, true);
+        activeAccount.balance += amount;
+        displayBalance(activeAccount.balance);
+        depositForm.reset();
     }
 });
 
 withdrawForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!withdrawInput.validity.valid) {
-        displayErrorMessage("amount", withdrawInput, withdrawMessage);
-    } else {
-        console.log("Withdraw form submitted");
-        const amount = Number(withdrawInput.value);
-        if (balance < amount) {
-            displayErrorMessage("noFund", withdrawInput, withdrawMessage);
-        } else if (amount <= 0) {
-            displayErrorMessage("noAmount", withdrawInput, withdrawMessage);
-        } else {
-            createLogRow({
-                entity: "Retrait",
-                date: getCurrentFormatedDate(),
-                amount: -amount,
-                reference: "Retrait depuis votre compte",
-                type: "operation",
-                icon: "bank",
-            }, true);
-            activeAccount.balance -= amount;
-            displayBalance(activeAccount.balance);
-            resetForm(withdrawForm);
-            resetMessage(withdrawMessage);
-        }
+    const withdrawFieldIsValid = checkAmountField(withdrawInput, withdrawMessage);
+    const withdrawAmountIsValid = checkWithdrawAmount(withdrawInput, withdrawMessage);
+    if (withdrawFieldIsValid && withdrawAmountIsValid) {
+        createLogRow({
+            entity: "Retrait",
+            date: getCurrentFormatedDate(),
+            amount: -amount,
+            reference: "Retrait depuis votre compte",
+            type: "operation",
+            icon: "bank",
+        }, true);
+        activeAccount.balance -= amount;
+        displayBalance(activeAccount.balance);
+        withdrawForm.reset();
     }
 });
 
 transferForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!transferAmountInput.validity.valid) {
-        displayErrorMessage("amount", transferAmountInput, transferAmountMessage);
-    } else if (transferAmountInput.validity.valid) {
-        resetMessage(transferAmountMessage);
-    }
-
-    if (!transferSwiftInput.validity.valid) {
-        displayErrorMessage("swift", transferSwiftInput, transferSwiftMessage);
-    } else if (transferSwiftInput.validity.valid) {
-        resetMessage(transferSwiftMessage);
-    }
-
-    if (!transferReferenceInput.validity.valid) {
-        displayErrorMessage("reference", transferReferenceInput, transferReferenceMessage);
-    } else if (transferReferenceInput.validity.valid) {
-        resetMessage(transferReferenceMessage);
-    }
-
-    if (transferAmountInput.validity.valid && transferSwiftInput.validity.valid && transferReferenceInput.validity.valid) {
-        console.log("Transfer form submitted");
-        const amount = Number(transferAmountInput.value);
-        if (balance < amount) {
-            displayErrorMessage("noFund", transferAmountInput, transferAmountMessage);
-        } else if (amount <= 0) {
-            displayErrorMessage("noAmount", transferAmountInput, transferAmountMessage);
-        } else {
-            createLogRow({
-                entity: "Transfert",
-                date: getCurrentFormatedDate(),
-                amount: -amount,
-                reference: transferReferenceInput.value,
-                type: "transfert",
-                icon: "bank",
-            }, true);
-            activeAccount.balance -= amount;
-            displayBalance(activeAccount.balance);
-            resetForm(transferForm);
-        }
+    const transferAmountFieldIsValid = checkAmountField(transferAmountInput, transferAmountMessage);
+    const transferAmountIsValid = checkWithdrawAmount(transferAmountInput, transferAmountMessage);
+    const transferAccountFieldIsValid = checkAccountNumberField(transferAccountInput, transferAccountMessage);
+    const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
+    if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
+        createLogRow({
+            entity: "Transfert",
+            date: getCurrentFormatedDate(),
+            amount: -amount,
+            reference: transferReferenceInput.value,
+            type: "transfert",
+            icon: "bank",
+        }, true);
+        activeAccount.balance -= amount;
+        displayBalance(activeAccount.balance);
+        transferForm.reset();
     }
 });
 
 enterpriseDepositForm.addEventListener("submit", (event) => {
-    if (!enterpriseDepositInput.validity.valid) {
-        displayErrorMessage("amount", enterpriseDepositInput, enterpriseDepositMessage);
-    } else {
-        console.log("Enterprise deposit form submitted");
-        resetForm(enterpriseDepositForm);
-        resetMessage(enterpriseDepositMessage);
-    }
     event.preventDefault();
+    const amountFieldIsValid = checkAmountField(enterpriseDepositInput, enterpriseDepositMessage);
+    if (amountFieldIsValid) {
+        enterpriseDepositForm.reset();
+    }
 });
 
 enterpriseWithdrawForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!enterpriseWithdrawInput.validity.valid) {
-        displayErrorMessage("amount", enterpriseWithdrawInput, enterpriseWithdrawMessage);
-    } else {
-        console.log("Enterprise withdraw form submitted");
-        resetForm(enterpriseWithdrawForm);
-        resetMessage(enterpriseWithdrawMessage);
+    const withdrawFieldIsValid = checkAmountField(enterpriseWithdrawInput, enterpriseWithdrawMessage);
+    const withdrawAmountIsValid = checkWithdrawAmount(enterpriseWithdrawInput, enterpriseWithdrawMessage);
+    if (withdrawFieldIsValid && withdrawAmountIsValid) {
+        enterpriseWithdrawForm.reset();
     }
 });
 
 offshoreDepositForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (!offshoreDepositInput.validity.valid) {
-        displayErrorMessage("amount", offshoreDepositInput, offshoreDepositMessage);
-    } else {
-        console.log("Offshore deposit form submitted");
-        resetForm(offshoreDepositForm);
-        resetMessage(offshoreDepositMessage);
+    const amountFieldIsValid = checkAmountField(offshoreDepositInput, offshoreDepositMessage);
+    if (amountFieldIsValid) {
+        offshoreDepositForm.reset();
     }
 });
 
@@ -536,8 +502,8 @@ function initAccount(account) {
     accountNumber.textContent = activeAccount.number;
     activeAccount.logs.forEach((log) => createLogRow(log));
     activeAccount.accounts.forEach((swift) => {
-        const swiftPasteRow = createSwiftPasteRow(swift);
-        createSwiftDeleteRow(swift, swiftPasteRow);
+        const swiftPasteRow = createAccountPasteRow(swift);
+        createAccountDeleteRow(swift, swiftPasteRow);
     });
 }
 
