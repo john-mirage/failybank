@@ -78,6 +78,8 @@ const accountPasteTemplate = document.getElementById("swift-paste-template");
 const accountName = document.getElementById("account-name");
 const accountNumber = document.getElementById("account-number");
 
+const appElement = document.querySelector(".app");
+
 const numberFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -485,6 +487,9 @@ offshoreDepositForm.addEventListener("submit", (event) => {
 const darkModeToggle = document.getElementById("dark-mode-toggle");
 
 function initAccount(account) {
+    setTimeout(() => {
+        appElement.classList.replace("app--loading", "app--loaded");
+    }, 1000);
     activeAccount = {...account};
     document.documentElement.classList.add(activeAccount.bank);
     if (activeAccount.darkMode) {
