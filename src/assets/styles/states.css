@@ -42,6 +42,6 @@
     display: block;
 }
 
-.swift__accordion[open] > .icon--delete {
+.account__accordion[open] > .icon--delete {
     background-image: url("/src/assets/images/close.svg");
 }
