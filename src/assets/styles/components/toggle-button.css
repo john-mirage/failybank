@@ -89,15 +89,3 @@
 .fleeca.dark .toggle-button__handle {
     background-color: var(--color-dark-fleeca);
 }
-
-.toggle-button__input:hover ~ .toggle-button__icon--moon {
-    color: var(--color-light-text);
-}
-
-.dark .toggle-button__input:hover ~ .toggle-button__icon--sun {
-    color: var(--color-dark-text);
-}
-
-.dark .toggle-button__input:hover ~ .toggle-button__icon--moon {
-    color: var(--color-dark-toggle-button-icon-active);
-}
