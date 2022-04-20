@@ -386,8 +386,8 @@ function checkReferenceField(input, message) {
 accountAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
+    const savedAccountNumberIsValid = accountNameFieldIsValid ? checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage) : false;
     const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
-    const savedAccountNumberIsValid = checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage);
     if (accountNameFieldIsValid && accountNumberFieldIsValid && savedAccountNumberIsValid) {
         const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
         const accountPasteRow = createAccountPasteRow(account, true);
@@ -417,7 +417,7 @@ depositForm.addEventListener("submit", (event) => {
 withdrawForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const withdrawFieldIsValid = checkAmountField(withdrawInput, withdrawMessage);
-    const withdrawAmountIsValid = checkWithdrawAmount(withdrawInput, withdrawMessage);
+    const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(withdrawInput, withdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
         createLogRow({
             entity: "Retrait",
@@ -436,7 +436,7 @@ withdrawForm.addEventListener("submit", (event) => {
 transferForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const transferAmountFieldIsValid = checkAmountField(transferAmountInput, transferAmountMessage);
-    const transferAmountIsValid = checkWithdrawAmount(transferAmountInput, transferAmountMessage);
+    const transferAmountIsValid = transferAmountFieldIsValid ? checkWithdrawAmount(transferAmountInput, transferAmountMessage) : false;
     const transferAccountFieldIsValid = checkAccountNumberField(transferAccountInput, transferAccountMessage);
     const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
     if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
@@ -465,7 +465,7 @@ enterpriseDepositForm.addEventListener("submit", (event) => {
 enterpriseWithdrawForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const withdrawFieldIsValid = checkAmountField(enterpriseWithdrawInput, enterpriseWithdrawMessage);
-    const withdrawAmountIsValid = checkWithdrawAmount(enterpriseWithdrawInput, enterpriseWithdrawMessage);
+    const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(enterpriseWithdrawInput, enterpriseWithdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
         enterpriseWithdrawForm.reset();
     }

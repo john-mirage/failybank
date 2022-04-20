@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </header>
-
+            
             <!-- View / account -->
             <div class="view" id="tab-content-account">
                 <div class="grid grid--account">
@@ -98,26 +98,26 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Account Swift -->
+                    <!-- Account number -->
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
-                            <h3 class="section__title">Code SWIFT</h3>
+                            <h3 class="section__title">Numéro du compte</h3>
                             <p class="section__number" id="account-number"></p>
                         </div>
                     </section>
-                    <!-- Account Swift add form -->
+                    <!-- Account add form -->
                     <section class="grid__section">
                         <form class="form" id="swift-add-form" novalidate>
-                            <h2 class="form__title">Ajouter un code SWIFT</h2>
+                            <h2 class="form__title">Ajouter un compte</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-name-input">Nom du code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer un nom" name="swift-code" required maxlength="40" id="swift-add-name-input">
+                                    <label class="form__label" for="swift-add-name-input">Nom du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="swift-code" required maxlength="40" id="swift-add-name-input">
                                     <p class="form__message" id="swift-add-name-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-code-input">Code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer un code SWIFT" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-code-input">
+                                    <label class="form__label" for="swift-add-code-input">Numéro du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-code-input">
                                     <p class="form__message" id="swift-add-code-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
@@ -129,7 +129,7 @@
                     <!-- Account Swift list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Codes SWIFT enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
                                     <table class="paper__table" id="swift-delete-table"></table>
@@ -200,8 +200,8 @@
                                     <p class="form__message" id="transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-swift-input">Code SWIFT du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <label class="form__label" for="transfer-swift-input">Numéro de compte du déstinataire</label>
+                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le numéro de compte" id="transfer-swift-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
                                     <p class="form__message" id="transfer-swift-message"></p>
                                 </div>
                             </div>
@@ -213,10 +213,10 @@
                             <button class="button button--primary" type="submit">Transférer</button>
                         </form>
                     </section>
-                    <!-- Transfer swift list -->
+                    <!-- Transfer account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Codes SWIFT enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
                                     <table class="paper__table" id="swift-paste-table"></table>
