@@ -6,35 +6,36 @@
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFzSURBVHgB7ZnfUYNAEMb3IM8aO6AEKghXgh0YK4lWYijBCiRJA9gBVmDybm79GMYMnMofwdnR7O9lYe8W9uO4fdgjUpTzxviOV2vnMDHJUVxlWYE8IlxH3liOsX3dMfviAbFx7omEwBe9g7kPmFfMvKyPhcwWZlP3BfTHUQHSzHrOKwxz1jaBjbmGmdd9iFm3xpSb1BhLI+gloEz+cre7bZuzT5KIqk12oisGlWaJgmFpBH1X4OOFNnAuqftcEDyitOVtcYfFYlW/R6UpLrbblCZgkIAyea7K3InQuQKmVYAfw9XvOIkArULSqABpVIA0KkAaFSCNCpBGBUijAqRRAdKoAGlUgDRn01rsBK3FNOhoP/4GkwlAd25Nw8mN1/RCp29DAxgtwOEQ4pAktm0OOnFNhzExYh6o9JvmIRFWMcLYDXt91u8YvwLoLn9KsJu5f/ryU7QKSfMvy2geehvoLQxfSosKkc6Ox4yEQB7PpChKg3fppHfp5hvaJgAAAABJRU5ErkJggg==">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.ab6c303d.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.792534e1.css">
+  <script type="module" crossorigin src="/failybank/assets/index.d4b90a17.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.f8c4141c.css">
 </head>
 
 <!-- Screen -->
 <body class="screen">
 
     <!-- App -->
-    <main class="app app--loaded">
+    <main class="app app--loading" id="app">
 
         <!-- App spinner -->
         <div class="app__spinner"></div>
 
         <!-- App container -->
         <div class="app__container">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-1" checked>
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-2">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-3">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-4">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-5">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-account" checked>
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-operation">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-transfer">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-enterprise">
+            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-offshore">
 
             <!-- Bar -->
             <header class="bar">
                 <div class="bar__section bar__section--row">
-                    <img class="bar__logo" src="/failybank/assets/logo.7ff690bc.svg" alt="Maze Bank logo">
+                    <svg class="bar__logo bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
+                    </svg>
                     <!-- Balance -->
                     <div class="balance">
                         <h2 class="balance__name">Solde</h2>
@@ -44,16 +45,16 @@
                 <div class="bar__section bar__section--middle">
                     <!-- Tab list -->
                     <div class="tab-list">
-                        <label class="tab-list__item" for="tab-selector-1" id="tab-1">
+                        <label class="tab-list__item" for="tab-selector-account" id="tab-account">
                             <span class="tab-list__label">Mon compte</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-2" id="tab-2">
+                        <label class="tab-list__item" for="tab-selector-operation" id="tab-operation">
                             <span class="tab-list__label">Opération</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-3" id="tab-3">
+                        <label class="tab-list__item" for="tab-selector-transfer" id="tab-transfer">
                             <span class="tab-list__label">Transfert</span>
                         </label>
-                        <label class="tab-list__item" for="tab-selector-4" id="tab-4">
+                        <label class="tab-list__item tab-list__item--hidden" for="tab-selector-enterprise" id="tab-enterprise">
                             <span class="tab-list__label">Entreprise</span>
                         </label>
                     </div>
@@ -61,8 +62,8 @@
                 <div class="bar__section bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
-                        <input class="toggle-button__input" type="checkbox">
-                        <svg class="toggle-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                        <input class="toggle-button__input" id="dark-mode-toggle" type="checkbox">
+                        <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             fill="currentColor">
                             <path
                                 d="M256 118a22 22 0 01-22-22V48a22 22 0 0144 0v48a22 22 0 01-22 22zM256 486a22 22 0 01-22-22v-48a22 22 0 0144 0v48a22 22 0 01-22 22zM369.14 164.86a22 22 0 01-15.56-37.55l33.94-33.94a22 22 0 0131.11 31.11l-33.94 33.94a21.93 21.93 0 01-15.55 6.44zM108.92 425.08a22 22 0 01-15.55-37.56l33.94-33.94a22 22 0 1131.11 31.11l-33.94 33.94a21.94 21.94 0 01-15.56 6.45zM464 278h-48a22 22 0 010-44h48a22 22 0 010 44zM96 278H48a22 22 0 010-44h48a22 22 0 010 44zM403.08 425.08a21.94 21.94 0 01-15.56-6.45l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.55 37.56zM142.86 164.86a21.89 21.89 0 01-15.55-6.44l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.56 37.55zM256 358a102 102 0 11102-102 102.12 102.12 0 01-102 102z" />
@@ -70,7 +71,7 @@
                         <div class="toggle-button__track">
                             <div class="toggle-button__handle"></div>
                         </div>
-                        <svg class="toggle-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                        <svg class="toggle-button__icon toggle-button__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             fill="currentColor">
                             <path
                                 d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z" />
@@ -80,13 +81,13 @@
             </header>
 
             <!-- View / account -->
-            <div class="view" id="tab-content-1">
+            <div class="view" id="tab-content-account">
                 <div class="grid grid--account">
                     <!-- Account owner -->
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte</h3>
-                            <p class="section__text">Hubert Bonisseur de La Bath</p>
+                            <p class="section__text" id="account-name"></p>
                         </div>
                     </section>
                     <!-- Account history -->
@@ -94,44 +95,51 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="global-log-list"></div>
+                                <div class="paper__frame" id="global-log-table"></div>
                             </div>
                         </div>
                     </section>
-                    <!-- Account Swift -->
+                    <!-- Account number -->
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
-                            <h3 class="section__title">Code SWIFT</h3>
-                            <p class="section__number">0123456789</p>
+                            <h3 class="section__title">Numéro du compte</h3>
+                            <p class="section__number" id="account-number"></p>
                         </div>
                     </section>
-                    <!-- Account Swift add form -->
+                    <!-- Account add form -->
                     <section class="grid__section">
-                        <form class="form" id="swift-add-form" novalidate>
-                            <h2 class="form__title">Ajouter un code SWIFT</h2>
+                        <form class="form" id="account-add-form" novalidate>
+                            <h2 class="form__title">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-name-input">Nom du code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer un nom" name="swift-code" required maxlength="40" id="swift-add-name-input">
-                                    <p class="form__message" id="swift-add-name-message"></p>
+                                    <label class="form__label" for="account-add-name-input">Nom du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="account-number" required maxlength="40" id="account-add-name-input">
+                                    <p class="form__message" id="account-add-name-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-code-input">Code SWIFT</label>
-                                    <input class="form__input" type="text" placeholder="Entrer un code SWIFT" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-code-input">
-                                    <p class="form__message" id="swift-add-code-message"></p>
+                                    <label class="form__label" for="account-add-number-input">Numéro du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="account-add-number-input">
+                                    <p class="form__message" id="account-add-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="icon icon--filled icon--button icon--add" type="submit"></button>
+                                    <button class="button button--icon button--primary" type="submit">
+                                        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </section>
-                    <!-- Account Swift list -->
+                    <!-- Account account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Codes SWIFT enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="swift-delete-list"></div>
+                                <div class="paper__frame">
+                                    <table class="paper__table" id="account-delete-table"></table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -139,7 +147,7 @@
             </div>
 
             <!-- View / operation -->
-            <div class="view" id="tab-content-2">
+            <div class="view" id="tab-content-operation">
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
@@ -152,10 +160,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--primary" type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -165,7 +173,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="operation-log-list"></div>
+                                <div class="paper__frame" id="operation-log-table"></div>
                             </div>
                         </div>
                     </section>
@@ -178,14 +186,14 @@
                                 <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
                                 <p class="form__message" id="withdraw-message"></p>
                             </div>
-                            <button class="button button--primary" type="submit">Retirer</button>
+                            <button class="button button--text button--primary" type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
             </div>
 
             <!-- View / transfer -->
-            <div class="view" id="tab-content-3">
+            <div class="view" id="tab-content-transfer">
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
@@ -198,9 +206,9 @@
                                     <p class="form__message" id="transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-swift-input">Code SWIFT du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le code SWIFT du déstinataire" id="transfer-swift-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
-                                    <p class="form__message" id="transfer-swift-message"></p>
+                                    <label class="form__label" for="transfer-account-number-input">Numéro de compte du déstinataire</label>
+                                    <input class="form__input" type="text" name="transfer-account-number" placeholder="Entrer le numéro de compte" id="transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <p class="form__message" id="transfer-account-number-message"></p>
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
@@ -208,15 +216,17 @@
                                 <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input" required maxlength="40">
                                 <p class="form__message" id="transfer-reference-message"></p>
                             </div>
-                            <button class="button button--primary" type="submit">Transférer</button>
+                            <button class="button button--text button--primary" type="submit">Transférer</button>
                         </form>
                     </section>
-                    <!-- Transfer swift list -->
+                    <!-- Transfer account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Codes SWIFT enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="swift-paste-list"></div>
+                                <div class="paper__frame">
+                                    <table class="paper__table" id="account-paste-table"></table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -224,7 +234,7 @@
             </div>
 
             <!-- View / enterprise -->
-            <div class="view" id="tab-content-4">
+            <div class="view" id="tab-content-enterprise">
                 <div class="grid grid--enterprise">
                     <!-- Enterprise owner -->
                     <section class="grid__section">
@@ -239,7 +249,7 @@
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame"></div>
-                                <label class="icon icon--button icon--palm-tree paper__button" for="tab-selector-5" id="tab-5"></label>
+                                <label class="icon icon--secondary icon--clickable icon--palm-tree icon--hidden paper__button" for="tab-selector-offshore" id="tab-offshore"></label>
                             </div>
                         </div>
                     </section>
@@ -261,10 +271,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary">Déposer</button>
+                                    <button class="button button--text button--primary" type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary">Tout déposer</button>
+                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -278,14 +288,14 @@
                                 <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
                                 <p class="form__message" id="enterprise-withdraw-message"></p>
                             </div>
-                            <button class="button button--primary">Retirer</button>
+                            <button class="button button--text button--primary">Retirer</button>
                         </form>
                     </section>
                 </div>
             </div>
 
             <!-- View / offshore -->
-            <div class="view" id="tab-content-5">
+            <div class="view" id="tab-content-offshore">
                 <div class="grid grid--offshore">
                     <!-- Offshore owner -->
                     <section class="grid__section">
@@ -321,10 +331,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary">Déposer</button>
+                                    <button class="button button--text button--primary">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary">Tout déposer</button>
+                                    <button class="button button--text button--secondary">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -334,6 +344,59 @@
         </div>
 
     </main>
+
+    <!-- Template / account with delete button -->
+    <template id="account-delete-template">
+        <tr class="account">
+            <td class="account__section">
+                <h4 class="account__name"></h4>
+            </td>
+            <td class="account__section">
+                <p class="account__number"></p>
+            </td>
+            <td class="account__section account__section--right">
+                <details class="account__accordion">
+                    <summary class="account__icon-button"></summary>
+                    <button class="account__text-button">Supprimer</button>
+                </details>
+            </td>
+        </tr>
+    </template>
+
+    <!-- Template / account with paste feature -->
+    <template id="account-paste-template">
+        <tr class="account account--clickable">
+            <td class="account__section">
+                <h4 class="account__name account__name--margin"></h4>
+                <p class="account__number"></p>
+            </td>
+            <td class="account__section account__section--right">
+                <svg class="account__icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <g transform="rotate(180 12 12)">
+                        <path fill="currentColor" d="M13 7h9v2h-9zm0 8h9v2h-9zm3-4h6v2h-6zm-3 1L8 7v4H2v2h6v4z"/>
+                    </g>
+                </svg>
+            </td>
+        </tr>
+    </template>
+
+    <!-- Template / log -->
+    <template id="log-template">
+        <details class="log">
+            <summary class="log__header">
+                <div class="log__icon"></div>
+                <div class="log__info">
+                    <h3 class="log__type"></h3>
+                    <p class="log__date"></p>
+                </div>
+                <p class="log__amount"></p>
+            </summary>
+            <div class="log__body">
+                <h5 class="log__reference-label">Référence: </h5>
+                <p class="log__reference"></p>
+            </div>
+        </details>
+    </template>
 
     
 </body>
