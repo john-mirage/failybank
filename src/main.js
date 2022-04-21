@@ -73,7 +73,7 @@ const balanceText = document.getElementById("balance");
 const globalLogTable = document.getElementById("global-log-table");
 const operationLogTable = document.getElementById("operation-log-table");
 const globalLogTemplate = document.getElementById("log-template");
-const appElement = document.querySelector(".app");
+const appElement = document.getElementById("app");
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -174,6 +174,94 @@ const data = {
             reference: "Vente de la voiture",
             type: "operation",
             icon: "bank",
+        },
+        {
+            entity: "Retrait",
+            date: "2022-04-13T15:00:00",
+            amount: -8500,
+            reference: "Achat ARC",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Transfert",
+            date: "2022-04-12T15:00:00",
+            amount: 15000,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+        {
+            entity: "Los Santos Police Department",
+            date: "2022-04-20T15:00:00",
+            amount: -2455,
+            reference: "Amende pour refus d'optempérer",
+            type: "fine",
+            icon: "police",
+        },
+        {
+            entity: "Transfert",
+            date: "2022-04-19T15:00",
+            amount: 2580,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+        {
+            entity: "Dépot",
+            date: "2022-04-18T15:00:00",
+            amount: 15000,
+            reference: "Vente de la voiture",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Transfert",
+            date: "2022-04-17T15:00:00",
+            amount: 20000,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
+        },
+        {
+            entity: "Retrait",
+            date: "2022-04-16T15:00:00",
+            amount: -4500,
+            reference: "Achat ARC",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Los Santos Police Department",
+            date: "2022-04-15T15:00:00",
+            amount: -100000,
+            reference: "Amende pour braquage de banque",
+            type: "fine",
+            icon: "police",
+        },
+        {
+            entity: "Dépot",
+            date: "2022-04-14T15:00:00",
+            amount: 1200,
+            reference: "Vente de la voiture",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Retrait",
+            date: "2022-04-13T15:00:00",
+            amount: -8500,
+            reference: "Achat ARC",
+            type: "operation",
+            icon: "bank",
+        },
+        {
+            entity: "Transfert",
+            date: "2022-04-12T15:00:00",
+            amount: 15000,
+            reference: "Argent pour les qualifications des Failygames",
+            type: "transfer",
+            icon: "person",
         },
         {
             entity: "Retrait",
@@ -364,7 +452,9 @@ function checkWithdrawAmount(input, message) {
     const amount = Number(input.value);
     if (balance < amount) {
         message.textContent = "Vous n'avez pas les fonds nécessaire";
+        return false;
     }
+    return true;
 }
 
 function checkReferenceField(input, message) {
@@ -399,6 +489,7 @@ depositForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const amountFieldIsValid = checkAmountField(depositInput, depositMessage);
     if (amountFieldIsValid) {
+        const amount = Number(depositInput.value);
         createLogRow({
             entity: "Dépot",
             date: getCurrentFormatedDate(),
@@ -418,6 +509,7 @@ withdrawForm.addEventListener("submit", (event) => {
     const withdrawFieldIsValid = checkAmountField(withdrawInput, withdrawMessage);
     const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(withdrawInput, withdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
+        const amount = Number(withdrawInput.value);
         createLogRow({
             entity: "Retrait",
             date: getCurrentFormatedDate(),
@@ -439,6 +531,7 @@ transferForm.addEventListener("submit", (event) => {
     const transferAccountFieldIsValid = checkAccountNumberField(transferAccountNumberInput, transferAccountNumberMessage);
     const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
     if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
+        const amount = Number(transferAmountInput.value);
         createLogRow({
             entity: "Transfert",
             date: getCurrentFormatedDate(),
