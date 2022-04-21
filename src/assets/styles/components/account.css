@@ -48,7 +48,7 @@
     margin-bottom: 6px;
 }
 
-.account__code {
+.account__number {
     box-sizing: border-box;
     display: block;
     margin: 0;
@@ -58,13 +58,61 @@
     line-height: 1;
 }
 
-.account__button {
+.account__icon-button {
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    list-style: none;
+    background-color: transparent;
+    background-image: url("/src/assets/images/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    cursor: pointer;
+    margin-right: -10px;
+}
+
+.account__icon-button:hover {
+    background-color: var(--color-light-icon-bg);
+}
+
+.dark .account__icon-button:hover {
+    background-color: var(--color-dark-icon-bg);
+}
+
+.account__text-button {
     box-sizing: border-box;
     display: block;
     position: absolute;
     top: 0;
     left: -8px;
     transform: translateX(-100%);
+    width: auto;
+    height: 36px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: none;
+    background-color: var(--color-light-down);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.account__icon {
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    color: var(--color-light-toggle-button-icon);
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.dark .account__icon {
+    color: var(--color-dark-toggle-button-icon);
 }
 
 .dark .account {
@@ -79,6 +127,26 @@
     color: var(--color-dark-text);
 }
 
-.dark .account__code {
+.dark .account__button {
+    background-color: var(--color-dark-down);
+}
+
+.dark .account__number {
     color: var(--color-dark-text-alt);
+}
+
+.maze .account:hover .account__icon {
+    color: var(--color-light-maze);
+}
+
+.fleeca .account:hover .account__icon {
+    color: var(--color-light-fleeca);
+}
+
+.maze.dark .account:hover .account__icon {
+    color: var(--color-dark-maze);
+}
+
+.fleeca.dark .account:hover .account__icon {
+    color: var(--color-dark-fleeca);
 }
