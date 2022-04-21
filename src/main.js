@@ -33,6 +33,7 @@ const accountDeleteTable = document.getElementById("account-delete-table");
 const accountDeleteTemplate = document.getElementById("account-delete-template");
 const accountPasteTable = document.getElementById("account-paste-table");
 const accountPasteTemplate = document.getElementById("account-paste-template");
+const accountAddButton = document.getElementById("account-add-button");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -358,6 +359,7 @@ function createAccountDeleteRow(account, pasteRow, prepend = false) {
     deleteButton.addEventListener("click", () => {
         accountDeleteTable.removeChild(deleteRow);
         accountPasteTable.removeChild(pasteRow);
+        handleAccountAddButton();
     }, { once: true });
     if (prepend) {
         accountDeleteTable.prepend(deleteTemplate);
@@ -421,15 +423,6 @@ function checkAccountNumberField(input, message) {
     return true;
 }
 
-function checkSavedAccountNumber(table, message) {
-    if (table.children.length >= 5) {
-        message.textContent = "Limite de compte atteinte";
-        return false;
-    }
-    if (message.textContent.length > 0) message.textContent = "";
-    return true;
-}
-
 function checkAmountField(input, message) {
     if (!input.validity.valid) {
         if (input.validity.valueMissing) {
@@ -474,15 +467,16 @@ function checkReferenceField(input, message) {
 
 accountAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
-    const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
-    if (accountNameFieldIsValid && accountNumberFieldIsValid) {
-        const savedAccountNumberIsValid = checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage);
-        if (savedAccountNumberIsValid) {
+    const savedAccountNumberIsValid = accountDeleteTable.children.length < 5;
+    if (savedAccountNumberIsValid) {
+        const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
+        const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
+        if (accountNameFieldIsValid && accountNumberFieldIsValid) {
             const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
             const accountPasteRow = createAccountPasteRow(account, true);
             createAccountDeleteRow(account, accountPasteRow, true);
             accountAddForm.reset();
+            handleAccountAddButton();
         }
     }
 });
@@ -602,12 +596,27 @@ function initAccount(account) {
         const accountPasteRow = createAccountPasteRow(savedAccount);
         createAccountDeleteRow(savedAccount, accountPasteRow);
     });
+    handleAccountAddButton();
 }
 
 /**
  * POVERS: Move this part in your script.
  */
 initAccount(data);
+
+/**
+ * Add button state
+ */
+function handleAccountAddButton() {
+    const accountLenght = accountDeleteTable.children.length;
+    if (accountLenght >= 5) {
+        if (accountAddButton.classList.contains("button--primary")) {
+            accountAddButton.classList.replace("button--primary", "button--disabled");
+        }
+    } else if (accountAddButton.classList.contains("button--disabled")) {
+        accountAddButton.classList.replace("button--disabled", "button--primary");
+    }
+}
 
 /**
  * Dark mode

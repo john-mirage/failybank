@@ -64,3 +64,11 @@
 .fleeca.dark .bar__logo {
     color: var(--color-dark-fleeca);
 }
+
+.maze .bar__logo--fleeca {
+    display: none;
+}
+
+.fleeca .bar__logo--maze {
+    display: none;
+}

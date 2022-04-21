@@ -1,5 +1,6 @@
 # FailyV Unofficial bank app
 
-## In progress
+## TODO
 
-1. [-] DOM optimization
+1. [ ] Infinite Scroll
+2. [ ] Filter system
