@@ -610,13 +610,11 @@ initAccount(data);
 function handleAccountAddButton() {
     const accountLenght = accountDeleteTable.children.length;
     if (accountLenght >= 5) {
-        if (!accountAddButton.classList.contains("button--disabled")) {
-            accountAddButton.classList.add("button--disabled");
+        if (accountAddButton.classList.contains("button--primary")) {
+            accountAddButton.classList.replace("button--primary", "button--disabled");
         }
-    } else {
-        if (accountAddButton.classList.contains("button--disabled")) {
-            accountAddButton.classList.remove("button--disabled");
-        }
+    } else if (accountAddButton.classList.contains("button--disabled")) {
+        accountAddButton.classList.replace("button--disabled", "button--primary");
     }
 }
 
