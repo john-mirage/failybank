@@ -107,18 +107,18 @@
                     </section>
                     <!-- Account add form -->
                     <section class="grid__section">
-                        <form class="form" id="swift-add-form" novalidate>
+                        <form class="form" id="account-add-form" novalidate>
                             <h2 class="form__title">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-name-input">Nom du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="swift-code" required maxlength="40" id="swift-add-name-input">
-                                    <p class="form__message" id="swift-add-name-message"></p>
+                                    <label class="form__label" for="account-add-name-input">Nom du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="account-number" required maxlength="40" id="account-add-name-input">
+                                    <p class="form__message" id="account-add-name-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="swift-add-code-input">Numéro du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="swift-code" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="swift-add-code-input">
-                                    <p class="form__message" id="swift-add-code-message"></p>
+                                    <label class="form__label" for="account-add-number-input">Numéro du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="account-add-number-input">
+                                    <p class="form__message" id="account-add-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="icon icon--primary icon--clickable icon--add" type="submit"></button>
@@ -126,13 +126,13 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Account Swift list -->
+                    <!-- Account account list -->
                     <section class="grid__section">
                         <div class="section section--column">
                             <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="swift-delete-table"></table>
+                                    <table class="paper__table" id="account-delete-table"></table>
                                 </div>
                             </div>
                         </div>
@@ -200,9 +200,9 @@
                                     <p class="form__message" id="transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-swift-input">Numéro de compte du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-swift" placeholder="Entrer le numéro de compte" id="transfer-swift-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
-                                    <p class="form__message" id="transfer-swift-message"></p>
+                                    <label class="form__label" for="transfer-account-number-input">Numéro de compte du déstinataire</label>
+                                    <input class="form__input" type="text" name="transfer-account-number" placeholder="Entrer le numéro de compte" id="transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <p class="form__message" id="transfer-account-number-message"></p>
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
@@ -219,7 +219,7 @@
                             <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="swift-paste-table"></table>
+                                    <table class="paper__table" id="account-paste-table"></table>
                                 </div>
                             </div>
                         </div>
@@ -339,7 +339,7 @@
 
     </main>
 
-    <template id="swift-delete-template">
+    <template id="account-delete-template">
         <tr class="account">
             <td class="account__section">
                 <h4 class="account__name"></h4>
@@ -356,7 +356,7 @@
         </tr>
     </template>
 
-    <template id="swift-paste-template">
+    <template id="account-paste-template">
         <tr class="account account--clickable">
             <td class="account__section">
                 <h4 class="account__name account__name--margin"></h4>
@@ -368,7 +368,7 @@
         </tr>
     </template>
 
-    <template id="global-log-template">
+    <template id="log-template">
         <details class="log">
             <summary class="log__header">
                 <div class="icon icon--secondary log__icon"></div>

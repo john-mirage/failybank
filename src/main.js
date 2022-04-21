@@ -23,11 +23,17 @@ import "./assets/styles/components/button.css";
 import "./assets/styles/states.css";
 
 // Account elements
-const accountAddForm = document.getElementById("swift-add-form");
-const accountAddNameInput = document.getElementById("swift-add-name-input");
-const accountAddNameMessage = document.getElementById("swift-add-name-message");
-const accountAddNumberInput = document.getElementById("swift-add-code-input");
-const accountAddNumberMessage = document.getElementById("swift-add-code-message");
+const accountName = document.getElementById("account-name");
+const accountNumber = document.getElementById("account-number");
+const accountAddForm = document.getElementById("account-add-form");
+const accountAddNameInput = document.getElementById("account-add-name-input");
+const accountAddNameMessage = document.getElementById("account-add-name-message");
+const accountAddNumberInput = document.getElementById("account-add-number-input");
+const accountAddNumberMessage = document.getElementById("account-add-number-message");
+const accountDeleteTable = document.getElementById("account-delete-table");
+const accountDeleteTemplate = document.getElementById("account-delete-template");
+const accountPasteTable = document.getElementById("account-paste-table");
+const accountPasteTemplate = document.getElementById("account-paste-template");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -40,15 +46,16 @@ const withdrawInput = document.getElementById("withdraw-input");
 const withdrawMessage = document.getElementById("withdraw-message");
 
 // Transfer elements
-const transferAccountInput = document.getElementById("transfer-swift-input");
-const transferAccountMessage = document.getElementById("transfer-swift-message");
 const transferForm = document.getElementById("transfer-form");
 const transferAmountInput = document.getElementById("transfer-amount-input");
-const transferReferenceInput = document.getElementById("transfer-reference-input");
 const transferAmountMessage = document.getElementById("transfer-amount-message");
+const transferAccountNumberInput = document.getElementById("transfer-account-number-input");
+const transferAccountNumberMessage = document.getElementById("transfer-account-number-message");
+const transferReferenceInput = document.getElementById("transfer-reference-input");
 const transferReferenceMessage = document.getElementById("transfer-reference-message");
 
 // Enterprise elements
+const enterpriseTab = document.getElementById("tab-enterprise");
 const enterpriseDepositForm = document.getElementById("enterprise-deposit-form");
 const enterpriseDepositInput = document.getElementById("enterprise-deposit-input");
 const enterpriseDepositMessage = document.getElementById("enterprise-deposit-message");
@@ -57,27 +64,15 @@ const enterpriseWithdrawInput = document.getElementById("enterprise-withdraw-inp
 const enterpriseWithdrawMessage = document.getElementById("enterprise-withdraw-message");
 
 // Offshore elements
+const offshoreTab = document.getElementById("tab-offshore");
 const offshoreDepositForm = document.getElementById("offshore-deposit-form");
 const offshoreDepositInput = document.getElementById("offshore-deposit-input");
 const offshoreDepositMessage = document.getElementById("offshore-deposit-message");
 
-const enterpriseTab = document.getElementById("tab-enterprise");
-const offshoreTab = document.getElementById("tab-offshore");
 const balanceText = document.getElementById("balance");
-
 const globalLogTable = document.getElementById("global-log-table");
 const operationLogTable = document.getElementById("operation-log-table");
-const globalLogTemplate = document.getElementById("global-log-template");
-
-const accountDeleteTable = document.getElementById("swift-delete-table");
-const accountDeleteTemplate = document.getElementById("swift-delete-template");
-
-const accountPasteTable = document.getElementById("swift-paste-table");
-const accountPasteTemplate = document.getElementById("swift-paste-template");
-
-const accountName = document.getElementById("account-name");
-const accountNumber = document.getElementById("account-number");
-
+const globalLogTemplate = document.getElementById("log-template");
 const appElement = document.querySelector(".app");
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
@@ -292,8 +287,8 @@ function createAccountPasteRow(account, prepend = false) {
     pasteName.textContent = account.name;
     pasteCode.textContent = account.code;
     pasteRow.addEventListener("click", () => {
-        if (transferAccountInput.value !== account.code) {
-            transferAccountInput.value = account.code;
+        if (transferAccountNumberInput.value !== account.code) {
+            transferAccountNumberInput.value = account.code;
         }
     });
     if (prepend) {
@@ -441,7 +436,7 @@ transferForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const transferAmountFieldIsValid = checkAmountField(transferAmountInput, transferAmountMessage);
     const transferAmountIsValid = transferAmountFieldIsValid ? checkWithdrawAmount(transferAmountInput, transferAmountMessage) : false;
-    const transferAccountFieldIsValid = checkAccountNumberField(transferAccountInput, transferAccountMessage);
+    const transferAccountFieldIsValid = checkAccountNumberField(transferAccountNumberInput, transferAccountNumberMessage);
     const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
     if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
         createLogRow({
