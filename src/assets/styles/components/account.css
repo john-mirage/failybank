@@ -102,13 +102,16 @@
     cursor: pointer;
 }
 
-.account__icon {
+.account__paste-icon {
     box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    color: var(--color-light-toggle-button-icon);
-    margin-top: 12px;
-    margin-bottom: 12px;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    background-image: url("/src/assets/images/paste-form.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    margin-right: -12px;
 }
 
 .dark .account__icon {
