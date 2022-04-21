@@ -67,11 +67,5 @@
 }
 
 .button--disabled {
-    color: var(--color-light-text-alt);
-    background-color: var(--color-light-icon-bg);
-}
-
-.dark .button--disabled {
-    color: var(--color-dark-text-alt);
-    background-color: var(--color-dark-icon-bg);
+    opacity: 0.2;
 }
