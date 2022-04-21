@@ -6,8 +6,7 @@
     <link rel="icon" type="image/png" href="/src/assets/images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
 </head>
@@ -16,7 +15,7 @@
 <body class="screen">
 
     <!-- App -->
-    <main class="app app--loading">
+    <main class="app app--loading" id="app">
 
         <!-- App spinner -->
         <div class="app__spinner"></div>
@@ -339,6 +338,7 @@
 
     </main>
 
+    <!-- Template / account with delete button -->
     <template id="account-delete-template">
         <tr class="account">
             <td class="account__section">
@@ -356,6 +356,7 @@
         </tr>
     </template>
 
+    <!-- Template / account with paste feature -->
     <template id="account-paste-template">
         <tr class="account account--clickable">
             <td class="account__section">
@@ -368,6 +369,7 @@
         </tr>
     </template>
 
+    <!-- Template / log -->
     <template id="log-template">
         <details class="log">
             <summary class="log__header">
