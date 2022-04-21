@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.d4b90a17.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.f8c4141c.css">
+  <script type="module" crossorigin src="/failybank/assets/index.609db824.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.45b8a7bd.css">
 </head>
 
 <!-- Screen -->
@@ -35,6 +35,9 @@
                 <div class="bar__section bar__section--row">
                     <svg class="bar__logo bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
+                    </svg>
+                    <svg class="bar__logo bar__logo--fleeca" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.167 25.5L29.917 33H41.917L41 38.5H23L27.167 13.5H12.167L11 20.5H24L23.167 25.5H10.167L8.917 33H21.917L21 38.5H2L7 8.5H46L45.167 13.5H33.167L32 20.5H44L43.167 25.5H31.167Z"/>
                     </svg>
                     <!-- Balance -->
                     <div class="balance">
@@ -122,7 +125,7 @@
                                     <p class="form__message" id="account-add-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--icon button--primary" type="submit">
+                                    <button class="button button--icon button--primary" type="submit" id="account-add-button">
                                         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                                             <path d="M0 0h24v24H0V0z" fill="none"/>
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
@@ -249,7 +252,11 @@
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame"></div>
-                                <label class="icon icon--secondary icon--clickable icon--palm-tree icon--hidden paper__button" for="tab-selector-offshore" id="tab-offshore"></label>
+                                <label class="button button--icon button--primary paper__button" for="tab-selector-offshore" id="tab-offshore">
+                                    <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
+                                    </svg>
+                                </label>
                             </div>
                         </div>
                     </section>
@@ -371,11 +378,7 @@
                 <p class="account__number"></p>
             </td>
             <td class="account__section account__section--right">
-                <svg class="account__icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                    <g transform="rotate(180 12 12)">
-                        <path fill="currentColor" d="M13 7h9v2h-9zm0 8h9v2h-9zm3-4h6v2h-6zm-3 1L8 7v4H2v2h6v4z"/>
-                    </g>
-                </svg>
+                <div class="account__paste-icon"></div>
             </td>
         </tr>
     </template>
