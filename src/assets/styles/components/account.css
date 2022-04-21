@@ -135,18 +135,18 @@
     color: var(--color-dark-text-alt);
 }
 
-.maze .account:hover .account__icon {
+.maze .account--clickable:hover .account__name {
     color: var(--color-light-maze);
 }
 
-.fleeca .account:hover .account__icon {
+.fleeca .account--clickable:hover .account__name {
     color: var(--color-light-fleeca);
 }
 
-.maze.dark .account:hover .account__icon {
+.maze.dark .account--clickable:hover .account__name {
     color: var(--color-dark-maze);
 }
 
-.fleeca.dark .account:hover .account__icon {
+.fleeca.dark .account--clickable:hover .account__name {
     color: var(--color-dark-fleeca);
 }
