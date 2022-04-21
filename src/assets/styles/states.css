@@ -42,6 +42,6 @@
     display: block;
 }
 
-.account__accordion[open] > .icon--delete {
+.account__accordion[open] > .account__icon-button {
     background-image: url("/src/assets/images/close.svg");
 }

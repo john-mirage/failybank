@@ -12,7 +12,6 @@ import "./assets/styles/components/view.css";
 import "./assets/styles/components/grid.css";
 import "./assets/styles/components/column.css";
 import "./assets/styles/components/paper.css";
-import "./assets/styles/components/icon.css";
 import "./assets/styles/components/form.css";
 import "./assets/styles/components/section.css";
 import "./assets/styles/components/account.css";
@@ -323,7 +322,7 @@ function createLogRow(log, prepend = false) {
     const logDate = logRow.querySelector(".log__date");
     const logAmount = logRow.querySelector(".log__amount");
     const logReference = logRow.querySelector(".log__reference");
-    logIcon.classList.add(`icon--${log.icon}`);
+    logIcon.classList.add(`log__icon--${log.icon}`);
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
     logType.textContent = log.entity;
     const date = new Date(log.date);
@@ -352,8 +351,8 @@ function createAccountDeleteRow(account, pasteRow, prepend = false) {
     const deleteTemplate = accountDeleteTemplate.content.cloneNode(true);
     const deleteRow = deleteTemplate.querySelector(".account");
     const deleteName = deleteRow.querySelector(".account__name");
-    const deleteCode = deleteRow.querySelector(".account__code");
-    const deleteButton = deleteRow.querySelector(".account__button");
+    const deleteCode = deleteRow.querySelector(".account__number");
+    const deleteButton = deleteRow.querySelector(".account__text-button");
     deleteName.textContent = account.name;
     deleteCode.textContent = account.code;
     deleteButton.addEventListener("click", () => {
@@ -371,7 +370,7 @@ function createAccountPasteRow(account, prepend = false) {
     const pasteTemplate = accountPasteTemplate.content.cloneNode(true);
     const pasteRow = pasteTemplate.querySelector(".account");
     const pasteName = pasteRow.querySelector(".account__name");
-    const pasteCode = pasteRow.querySelector(".account__code");
+    const pasteCode = pasteRow.querySelector(".account__number");
     pasteName.textContent = account.name;
     pasteCode.textContent = account.code;
     pasteRow.addEventListener("click", () => {
@@ -437,11 +436,12 @@ function checkAmountField(input, message) {
             message.textContent = "Veuillez entrer un montant";
         } else if (input.validity.patternMismatch) {
             message.textContent = "Le montant ne doit comporter que des chiffres";
-        } else if (Number(input.value) < 50) {
-            message.textContent = "Le montant doit être supérieur à 50";
         } else {
             message.textContent = "Il y a une erreur";
         }
+        return false;
+    } else if (Number(input.value) < 50) {
+        message.textContent = "Le montant doit être supérieur où égale à 50$";
         return false;
     }
     if (message.textContent.length > 0) message.textContent = "";
@@ -450,8 +450,8 @@ function checkAmountField(input, message) {
 
 function checkWithdrawAmount(input, message) {
     const amount = Number(input.value);
-    if (balance < amount) {
-        message.textContent = "Vous n'avez pas les fonds nécessaire";
+    if (activeAccount.balance < amount) {
+        message.textContent = "Vous n'avez pas les fonds nécessaires";
         return false;
     }
     return true;
@@ -475,13 +475,15 @@ function checkReferenceField(input, message) {
 accountAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
-    const savedAccountNumberIsValid = accountNameFieldIsValid ? checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage) : false;
     const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
-    if (accountNameFieldIsValid && accountNumberFieldIsValid && savedAccountNumberIsValid) {
-        const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
-        const accountPasteRow = createAccountPasteRow(account, true);
-        createAccountDeleteRow(account, accountPasteRow, true);
-        accountAddForm.reset();
+    if (accountNameFieldIsValid && accountNumberFieldIsValid) {
+        const savedAccountNumberIsValid = checkSavedAccountNumber(accountDeleteTable, accountAddNameMessage);
+        if (savedAccountNumberIsValid) {
+            const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
+            const accountPasteRow = createAccountPasteRow(account, true);
+            createAccountDeleteRow(account, accountPasteRow, true);
+            accountAddForm.reset();
+        }
     }
 });
 

@@ -1,30 +1,33 @@
 .button {
     box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.button--text {
     display: block;
     min-width: 168px;
-    height: 48px;
     padding-left: 24px;
     padding-right: 24px;
-    cursor: pointer;
     font-family: inherit;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: none;
 }
 
-.button--small {
-    min-width: auto;
-    height: 36px;
-    padding-left: 16px;
-    padding-right: 16px;
-    font-size: 10px;
-    letter-spacing: 0.6px;
+.button--icon {
+    display: flex;
+    width: 48px;
 }
 
-.button--half {
-    width: calc(50% - 12px);
+.button__icon {
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    margin: auto;
 }
 
 .button--primary {
@@ -39,16 +42,6 @@
     background-color: var(--color-light-fleeca);
 }
 
-.button--secondary {
-    color: var(--color-light-text);
-    background-color: var(--color-light-button-secondary);
-}
-
-.dark .button--secondary {
-    color: var(--color-dark-text);
-    background-color: var(--color-dark-button-secondary);
-}
-
 .maze.dark .button--primary {
     background-color: var(--color-dark-maze);
 }
@@ -57,12 +50,18 @@
     background-color: var(--color-dark-fleeca);
 }
 
-.button--delete {
-    color: #ffffff;
-    background-color: var(--color-light-down);
+.maze .button--secondary {
+    color: var(--color-light-maze);
 }
 
-.dark .button--delete {
-    color: #ffffff;
-    background-color: var(--color-dark-down);
+.fleeca .button--secondary {
+    color: var(--color-light-fleeca);
+}
+
+.maze.dark .button--secondary {
+    color: var(--color-dark-maze);
+}
+
+.fleeca.dark .button--secondary {
+    color: var(--color-dark-fleeca);
 }

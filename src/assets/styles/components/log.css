@@ -28,10 +28,29 @@
 }
 
 .log__icon {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
     margin-right: 16px;
+    background-color: var(--color-light-icon-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
 }
 
-.log__icon,
+.log__icon--person {
+    background-image: url("/src/assets/images/person.svg");
+}
+
+.log__icon--police {
+    background-image: url("/src/assets/images/police.svg");
+}
+
+.log__icon--bank {
+    background-image: url("/src/assets/images/bank.svg");
+}
+
 .log__amount {
     flex: 0 0 auto;
 }
@@ -107,6 +126,10 @@
     border: none;
 }
 
+.dark .log__icon {
+    background-color: var(--color-dark-icon-bg);
+}
+
 .dark .log__type {
     color: var(--color-dark-text);
 }
@@ -129,4 +152,20 @@
 
 .dark .log__amount--down {
     color: var(--color-dark-down);
+}
+
+.maze .log__header:hover .log__type {
+    color: var(--color-light-maze);
+}
+
+.fleeca .log__header:hover .log__type {
+    color: var(--color-light-fleeca);
+}
+
+.maze.dark .log__header:hover .log__type {
+    color: var(--color-dark-maze);
+}
+
+.fleeca.dark .log__header:hover .log__type {
+    color: var(--color-dark-fleeca);
 }

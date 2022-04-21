@@ -120,7 +120,12 @@
                                     <p class="form__message" id="account-add-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="icon icon--primary icon--clickable icon--add" type="submit"></button>
+                                    <button class="button button--icon button--primary" type="submit">
+                                        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -153,10 +158,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--primary" type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -179,7 +184,7 @@
                                 <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
                                 <p class="form__message" id="withdraw-message"></p>
                             </div>
-                            <button class="button button--primary" type="submit">Retirer</button>
+                            <button class="button button--text button--primary" type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -209,7 +214,7 @@
                                 <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input" required maxlength="40">
                                 <p class="form__message" id="transfer-reference-message"></p>
                             </div>
-                            <button class="button button--primary" type="submit">Transférer</button>
+                            <button class="button button--text button--primary" type="submit">Transférer</button>
                         </form>
                     </section>
                     <!-- Transfer account list -->
@@ -264,10 +269,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--primary" type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -281,7 +286,7 @@
                                 <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
                                 <p class="form__message" id="enterprise-withdraw-message"></p>
                             </div>
-                            <button class="button button--primary">Retirer</button>
+                            <button class="button button--text button--primary">Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -324,10 +329,10 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--primary">Déposer</button>
+                                    <button class="button button--text button--primary">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--secondary">Tout déposer</button>
+                                    <button class="button button--text button--secondary">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -345,12 +350,12 @@
                 <h4 class="account__name"></h4>
             </td>
             <td class="account__section">
-                <p class="account__code"></p>
+                <p class="account__number"></p>
             </td>
             <td class="account__section account__section--right">
                 <details class="account__accordion">
-                    <summary class="icon icon--secondary icon--clickable icon--small icon--delete"></summary>
-                    <button class="button button--delete button--small account__button">Supprimer</button>
+                    <summary class="account__icon-button"></summary>
+                    <button class="account__text-button">Supprimer</button>
                 </details>
             </td>
         </tr>
@@ -361,10 +366,14 @@
         <tr class="account account--clickable">
             <td class="account__section">
                 <h4 class="account__name account__name--margin"></h4>
-                <p class="account__code"></p>
+                <p class="account__number"></p>
             </td>
             <td class="account__section account__section--right">
-                <button class="icon icon--paste icon--negative-mr"></button>
+                <svg class="account__icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <g transform="rotate(180 12 12)">
+                        <path fill="currentColor" d="M13 7h9v2h-9zm0 8h9v2h-9zm3-4h6v2h-6zm-3 1L8 7v4H2v2h6v4z"/>
+                    </g>
+                </svg>
             </td>
         </tr>
     </template>
@@ -373,7 +382,7 @@
     <template id="log-template">
         <details class="log">
             <summary class="log__header">
-                <div class="icon icon--secondary log__icon"></div>
+                <div class="log__icon"></div>
                 <div class="log__info">
                     <h3 class="log__type"></h3>
                     <p class="log__date"></p>
