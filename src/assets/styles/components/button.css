@@ -65,3 +65,13 @@
 .fleeca.dark .button--secondary {
     color: var(--color-dark-fleeca);
 }
+
+.button--disabled {
+    color: var(--color-light-text-alt);
+    background-color: #ffffff;
+}
+
+.dark .button--disabled {
+    color: var(--color-dark-text-alt);
+    background-color: var(--color-dark-icon-bg);
+}
