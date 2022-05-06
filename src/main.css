@@ -306,8 +306,16 @@ html {
     cursor: pointer;
 }
 
-.toggle-button__input:focus {
-    outline: none;
+.toggle-button__input:focus-visible {
+    outline-offset: 6px;
+}
+
+.maze .toggle-button__input:focus-visible {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .toggle-button__input:focus-visible {
+    outline: 2px solid var(--color-fleeca);
 }
 
 .toggle-button__icon {
@@ -514,7 +522,7 @@ html {
     color: #ffffff;
 }
 
-.button--primary:focus {
+.button--primary:focus-visible {
     outline-offset: 3px;
 }
 
@@ -526,11 +534,11 @@ html {
     background-color: var(--color-fleeca);
 }
 
-.maze .button--primary:focus {
+.maze .button--primary:focus-visible {
     outline: 2px solid var(--color-maze);
 }
 
-.fleeca .button--primary:focus {
+.fleeca .button--primary:focus-visible {
     outline: 2px solid var(--color-fleeca);
 }
 
@@ -856,7 +864,7 @@ html {
     background-color: var(--color-icon-bg);
 }
 
-.account__icon-button:focus {
+.account__icon-button:focus-visible {
     outline: 2px solid var(--color-down);
 }
 
@@ -882,7 +890,7 @@ html {
     cursor: pointer;
 }
 
-.account__text-button:focus {
+.account__text-button:focus-visible {
     outline-offset: 3px;
     outline: 2px solid var(--color-down);
 }
@@ -932,6 +940,18 @@ html {
     height: auto;
     cursor: pointer;
     list-style: none;
+}
+
+.log__header:focus-visible {
+    outline-offset: 4px;
+}
+
+.maze .log__header:focus-visible {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .log__header:focus-visible {
+    outline: 2px solid var(--color-fleeca);
 }
 
 .log__body {
