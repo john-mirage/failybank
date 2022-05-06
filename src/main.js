@@ -1,4 +1,3 @@
-import "./main.css";
 import data from "./data";
 
 // Account elements
