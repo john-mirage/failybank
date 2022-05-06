@@ -72,6 +72,14 @@ const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
  */
 let activeAccount = {};
 
+let page = 1;
+let pageNumber = 0;
+
+let observer = new IntersectionObserver(handlePagination);
+let observedElement = false;
+
+const LOGS_PER_PAGES = 10;
+
 /**
  * Balance
  */
@@ -97,7 +105,7 @@ function getCurrentFormatedDate() {
     return date.toISOString();
 }
 
-function createLogRow(log, prepend = false) {
+function createLogRow(log, prepend = false, observe = false) {
     const logTemplate = globalLogTemplate.content.cloneNode(true);
     const logRow = logTemplate.querySelector(".log");
     const logIcon = logRow.querySelector(".log__icon");
@@ -114,16 +122,12 @@ function createLogRow(log, prepend = false) {
     logReference.textContent = log.reference;
     if (prepend) {
         globalLogTable.prepend(logTemplate);
-        if (log.type === "operation") {
-            const operationRow = logRow.cloneNode(true);
-            operationLogTable.prepend(operationRow);
-        }
     } else {
         globalLogTable.appendChild(logTemplate);
-        if (log.type === "operation") {
-            const operationRow = logRow.cloneNode(true);
-            operationLogTable.appendChild(operationRow);
-        }
+    }
+    if (observe) {
+        observedElement = logRow;
+        observer.observe(logRow);
     }
 }
 
@@ -356,6 +360,39 @@ offshoreDepositForm.addEventListener("submit", (event) => {
     }
 });
 
+function handlePagination(entries) {
+    if (entries[0].isIntersecting) {
+        console.log("Handle pagination")
+        page += 1;
+        generateLogs();
+    }
+}
+
+function calculatePageNumber() {
+    const logNumber = activeAccount.logs.length;
+    pageNumber = Math.ceil(logNumber / LOGS_PER_PAGES);
+}
+
+function getPageLogs() {
+    return activeAccount.logs.slice(LOGS_PER_PAGES * (page - 1), LOGS_PER_PAGES * page);
+}
+
+function generateLogs() {
+    const logs = getPageLogs();
+    if (observedElement) {
+        console.log("Unobserve element")
+        observer.unobserve(observedElement);
+        observedElement = false;
+    }
+    logs.forEach((log, logIndex) => {
+        if (logIndex === logs.length - 1 && page < pageNumber) {
+            createLogRow(log, false, true);
+        } else {
+            createLogRow(log);
+        }
+    });
+}
+
 /**
  * Init
  */
@@ -380,7 +417,8 @@ function initAccount(account) {
     displayBalance(activeAccount.balance);
     accountName.textContent = activeAccount.name;
     accountNumber.textContent = activeAccount.number;
-    activeAccount.logs.forEach((log) => createLogRow(log));
+    calculatePageNumber();
+    generateLogs();
     activeAccount.accounts.forEach((savedAccount) => {
         const accountPasteRow = createAccountPasteRow(savedAccount);
         createAccountDeleteRow(savedAccount, accountPasteRow);
