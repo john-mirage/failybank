@@ -1,6 +1,6 @@
-/*
- * GLOBALS
- */
+/*------------------------------------*\
+  GLOBALS
+\*------------------------------------*/
 :root {
     --color-screen: #e9ecef;
     --color-bg: #F3F5F6;
@@ -61,9 +61,9 @@ html {
     background: radial-gradient(#343a40, #212529);
 }
 
-/*
- * APP
- */
+/*------------------------------------*\
+  APP
+\*------------------------------------*/
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -123,9 +123,9 @@ html {
     border-top: 8px solid var(--color-fleeca);
 }
 
-/*
- * BAR
- */
+/*------------------------------------*\
+  BAR
+\*------------------------------------*/
 .bar {
     box-sizing: border-box;
     display: flex;
@@ -188,9 +188,9 @@ html {
     display: none;
 }
 
-/*
- * BALANCE
- */
+/*------------------------------------*\
+  BALANCE
+\*------------------------------------*/
 .balance {
     box-sizing: border-box;
     width: auto;
@@ -234,9 +234,9 @@ html {
     text-shadow: none;
 }
 
-/*
- * TAB LIST
- */
+/*------------------------------------*\
+  TAB LIST
+\*------------------------------------*/
 .tab-list {
     box-sizing: border-box;
     display: flex;
@@ -270,9 +270,9 @@ html {
     color: var(--color-text-alt);
 }
 
-/*
- * TOGGLE BUTTON
- */
+/*------------------------------------*\
+  TOGGLE BUTTON
+\*------------------------------------*/
 .toggle-button {
     box-sizing: border-box;
     position: relative;
@@ -313,6 +313,14 @@ html {
     color: var(--color-toggle-button-icon);
 }
 
+.dark .toggle-button__icon--sun {
+    color: var(--color-toggle-button-icon);
+}
+
+.dark .toggle-button__icon--moon {
+    color: var(--color-toggle-button-icon-active);
+}
+
 .toggle-button__track {
     box-sizing: border-box;
     width: 40px;
@@ -345,9 +353,9 @@ html {
     transform: translateX(20px);
 }
 
-/*
- * VIEW
- */
+/*------------------------------------*\
+  VIEW
+\*------------------------------------*/
 .view {
     box-sizing: border-box;
     display: none;
@@ -356,9 +364,9 @@ html {
     padding: 24px;
 }
 
-/*
- * GRID
- */
+/*------------------------------------*\
+  GRID
+\*------------------------------------*/
 .grid {
     box-sizing: border-box;
     display: grid;
@@ -427,9 +435,9 @@ html {
     grid-row: span 4 / span 4;
 }
 
-/*
- * COLUMN
- */
+/*------------------------------------*\
+  COLUMN
+\*------------------------------------*/
 .column {
     box-sizing: border-box;
     display: flex;
@@ -452,9 +460,9 @@ html {
     flex: 1 1 0;
 }
 
-/*
- * PAPER
- */
+/*------------------------------------*\
+  PAPER
+\*------------------------------------*/
 .paper {
     position: relative;
     box-sizing: border-box;
@@ -505,9 +513,9 @@ html {
     height: auto;
 }
 
-/*
- * FORM
- */
+/*------------------------------------*\
+  FORM
+\*------------------------------------*/
 .form {
     box-sizing: border-box;
 }
@@ -606,9 +614,9 @@ html {
     border: 1px solid var(--color-fleeca);
 }
 
-/*
- * SECTION
- */
+/*------------------------------------*\
+  SECTION
+\*------------------------------------*/
 .section {
     box-sizing: border-box;
     width: 100%;
@@ -669,9 +677,9 @@ html {
     flex: 1 1 0;
 }
 
-/*
- * ACCOUNT
- */
+/*------------------------------------*\
+  ACCOUNT
+\*------------------------------------*/
 .account {
     box-sizing: border-box;
     width: 100%;
@@ -792,9 +800,9 @@ html {
     color: var(--color-fleeca);
 }
 
-/*
- * LOG
- */
+/*------------------------------------*\
+  LOG
+\*------------------------------------*/
 .log {
     box-sizing: border-box;
     width: 100%;
@@ -923,9 +931,9 @@ html {
     color: var(--color-fleeca);
 }
 
-/*
- * BUTTON
- */
+/*------------------------------------*\
+  BUTTON
+\*------------------------------------*/
 .button {
     box-sizing: border-box;
     height: 48px;
@@ -983,9 +991,9 @@ html {
     background-color: var(--color-border);
 }
 
-/*
- * STATES
- */
+/*------------------------------------*\
+  STATES
+\*------------------------------------*/
 .maze #tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-maze);}
 .maze #tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-maze);}
 .maze #tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-maze);}
