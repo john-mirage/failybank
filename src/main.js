@@ -34,6 +34,7 @@ const accountDeleteTemplate = document.getElementById("account-delete-template")
 const accountPasteTable = document.getElementById("account-paste-table");
 const accountPasteTemplate = document.getElementById("account-paste-template");
 const accountAddButton = document.getElementById("account-add-button");
+const savedAccounts = document.getElementById("saved-accounts");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -359,7 +360,7 @@ function createAccountDeleteRow(account, pasteRow, prepend = false) {
     deleteButton.addEventListener("click", () => {
         accountDeleteTable.removeChild(deleteRow);
         accountPasteTable.removeChild(pasteRow);
-        handleAccountAddButton();
+        handleSavedAccounts();
     }, { once: true });
     if (prepend) {
         accountDeleteTable.prepend(deleteTemplate);
@@ -476,7 +477,7 @@ accountAddForm.addEventListener("submit", (event) => {
             const accountPasteRow = createAccountPasteRow(account, true);
             createAccountDeleteRow(account, accountPasteRow, true);
             accountAddForm.reset();
-            handleAccountAddButton();
+            handleSavedAccounts();
         }
     }
 });
@@ -596,7 +597,7 @@ function initAccount(account) {
         const accountPasteRow = createAccountPasteRow(savedAccount);
         createAccountDeleteRow(savedAccount, accountPasteRow);
     });
-    handleAccountAddButton();
+    handleSavedAccounts();
 }
 
 /**
@@ -607,9 +608,10 @@ initAccount(data);
 /**
  * Add button state
  */
-function handleAccountAddButton() {
-    const accountLenght = accountDeleteTable.children.length;
-    if (accountLenght >= 5) {
+function handleSavedAccounts() {
+    const accountLength = accountDeleteTable.children.length;
+    savedAccounts.textContent = `[${String(accountLength)}/5]`;
+    if (accountLength >= 5) {
         if (accountAddButton.classList.contains("button--primary")) {
             accountAddButton.classList.replace("button--primary", "button--disabled");
         }
