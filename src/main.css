@@ -934,10 +934,6 @@ html {
     list-style: none;
 }
 
-.log__header:focus {
-    outline: none;
-}
-
 .log__body {
     box-sizing: border-box;
     padding-top: 8px;
@@ -1039,14 +1035,6 @@ html {
 }
 
 .fleeca .log__header:hover .log__type {
-    color: var(--color-fleeca);
-}
-
-.maze .log__header:focus .log__type {
-    color: var(--color-maze);
-}
-
-.fleeca .log__header:focus .log__type {
     color: var(--color-fleeca);
 }
 
