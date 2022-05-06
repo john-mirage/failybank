@@ -257,6 +257,7 @@ accountAddForm.addEventListener("submit", (event) => {
             const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
             const accountPasteRow = createAccountPasteRow(account, true);
             createAccountDeleteRow(account, accountPasteRow, true);
+            activeAccount.accounts.push(account);
             accountAddForm.reset();
             handleSavedAccounts();
         }
@@ -268,14 +269,16 @@ depositForm.addEventListener("submit", (event) => {
     const amountFieldIsValid = checkAmountField(depositInput, depositMessage);
     if (amountFieldIsValid) {
         const amount = Number(depositInput.value);
-        createLogRow({
+        const log = {
             entity: "Dépot",
             date: getCurrentFormatedDate(),
             amount: amount,
             reference: "Dépot sur votre compte",
             type: "operation",
             icon: "bank",
-        }, true);
+        }
+        createLogRow(log, true);
+        activeAccount.logs.push(log);
         activeAccount.balance += amount;
         displayBalance(activeAccount.balance);
         depositForm.reset();
@@ -288,14 +291,16 @@ withdrawForm.addEventListener("submit", (event) => {
     const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(withdrawInput, withdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
         const amount = Number(withdrawInput.value);
-        createLogRow({
+        const log = {
             entity: "Retrait",
             date: getCurrentFormatedDate(),
             amount: -amount,
             reference: "Retrait depuis votre compte",
             type: "operation",
             icon: "bank",
-        }, true);
+        }
+        createLogRow(log, true);
+        activeAccount.logs.push(log);
         activeAccount.balance -= amount;
         displayBalance(activeAccount.balance);
         withdrawForm.reset();
@@ -310,14 +315,16 @@ transferForm.addEventListener("submit", (event) => {
     const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
     if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
         const amount = Number(transferAmountInput.value);
-        createLogRow({
+        const log = {
             entity: "Transfert",
             date: getCurrentFormatedDate(),
             amount: -amount,
             reference: transferReferenceInput.value,
             type: "transfert",
             icon: "bank",
-        }, true);
+        }
+        createLogRow(log, true);
+        activeAccount.logs.push(log);
         activeAccount.balance -= amount;
         displayBalance(activeAccount.balance);
         transferForm.reset();
@@ -395,9 +402,11 @@ function handleSavedAccounts() {
     if (accountLength >= 5) {
         if (accountAddButton.classList.contains("button--primary")) {
             accountAddButton.classList.replace("button--primary", "button--disabled");
+            accountAddButton.setAttribute("disabled", "");
         }
     } else if (accountAddButton.classList.contains("button--disabled")) {
         accountAddButton.classList.replace("button--disabled", "button--primary");
+        accountAddButton.removeAttribute("disabled");
     }
 }
 

@@ -14,10 +14,11 @@
     --color-icon-bg: #f1f3f5;
     --color-button-secondary: #e9ecef;
     --color-toggle-button-track: #e9ecef;
+    --color-toggle-button-track-focus: #ced4da;
     --color-toggle-button-icon: #9299A0;
     --color-toggle-button-icon-active: #f59f00;
     --color-up: #20c997;
-    --color-down: #f06595;
+    --color-down: #d6336c;
     --color-fleeca: #40c057;
     --color-maze: #ff6b6b;
 }
@@ -35,10 +36,11 @@
     --color-icon-bg: #272B30;
     --color-button-secondary: #272B30;
     --color-toggle-button-track: #383D43;
+    --color-toggle-button-track-focus: #495057;
     --color-toggle-button-icon: #868E96;
     --color-toggle-button-icon-active: #fcc419;
     --color-up: #0ca678;
-    --color-down: #d6336c;
+    --color-down: #f06595;
     --color-fleeca: #37b24d;
     --color-maze: #c92a2a;
 }
@@ -304,6 +306,10 @@ html {
     cursor: pointer;
 }
 
+.toggle-button__input:focus {
+    outline: none;
+}
+
 .toggle-button__icon {
     box-sizing: border-box;
     width: 16px;
@@ -335,6 +341,10 @@ html {
     margin-right: 12px;
     border-radius: 9999px;
     background-color: var(--color-toggle-button-track);
+}
+
+.toggle-button__input:focus ~ .toggle-button__track {
+    background-color: var(--color-toggle-button-track-focus);
 }
 
 .toggle-button__handle {
@@ -466,6 +476,86 @@ html {
 }
 
 /*------------------------------------*\
+  BUTTON
+\*------------------------------------*/
+.button {
+    box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.button--text {
+    display: block;
+    min-width: 168px;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.button--icon {
+    display: flex;
+    width: 48px;
+}
+
+.button__icon {
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    margin: auto;
+}
+
+.button--primary {
+    color: #ffffff;
+}
+
+.button--primary:focus {
+    outline-offset: 3px;
+}
+
+.maze .button--primary {
+    background-color: var(--color-maze);
+}
+
+.fleeca .button--primary {
+    background-color: var(--color-fleeca);
+}
+
+.maze .button--primary:focus {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .button--primary:focus {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.maze .button--secondary {
+    color: var(--color-maze);
+}
+
+.fleeca .button--secondary {
+    color: var(--color-fleeca);
+}
+
+.maze .button--secondary:focus {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .button--secondary:focus {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.button--disabled {
+    color: var(--color-text-alt);
+    background-color: var(--color-border);
+}
+
+/*------------------------------------*\
   PAPER
 \*------------------------------------*/
 .paper {
@@ -510,12 +600,15 @@ html {
 
 .paper__button {
     box-sizing: border-box;
+    display: none;
     position: absolute;
     z-index: 60;
     bottom: 16px;
     right: 16px;
-    width: auto;
-    height: auto;
+}
+
+.paper:hover .paper__button {
+    display: flex;
 }
 
 /*------------------------------------*\
@@ -763,6 +856,10 @@ html {
     background-color: var(--color-icon-bg);
 }
 
+.account__icon-button:focus {
+    outline: 2px solid var(--color-down);
+}
+
 .account__text-button {
     box-sizing: border-box;
     display: block;
@@ -783,6 +880,11 @@ html {
     letter-spacing: 0.6px;
     color: #fff;
     cursor: pointer;
+}
+
+.account__text-button:focus {
+    outline-offset: 3px;
+    outline: 2px solid var(--color-down);
 }
 
 .account__paste-icon {
@@ -830,6 +932,10 @@ html {
     height: auto;
     cursor: pointer;
     list-style: none;
+}
+
+.log__header:focus {
+    outline: none;
 }
 
 .log__body {
@@ -936,64 +1042,12 @@ html {
     color: var(--color-fleeca);
 }
 
-/*------------------------------------*\
-  BUTTON
-\*------------------------------------*/
-.button {
-    box-sizing: border-box;
-    height: 48px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-}
-
-.button--text {
-    display: block;
-    min-width: 168px;
-    padding-left: 24px;
-    padding-right: 24px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.button--icon {
-    display: flex;
-    width: 48px;
-}
-
-.button__icon {
-    box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    margin: auto;
-}
-
-.button--primary {
-    color: #ffffff;
-}
-
-.maze .button--primary {
-    background-color: var(--color-maze);
-}
-
-.fleeca .button--primary {
-    background-color: var(--color-fleeca);
-}
-
-.maze .button--secondary {
+.maze .log__header:focus .log__type {
     color: var(--color-maze);
 }
 
-.fleeca .button--secondary {
+.fleeca .log__header:focus .log__type {
     color: var(--color-fleeca);
-}
-
-.button--disabled {
-    color: var(--color-text-alt);
-    background-color: var(--color-border);
 }
 
 /*------------------------------------*\
@@ -1026,6 +1080,10 @@ html {
 
 .app--loaded > .app__container {
     display: block;
+}
+
+.paper:hover .button--hover {
+    display: flex;
 }
 
 .account__accordion[open] > .account__icon-button {
