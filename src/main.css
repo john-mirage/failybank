@@ -2,7 +2,6 @@
   GLOBALS
 \*------------------------------------*/
 :root {
-    --color-screen: #e9ecef;
     --color-bg: #F3F5F6;
     --color-fg: #ffffff;
     --color-text: #495057;
@@ -24,7 +23,6 @@
 }
 
 :root.dark {
-    --color-screen: #1A1B1E;
     --color-bg: #121417;
     --color-fg: #191C1F;
     --color-text: #CED4DA;
@@ -58,7 +56,14 @@ html {
     width: 100%;
     min-height: 100vh;
     margin: 0;
-    background: radial-gradient(#343a40, #212529);
+}
+
+.maze .screen {
+    background: radial-gradient(#ffa8a8, #c92a2a);
+}
+
+.fleeca .screen {
+    background: radial-gradient(#8ce99a, #2b8a3e);
 }
 
 /*------------------------------------*\
