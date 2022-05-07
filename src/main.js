@@ -42,22 +42,9 @@ const offshoreDepositInput = document.getElementById("offshore-deposit-input");
 const offshoreDepositMessage = document.getElementById("offshore-deposit-message");
 
 const appElement = document.getElementById("app");
-
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    signDisplay: "always",
-    maximumFractionDigits: 0
-});
-
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
-    dateStyle: "long",
-    timeStyle: "short",
-});
-
 document.documentElement.classList.add("fleeca");
 
-const account = new Account(data, currencyFormatter, dateTimeFormatter);
+const account = new Account(data);
 account.displayAccount();
 account.displayFavoriteAccounts();
 account.displayLogs();
