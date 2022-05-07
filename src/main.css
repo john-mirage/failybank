@@ -615,7 +615,7 @@ html {
     right: 16px;
 }
 
-.paper:hover .paper__button {
+.paper__button.paper__button--visible {
     display: flex;
 }
 
@@ -971,7 +971,7 @@ html {
     background-size: 24px;
 }
 
-.log__icon--person {
+.log__icon--transfer {
     background-image: url("/src/images/person.svg");
 }
 
@@ -979,7 +979,7 @@ html {
     background-image: url("/src/images/police.svg");
 }
 
-.log__icon--bank {
+.log__icon--operation {
     background-image: url("/src/images/bank.svg");
 }
 

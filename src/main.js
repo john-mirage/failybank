@@ -1,19 +1,13 @@
 import data from "./data";
+import Account from "./script/account";
 
 // Account elements
-const accountName = document.getElementById("account-name");
-const accountNumber = document.getElementById("account-number");
 const accountAddForm = document.getElementById("account-add-form");
 const accountAddNameInput = document.getElementById("account-add-name-input");
 const accountAddNameMessage = document.getElementById("account-add-name-message");
 const accountAddNumberInput = document.getElementById("account-add-number-input");
 const accountAddNumberMessage = document.getElementById("account-add-number-message");
 const accountDeleteTable = document.getElementById("account-delete-table");
-const accountDeleteTemplate = document.getElementById("account-delete-template");
-const accountPasteTable = document.getElementById("account-paste-table");
-const accountPasteTemplate = document.getElementById("account-paste-template");
-const accountAddButton = document.getElementById("account-add-button");
-const savedAccounts = document.getElementById("saved-accounts");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -35,7 +29,6 @@ const transferReferenceInput = document.getElementById("transfer-reference-input
 const transferReferenceMessage = document.getElementById("transfer-reference-message");
 
 // Enterprise elements
-const enterpriseTab = document.getElementById("tab-enterprise");
 const enterpriseDepositForm = document.getElementById("enterprise-deposit-form");
 const enterpriseDepositInput = document.getElementById("enterprise-deposit-input");
 const enterpriseDepositMessage = document.getElementById("enterprise-deposit-message");
@@ -44,18 +37,13 @@ const enterpriseWithdrawInput = document.getElementById("enterprise-withdraw-inp
 const enterpriseWithdrawMessage = document.getElementById("enterprise-withdraw-message");
 
 // Offshore elements
-const offshoreTab = document.getElementById("tab-offshore");
 const offshoreDepositForm = document.getElementById("offshore-deposit-form");
 const offshoreDepositInput = document.getElementById("offshore-deposit-input");
 const offshoreDepositMessage = document.getElementById("offshore-deposit-message");
 
-const balanceText = document.getElementById("balance");
-const globalLogTable = document.getElementById("global-log-table");
-const operationLogTable = document.getElementById("operation-log-table");
-const globalLogTemplate = document.getElementById("log-template");
 const appElement = document.getElementById("app");
 
-const numberFormatter = new Intl.NumberFormat("en-US", {
+const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     signDisplay: "always",
@@ -67,12 +55,19 @@ const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
     timeStyle: "short",
 });
 
+document.documentElement.classList.add("fleeca");
+
+const account = new Account(data, currencyFormatter, dateTimeFormatter);
+account.displayAccount();
+account.displayFavoriteAccounts();
+account.displayLogs();
+
 /**
- * Get the current formatted date in ISO format.
+ * Get the current date in ISO format.
  *
- * @returns {string}
+ * @return {string} - The current ISO date.
  */
-function getCurrentFormatedDate() {
+function getCurrentDate() {
     const date = new Date();
     return date.toISOString();
 }
@@ -157,7 +152,7 @@ function checkAmountField(input, message) {
  */
 function checkWithdrawAmount(input, message) {
     const amount = Number(input.value);
-    if (activeAccount.balance < amount) {
+    if (account.balance < amount) {
         message.textContent = "Vous n'avez pas les fonds nécessaires";
         return false;
     }
@@ -186,114 +181,179 @@ function checkReferenceField(input, message) {
     return true;
 }
 
-accountAddForm.addEventListener("submit", (event) => {
+/**
+ * Handle account add form.
+ *
+ * @param event - The event.
+ */
+function handleAccountAddForm(event) {
     event.preventDefault();
     const savedAccountNumberIsValid = accountDeleteTable.children.length < 5;
     if (savedAccountNumberIsValid) {
         const accountNameFieldIsValid = checkAccountNameField(accountAddNameInput, accountAddNameMessage);
         const accountNumberFieldIsValid = checkAccountNumberField(accountAddNumberInput, accountAddNumberMessage);
         if (accountNameFieldIsValid && accountNumberFieldIsValid) {
-            const account = { name: accountAddNameInput.value, code: accountAddNumberInput.value };
-            const accountPasteRow = createAccountPasteRow(account, true);
-            createAccountDeleteRow(account, accountPasteRow, true);
-            activeAccount.accounts.push(account);
-            accountAddForm.reset();
-            handleSavedAccounts();
+            const account = {
+                name: accountAddNameInput.value,
+                number: accountAddNumberInput.value
+            };
+            document.dispatchEvent(new CustomEvent("add-favorite-account", { detail: { account } }));
         }
     }
-});
+}
 
-depositForm.addEventListener("submit", (event) => {
+/**
+ * Handle deposit form.
+ *
+ * @param event - The event.
+ */
+function handleDepositForm(event) {
     event.preventDefault();
     const amountFieldIsValid = checkAmountField(depositInput, depositMessage);
     if (amountFieldIsValid) {
         const amount = Number(depositInput.value);
         const log = {
-            entity: "Dépot",
-            date: getCurrentFormatedDate(),
-            amount: amount,
+            label: "Dépot",
+            amount,
+            date: getCurrentDate(),
             reference: "Dépot sur votre compte",
             type: "operation",
-            icon: "bank",
         }
-        createLogRow(log, true);
-        activeAccount.logs.push(log);
-        activeAccount.balance += amount;
-        displayBalance(activeAccount.balance);
+        document.dispatchEvent(new CustomEvent("add-global-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("add-operation-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-balance", { detail: { amount } }));
         depositForm.reset();
     }
-});
+}
 
-withdrawForm.addEventListener("submit", (event) => {
+/**
+ * Handle withdraw form.
+ *
+ * @param event - The event.
+ */
+function handleWithdrawForm(event) {
     event.preventDefault();
     const withdrawFieldIsValid = checkAmountField(withdrawInput, withdrawMessage);
     const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(withdrawInput, withdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
-        const amount = Number(withdrawInput.value);
+        const amount = Number(`-${withdrawInput.value}`);
         const log = {
-            entity: "Retrait",
-            date: getCurrentFormatedDate(),
-            amount: -amount,
+            label: "Retrait",
+            amount,
+            date: getCurrentDate(),
             reference: "Retrait depuis votre compte",
             type: "operation",
-            icon: "bank",
         }
-        createLogRow(log, true);
-        activeAccount.logs.push(log);
-        activeAccount.balance -= amount;
-        displayBalance(activeAccount.balance);
+        document.dispatchEvent(new CustomEvent("add-global-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("add-operation-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-balance", { detail: { amount } }));
         withdrawForm.reset();
     }
-});
+}
 
-transferForm.addEventListener("submit", (event) => {
+/**
+ * Handle transfer form.
+ *
+ * @param event - The event.
+ */
+function handleTransferForm(event) {
     event.preventDefault();
     const transferAmountFieldIsValid = checkAmountField(transferAmountInput, transferAmountMessage);
     const transferAmountIsValid = transferAmountFieldIsValid ? checkWithdrawAmount(transferAmountInput, transferAmountMessage) : false;
     const transferAccountFieldIsValid = checkAccountNumberField(transferAccountNumberInput, transferAccountNumberMessage);
     const transferReferenceFieldIsValid = checkReferenceField(transferReferenceInput, transferReferenceMessage);
     if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
-        const amount = Number(transferAmountInput.value);
+        const amount = Number(`-${transferAmountInput.value}`);
         const log = {
-            entity: "Transfert",
-            date: getCurrentFormatedDate(),
-            amount: -amount,
+            label: "Transfert",
+            amount,
+            date: getCurrentDate(),
             reference: transferReferenceInput.value,
-            type: "transfert",
-            icon: "bank",
+            type: "transfer",
         }
-        createLogRow(log, true);
-        activeAccount.logs.push(log);
-        activeAccount.balance -= amount;
-        displayBalance(activeAccount.balance);
+        document.dispatchEvent(new CustomEvent("add-global-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-balance", { detail: { amount } }));
         transferForm.reset();
     }
-});
+}
 
-enterpriseDepositForm.addEventListener("submit", (event) => {
+/**
+ * Handle enterprise deposit form.
+ *
+ * @param event - The event.
+ */
+function handleEnterpriseDepositForm(event) {
     event.preventDefault();
     const amountFieldIsValid = checkAmountField(enterpriseDepositInput, enterpriseDepositMessage);
     if (amountFieldIsValid) {
+        const amount = Number(enterpriseDepositInput.value);
+        const log = {
+            label: "Dépot",
+            amount,
+            date: getCurrentDate(),
+            reference: "Dépot sur le compte",
+            type: "enterprise",
+        }
+        document.dispatchEvent(new CustomEvent("add-enterprise-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-enterprise-balance", { detail: { amount } }));
         enterpriseDepositForm.reset();
     }
-});
+}
 
-enterpriseWithdrawForm.addEventListener("submit", (event) => {
+/**
+ * Handle enterprise withdraw form.
+ *
+ * @param event - The event.
+ */
+function handleEnterpriseWithdrawForm(event) {
     event.preventDefault();
     const withdrawFieldIsValid = checkAmountField(enterpriseWithdrawInput, enterpriseWithdrawMessage);
     const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(enterpriseWithdrawInput, enterpriseWithdrawMessage) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
+        const amount = Number(`-${enterpriseWithdrawInput.value}`);
+        const log = {
+            label: "Retrait",
+            amount,
+            date: getCurrentDate(),
+            reference: "Retrait depuis le compte",
+            type: "enterprise",
+        }
+        document.dispatchEvent(new CustomEvent("add-enterprise-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-enterprise-balance", { detail: { amount } }));
         enterpriseWithdrawForm.reset();
     }
-});
+}
 
-offshoreDepositForm.addEventListener("submit", (event) => {
+/**
+ * Handle offshore deposit form.
+ *
+ * @param event - The event.
+ */
+function handleOffshoreDepositForm(event) {
     event.preventDefault();
     const amountFieldIsValid = checkAmountField(offshoreDepositInput, offshoreDepositMessage);
     if (amountFieldIsValid) {
+        const amount = Number(offshoreDepositInput.value);
+        const log = {
+            label: "Dépot",
+            amount,
+            date: getCurrentDate(),
+            reference: "Dépot sur le compte",
+            type: "offshore",
+        }
+        document.dispatchEvent(new CustomEvent("add-offshore-log", { detail: { log } }));
+        document.dispatchEvent(new CustomEvent("update-offshore-balance", { detail: { amount } }));
         offshoreDepositForm.reset();
     }
-});
+}
+
+accountAddForm.addEventListener("submit", handleAccountAddForm);
+depositForm.addEventListener("submit", handleDepositForm);
+withdrawForm.addEventListener("submit", handleWithdrawForm);
+transferForm.addEventListener("submit", handleTransferForm);
+enterpriseDepositForm.addEventListener("submit", handleEnterpriseDepositForm);
+enterpriseWithdrawForm.addEventListener("submit", handleEnterpriseWithdrawForm);
+offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
 
 setTimeout(() => {
     appElement.classList.replace("app--loading", "app--loaded");
