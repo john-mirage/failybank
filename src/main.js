@@ -68,114 +68,21 @@ const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
 });
 
 /**
- * Current state of the account.
+ * Get the current formatted date in ISO format.
+ *
+ * @returns {string}
  */
-let activeAccount = {};
-
-let page = 1;
-let pageNumber = 0;
-
-let observer = new IntersectionObserver(handlePagination);
-let observedElement = false;
-
-const LOGS_PER_PAGES = 10;
-
-/**
- * Balance
- */
-function displayBalance(newBalance) {
-    if (newBalance < 1) {
-        if (!balanceText.classList.contains("balance__value--negative")) {
-            balanceText.classList.add("balance__value--negative");
-        }
-    } else {
-        if (balanceText.classList.contains("balance__value--negative")) {
-            balanceText.classList.remove("balance__value--negative");
-        }
-    }
-    balanceText.textContent = numberFormatter.format(newBalance);
-}
-
-/**
- * Log manager
- */
-
 function getCurrentFormatedDate() {
     const date = new Date();
     return date.toISOString();
 }
 
-function createLogRow(log, prepend = false, observe = false) {
-    const logTemplate = globalLogTemplate.content.cloneNode(true);
-    const logRow = logTemplate.querySelector(".log");
-    const logIcon = logRow.querySelector(".log__icon");
-    const logType = logRow.querySelector(".log__type");
-    const logDate = logRow.querySelector(".log__date");
-    const logAmount = logRow.querySelector(".log__amount");
-    const logReference = logRow.querySelector(".log__reference");
-    logIcon.classList.add(`log__icon--${log.icon}`);
-    logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
-    logType.textContent = log.entity;
-    const date = new Date(log.date);
-    logDate.textContent = dateTimeFormatter.format(date);
-    logAmount.textContent = numberFormatter.format(log.amount);
-    logReference.textContent = log.reference;
-    if (prepend) {
-        globalLogTable.prepend(logTemplate);
-    } else {
-        globalLogTable.appendChild(logTemplate);
-    }
-    if (observe) {
-        observedElement = logRow;
-        observer.observe(logRow);
-    }
-}
-
 /**
- * Account Manager
- */
-function createAccountDeleteRow(account, pasteRow, prepend = false) {
-    const deleteTemplate = accountDeleteTemplate.content.cloneNode(true);
-    const deleteRow = deleteTemplate.querySelector(".account");
-    const deleteName = deleteRow.querySelector(".account__name");
-    const deleteCode = deleteRow.querySelector(".account__number");
-    const deleteButton = deleteRow.querySelector(".account__text-button");
-    deleteName.textContent = account.name;
-    deleteCode.textContent = account.code;
-    deleteButton.addEventListener("click", () => {
-        accountDeleteTable.removeChild(deleteRow);
-        accountPasteTable.removeChild(pasteRow);
-        handleSavedAccounts();
-    }, { once: true });
-    if (prepend) {
-        accountDeleteTable.prepend(deleteTemplate);
-    } else {
-        accountDeleteTable.appendChild(deleteTemplate);
-    }
-}
-
-function createAccountPasteRow(account, prepend = false) {
-    const pasteTemplate = accountPasteTemplate.content.cloneNode(true);
-    const pasteRow = pasteTemplate.querySelector(".account");
-    const pasteName = pasteRow.querySelector(".account__name");
-    const pasteCode = pasteRow.querySelector(".account__number");
-    pasteName.textContent = account.name;
-    pasteCode.textContent = account.code;
-    pasteRow.addEventListener("click", () => {
-        if (transferAccountNumberInput.value !== account.code) {
-            transferAccountNumberInput.value = account.code;
-        }
-    });
-    if (prepend) {
-        accountPasteTable.prepend(pasteTemplate);
-    } else {
-        accountPasteTable.appendChild(pasteTemplate);
-    }
-    return pasteRow;
-}
-
-/**
- * Form manager
+ * Check account name input.
+ *
+ * @param input
+ * @param message
+ * @returns {boolean}
  */
 function checkAccountNameField(input, message) {
     if (!input.validity.valid) {
@@ -192,6 +99,13 @@ function checkAccountNameField(input, message) {
     return true;
 }
 
+/**
+ * Check account number input.
+ *
+ * @param input
+ * @param message
+ * @returns {boolean}
+ */
 function checkAccountNumberField(input, message) {
     if (!input.validity.valid) {
         if (input.validity.valueMissing) {
@@ -209,6 +123,13 @@ function checkAccountNumberField(input, message) {
     return true;
 }
 
+/**
+ * Check amount input.
+ *
+ * @param input
+ * @param message
+ * @returns {boolean}
+ */
 function checkAmountField(input, message) {
     if (!input.validity.valid) {
         if (input.validity.valueMissing) {
@@ -227,6 +148,13 @@ function checkAmountField(input, message) {
     return true;
 }
 
+/**
+ * Check withdraw amount input.
+ *
+ * @param input
+ * @param message
+ * @returns {boolean}
+ */
 function checkWithdrawAmount(input, message) {
     const amount = Number(input.value);
     if (activeAccount.balance < amount) {
@@ -236,6 +164,13 @@ function checkWithdrawAmount(input, message) {
     return true;
 }
 
+/**
+ * Check reference input.
+ *
+ * @param input
+ * @param message
+ * @returns {boolean}
+ */
 function checkReferenceField(input, message) {
     if (!input.validity.valid) {
         if (input.validity.valueMissing) {
@@ -360,105 +295,6 @@ offshoreDepositForm.addEventListener("submit", (event) => {
     }
 });
 
-function handlePagination(entries) {
-    if (entries[0].isIntersecting) {
-        console.log("Handle pagination")
-        page += 1;
-        generateLogs();
-    }
-}
-
-function calculatePageNumber() {
-    const logNumber = activeAccount.logs.length;
-    pageNumber = Math.ceil(logNumber / LOGS_PER_PAGES);
-}
-
-function getPageLogs() {
-    return activeAccount.logs.slice(LOGS_PER_PAGES * (page - 1), LOGS_PER_PAGES * page);
-}
-
-function generateLogs() {
-    const logs = getPageLogs();
-    if (observedElement) {
-        console.log("Unobserve element")
-        observer.unobserve(observedElement);
-        observedElement = false;
-    }
-    logs.forEach((log, logIndex) => {
-        if (logIndex === logs.length - 1 && page < pageNumber) {
-            createLogRow(log, false, true);
-        } else {
-            createLogRow(log);
-        }
-    });
-}
-
-/**
- * Init
- */
-const darkModeToggle = document.getElementById("dark-mode-toggle");
-
-function initAccount(account) {
-    setTimeout(() => {
-        appElement.classList.replace("app--loading", "app--loaded");
-    }, 1000);
-    activeAccount = {...account};
-    document.documentElement.classList.add(activeAccount.bank);
-    if (activeAccount.darkMode) {
-        darkModeToggle.checked = true;
-        document.documentElement.classList.add("dark");
-    }
-    if (activeAccount.hasEnterprise) {
-        enterpriseTab.classList.remove("tab-list__item--hidden");
-        if (activeAccount.hasOffShore) {
-            offshoreTab.classList.remove("icon--hidden");
-        }
-    }
-    displayBalance(activeAccount.balance);
-    accountName.textContent = activeAccount.name;
-    accountNumber.textContent = activeAccount.number;
-    calculatePageNumber();
-    generateLogs();
-    activeAccount.accounts.forEach((savedAccount) => {
-        const accountPasteRow = createAccountPasteRow(savedAccount);
-        createAccountDeleteRow(savedAccount, accountPasteRow);
-    });
-    handleSavedAccounts();
-}
-
-/**
- * POVERS: Move this part in your script.
- */
-initAccount(data);
-
-/**
- * Add button state
- */
-function handleSavedAccounts() {
-    const accountLength = accountDeleteTable.children.length;
-    savedAccounts.textContent = `[${String(accountLength)}/5]`;
-    if (accountLength >= 5) {
-        if (accountAddButton.classList.contains("button--primary")) {
-            accountAddButton.classList.replace("button--primary", "button--disabled");
-            accountAddButton.setAttribute("disabled", "");
-        }
-    } else if (accountAddButton.classList.contains("button--disabled")) {
-        accountAddButton.classList.replace("button--disabled", "button--primary");
-        accountAddButton.removeAttribute("disabled");
-    }
-}
-
-/**
- * Dark mode
- */
-darkModeToggle.addEventListener("change", (event) => {
-    if (event.target.checked) {
-        if (!document.documentElement.classList.contains("dark")) {
-            document.documentElement.classList.add("dark");
-        }
-    } else {
-        if (document.documentElement.classList.contains("dark")) {
-            document.documentElement.classList.remove("dark");
-        }
-    }
-});
+setTimeout(() => {
+    appElement.classList.replace("app--loading", "app--loaded");
+}, 1000);

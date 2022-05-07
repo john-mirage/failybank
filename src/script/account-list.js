@@ -77,4 +77,18 @@ class AccountList {
       this.createDeleteAccount(account, accountPasteRow);
     });
   }
+
+  handleFavoriteAccounts() {
+    const accountLength = accountDeleteTable.children.length;
+    savedAccounts.textContent = `[${String(accountLength)}/5]`;
+    if (accountLength >= 5) {
+      if (accountAddButton.classList.contains("button--primary")) {
+        accountAddButton.classList.replace("button--primary", "button--disabled");
+        accountAddButton.setAttribute("disabled", "");
+      }
+    } else if (accountAddButton.classList.contains("button--disabled")) {
+      accountAddButton.classList.replace("button--disabled", "button--primary");
+      accountAddButton.removeAttribute("disabled");
+    }
+  }
 }
