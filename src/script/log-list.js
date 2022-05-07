@@ -1,15 +1,4 @@
 /**
- * Date time formatter.
- * Used to format log ISO dates.
- *
- * @type {Intl.DateTimeFormat}
- */
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
-  dateStyle: "long",
-  timeStyle: "short",
-});
-
-/**
  * Log template element.
  * Used as a template for the logs.
  *
@@ -38,17 +27,41 @@ class LogList {
    * @param logList
    * @param logs
    * @param currencyFormatter
+   * @param dateTimeFormatter
+   * @param acceptedLogTypes
    */
-  constructor(logList, logs, currencyFormatter) {
+  constructor(
+    logList,
+    logs,
+    currencyFormatter,
+    dateTimeFormatter,
+    acceptedLogTypes
+  ) {
     this.logList = logList;
     this.logs = logs;
     this.currencyFormatter = currencyFormatter;
+    this.dateTimeFormatter = dateTimeFormatter;
+    this.acceptedLogTypes = acceptedLogTypes;
     this.page = 1;
     this.observer = new IntersectionObserver(this.getNextPage);
     this.observedLog = false;
     this.getPageNumber();
     this.getPageLogs();
     this.createPageLogs();
+    document.addEventListener("add-log", this.addLog);
+  }
+
+  /**
+   * Add a new log if the type is accepted.
+   *
+   * @param event
+   */
+  addLog(event) {
+    const log = event.detail.log;
+    if (this.acceptedLogTypes.includes(log.type)) {
+      this.logs.unshift(log);
+      this.reset();
+    }
   }
 
   /**
@@ -73,7 +86,7 @@ class LogList {
     logIcon.classList.add(`log__icon--${log.icon}`);
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
     logType.textContent = log.entity;
-    logDate.textContent = dateTimeFormatter.format(new Date(log.date));
+    logDate.textContent = this.dateTimeFormatter.format(new Date(log.date));
     logAmount.textContent = this.currencyFormatter.format(log.amount);
     logReference.textContent = log.reference;
     if (prepend) {
