@@ -8,6 +8,18 @@ const accountNumber = document.getElementById("account-number");
 const enterpriseTab = document.getElementById("tab-enterprise");
 const offshoreTab = document.getElementById("tab-offshore");
 
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  signDisplay: "always",
+  maximumFractionDigits: 0
+});
+
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
+  dateStyle: "long",
+  timeStyle: "short",
+});
+
 /**
  * @class Account
  */
@@ -16,10 +28,8 @@ class Account {
   /**
    * @constructor
    * @param account - The account data.
-   * @param currencyFormatter - The currency formatter used to display balance.
-   * @param dateTimeFormatter - The date time formatter used to display dates.
    */
-  constructor(account, currencyFormatter, dateTimeFormatter) {
+  constructor(account) {
     this.name = account.name;
     this.number = account.number;
     this.balance = account.balance;
@@ -28,15 +38,9 @@ class Account {
     this.hasEnterprise = account.hasEnterprise;
     if (this.hasEnterprise) this.enterpriseLogs = account.enterprise.logs;
     this.hasOffshore = account.hasOffshore;
-    this.dateTimeFormatter = dateTimeFormatter;
-    this.currencyFormatter = currencyFormatter;
     this.theme = account.theme;
-    themeSwitchButton.addEventListener("change", (event) => {
-      this.handleTheme(event);
-    });
-    document.addEventListener("update-balance", (event) => {
-      this.handleBalance(event);
-    });
+    themeSwitchButton.addEventListener("change", (event) => { this.handleTheme(event); });
+    document.addEventListener("update-balance", (event) => { this.handleBalance(event); });
   }
 
   handleBalance(event) {
@@ -69,7 +73,7 @@ class Account {
         balanceText.classList.remove("balance__value--negative");
       }
     }
-    balanceText.textContent = this.currencyFormatter.format(this.balance);
+    balanceText.textContent = currencyFormatter.format(this.balance);
   }
 
   displayEnterpriseTab() {
@@ -105,23 +109,23 @@ class Account {
     const globalLogList = new LogList(
       document.getElementById("global-log-list"),
       this.logs,
-      this.currencyFormatter,
-      this.dateTimeFormatter,
+      currencyFormatter,
+      dateTimeFormatter,
       "add-global-log"
     );
     const operationLogList = new LogList(
       document.getElementById("operation-log-list"),
       this.logs.filter((log) => log.type === "operation"),
-      this.currencyFormatter,
-      this.dateTimeFormatter,
+      currencyFormatter,
+      dateTimeFormatter,
       "add-operation-log"
     );
     if (this.hasEnterprise) {
       const enterpriseLogList = new LogList(
         document.getElementById("enterprise-log-list"),
         this.enterpriseLogs,
-        this.currencyFormatter,
-        this.dateTimeFormatter,
+        currencyFormatter,
+        dateTimeFormatter,
         "add-enterprise-log"
       );
     }
