@@ -1,3 +1,11 @@
+const deleteAccountList = document.getElementById("account-delete-table");
+const pasteAccountList = document.getElementById("account-paste-table");
+const accountDeleteTemplate = document.getElementById("account-delete-template");
+const accountPasteTemplate = document.getElementById("account-paste-template");
+const accountAddButton = document.getElementById("account-add-button");
+const savedAccounts = document.getElementById("saved-accounts");
+const transferAccountNumberInput = document.getElementById("transfer-account-number-input");
+
 /**
  * Create a new account list.
  *
@@ -6,82 +14,125 @@
 class AccountList {
 
   /**
-   *
-   * @param accountList
-   * @param accounts
+   * @constructor
+   * @param favoriteAccounts
    */
-  constructor(accounts) {
-    this.accounts = accounts;
-    this.createAccounts();
+  constructor(favoriteAccounts) {
+    this.favoriteAccounts = favoriteAccounts;
+    document.addEventListener("add-favorite-account", (event) => {
+      const lessThanFiveAccounts = this.favoriteAccounts.length < 5;
+      if (lessThanFiveAccounts) {
+        const account = event.detail.account;
+        this.addFavoriteAccount(account);
+      }
+    });
   }
 
   /**
+   * Ad a favorite account.
    *
+   * @param account - The account to add.
    */
-  createDeleteAccount(account, deleteAccountRow) {
-    const deleteTemplate = accountDeleteTemplate.content.cloneNode(true);
-    const deleteRow = deleteTemplate.querySelector(".account");
+  addFavoriteAccount(account) {
+    this.favoriteAccounts.unshift(account);
+    this.displayAccountRow(account, true);
+    this.updateAddButton();
+  }
+
+  /**
+   * Delete a favorite account.
+   *
+   * @param account - The account to delete.
+   * @param deleteRow - The corresponding delete row on the DOM.
+   * @param pasteRow - The corresponding paste row on the DOM.
+   */
+  deleteFavoriteAccount(account, deleteRow, pasteRow) {
+    document.dispatchEvent(new CustomEvent("delete-favorite-account", { detail: { account } }));
+    this.favoriteAccounts = this.favoriteAccounts.filter((favoriteAccount) => account.number !== favoriteAccount.number);
+    deleteAccountList.removeChild(deleteRow);
+    pasteAccountList.removeChild(pasteRow);
+  }
+
+  /**
+   * Create delete account row in the list.
+   *
+   * @param account - The account to add to the DOM.
+   * @param pasteRow - The paste account row to delete when deleting the account delete row.
+   * @param prepend - Indicates that the account delete row should be added before the other rows.
+   */
+  createDeleteAccountRow(account, pasteRow, prepend = false) {
+    const deleteFragment = accountDeleteTemplate.content.cloneNode(true);
+    const deleteRow = deleteFragment.querySelector(".account");
     const deleteName = deleteRow.querySelector(".account__name");
     const deleteCode = deleteRow.querySelector(".account__number");
     const deleteButton = deleteRow.querySelector(".account__text-button");
     deleteName.textContent = account.name;
-    deleteCode.textContent = account.code;
+    deleteCode.textContent = account.number;
     deleteButton.addEventListener("click", () => {
-      accountDeleteTable.removeChild(deleteRow);
-      accountPasteTable.removeChild(pasteRow);
-      handleSavedAccounts();
+      this.deleteFavoriteAccount(account, deleteRow, pasteRow);
+      this.updateAddButton();
     }, { once: true });
     if (prepend) {
-      accountDeleteTable.prepend(deleteTemplate);
+      deleteAccountList.prepend(deleteFragment);
     } else {
-      accountDeleteTable.appendChild(deleteTemplate);
+      deleteAccountList.appendChild(deleteFragment);
     }
   }
 
   /**
+   * Create paste account row.
    *
-   * @returns HTMLElement
+   * @param newAccount - The new account to add.
+   * @param prepend - Indicates that the account paste row should be added before the other rows.
+   * @return HTMLElement - The account paste row (used as delete reference).
    */
-  createPasteAccount(account) {
+  createPasteAccountRow(newAccount, prepend = false) {
     const pasteTemplate = accountPasteTemplate.content.cloneNode(true);
     const pasteRow = pasteTemplate.querySelector(".account");
     const pasteName = pasteRow.querySelector(".account__name");
     const pasteCode = pasteRow.querySelector(".account__number");
-    pasteName.textContent = account.name;
-    pasteCode.textContent = account.code;
+    pasteName.textContent = newAccount.name;
+    pasteCode.textContent = newAccount.number;
     pasteRow.addEventListener("click", () => {
-      if (transferAccountNumberInput.value !== account.code) {
-        transferAccountNumberInput.value = account.code;
+      if (transferAccountNumberInput.value !== newAccount.number) {
+        transferAccountNumberInput.value = newAccount.number;
       }
     });
     if (prepend) {
-      accountPasteTable.prepend(pasteTemplate);
+      pasteAccountList.prepend(pasteTemplate);
     } else {
-      accountPasteTable.appendChild(pasteTemplate);
+      pasteAccountList.appendChild(pasteTemplate);
     }
     return pasteRow;
   }
 
-  deleteAccount(deleteAccountRow, pasteAccountRow) {
-    accountDeleteList.removeChild(deleteAccountRow);
-    accountPasteList.removeChild(pasteAccountRow);
-    handleSavedAccounts();
+  /**
+   * Create favorite account.
+   *
+   * @param newAccount - The new account to create.
+   * @param prepend - Indicates that the account paste row should be added before the other rows.
+   */
+  displayAccountRow(newAccount, prepend = false) {
+    const accountPasteRow = this.createPasteAccountRow(newAccount, prepend);
+    this.createDeleteAccountRow(newAccount, accountPasteRow, prepend);
   }
 
   /**
-   *
+   * Create favorite accounts.
    */
-  createAccounts() {
-    this.accounts.forEach((account) => {
-      const accountPasteRow = this.createPasteAccount(account);
-      this.createDeleteAccount(account, accountPasteRow);
+  displayAllAccountRows() {
+    this.favoriteAccounts.forEach((favoriteAccount) => {
+      this.displayAccountRow(favoriteAccount);
     });
   }
 
-  handleFavoriteAccounts() {
-    const accountLength = accountDeleteTable.children.length;
-    savedAccounts.textContent = `[${String(accountLength)}/5]`;
-    if (accountLength >= 5) {
+  /**
+   * Handle add favorite account button.
+   */
+  updateAddButton() {
+    const numberOfAccounts = this.favoriteAccounts.length;
+    savedAccounts.textContent = `[${String(numberOfAccounts)}/5]`;
+    if (numberOfAccounts >= 5) {
       if (accountAddButton.classList.contains("button--primary")) {
         accountAddButton.classList.replace("button--primary", "button--disabled");
         accountAddButton.setAttribute("disabled", "");
@@ -92,3 +143,5 @@ class AccountList {
     }
   }
 }
+
+export default AccountList;

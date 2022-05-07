@@ -24,44 +24,44 @@ class LogList {
 
   /**
    * @constructor
-   * @param logList
-   * @param logs
-   * @param currencyFormatter
-   * @param dateTimeFormatter
-   * @param acceptedLogTypes
+   * @param logList - The log list HTML element.
+   * @param logs - The logs to display in the above list.
+   * @param currencyFormatter - The currency formatter used to format amounts.
+   * @param dateTimeFormatter - The date time formatter used to format dates.
+   * @param eventType - The event type used to listen for a new log.
    */
   constructor(
     logList,
     logs,
     currencyFormatter,
     dateTimeFormatter,
-    acceptedLogTypes
+    eventType,
   ) {
     this.logList = logList;
     this.logs = logs;
     this.currencyFormatter = currencyFormatter;
     this.dateTimeFormatter = dateTimeFormatter;
-    this.acceptedLogTypes = acceptedLogTypes;
     this.page = 1;
     this.observer = new IntersectionObserver(this.getNextPage);
     this.observedLog = false;
+    this.eventType = eventType;
     this.getPageNumber();
     this.getPageLogs();
     this.createPageLogs();
-    document.addEventListener("add-log", this.addLog);
+    document.addEventListener(this.eventType, (event) => {
+      const log = event.detail.log;
+      this.addLog(log);
+    });
   }
 
   /**
    * Add a new log if the type is accepted.
    *
-   * @param event
+   * @param log - The log to add.
    */
-  addLog(event) {
-    const log = event.detail.log;
-    if (this.acceptedLogTypes.includes(log.type)) {
-      this.logs.unshift(log);
-      this.reset();
-    }
+  addLog(log) {
+    this.logs.unshift(log);
+    this.reset();
   }
 
   /**
@@ -76,6 +76,7 @@ class LogList {
     prepend = false,
     observe = false
   ) {
+    console.log(log);
     const logFragment = logTemplate.content.cloneNode(true);
     const logRow = logFragment.querySelector(".log");
     const logIcon = logRow.querySelector(".log__icon");
@@ -83,9 +84,9 @@ class LogList {
     const logDate = logRow.querySelector(".log__date");
     const logAmount = logRow.querySelector(".log__amount");
     const logReference = logRow.querySelector(".log__reference");
-    logIcon.classList.add(`log__icon--${log.icon}`);
+    logIcon.classList.add(`log__icon--${log.type}`);
     logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
-    logType.textContent = log.entity;
+    logType.textContent = log.label;
     logDate.textContent = this.dateTimeFormatter.format(new Date(log.date));
     logAmount.textContent = this.currencyFormatter.format(log.amount);
     logReference.textContent = log.reference;
