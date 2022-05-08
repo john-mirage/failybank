@@ -29,7 +29,7 @@ class AccountList {
   }
 
   /**
-   * Ad a favorite account.
+   * Add a favorite account.
    *
    * @param account - The account to add.
    */
