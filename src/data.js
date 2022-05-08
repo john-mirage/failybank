@@ -11,7 +11,19 @@ const data = {
     {
       name: "Owen Chapman",
       number: "1234567890"
-    }
+    },
+    {
+      name: "Pamela Padilla",
+      number: "2345678901"
+    },
+    {
+      name: "Garry Green",
+      number: "3456789012"
+    },
+    {
+      name: "Quentin Cooper",
+      number: "4567890123"
+    },
   ],
   logs: [
     {
