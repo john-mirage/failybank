@@ -11,7 +11,7 @@ const logTemplate = document.getElementById("log-template");
  *
  * @type {number}
  */
-const LOGS_PER_PAGES = 15;
+const LOGS_PER_PAGES = 10;
 
 /**
  * Create a new log list.
@@ -20,29 +20,31 @@ const LOGS_PER_PAGES = 15;
  *
  * @Class LogList
  */
-class LogList {
+export class LogList {
 
   /**
    * @constructor
-   * @param logList - The log list HTML element.
    * @param logs - The logs to display in the above list.
+   * @param list - The log list HTML element.
    * @param currencyFormatter - The currency formatter used to format amounts.
    * @param dateTimeFormatter - The date time formatter used to format dates.
    * @param eventType - The event type used to listen for a new log.
    */
   constructor(
-    logList,
     logs,
+    list,
     currencyFormatter,
     dateTimeFormatter,
     eventType,
   ) {
-    this.logList = logList;
+    this.logList = list;
     this.logs = logs;
     this.currencyFormatter = currencyFormatter;
     this.dateTimeFormatter = dateTimeFormatter;
     this.page = 1;
-    this.observer = new IntersectionObserver(this.getNextPage);
+    this.observer = new IntersectionObserver((entries) => {
+      this.getNextPage(entries);
+    });
     this.observedLog = false;
     this.eventType = eventType;
     this.getPageNumber();
@@ -76,7 +78,6 @@ class LogList {
     prepend = false,
     observe = false
   ) {
-    console.log(log);
     const logFragment = logTemplate.content.cloneNode(true);
     const logRow = logFragment.querySelector(".log");
     const logIcon = logRow.querySelector(".log__icon");
@@ -128,6 +129,7 @@ class LogList {
   getNextPage(entries) {
     if (entries[0].isIntersecting) {
       this.page += 1;
+      this.getPageLogs();
       this.createPageLogs();
     }
   }
@@ -159,5 +161,3 @@ class LogList {
     this.createPageLogs();
   }
 }
-
-export default LogList;

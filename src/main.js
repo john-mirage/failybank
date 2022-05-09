@@ -1,5 +1,6 @@
 import account from "./data";
 import {DeleteAccountList, PasteAccountList} from "./script/account-list";
+import {LogList} from "./script/log-list";
 
 // Delete account list
 const deleteAccountList = document.getElementById("account-delete-list");
@@ -9,13 +10,16 @@ const deleteAccountTemplate = document.getElementById("account-delete-template")
 const pasteAccountList = document.getElementById("account-paste-list");
 const pasteAccountTemplate = document.getElementById("account-paste-template");
 
+// Log lists
+const accountLogList = document.getElementById("account-log-list");
+const accountOperationLogList = document.getElementById("account-operation-log-list");
+
 // Account elements
 const accountAddForm = document.getElementById("account-add-form");
 const accountAddNameInput = document.getElementById("account-add-name-input");
 const accountAddNameMessage = document.getElementById("account-add-name-message");
 const accountAddNumberInput = document.getElementById("account-add-number-input");
 const accountAddNumberMessage = document.getElementById("account-add-number-message");
-const accountDeleteTable = document.getElementById("account-delete-table");
 
 // Deposit elements
 const depositForm = document.getElementById("deposit-form");
@@ -52,6 +56,17 @@ const offshoreDepositMessage = document.getElementById("offshore-deposit-message
 const appElement = document.getElementById("app");
 document.documentElement.classList.add("fleeca");
 
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  signDisplay: "always",
+  maximumFractionDigits: 0
+});
+
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
+  dateStyle: "long",
+  timeStyle: "short",
+});
 
 function createDeleteAccountElement(account) {
   const accountFragment = deleteAccountTemplate.content.cloneNode(true);
@@ -94,6 +109,21 @@ new PasteAccountList(
   createPasteAccountElement
 );
 
+new LogList(
+  account.logs,
+  accountLogList,
+  currencyFormatter,
+  dateTimeFormatter,
+  "add-account-log"
+);
+
+new LogList(
+  account.logs.filter((log) => log.type === "operation"),
+  accountOperationLogList,
+  currencyFormatter,
+  dateTimeFormatter,
+  "add-account-operation-log"
+);
 
 /**
  * Get the current date in ISO format.
@@ -249,8 +279,8 @@ function handleDepositForm(event) {
       reference: "Dépot sur votre compte",
       type: "operation",
     }
-    document.dispatchEvent(new CustomEvent("add-global-log", {detail: {log}}));
-    document.dispatchEvent(new CustomEvent("add-operation-log", {detail: {log}}));
+    document.dispatchEvent(new CustomEvent("add-account-log", {detail: {log}}));
+    document.dispatchEvent(new CustomEvent("add-account-operation-log", {detail: {log}}));
     document.dispatchEvent(new CustomEvent("update-balance", {detail: {amount}}));
     depositForm.reset();
   }
@@ -274,8 +304,8 @@ function handleWithdrawForm(event) {
       reference: "Retrait depuis votre compte",
       type: "operation",
     }
-    document.dispatchEvent(new CustomEvent("add-global-log", {detail: {log}}));
-    document.dispatchEvent(new CustomEvent("add-operation-log", {detail: {log}}));
+    document.dispatchEvent(new CustomEvent("add-account-log", {detail: {log}}));
+    document.dispatchEvent(new CustomEvent("add-account-operation-log", {detail: {log}}));
     document.dispatchEvent(new CustomEvent("update-balance", {detail: {amount}}));
     withdrawForm.reset();
   }
@@ -301,7 +331,7 @@ function handleTransferForm(event) {
       reference: transferReferenceInput.value,
       type: "transfer",
     }
-    document.dispatchEvent(new CustomEvent("add-global-log", {detail: {log}}));
+    document.dispatchEvent(new CustomEvent("add-account-log", {detail: {log}}));
     document.dispatchEvent(new CustomEvent("update-balance", {detail: {amount}}));
     transferForm.reset();
   }

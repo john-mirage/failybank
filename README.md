@@ -14,7 +14,10 @@ document.addEventListener("event-name", (event) => {
 });
 ```
 
-| Event name                | Description                           | data      |
-|---------------------------|---------------------------------------|-----------|
-| `add-favorite-account`    | The user added a new favorite account | `account` |
-| `delete-favorite-account` | The user removed a favorite account   | `account` |
+| Event name                  | Description                                   | data      |
+|-----------------------------|-----------------------------------------------|-----------|
+| `add-favorite-account`      | The user added a new favorite account         | `account` |
+| `delete-favorite-account`   | The user removed a favorite account           | `account` |
+| `update-balance`            | The balance has been updated                  | dz        |
+| `add-account-log`           | A log has been added to the account           | `log`     |
+| `add-account-operation-log` | A operation log has been added to the account | `log`     |
