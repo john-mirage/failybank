@@ -1,4 +1,4 @@
-const data = {
+const oldData = {
   name: "Hubert Bonisseur de La Bath",
   number: "0123456789",
   balance: 2152800,
@@ -154,5 +154,31 @@ const data = {
     ],
   },
 };
+
+const data = {
+  bank: "fleeca",
+  hasEnterprise: true,
+  hasOffshore: true,
+  account: {
+    personal: {
+      owner: "Garry Green",
+      number: "0123456789",
+      balance: 48569,
+      theme: "dark",
+      favoriteAccounts: [],
+      logs: []
+    },
+    enterprise: {
+      owner: "Arthur Popov",
+      balance: 485321,
+      logs: []
+    },
+    offshore: {
+      owner: "Quentin Cooper",
+      balance: 4123547,
+      logs: []
+    }
+  }
+}
 
 export default data;
