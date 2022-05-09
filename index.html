@@ -63,7 +63,7 @@
                 <div class="bar__section bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
-                        <input class="toggle-button__input" id="dark-mode-toggle" type="checkbox">
+                        <input class="toggle-button__input" id="personal-theme-button" type="checkbox">
                         <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             fill="currentColor">
                             <path
@@ -109,18 +109,18 @@
                     </section>
                     <!-- Account add form -->
                     <section class="grid__section">
-                        <form class="form" id="account-add-form" novalidate>
+                        <form class="form" id="personal-favorite-account-form" novalidate>
                             <h2 class="form__title">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="account-add-name-input">Nom du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="account-number" required maxlength="40" id="account-add-name-input">
-                                    <p class="form__message" id="account-add-name-message"></p>
+                                    <label class="form__label" for="personal-favorite-account-name-input">Nom du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="personal-favorite-account-name" required maxlength="40" id="personal-favorite-account-name-input">
+                                    <p class="form__message" id="personal-favorite-account-name-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="account-add-number-input">Numéro du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="account-add-number-input">
-                                    <p class="form__message" id="account-add-number-message"></p>
+                                    <label class="form__label" for="personal-favorite-account-number-input">Numéro du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
+                                    <p class="form__message" id="personal-favorite-account-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="button button--icon button--primary" type="submit" id="account-add-button">
@@ -152,12 +152,12 @@
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
-                        <form class="form" id="deposit-form" novalidate>
+                        <form class="form" id="personal-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
-                                <p class="form__message" id="deposit-message"></p>
+                                <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="personal-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -180,12 +180,12 @@
                     </section>
                     <!-- Operation Withdraw form -->
                     <section class="grid__section">
-                        <form class="form" id="withdraw-form" novalidate>
+                        <form class="form" id="personal-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="withdraw-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
-                                <p class="form__message" id="withdraw-message"></p>
+                                <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
+                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <p class="form__message" id="personal-withdraw-amount-message"></p>
                             </div>
                             <button class="button button--text button--primary" type="submit">Retirer</button>
                         </form>
@@ -198,24 +198,24 @@
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
-                        <form class="form" id="transfer-form" novalidate>
+                        <form class="form" id="personal-transfer-form" novalidate>
                             <h2 class="form__title">Effectuer un transfert</h2>
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amount-input" required pattern="[0-9]+">
-                                    <p class="form__message" id="transfer-amount-message"></p>
+                                    <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
+                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="[0-9]+">
+                                    <p class="form__message" id="personal-transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-account-number-input">Numéro de compte du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-account-number" placeholder="Entrer le numéro de compte" id="transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
-                                    <p class="form__message" id="transfer-account-number-message"></p>
+                                    <label class="form__label" for="personal-transfer-account-number-input">Numéro de compte du déstinataire</label>
+                                    <input class="form__input" type="text" name="personal-transfer-account-number" placeholder="Entrer le numéro de compte" id="personal-transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <p class="form__message" id="personal-transfer-account-number-message"></p>
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="transfer-reference-input">Référence du transfert</label>
-                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input" required maxlength="40">
-                                <p class="form__message" id="transfer-reference-message"></p>
+                                <label class="form__label" for="personal-transfer-reference-input">Référence du transfert</label>
+                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
+                                <p class="form__message" id="personal-transfer-reference-message"></p>
                             </div>
                             <button class="button button--text button--primary" type="submit">Transférer</button>
                         </form>
