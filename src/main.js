@@ -1,32 +1,6 @@
 import data from "./data";
 
 /*------------------------------------*\
-  HTML elements
-\*------------------------------------*/
-
-const app = document.getElementById("app");
-
-const personalThemeButton = document.getElementById("personal-theme-button");
-const personalDepositForm = document.getElementById("personal-deposit-form");
-const personalWithdrawForm = document.getElementById("personal-withdraw-form");
-const personalTransferForm = document.getElementById("personal-transfer-form");
-const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
-const personalDepositAmountMessage = document.getElementById("personal-deposit-amount-message");
-const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
-const personalWithdrawAmountMessage = document.getElementById("personal-withdraw-amount-message");
-const personalTransferAmountInput = document.getElementById("personal-transfer-amount-input");
-const personalTransferAmountMessage = document.getElementById("personal-transfer-amount-message");
-const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
-const personalTransferAccountNumberMessage = document.getElementById("personal-transfer-account-number-message");
-const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
-const personalTransferReferenceMessage = document.getElementById("personal-transfer-reference-message");
-const personalFavoriteAccountForm = document.getElementById("personal-favorite-account-form");
-const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
-const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
-const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
-const personalFavoriteAccountNumberMessage = document.getElementById("personal-favorite-account-number-message");
-
-/*------------------------------------*\
   Formatters
 \*------------------------------------*/
 
@@ -140,6 +114,103 @@ function checkReferenceField(input, message) {
 }
 
 /*------------------------------------*\
+  Logs
+\*------------------------------------*/
+
+const logTemplate = document.getElementById("log-template");
+
+const LOGS_PER_PAGE = 10;
+
+class LogList {
+  constructor(logs, list) {
+    this.logList = list;
+    this.logs = logs;
+    this.page = 1;
+    this.observer = new IntersectionObserver((entries) => this.getNextPage(entries));
+    this.observedLog = false;
+    this.getPageNumber();
+    this.getPageLogs();
+    this.createPageLogs();
+  }
+
+  addLog(log) {
+    this.logs.unshift(log);
+    this.reset();
+  }
+
+  createLog(
+    log,
+    prepend = false,
+    observe = false
+  ) {
+    const logFragment = logTemplate.content.cloneNode(true);
+    const logRow = logFragment.querySelector(".log");
+    const logIcon = logRow.querySelector(".log__icon");
+    const logType = logRow.querySelector(".log__type");
+    const logDate = logRow.querySelector(".log__date");
+    const logAmount = logRow.querySelector(".log__amount");
+    const logReference = logRow.querySelector(".log__reference");
+    logIcon.classList.add(`log__icon--${log.type}`);
+    logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
+    logType.textContent = log.label;
+    logDate.textContent = dateTimeFormatter.format(new Date(log.date));
+    logAmount.textContent = currencyFormatter.format(log.amount);
+    logReference.textContent = log.reference;
+    if (prepend) {
+      this.logList.prepend(logFragment);
+    } else {
+      this.logList.appendChild(logFragment);
+    }
+    if (observe) {
+      this.observedLog = logRow;
+      this.observer.observe(logRow);
+    }
+  }
+
+  createPageLogs() {
+    if (this.observedLog) {
+      this.observer.unobserve(this.observedLog);
+      this.observedLog = false;
+    }
+    this.pageLogs.forEach((pageLog, pageLogIndex) => {
+      const isLastLog = pageLogIndex === (this.pageLogs.length - 1);
+      const isNotLastPage = this.page < this.pageNumber;
+      if (isLastLog && isNotLastPage) {
+        this.createLog(pageLog, false, true);
+      } else {
+        this.createLog(pageLog);
+      }
+    });
+  }
+
+  getNextPage(entries) {
+    if (entries[0].isIntersecting) {
+      this.page += 1;
+      this.getPageLogs();
+      this.createPageLogs();
+    }
+  }
+
+  getPageNumber() {
+    const logNumber = this.logs.length;
+    this.pageNumber = Math.ceil( logNumber / LOGS_PER_PAGE);
+  }
+
+  getPageLogs() {
+    const firstIndex = LOGS_PER_PAGE * (this.page - 1);
+    const lastIndex = LOGS_PER_PAGE * this.page;
+    this.pageLogs = this.logs.slice(firstIndex, lastIndex);
+  }
+
+  reset() {
+    this.logList.innerHTML = "";
+    this.page = 1;
+    this.getPageLogs();
+    this.createPageLogs();
+  }
+}
+
+/*------------------------------------*\
   Account classes
 \*------------------------------------*/
 
@@ -154,7 +225,7 @@ class Account {
     this.ownerElement = ownerElement;
     this.balance = account.balance;
     this.balanceElement = balanceElement;
-    //this.logList = new LogList(account.logs, logListElement);
+    this.logList = new LogList(account.logs, logListElement);
     this.displayOwner();
     this.displayBalance();
   }
@@ -200,7 +271,7 @@ class PersonalAccount extends Account {
     this.numberElement = numberElement;
     this.theme = account.theme;
     //this.accountList = new AccountList(account.favoriteAccounts);
-    //this.operationLogList = new LogList(account.logs.filter(log => log.type === "operation"), operationLogListElement);
+    this.operationLogList = new LogList(account.logs.filter(log => log.type === "operation"), operationLogListElement);
     this.displayNumber();
   }
 
@@ -225,6 +296,26 @@ class PersonalAccount extends Account {
 /*------------------------------------*\
   Personal account
 \*------------------------------------*/
+
+const personalThemeButton = document.getElementById("personal-theme-button");
+const personalDepositForm = document.getElementById("personal-deposit-form");
+const personalWithdrawForm = document.getElementById("personal-withdraw-form");
+const personalTransferForm = document.getElementById("personal-transfer-form");
+const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
+const personalDepositAmountMessage = document.getElementById("personal-deposit-amount-message");
+const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
+const personalWithdrawAmountMessage = document.getElementById("personal-withdraw-amount-message");
+const personalTransferAmountInput = document.getElementById("personal-transfer-amount-input");
+const personalTransferAmountMessage = document.getElementById("personal-transfer-amount-message");
+const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
+const personalTransferAccountNumberMessage = document.getElementById("personal-transfer-account-number-message");
+const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
+const personalTransferReferenceMessage = document.getElementById("personal-transfer-reference-message");
+const personalFavoriteAccountForm = document.getElementById("personal-favorite-account-form");
+const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
+const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
+const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
+const personalFavoriteAccountNumberMessage = document.getElementById("personal-favorite-account-number-message");
 
 const personalAccount = new PersonalAccount(
   data.account.personal,
@@ -355,21 +446,27 @@ if (data.hasEnterprise) {
 
     offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
   } else {
-    const offshoreTab = document.getElementById("tab-offshore");
+    const offshoreTabInput = document.getElementById("tab-selector-offshore");
+    const offshoreTabLabel = document.getElementById("tab-offshore");
     const offshoreTabContent = document.getElementById("tab-content-offshore");
-    offshoreTab.remove();
+    offshoreTabInput.remove();
+    offshoreTabLabel.remove();
     offshoreTabContent.remove();
   }
 } else {
-  const enterpriseTab = document.getElementById("tab-enterprise");
+  const enterpriseTabInput = document.getElementById("tab-selector-enterprise")
+  const enterpriseTabLabel = document.getElementById("tab-enterprise");
   const enterpriseTabContent = document.getElementById("tab-content-enterprise");
-  enterpriseTab.remove();
+  enterpriseTabInput.remove();
+  enterpriseTabLabel.remove();
   enterpriseTabContent.remove();
 }
 
 /*------------------------------------*\
   Load app
 \*------------------------------------*/
+
+const app = document.getElementById("app");
 
 setTimeout(() => {
   app.classList.replace("app--loading", "app--loaded");
