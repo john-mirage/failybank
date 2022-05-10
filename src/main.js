@@ -211,7 +211,101 @@ class LogList {
 }
 
 /*------------------------------------*\
-  Account classes
+  Account list
+\*------------------------------------*/
+
+const deleteAccountList = document.getElementById("account-delete-list");
+const deleteAccountTemplate = document.getElementById("account-delete-template");
+const pasteAccountList = document.getElementById("account-paste-list");
+const pasteAccountTemplate = document.getElementById("account-paste-template");
+const personalFavoriteAccountSumText = document.getElementById("personal-favorite-account-sum-text");
+const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form-button");
+
+const ACCOUNTS_LIMIT = 5;
+
+class AccountList {
+  constructor(accounts) {
+    this.accounts = accounts;
+    this.createList();
+    this.handleAddButton();
+  }
+
+  addAccount(account) {
+    if (this.accounts.length < ACCOUNTS_LIMIT) {
+      this.accounts = [account, ...this.accounts];
+      this.resetList();
+    } else {
+      throw new Error("Account limit is reached");
+    }
+  }
+
+  deleteAccount(account) {
+    this.accounts = this.accounts.filter((savedAccount) => {
+      return savedAccount.number !== account.number;
+    });
+    this.resetList();
+  }
+
+  createDeleteAccount(account) {
+    const accountFragment = deleteAccountTemplate.content.cloneNode(true);
+    const accountElement = accountFragment.querySelector(".account");
+    const accountNameElement = accountElement.querySelector(".account__name");
+    const accountNumberElement = accountElement.querySelector(".account__number");
+    const accountDeleteButtonElement = accountElement.querySelector(".account__text-button");
+    accountNameElement.textContent = account.name;
+    accountNumberElement.textContent = account.number;
+    accountDeleteButtonElement.addEventListener("click", () => {
+      this.deleteAccount(account);
+    }, {once: true});
+    deleteAccountList.appendChild(accountFragment);
+  }
+
+  createPasteAccount(account) {
+    const accountFragment = pasteAccountTemplate.content.cloneNode(true);
+    const accountElement = accountFragment.querySelector(".account");
+    const accountNameElement = accountElement.querySelector(".account__name");
+    const accountNumberElement = accountElement.querySelector(".account__number");
+    accountNameElement.textContent = account.name;
+    accountNumberElement.textContent = account.number;
+    accountElement.addEventListener("click", () => {
+      if (personalTransferAccountNumberInput.value !== account.number) {
+        personalTransferAccountNumberInput.value = account.number;
+      }
+    });
+    pasteAccountList.appendChild(accountFragment);
+  }
+
+  createList() {
+    this.accounts.forEach((account) => {
+      this.createDeleteAccount(account);
+      this.createPasteAccount(account);
+    });
+  }
+
+  resetList() {
+    deleteAccountList.innerHTML = "";
+    pasteAccountList.innerText = "";
+    this.createList();
+    this.handleAddButton();
+  }
+
+  handleAddButton() {
+    const numberOfAccounts = this.accounts.length;
+    personalFavoriteAccountSumText.textContent = `[${String(numberOfAccounts)}/5]`;
+    if (numberOfAccounts >= 5) {
+      if (personalFavoriteAccountFormButton.classList.contains("button--primary")) {
+        personalFavoriteAccountFormButton.classList.replace("button--primary", "button--disabled");
+        personalFavoriteAccountFormButton.setAttribute("disabled", "");
+      }
+    } else if (personalFavoriteAccountFormButton.classList.contains("button--disabled")) {
+      personalFavoriteAccountFormButton.classList.replace("button--disabled", "button--primary");
+      personalFavoriteAccountFormButton.removeAttribute("disabled");
+    }
+  }
+}
+
+/*------------------------------------*\
+  Account
 \*------------------------------------*/
 
 class Account {
@@ -270,7 +364,7 @@ class PersonalAccount extends Account {
     this.number = account.number;
     this.numberElement = numberElement;
     this.theme = account.theme;
-    //this.accountList = new AccountList(account.favoriteAccounts);
+    this.accountList = new AccountList(account.favoriteAccounts);
     this.operationLogList = new LogList(account.logs.filter(log => log.type === "operation"), operationLogListElement);
     this.displayNumber();
   }
