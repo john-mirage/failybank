@@ -46,12 +46,12 @@ class Account {
     document.addEventListener("update-enterprise-account-balance", (event) => {
       const amount = event.detail.amount;
       this.enterpriseBalance += amount;
-      this.displayBalance(this.enterpriseBalance, enterpriseAccountBalance);
+      this.displayBalance(this.enterpriseBalance, enterpriseAccountBalanceElt);
     });
     document.addEventListener("update-offshore-account-balance", (event) => {
       const amount = event.detail.amount;
       this.offshoreBalance += amount;
-      this.displayBalance(this.offshoreBalance, offshoreAccountBalance);
+      this.displayBalance(this.offshoreBalance, offshoreAccountBalanceElt);
     });
   }
 
@@ -90,12 +90,12 @@ class Account {
 
   displayEnterpriseAccount() {
     enterpriseAccountName.textContent = this.enterpriseOwner;
-    this.displayBalance(this.enterpriseBalance, enterpriseAccountBalance);
+    this.displayBalance(this.enterpriseBalance, enterpriseAccountBalanceElt);
   }
 
   displayOffshoreAccount() {
     offshoreAccountName.textContent = this.offshoreOwner;
-    this.displayBalance(this.offshoreBalance, offshoreAccountBalance);
+    this.displayBalance(this.offshoreBalance, offshoreAccountBalanceElt);
   }
 
   displayFavoriteAccounts() {
