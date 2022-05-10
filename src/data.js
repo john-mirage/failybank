@@ -1,7 +1,7 @@
 const data = {
   bank: "fleeca",
-  hasEnterprise: false,
-  hasOffshore: false,
+  hasEnterprise: true,
+  hasOffshore: true,
   account: {
     personal: {
       owner: "Garry Green",

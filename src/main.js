@@ -394,6 +394,78 @@ class PersonalAccount extends Account {
 }
 
 /*------------------------------------*\
+  Tabs
+\*------------------------------------*/
+
+class TabList {
+  constructor(...tabs) {
+    this.tabs = tabs;
+    this.activeTab = tabs[0];
+    this.listenTabs();
+  }
+
+  addTab(tab) {
+    this.tabs = [...this.tabs, tab];
+    this.listenTab(tab);
+  }
+
+  setActiveTab(tab) {
+    this.activeTab.deactivate();
+    this.activeTab = tab;
+    this.activeTab.activate();
+  }
+
+  listenTab(tab) {
+    tab.inputElt.addEventListener("change", () => {
+      this.setActiveTab(tab);
+    });
+  }
+
+  listenTabs() {
+    this.tabs.forEach((tab) => {
+      this.listenTab(tab);
+    });
+  }
+}
+
+class Tab {
+  constructor(containerElt, inputElt, viewElt) {
+    this.containerElt = containerElt;
+    this.inputElt = inputElt;
+    this.viewElt = viewElt;
+  }
+
+  activate() {
+    this.containerElt.classList.add("tab-list__item--active");
+    this.viewElt.classList.add("view--active");
+  }
+
+  deactivate() {
+    this.containerElt.classList.remove("tab-list__item--active");
+    this.viewElt.classList.remove("view--active");
+  }
+
+  remove() {
+    this.containerElt.remove();
+    this.viewElt.remove();
+  }
+}
+
+class OffshoreTab extends Tab {
+  constructor(containerElt, inputElt, viewElt) {
+    super(containerElt, inputElt, viewElt);
+  }
+
+  activate() {
+    this.viewElt.classList.add("view--active");
+  }
+
+  deactivate() {
+    this.viewElt.classList.remove("view--active");
+  }
+}
+
+/*------------------------------------*\
   Personal account
 \*------------------------------------*/
 
@@ -415,11 +487,48 @@ const personalFavoriteAccountNameInput = document.getElementById("personal-favor
 const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
 const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
 const personalFavoriteAccountNumberMessage = document.getElementById("personal-favorite-account-number-message");
+const personalTabContainer = document.getElementById("personal-tab");
+const personalTabInput = document.getElementById("personal-tab-input");
+const personalTabView = document.getElementById("personal-tab-view");
+const personalOperationTabContainer = document.getElementById("personal-operation-tab");
+const personalOperationTabInput = document.getElementById("personal-operation-tab-input");
+const personalOperationTabView = document.getElementById("personal-operation-tab-view");
+const personalTransferTabContainer = document.getElementById("personal-transfer-tab");
+const personalTransferTabInput = document.getElementById("personal-transfer-tab-input");
+const personalTransferTabView = document.getElementById("personal-transfer-tab-view");
+const enterpriseTabContainer = document.getElementById("enterprise-tab");
+const enterpriseTabView = document.getElementById("enterprise-tab-view");
+const offshoreTabContainer = document.getElementById("offshore-tab");
+const offshoreTabView = document.getElementById("offshore-tab-view");
 
 function getCurrentFormattedDate() {
   const date = new Date();
   return date.toISOString();
 }
+
+const personalTab = new Tab(
+  personalTabContainer,
+  personalTabInput,
+  personalTabView
+);
+
+const personalOperationTab = new Tab(
+  personalOperationTabContainer,
+  personalOperationTabInput,
+  personalOperationTabView
+);
+
+const personalTransferTab = new Tab(
+  personalTransferTabContainer,
+  personalTransferTabInput,
+  personalTransferTabView
+);
+
+const tabList = new TabList(
+  personalTab,
+  personalOperationTab,
+  personalTransferTab
+);
 
 const personalAccount = new PersonalAccount(
   data.account.personal,
@@ -535,6 +644,15 @@ if (data.hasEnterprise) {
   const enterpriseDepositAmountMessage = document.getElementById("enterprise-deposit-amount-message");
   const enterpriseWithdrawAmountInput = document.getElementById("enterprise-withdraw-amount-input");
   const enterpriseWithdrawAmountMessage = document.getElementById("enterprise-withdraw-amount-message");
+  const enterpriseTabInput = document.getElementById("enterprise-tab-input");
+
+  const enterpriseTab = new Tab(
+    enterpriseTabContainer,
+    enterpriseTabInput,
+    enterpriseTabView
+  );
+
+  tabList.addTab(enterpriseTab);
 
   const enterpriseAccount = new Account(
     data.account.enterprise,
@@ -587,6 +705,15 @@ if (data.hasEnterprise) {
     const offshoreDepositForm = document.getElementById("offshore-deposit-form");
     const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
     const offshoreDepositAmountMessage = document.getElementById("offshore-deposit-amount-message");
+    const offshoreTabInput = document.getElementById("offshore-tab-input");
+
+    const offshoreTab = new OffshoreTab(
+      offshoreTabContainer,
+      offshoreTabInput,
+      offshoreTabView
+    );
+
+    tabList.addTab(offshoreTab);
 
     const offshoreAccount = new Account(
       data.account.offshore,
@@ -614,91 +741,16 @@ if (data.hasEnterprise) {
     }
 
     offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
+  } else {
+    offshoreTabContainer.remove();
+    offshoreTabView.remove();
   }
 } else {
-  const enterpriseTab = document.getElementById("enterprise-tab");
-  const enterpriseTabView = document.getElementById("enterprise-tab-view");
-  const offshoreTab = document.getElementById("offshore-tab");
-  const offshoreTabView = document.getElementById("offshore-tab-view");
-  enterpriseTab.remove();
+  enterpriseTabContainer.remove();
   enterpriseTabView.remove();
-  offshoreTab.remove();
+  offshoreTabContainer.remove();
   offshoreTabView.remove();
 }
-
-/*------------------------------------*\
-  Tabs
-\*------------------------------------*/
-
-const tabs = [
-  {
-    type: "personal",
-    container: document.getElementById("personal-tab"),
-    radio: document.getElementById("personal-tab-input"),
-    view: document.getElementById("personal-tab-view")
-  },
-  {
-    type: "personal",
-    container: document.getElementById("personal-operation-tab"),
-    radio: document.getElementById("personal-operation-tab-input"),
-    view: document.getElementById("personal-operation-tab-view")
-  },
-  {
-    type: "personal",
-    container: document.getElementById("personal-transfer-tab"),
-    radio: document.getElementById("personal-transfer-tab-input"),
-    view: document.getElementById("personal-transfer-tab-view")
-  },
-  {
-    type: "enterprise",
-    container: document.getElementById("enterprise-tab"),
-    radio: document.getElementById("enterprise-tab-input"),
-    view: document.getElementById("enterprise-tab-view")
-  },
-  {
-    type: "offshore",
-    container: document.getElementById("offshore-tab"),
-    radio: document.getElementById("offshore-tab-input"),
-    view: document.getElementById("offshore-tab-view")
-  }
-];
-
-let previousActiveTab = tabs[0];
-
-function listenTab(tab) {
-  tab.radio.addEventListener("change" , () => {
-    if (tab.type === "offshore") {
-      previousActiveTab.container.classList.remove("tab-list__item--active");
-      previousActiveTab.view.classList.remove("view--active");
-      tab.view.classList.add("view--active");
-    } else {
-      if (previousActiveTab.type === "offshore") {
-        previousActiveTab.view.classList.remove("view--active");
-        tab.container.classList.add("tab-list__item--active");
-        tab.view.classList.add("view--active");
-      } else {
-        previousActiveTab.container.classList.remove("tab-list__item--active");
-        previousActiveTab.view.classList.remove("view--active");
-        tab.container.classList.add("tab-list__item--active");
-        tab.view.classList.add("view--active");
-      }
-    }
-    previousActiveTab = tab;
-  });
-}
-
-tabs.forEach((tab) => {
-  if (tab.type !== "personal") {
-    if (data.hasEnterprise) {
-      listenTab(tab);
-      if (data.hasOffshore) {
-        listenTab(tab);
-      }
-    }
-  } else {
-    listenTab(tab);
-  }
-});
 
 /*------------------------------------*\
   Load app
