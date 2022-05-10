@@ -262,27 +262,44 @@ html {
 
 .tab-list__item {
     box-sizing: border-box;
+    position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     width: 124px;
     height: 100%;
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    cursor: pointer;
 }
 
-.tab-list__item--hidden {
-    display: none;
+.fleeca .tab-list__item--active {
+    border-bottom: 4px solid var(--color-fleeca);
+}
+
+.maze .tab-list__item--active {
+    border-bottom: 4px solid var(--color-maze);
 }
 
 .tab-list__label {
+    margin: auto;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: var(--color-text-alt);
+}
+
+.tab-list__item--active > .tab-list__label {
+    color: var(--color-text);
+}
+
+.tab-list__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
 }
 
 /*------------------------------------*\
@@ -395,6 +412,10 @@ html {
     padding: 24px;
 }
 
+.view--active {
+    display: block;
+}
+
 /*------------------------------------*\
   GRID
 \*------------------------------------*/
@@ -502,6 +523,10 @@ html {
     border: none;
 }
 
+.button--has-input {
+    position: relative;
+}
+
 .button--text {
     display: block;
     min-width: 168px;
@@ -512,6 +537,17 @@ html {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.button__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
 }
 
 .button--icon {
@@ -1079,27 +1115,3 @@ html {
 .fleeca .log__header:hover .log__type {
     color: var(--color-fleeca);
 }
-
-/*------------------------------------*\
-  STATES
-\*------------------------------------*/
-.maze #tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-maze);}
-.maze #tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-maze);}
-.maze #tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-maze);}
-.maze #tab-selector-enterprise:checked ~ .bar #tab-enterprise {border-bottom: 4px solid var(--color-maze);}
-
-.fleeca #tab-selector-account:checked ~ .bar #tab-account {border-bottom: 4px solid var(--color-fleeca);}
-.fleeca #tab-selector-operation:checked ~ .bar #tab-operation {border-bottom: 4px solid var(--color-fleeca);}
-.fleeca #tab-selector-transfer:checked ~ .bar #tab-transfer {border-bottom: 4px solid var(--color-fleeca);}
-.fleeca #tab-selector-enterprise:checked ~ .bar #tab-enterprise {border-bottom: 4px solid var(--color-fleeca);}
-
-#tab-selector-account:checked ~ .bar #tab-account > .tab-list__label {color: var(--color-text);}
-#tab-selector-operation:checked ~ .bar #tab-operation > .tab-list__label {color: var(--color-text);}
-#tab-selector-transfer:checked ~ .bar #tab-transfer > .tab-list__label {color: var(--color-text);}
-#tab-selector-enterprise:checked ~ .bar #tab-enterprise > .tab-list__label {color: var(--color-text);}
-
-#tab-selector-account:checked ~ #tab-content-account {display: block;}
-#tab-selector-operation:checked ~ #tab-content-operation {display: block;}
-#tab-selector-transfer:checked ~ #tab-content-transfer {display: block;}
-#tab-selector-enterprise:checked ~ #tab-content-enterprise {display: block;}
-#tab-selector-offshore:checked ~ #tab-content-offshore {display: block;}

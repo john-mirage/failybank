@@ -22,11 +22,6 @@
 
         <!-- App container -->
         <div class="app__container" id="app-container">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-account" checked>
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-operation">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-transfer">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-enterprise">
-            <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-offshore">
 
             <!-- Bar -->
             <header class="bar">
@@ -45,19 +40,23 @@
                 </div>
                 <div class="bar__section bar__section--middle">
                     <!-- Tab list -->
-                    <div class="tab-list" id="tab-list">
-                        <label class="tab-list__item" for="tab-selector-account" id="tab-account">
-                            <span class="tab-list__label">Mon compte</span>
-                        </label>
-                        <label class="tab-list__item" for="tab-selector-operation" id="tab-operation">
-                            <span class="tab-list__label">Opération</span>
-                        </label>
-                        <label class="tab-list__item" for="tab-selector-transfer" id="tab-transfer">
-                            <span class="tab-list__label">Transfert</span>
-                        </label>
-                        <label class="tab-list__item" for="tab-selector-enterprise" id="tab-enterprise">
-                            <span class="tab-list__label">Entreprise</span>
-                        </label>
+                    <div class="tab-list">
+                        <div class="tab-list__item tab-list__item--active" id="personal-tab">
+                            <label class="tab-list__label" for="personal-tab-input">Mon compte</label>
+                            <input class="tab-list__input" type="radio" name="tab" id="personal-tab-input" checked>
+                        </div>
+                        <div class="tab-list__item" id="personal-operation-tab">
+                            <label class="tab-list__label" for="personal-operation-tab-input">Opération</label>
+                            <input class="tab-list__input" type="radio" name="tab" id="personal-operation-tab-input">
+                        </div>
+                        <div class="tab-list__item" id="personal-transfer-tab">
+                            <label class="tab-list__label" for="personal-transfer-tab-input">Transfert</label>
+                            <input class="tab-list__input" type="radio" name="tab" id="personal-transfer-tab-input">
+                        </div>
+                        <div class="tab-list__item" id="enterprise-tab">
+                            <label class="tab-list__label" for="enterprise-tab-input">Entreprise</label>
+                            <input class="tab-list__input" type="radio" name="tab" id="enterprise-tab-input">
+                        </div>
                     </div>
                 </div>
                 <div class="bar__section bar__section--right">
@@ -82,7 +81,7 @@
             </header>
 
             <!-- View / account -->
-            <div class="view" id="tab-content-account">
+            <div class="view view--active" id="personal-tab-view">
                 <div class="grid grid--account">
                     <!-- Account owner -->
                     <section class="grid__section">
@@ -148,7 +147,7 @@
             </div>
 
             <!-- View / operation -->
-            <div class="view" id="tab-content-operation">
+            <div class="view" id="personal-operation-tab-view">
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
@@ -194,7 +193,7 @@
             </div>
 
             <!-- View / transfer -->
-            <div class="view" id="tab-content-transfer">
+            <div class="view" id="personal-transfer-tab-view">
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
@@ -235,7 +234,7 @@
             </div>
 
             <!-- View / enterprise -->
-            <div class="view" id="tab-content-enterprise">
+            <div class="view" id="enterprise-tab-view">
                 <div class="grid grid--enterprise">
                     <!-- Enterprise owner -->
                     <section class="grid__section">
@@ -250,11 +249,12 @@
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame" id="enterprise-account-log-list"></div>
-                                <label class="button button--icon button--primary paper__button" for="tab-selector-offshore" id="tab-offshore">
+                                <div class="button button--has-input button--icon button--primary paper__button" id="offshore-tab">
                                     <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
                                     </svg>
-                                </label>
+                                    <input class="button__input" type="radio" name="tab" id="offshore-tab-input">
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -300,7 +300,7 @@
             </div>
 
             <!-- View / offshore -->
-            <div class="view" id="tab-content-offshore">
+            <div class="view" id="offshore-tab-view">
                 <div class="grid grid--offshore">
                     <!-- Offshore owner -->
                     <section class="grid__section">

@@ -614,22 +614,91 @@ if (data.hasEnterprise) {
     }
 
     offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
-  } else {
-    const offshoreTabInput = document.getElementById("tab-selector-offshore");
-    const offshoreTabLabel = document.getElementById("tab-offshore");
-    const offshoreTabContent = document.getElementById("tab-content-offshore");
-    offshoreTabInput.remove();
-    offshoreTabLabel.remove();
-    offshoreTabContent.remove();
   }
 } else {
-  const enterpriseTabInput = document.getElementById("tab-selector-enterprise")
-  const enterpriseTabLabel = document.getElementById("tab-enterprise");
-  const enterpriseTabContent = document.getElementById("tab-content-enterprise");
-  enterpriseTabInput.remove();
-  enterpriseTabLabel.remove();
-  enterpriseTabContent.remove();
+  const enterpriseTab = document.getElementById("enterprise-tab");
+  const enterpriseTabView = document.getElementById("enterprise-tab-view");
+  const offshoreTab = document.getElementById("offshore-tab");
+  const offshoreTabView = document.getElementById("offshore-tab-view");
+  enterpriseTab.remove();
+  enterpriseTabView.remove();
+  offshoreTab.remove();
+  offshoreTabView.remove();
 }
+
+/*------------------------------------*\
+  Tabs
+\*------------------------------------*/
+
+const tabs = [
+  {
+    type: "personal",
+    container: document.getElementById("personal-tab"),
+    radio: document.getElementById("personal-tab-input"),
+    view: document.getElementById("personal-tab-view")
+  },
+  {
+    type: "personal",
+    container: document.getElementById("personal-operation-tab"),
+    radio: document.getElementById("personal-operation-tab-input"),
+    view: document.getElementById("personal-operation-tab-view")
+  },
+  {
+    type: "personal",
+    container: document.getElementById("personal-transfer-tab"),
+    radio: document.getElementById("personal-transfer-tab-input"),
+    view: document.getElementById("personal-transfer-tab-view")
+  },
+  {
+    type: "enterprise",
+    container: document.getElementById("enterprise-tab"),
+    radio: document.getElementById("enterprise-tab-input"),
+    view: document.getElementById("enterprise-tab-view")
+  },
+  {
+    type: "offshore",
+    container: document.getElementById("offshore-tab"),
+    radio: document.getElementById("offshore-tab-input"),
+    view: document.getElementById("offshore-tab-view")
+  }
+];
+
+let previousActiveTab = tabs[0];
+
+function listenTab(tab) {
+  tab.radio.addEventListener("change" , () => {
+    if (tab.type === "offshore") {
+      previousActiveTab.container.classList.remove("tab-list__item--active");
+      previousActiveTab.view.classList.remove("view--active");
+      tab.view.classList.add("view--active");
+    } else {
+      if (previousActiveTab.type === "offshore") {
+        previousActiveTab.view.classList.remove("view--active");
+        tab.container.classList.add("tab-list__item--active");
+        tab.view.classList.add("view--active");
+      } else {
+        previousActiveTab.container.classList.remove("tab-list__item--active");
+        previousActiveTab.view.classList.remove("view--active");
+        tab.container.classList.add("tab-list__item--active");
+        tab.view.classList.add("view--active");
+      }
+    }
+    previousActiveTab = tab;
+  });
+}
+
+tabs.forEach((tab) => {
+  if (tab.type !== "personal") {
+    if (data.hasEnterprise) {
+      listenTab(tab);
+      if (data.hasOffshore) {
+        listenTab(tab);
+      }
+    }
+  } else {
+    listenTab(tab);
+  }
+});
 
 /*------------------------------------*\
   Load app
