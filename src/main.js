@@ -135,7 +135,7 @@ class LogList {
 
   addLog(log) {
     this.logs.unshift(log);
-    this.reset();
+    this.resetList();
   }
 
   createLog(
@@ -202,7 +202,7 @@ class LogList {
     this.pageLogs = this.logs.slice(firstIndex, lastIndex);
   }
 
-  reset() {
+  resetList() {
     this.logList.innerHTML = "";
     this.page = 1;
     this.getPageLogs();
@@ -308,6 +308,8 @@ class AccountList {
   Account
 \*------------------------------------*/
 
+const personalThemeButton = document.getElementById("personal-theme-button");
+
 class Account {
   constructor(
     account,
@@ -364,7 +366,11 @@ class PersonalAccount extends Account {
     this.number = account.number;
     this.numberElement = numberElement;
     this.theme = account.theme;
-    this.accountList = new AccountList(account.favoriteAccounts);
+    if (this.theme === "dark") {
+      personalThemeButton.checked = true;
+      document.documentElement.classList.add("dark");
+    }
+    this.favoriteAccountList = new AccountList(account.favoriteAccounts);
     this.operationLogList = new LogList(account.logs.filter(log => log.type === "operation"), operationLogListElement);
     this.displayNumber();
   }
@@ -391,7 +397,6 @@ class PersonalAccount extends Account {
   Personal account
 \*------------------------------------*/
 
-const personalThemeButton = document.getElementById("personal-theme-button");
 const personalDepositForm = document.getElementById("personal-deposit-form");
 const personalWithdrawForm = document.getElementById("personal-withdraw-form");
 const personalTransferForm = document.getElementById("personal-transfer-form");
@@ -410,6 +415,11 @@ const personalFavoriteAccountNameInput = document.getElementById("personal-favor
 const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
 const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
 const personalFavoriteAccountNumberMessage = document.getElementById("personal-favorite-account-number-message");
+
+function getCurrentFormattedDate() {
+  const date = new Date();
+  return date.toISOString();
+}
 
 const personalAccount = new PersonalAccount(
   data.account.personal,
@@ -438,8 +448,11 @@ function handlePersonalFavoriteAccountForm(event) {
   const accountNameFieldIsValid = checkAccountNameField(personalFavoriteAccountNameInput, personalFavoriteAccountNameMessage);
   const accountNumberFieldIsValid = checkAccountNumberField(personalFavoriteAccountNumberInput, personalFavoriteAccountNumberMessage);
   if (accountNameFieldIsValid && accountNumberFieldIsValid) {
-    const accountName = personalFavoriteAccountNameInput.value;
-    const accountNumber = personalFavoriteAccountNumberInput.value;
+    const account = {
+      name: personalFavoriteAccountNameInput.value,
+      number: personalFavoriteAccountNumberInput.value
+    }
+    personalAccount.favoriteAccountList.addAccount(account);
   }
 }
 
@@ -448,6 +461,17 @@ function handlePersonalDepositForm(event) {
   const amountFieldIsValid = checkAmountField(personalDepositAmountInput, personalDepositAmountMessage);
   if (amountFieldIsValid) {
     const depositAmount = Number(personalDepositAmountInput.value);
+    const log = {
+      label: "Dépot",
+      amount: depositAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Dépot sur votre compte",
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    personalAccount.operationLogList.addLog(log);
+    personalAccount.balance += depositAmount;
+    personalAccount.displayBalance();
   }
 }
 
@@ -457,6 +481,17 @@ function handlePersonalWithdrawForm(event) {
   const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(personalWithdrawAmountInput, personalWithdrawAmountMessage, personalAccount.balance) : false;
   if (withdrawFieldIsValid && withdrawAmountIsValid) {
     const withdrawAmount = Number(personalWithdrawAmountInput.value);
+    const log = {
+      label: "Retrait",
+      amount: -withdrawAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Retrait depuis votre compte",
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    personalAccount.operationLogList.addLog(log);
+    personalAccount.balance -= withdrawAmount;
+    personalAccount.displayBalance();
   }
 }
 
@@ -470,6 +505,16 @@ function handlePersonalTransferForm(event) {
     const transferAmount = Number(personalTransferAmountInput.value);
     const transferAccountNumber = personalTransferAccountNumberInput.value;
     const transferReference = personalTransferReferenceInput.value;
+    const log = {
+      label: "Transfert",
+      amount: -transferAmount,
+      date: getCurrentFormattedDate(),
+      reference: transferReference,
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    personalAccount.balance -= transferAmount;
+    personalAccount.displayBalance();
   }
 }
 
@@ -503,6 +548,16 @@ if (data.hasEnterprise) {
     const amountFieldIsValid = checkAmountField(enterpriseDepositAmountInput, enterpriseDepositAmountMessage);
     if (amountFieldIsValid) {
       const depositAmount = Number(enterpriseDepositAmountInput.value);
+      const log = {
+        label: "Dépot",
+        amount: depositAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot sur votre compte",
+        type: "operation"
+      }
+      enterpriseAccount.logList.addLog(log);
+      enterpriseAccount.balance += depositAmount;
+      enterpriseAccount.displayBalance();
     }
   }
 
@@ -512,6 +567,16 @@ if (data.hasEnterprise) {
     const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(enterpriseWithdrawAmountInput, enterpriseWithdrawAmountMessage, enterpriseAccount.balance) : false;
     if (withdrawFieldIsValid && withdrawAmountIsValid) {
       const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
+      const log = {
+        label: "Retrait",
+        amount: -withdrawAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Retrait depuis votre compte",
+        type: "operation"
+      }
+      enterpriseAccount.logList.addLog(log);
+      enterpriseAccount.balance -= withdrawAmount;
+      enterpriseAccount.displayBalance();
     }
   }
 
@@ -535,6 +600,16 @@ if (data.hasEnterprise) {
       const amountFieldIsValid = checkAmountField(offshoreDepositAmountInput, offshoreDepositAmountMessage);
       if (amountFieldIsValid) {
         const depositAmount = Number(offshoreDepositAmountInput.value);
+        const log = {
+          label: "Dépot",
+          amount: depositAmount,
+          date: getCurrentFormattedDate(),
+          reference: "Dépot sur votre compte",
+          type: "operation"
+        }
+        offshoreAccount.logList.addLog(log);
+        offshoreAccount.balance += depositAmount;
+        offshoreAccount.displayBalance();
       }
     }
 
