@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFzSURBVHgB7ZnfUYNAEMb3IM8aO6AEKghXgh0YK4lWYijBCiRJA9gBVmDybm79GMYMnMofwdnR7O9lYe8W9uO4fdgjUpTzxviOV2vnMDHJUVxlWYE8IlxH3liOsX3dMfviAbFx7omEwBe9g7kPmFfMvKyPhcwWZlP3BfTHUQHSzHrOKwxz1jaBjbmGmdd9iFm3xpSb1BhLI+gloEz+cre7bZuzT5KIqk12oisGlWaJgmFpBH1X4OOFNnAuqftcEDyitOVtcYfFYlW/R6UpLrbblCZgkIAyea7K3InQuQKmVYAfw9XvOIkArULSqABpVIA0KkAaFSCNCpBGBUijAqRRAdKoAGlUgDRn01rsBK3FNOhoP/4GkwlAd25Nw8mN1/RCp29DAxgtwOEQ4pAktm0OOnFNhzExYh6o9JvmIRFWMcLYDXt91u8YvwLoLn9KsJu5f/ryU7QKSfMvy2geehvoLQxfSosKkc6Ox4yEQB7PpChKg3fppHfp5hvaJgAAAABJRU5ErkJggg==">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.609db824.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.45b8a7bd.css">
+  <script type="module" crossorigin src="/failybank/assets/index.35bc5b85.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.d7567162.css">
 </head>
 
 <!-- Screen -->
@@ -23,7 +23,7 @@
         <div class="app__spinner"></div>
 
         <!-- App container -->
-        <div class="app__container">
+        <div class="app__container" id="app-container">
             <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-account" checked>
             <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-operation">
             <input class="app__tab-selector" type="radio" name="tab-selector" id="tab-selector-transfer">
@@ -42,12 +42,12 @@
                     <!-- Balance -->
                     <div class="balance">
                         <h2 class="balance__name">Solde</h2>
-                        <p class="balance__value" id="balance"></p>
+                        <p class="balance__value" id="personal-account-balance"></p>
                     </div>
                 </div>
                 <div class="bar__section bar__section--middle">
                     <!-- Tab list -->
-                    <div class="tab-list">
+                    <div class="tab-list" id="tab-list">
                         <label class="tab-list__item" for="tab-selector-account" id="tab-account">
                             <span class="tab-list__label">Mon compte</span>
                         </label>
@@ -57,7 +57,7 @@
                         <label class="tab-list__item" for="tab-selector-transfer" id="tab-transfer">
                             <span class="tab-list__label">Transfert</span>
                         </label>
-                        <label class="tab-list__item tab-list__item--hidden" for="tab-selector-enterprise" id="tab-enterprise">
+                        <label class="tab-list__item" for="tab-selector-enterprise" id="tab-enterprise">
                             <span class="tab-list__label">Entreprise</span>
                         </label>
                     </div>
@@ -65,7 +65,7 @@
                 <div class="bar__section bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
-                        <input class="toggle-button__input" id="dark-mode-toggle" type="checkbox">
+                        <input class="toggle-button__input" id="personal-theme-button" type="checkbox">
                         <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             fill="currentColor">
                             <path
@@ -90,7 +90,7 @@
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte</h3>
-                            <p class="section__text" id="account-name"></p>
+                            <p class="section__text" id="personal-account-owner"></p>
                         </div>
                     </section>
                     <!-- Account history -->
@@ -98,7 +98,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="global-log-table"></div>
+                                <div class="paper__frame" id="personal-account-log-list"></div>
                             </div>
                         </div>
                     </section>
@@ -106,26 +106,26 @@
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Numéro du compte</h3>
-                            <p class="section__number" id="account-number"></p>
+                            <p class="section__number" id="personal-account-number"></p>
                         </div>
                     </section>
                     <!-- Account add form -->
                     <section class="grid__section">
-                        <form class="form" id="account-add-form" novalidate>
+                        <form class="form" id="personal-favorite-account-form" novalidate>
                             <h2 class="form__title">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="account-add-name-input">Nom du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="account-number" required maxlength="40" id="account-add-name-input">
-                                    <p class="form__message" id="account-add-name-message"></p>
+                                    <label class="form__label" for="personal-favorite-account-name-input">Nom du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="personal-favorite-account-name" required maxlength="40" id="personal-favorite-account-name-input">
+                                    <p class="form__message" id="personal-favorite-account-name-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="account-add-number-input">Numéro du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="account-add-number-input">
-                                    <p class="form__message" id="account-add-number-message"></p>
+                                    <label class="form__label" for="personal-favorite-account-number-input">Numéro du compte</label>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
+                                    <p class="form__message" id="personal-favorite-account-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--icon button--primary" type="submit" id="account-add-button">
+                                    <button class="button button--icon button--primary" type="submit" id="personal-favorite-account-form-button">
                                         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                                             <path d="M0 0h24v24H0V0z" fill="none"/>
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
@@ -135,13 +135,13 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Account account list -->
+                    <!-- Account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés <span id="personal-favorite-account-sum-text"></span></h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="account-delete-table"></table>
+                                    <table class="paper__table" id="account-delete-list"></table>
                                 </div>
                             </div>
                         </div>
@@ -154,12 +154,12 @@
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
-                        <form class="form" id="deposit-form" novalidate>
+                        <form class="form" id="personal-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="deposit-amount" id="deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
-                                <p class="form__message" id="deposit-message"></p>
+                                <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="personal-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -176,18 +176,18 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="operation-log-table"></div>
+                                <div class="paper__frame" id="personal-account-operation-log-list"></div>
                             </div>
                         </div>
                     </section>
                     <!-- Operation Withdraw form -->
                     <section class="grid__section">
-                        <form class="form" id="withdraw-form" novalidate>
+                        <form class="form" id="personal-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="withdraw-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="withdraw-amount" id="withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
-                                <p class="form__message" id="withdraw-message"></p>
+                                <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
+                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <p class="form__message" id="personal-withdraw-amount-message"></p>
                             </div>
                             <button class="button button--text button--primary" type="submit">Retirer</button>
                         </form>
@@ -200,24 +200,24 @@
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
                     <section class="grid__section">
-                        <form class="form" id="transfer-form" novalidate>
+                        <form class="form" id="personal-transfer-form" novalidate>
                             <h2 class="form__title">Effectuer un transfert</h2>
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="transfer-amount" placeholder="Entrer le montant du transfert" id="transfer-amount-input" required pattern="[0-9]+">
-                                    <p class="form__message" id="transfer-amount-message"></p>
+                                    <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
+                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="[0-9]+">
+                                    <p class="form__message" id="personal-transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="transfer-account-number-input">Numéro de compte du déstinataire</label>
-                                    <input class="form__input" type="text" name="transfer-account-number" placeholder="Entrer le numéro de compte" id="transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
-                                    <p class="form__message" id="transfer-account-number-message"></p>
+                                    <label class="form__label" for="personal-transfer-account-number-input">Numéro de compte du déstinataire</label>
+                                    <input class="form__input" type="text" name="personal-transfer-account-number" placeholder="Entrer le numéro de compte" id="personal-transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                                    <p class="form__message" id="personal-transfer-account-number-message"></p>
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="transfer-reference-input">Référence du transfert</label>
-                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="transfer-reference-input" required maxlength="40">
-                                <p class="form__message" id="transfer-reference-message"></p>
+                                <label class="form__label" for="personal-transfer-reference-input">Référence du transfert</label>
+                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
+                                <p class="form__message" id="personal-transfer-reference-message"></p>
                             </div>
                             <button class="button button--text button--primary" type="submit">Transférer</button>
                         </form>
@@ -228,7 +228,7 @@
                             <h3 class="section__title">Comptes enregistrés</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="account-paste-table"></table>
+                                    <table class="paper__table" id="account-paste-list"></table>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire de l'entreprise</h3>
-                            <p class="section__text">Hubert Bonisseur de La Bath</p>
+                            <p class="section__text" id="enterprise-account-owner"></p>
                         </div>
                     </section>
                     <!-- Enterprise history -->
@@ -251,7 +251,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame"></div>
+                                <div class="paper__frame" id="enterprise-account-log-list"></div>
                                 <label class="button button--icon button--primary paper__button" for="tab-selector-offshore" id="tab-offshore">
                                     <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
@@ -264,7 +264,7 @@
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Solde de l'entreprise</h3>
-                            <p class="section__number">25,000,000$</p>
+                            <p class="section__number" id="enterprise-account-balance"></p>
                         </div>
                     </section>
                     <!-- Enterprise deposit form -->
@@ -272,9 +272,9 @@
                         <form class="form" id="enterprise-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="enterprise-deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
-                                <p class="form__message" id="enterprise-deposit-message"></p>
+                                <label class="form__label" for="enterprise-deposit-amount-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="enterprise-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -291,9 +291,9 @@
                         <form class="form" id="enterprise-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="enterprise-withdraw-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
-                                <p class="form__message" id="enterprise-withdraw-message"></p>
+                                <label class="form__label" for="enterprise-withdraw-amount-input">Montant du retrait</label>
+                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <p class="form__message" id="enterprise-withdraw-amount-message"></p>
                             </div>
                             <button class="button button--text button--primary">Retirer</button>
                         </form>
@@ -308,7 +308,7 @@
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte offshore</h3>
-                            <p class="section__text section__text--reversed">Hubert Bonisseur de La Bath</p>
+                            <p class="section__text section__text--reversed" id="offshore-account-owner"></p>
                         </div>
                     </section>
                     <!-- Offshore history -->
@@ -316,7 +316,7 @@
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame"></div>
+                                <div class="paper__frame" id="offshore-account-log-list"></div>
                             </div>
                         </div>
                     </section>
@@ -324,7 +324,7 @@
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Solde du compte offshore</h3>
-                            <p class="section__number">152,000,000$</p>
+                            <p class="section__number" id="offshore-account-balance"></p>
                         </div>
                     </section>
                     <!-- offshore deposit form -->
@@ -332,9 +332,9 @@
                         <form class="form" id="offshore-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
-                                <label class="form__label" for="offshore-deposit-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
-                                <p class="form__message" id="offshore-deposit-message"></p>
+                                <label class="form__label" for="offshore-deposit-amount-input">Montant du dépot</label>
+                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <p class="form__message" id="offshore-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -387,12 +387,12 @@
     <template id="log-template">
         <details class="log">
             <summary class="log__header">
-                <div class="log__icon"></div>
-                <div class="log__info">
-                    <h3 class="log__type"></h3>
-                    <p class="log__date"></p>
-                </div>
-                <p class="log__amount"></p>
+                <span class="log__icon"></span>
+                <span class="log__info">
+                    <span class="log__type"></span>
+                    <span class="log__date"></span>
+                </span>
+                <span class="log__amount"></span>
             </summary>
             <div class="log__body">
                 <h5 class="log__reference-label">Référence: </h5>
