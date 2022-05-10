@@ -232,11 +232,11 @@ html {
     text-shadow: none;
 }
 
-.balance__value--negative {
+.balance__value--down {
     text-shadow: 0 0 12px var(--color-down);
 }
 
-.balance__value--negative:hover {
+.balance__value--down:hover {
     color: var(--color-down);
     text-shadow: none;
 }
@@ -615,7 +615,7 @@ html {
     right: 16px;
 }
 
-.paper__button.paper__button--visible {
+.paper:hover > .paper__button {
     display: flex;
 }
 
@@ -754,6 +754,14 @@ html {
     letter-spacing: 0.8px;
     line-height: 1;
     margin: 0;
+}
+
+.section__number--up {
+    color: var(--color-up);
+}
+
+.section__number--down {
+    color: var(--color-down);
 }
 
 .section__text {
@@ -1090,10 +1098,6 @@ html {
 
 .app--loaded > .app__container {
     display: block;
-}
-
-.paper:hover .button--hover {
-    display: flex;
 }
 
 .account__accordion[open] > .account__icon-button {
