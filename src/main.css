@@ -103,11 +103,19 @@ html {
     margin: auto;
 }
 
+.app--loading > .app__spinner {
+    display: block;
+}
+
 .app__container {
     box-sizing: border-box;
     display: none;
     width: 100%;
     height: 100%;
+}
+
+.app--loaded > .app__container {
+    display: block;
 }
 
 .app__tab-selector {
@@ -868,6 +876,10 @@ html {
     margin-right: -10px;
 }
 
+.account__accordion[open] > .account__icon-button {
+    background-image: url("./images/close.svg");
+}
+
 .account__icon-button:hover {
     background-color: var(--color-icon-bg);
 }
@@ -1091,15 +1103,3 @@ html {
 #tab-selector-transfer:checked ~ #tab-content-transfer {display: block;}
 #tab-selector-enterprise:checked ~ #tab-content-enterprise {display: block;}
 #tab-selector-offshore:checked ~ #tab-content-offshore {display: block;}
-
-.app--loading > .app__spinner {
-    display: block;
-}
-
-.app--loaded > .app__container {
-    display: block;
-}
-
-.account__accordion[open] > .account__icon-button {
-    background-image: url("./images/close.svg");
-}
