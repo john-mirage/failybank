@@ -5,3 +5,4 @@
 ## TODO
 
 - [ ] log list filters
+- [ ] Form automatic button states
