@@ -23,7 +23,7 @@
         <!-- App container -->
         <div class="app__container" id="app-container">
 
-            <!-- Bar -->
+            <!-- Top app bar -->
             <header class="top-app-bar">
                 <div class="top-app-bar__section top-app-bar__section--row">
                     <svg class="top-app-bar__logo top-app-bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +103,7 @@
                             <p class="section__number" id="personal-account-number"></p>
                         </div>
                     </section>
-                    <!-- Account add form.js -->
+                    <!-- Account add form -->
                     <section class="grid__section">
                         <form class="form" id="personal-favorite-account-form" novalidate>
                             <h2 class="form__title">Ajouter un destinataire</h2>
@@ -119,7 +119,7 @@
                                     <p class="form__message" id="personal-favorite-account-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--icon button--primary" type="submit" id="personal-favorite-account-form-button">
+                                    <button class="button button--icon button--disabled" disabled type="submit" id="personal-favorite-account-form-button">
                                         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                                             <path d="M0 0h24v24H0V0z" fill="none"/>
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
@@ -146,18 +146,18 @@
             <!-- View / personal operation -->
             <div class="view" id="personal-operation-tab-view">
                 <div class="grid grid--operation">
-                    <!-- Operation deposit form.js -->
+                    <!-- Operation deposit form -->
                     <section class="grid__section grid__section--with-border">
                         <form class="form" id="personal-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="personal-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--disabled" id="personal-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="button button--text button--secondary" type="button">Tout déposer</button>
@@ -174,16 +174,16 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Operation Withdraw form.js -->
+                    <!-- Operation Withdraw form -->
                     <section class="grid__section">
                         <form class="form" id="personal-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="personal-withdraw-amount-message"></p>
                             </div>
-                            <button class="button button--text button--primary" type="submit">Retirer</button>
+                            <button class="button button--text button--disabled" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -192,14 +192,14 @@
             <!-- View / personal transfer -->
             <div class="view" id="personal-transfer-tab-view">
                 <div class="grid grid--transfer">
-                    <!-- Transfer form.js -->
+                    <!-- Transfer form -->
                     <section class="grid__section">
                         <form class="form" id="personal-transfer-form" novalidate>
                             <h2 class="form__title">Effectuer un transfert</h2>
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="[0-9]+">
+                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                     <p class="form__message" id="personal-transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
@@ -213,7 +213,7 @@
                                 <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
                                 <p class="form__message" id="personal-transfer-reference-message"></p>
                             </div>
-                            <button class="button button--text button--primary" type="submit">Transférer</button>
+                            <button class="button button--text button--disabled" id="personal-transfer-form-button" disabled type="submit">Transférer</button>
                         </form>
                     </section>
                     <!-- Transfer account list -->
@@ -263,18 +263,18 @@
                             <p class="section__number" id="enterprise-account-balance"></p>
                         </div>
                     </section>
-                    <!-- Enterprise deposit form.js -->
+                    <!-- Enterprise deposit form -->
                     <section class="grid__section grid__section--with-border">
                         <form class="form" id="enterprise-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="enterprise-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--disabled" id="enterprise-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="button button--text button--secondary" type="button">Tout déposer</button>
@@ -282,16 +282,16 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Enterprise withdraw form.js -->
+                    <!-- Enterprise withdraw form -->
                     <section class="grid__section">
                         <form class="form" id="enterprise-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$">
                                 <p class="form__message" id="enterprise-withdraw-amount-message"></p>
                             </div>
-                            <button class="button button--text button--primary">Retirer</button>
+                            <button class="button button--text button--disabled" id="enterprise-withdraw-form-button" disabled>Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -323,18 +323,18 @@
                             <p class="section__number" id="offshore-account-balance"></p>
                         </div>
                     </section>
-                    <!-- offshore deposit form.js -->
+                    <!-- offshore deposit form -->
                     <section class="grid__section">
                         <form class="form" id="offshore-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="offshore-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="offshore-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary">Déposer</button>
+                                    <button class="button button--text button--disabled" id="offshore-deposit-form-button" disabled>Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="button button--text button--secondary">Tout déposer</button>

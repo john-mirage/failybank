@@ -36,84 +36,6 @@ function setAppTheme(bank) {
 setAppTheme(data.bank);
 
 /*------------------------------------*\
-  Fields verification
-\*------------------------------------*/
-
-function checkAccountNameField(input, message) {
-  if (!input.validity.valid) {
-    if (input.validity.valueMissing) {
-      message.textContent = "Veuillez entrer un nom";
-    } else if (input.validity.tooLong) {
-      message.textContent = "Le nom ne doit pas exeder 40 caractères";
-    } else {
-      message.textContent = "Il y a une erreur";
-    }
-    return false;
-  }
-  if (message.textContent.length > 0) message.textContent = "";
-  return true;
-}
-
-function checkAccountNumberField(input, message) {
-  if (!input.validity.valid) {
-    if (input.validity.valueMissing) {
-      message.textContent = "Veuillez entrer un numéro de compte";
-    } else if (input.validity.tooShort || input.validity.tooLong) {
-      message.textContent = "Le numéro de compte doit comporter 10 chiffres";
-    } else if (input.validity.patternMismatch) {
-      message.textContent = "Le numéro de compte ne comporte que des chiffres";
-    } else {
-      message.textContent = "Il y a une erreur";
-    }
-    return false;
-  }
-  if (message.textContent.length > 0) message.textContent = "";
-  return true;
-}
-
-function checkAmountField(input, message) {
-  if (!input.validity.valid) {
-    if (input.validity.valueMissing) {
-      message.textContent = "Veuillez entrer un montant";
-    } else if (input.validity.patternMismatch) {
-      message.textContent = "Le montant ne doit comporter que des chiffres";
-    } else {
-      message.textContent = "Il y a une erreur";
-    }
-    return false;
-  } else if (Number(input.value) < 50) {
-    message.textContent = "Le montant doit être supérieur où égale à 50$";
-    return false;
-  }
-  if (message.textContent.length > 0) message.textContent = "";
-  return true;
-}
-
-function checkWithdrawAmount(input, message, balance) {
-  const amount = Number(input.value);
-  if (balance < amount) {
-    message.textContent = "Vous n'avez pas les fonds nécessaires";
-    return false;
-  }
-  return true;
-}
-
-function checkReferenceField(input, message) {
-  if (!input.validity.valid) {
-    if (input.validity.valueMissing) {
-      message.textContent = "Veuillez entrer la référence du transfert";
-    } else if (input.validity.tooLong) {
-      message.textContent = "La référence du transfert ne doit exeder 40 caractères";
-    } else {
-      message.textContent = "Il y a une erreur";
-    }
-    return false;
-  }
-  if (message.textContent.length > 0) message.textContent = "";
-  return true;
-}
-
-/*------------------------------------*\
   Logs
 \*------------------------------------*/
 
@@ -230,8 +152,6 @@ const deleteAccountList = document.getElementById("account-delete-list");
 const deleteAccountTemplate = document.getElementById("account-delete-template");
 const pasteAccountList = document.getElementById("account-paste-list");
 const pasteAccountTemplate = document.getElementById("account-paste-template");
-const personalFavoriteAccountSumText = document.getElementById("personal-favorite-account-sum-text");
-const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form.js-button");
 
 const ACCOUNTS_LIMIT = 5;
 
@@ -239,7 +159,6 @@ class AccountList {
   constructor(accounts) {
     this.accounts = accounts;
     this.createList();
-    this.handleAddButton();
   }
 
   addAccount(account) {
@@ -298,21 +217,6 @@ class AccountList {
     deleteAccountList.innerHTML = "";
     pasteAccountList.innerText = "";
     this.createList();
-    this.handleAddButton();
-  }
-
-  handleAddButton() {
-    const numberOfAccounts = this.accounts.length;
-    personalFavoriteAccountSumText.textContent = `[${String(numberOfAccounts)}/5]`;
-    if (numberOfAccounts >= 5) {
-      if (personalFavoriteAccountFormButton.classList.contains("button--primary")) {
-        personalFavoriteAccountFormButton.classList.replace("button--primary", "button--disabled");
-        personalFavoriteAccountFormButton.setAttribute("disabled", "");
-      }
-    } else if (personalFavoriteAccountFormButton.classList.contains("button--disabled")) {
-      personalFavoriteAccountFormButton.classList.replace("button--disabled", "button--primary");
-      personalFavoriteAccountFormButton.removeAttribute("disabled");
-    }
   }
 }
 
@@ -458,12 +362,74 @@ class TopAppBarTab extends Tab {
 }
 
 /*------------------------------------*\
+  Forms
+\*------------------------------------*/
+
+class Form {
+  constructor(fields, buttonElt) {
+    this.fields = fields;
+    this.buttonElt = buttonElt;
+    this.buttonIsActive = false;
+    this.isActive = true;
+    this.fields.forEach((field) => {
+      field.inputElt.addEventListener("keyup", () => this.checkFields());
+    });
+  }
+
+  checkFields() {
+    if (this.isActive) {
+      const fieldsAreValid = this.fields.every((field) => field.checkField());
+      console.log(fieldsAreValid);
+      if (fieldsAreValid && !this.buttonIsActive) {
+        this.activateSubmitButton();
+      } else if (!fieldsAreValid && this.buttonIsActive) {
+        this.deactivateSubmitButton();
+      }
+    }
+  }
+
+  activate() {
+    this.isActive = true;
+    this.checkFields();
+  }
+
+  deactivate() {
+    this.isActive = false;
+    if (this.buttonIsActive) {
+      this.deactivateSubmitButton();
+    }
+  }
+
+  activateSubmitButton() {
+    this.buttonIsActive = true;
+    this.buttonElt.classList.replace("button--disabled", "button--primary");
+    this.buttonElt.removeAttribute("disabled");
+  }
+
+  deactivateSubmitButton() {
+    this.buttonIsActive = false;
+    this.buttonElt.classList.replace("button--primary", "button--disabled");
+    this.buttonElt.setAttribute("disabled", "");
+  }
+}
+
+class Field {
+  constructor(inputElt) {
+    this.inputElt = inputElt;
+  }
+
+  checkField() {
+    return this.inputElt.validity.valid;
+  }
+}
+
+/*------------------------------------*\
   Personal account
 \*------------------------------------*/
 
-const personalDepositForm = document.getElementById("personal-deposit-form.js");
-const personalWithdrawForm = document.getElementById("personal-withdraw-form.js");
-const personalTransferForm = document.getElementById("personal-transfer-form.js");
+const personalDepositFormElt = document.getElementById("personal-deposit-form");
+const personalWithdrawFormElt = document.getElementById("personal-withdraw-form");
+const personalTransferFormElt = document.getElementById("personal-transfer-form");
 const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
 const personalDepositAmountMessage = document.getElementById("personal-deposit-amount-message");
 const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
@@ -474,7 +440,7 @@ const personalTransferAccountNumberInput = document.getElementById("personal-tra
 const personalTransferAccountNumberMessage = document.getElementById("personal-transfer-account-number-message");
 const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
 const personalTransferReferenceMessage = document.getElementById("personal-transfer-reference-message");
-const personalFavoriteAccountForm = document.getElementById("personal-favorite-account-form.js");
+const personalFavoriteAccountFormElt = document.getElementById("personal-favorite-account-form");
 const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
 const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
 const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
@@ -492,6 +458,11 @@ const enterpriseTabContainer = document.getElementById("enterprise-tab");
 const enterpriseTabView = document.getElementById("enterprise-tab-view");
 const offshoreTabContainer = document.getElementById("offshore-tab");
 const offshoreTabView = document.getElementById("offshore-tab-view");
+const personalFavoriteAccountSumText = document.getElementById("personal-favorite-account-sum-text");
+const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form-button");
+const personalDepositFormButton = document.getElementById("personal-deposit-form-button");
+const personalWithdrawFormButton = document.getElementById("personal-withdraw-form-button");
+const personalTransferFormButton = document.getElementById("personal-transfer-form-button");
 
 function getCurrentFormattedDate() {
   const date = new Date();
@@ -517,6 +488,38 @@ const personalTransferTab = new TopAppBarTab(personalTransferTabContainer, perso
 
 const tabList = new TabList(personalTab, personalOperationTab, personalTransferTab);
 
+const personalFavoriteAccountNameField = new Field(personalFavoriteAccountNameInput);
+const personalFavoriteAccountNumberField = new Field(personalFavoriteAccountNumberInput);
+const personalDepositAmountField = new Field(personalDepositAmountInput);
+const personalWithdrawAmountField = new Field(personalWithdrawAmountInput);
+const personalTransferAmountField = new Field(personalTransferAmountInput);
+const personalTransferAccountNumberField = new Field(personalTransferAccountNumberInput);
+const personalTransferReferenceField = new Field(personalTransferReferenceInput);
+
+const personalFavoriteAccountForm = new Form(
+  [personalFavoriteAccountNameField, personalFavoriteAccountNumberField],
+  personalFavoriteAccountFormButton
+);
+
+const personalDepositForm = new Form(
+  [personalDepositAmountField],
+  personalDepositFormButton
+);
+
+const personalWithdrawForm = new Form(
+  [personalWithdrawAmountField],
+  personalWithdrawFormButton
+);
+
+const personalTransferForm = new Form(
+  [personalTransferAmountField, personalTransferAccountNumberField, personalTransferReferenceField],
+  personalTransferFormButton
+);
+
+if (personalAccount.favoriteAccountList.accounts.length >= 5) {
+  personalFavoriteAccountForm.deactivate();
+}
+
 function handlePersonalThemeButton(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
   if (personalAccount.theme === "dark") {
@@ -532,81 +535,64 @@ function handlePersonalThemeButton(event) {
 
 function handlePersonalFavoriteAccountForm(event) {
   event.preventDefault();
-  const accountNameFieldIsValid = checkAccountNameField(personalFavoriteAccountNameInput, personalFavoriteAccountNameMessage);
-  const accountNumberFieldIsValid = checkAccountNumberField(personalFavoriteAccountNumberInput, personalFavoriteAccountNumberMessage);
-  if (accountNameFieldIsValid && accountNumberFieldIsValid) {
-    const account = {
-      name: personalFavoriteAccountNameInput.value,
-      number: personalFavoriteAccountNumberInput.value
-    }
-    personalAccount.favoriteAccountList.addAccount(account);
-    personalFavoriteAccountForm.reset();
+  const account = {
+    name: personalFavoriteAccountNameInput.value,
+    number: personalFavoriteAccountNumberInput.value
   }
+  personalAccount.favoriteAccountList.addAccount(account);
+  personalFavoriteAccountForm.reset();
 }
 
 function handlePersonalDepositForm(event) {
   event.preventDefault();
-  const amountFieldIsValid = checkAmountField(personalDepositAmountInput, personalDepositAmountMessage);
-  if (amountFieldIsValid) {
-    const depositAmount = Number(personalDepositAmountInput.value);
-    const log = {
-      label: "Dépot",
-      amount: depositAmount,
-      date: getCurrentFormattedDate(),
-      reference: "Dépot sur votre compte",
-      type: "operation"
-    }
-    personalAccount.logList.addLog(log);
-    personalAccount.operationLogList.addLog(log);
-    personalAccount.balance += depositAmount;
-    personalAccount.displayBalance();
-    personalDepositForm.reset();
+  const depositAmount = Number(personalDepositAmountInput.value);
+  const log = {
+    label: "Dépot",
+    amount: depositAmount,
+    date: getCurrentFormattedDate(),
+    reference: "Dépot sur votre compte",
+    type: "operation"
   }
+  personalAccount.logList.addLog(log);
+  personalAccount.operationLogList.addLog(log);
+  personalAccount.balance += depositAmount;
+  personalAccount.displayBalance();
+  personalDepositForm.reset();
 }
 
 function handlePersonalWithdrawForm(event) {
   event.preventDefault();
-  const withdrawFieldIsValid = checkAmountField(personalWithdrawAmountInput, personalWithdrawAmountMessage);
-  const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(personalWithdrawAmountInput, personalWithdrawAmountMessage, personalAccount.balance) : false;
-  if (withdrawFieldIsValid && withdrawAmountIsValid) {
-    const withdrawAmount = Number(personalWithdrawAmountInput.value);
-    const log = {
-      label: "Retrait",
-      amount: -withdrawAmount,
-      date: getCurrentFormattedDate(),
-      reference: "Retrait depuis votre compte",
-      type: "operation"
-    }
-    personalAccount.logList.addLog(log);
-    personalAccount.operationLogList.addLog(log);
-    personalAccount.balance -= withdrawAmount;
-    personalAccount.displayBalance();
-    personalWithdrawForm.reset();
+  const withdrawAmount = Number(personalWithdrawAmountInput.value);
+  const log = {
+    label: "Retrait",
+    amount: -withdrawAmount,
+    date: getCurrentFormattedDate(),
+    reference: "Retrait depuis votre compte",
+    type: "operation"
   }
+  personalAccount.logList.addLog(log);
+  personalAccount.operationLogList.addLog(log);
+  personalAccount.balance -= withdrawAmount;
+  personalAccount.displayBalance();
+  personalWithdrawForm.reset();
 }
 
 function handlePersonalTransferForm(event) {
   event.preventDefault();
-  const transferAmountFieldIsValid = checkAmountField(personalTransferAmountInput, personalTransferAmountMessage);
-  const transferAmountIsValid = transferAmountFieldIsValid ? checkWithdrawAmount(personalTransferAmountInput, personalTransferAmountMessage, personalAccount.balance) : false;
-  const transferAccountFieldIsValid = checkAccountNumberField(personalTransferAccountNumberInput, personalTransferAccountNumberMessage);
-  const transferReferenceFieldIsValid = checkReferenceField(personalTransferReferenceInput, personalTransferReferenceMessage);
-  if (transferAmountFieldIsValid && transferAmountIsValid && transferAccountFieldIsValid && transferReferenceFieldIsValid) {
-    const transferAmount = Number(personalTransferAmountInput.value);
-    const transferAccountNumber = personalTransferAccountNumberInput.value;
-    const transferReference = personalTransferReferenceInput.value;
-    const log = {
-      label: "Transfert",
-      amount: -transferAmount,
-      date: getCurrentFormattedDate(),
-      reference: transferReference,
-      type: "operation"
-    }
-    personalAccount.logList.addLog(log);
-    personalAccount.balance -= transferAmount;
-    personalAccount.displayBalance();
-    personalTransferForm.reset();
+  const transferAmount = Number(personalTransferAmountInput.value);
+  const transferAccountNumber = personalTransferAccountNumberInput.value;
+  const transferReference = personalTransferReferenceInput.value;
+  const log = {
+    label: "Transfert",
+    amount: -transferAmount,
+    date: getCurrentFormattedDate(),
+    reference: transferReference,
+    type: "operation"
   }
+  personalAccount.logList.addLog(log);
+  personalAccount.balance -= transferAmount;
+  personalAccount.displayBalance();
+  personalTransferForm.reset();
 }
 
 personalTabInput.addEventListener("change", () => {
@@ -629,23 +615,25 @@ personalTransferTabInput.addEventListener("change", () => {
 });
 
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
-personalFavoriteAccountForm.addEventListener("submit", handlePersonalFavoriteAccountForm);
-personalDepositForm.addEventListener("submit", handlePersonalDepositForm);
-personalWithdrawForm.addEventListener("submit", handlePersonalWithdrawForm);
-personalTransferForm.addEventListener("submit", handlePersonalTransferForm);
+personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
+personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
+personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
+personalTransferFormElt.addEventListener("submit", handlePersonalTransferForm);
 
 /*------------------------------------*\
   Enterprise & Offshore accounts
 \*------------------------------------*/
 
 if (data.hasEnterprise) {
-  const enterpriseDepositForm = document.getElementById("enterprise-deposit-form.js");
-  const enterpriseWithdrawForm = document.getElementById("enterprise-withdraw-form.js");
+  const enterpriseDepositFormElt = document.getElementById("enterprise-deposit-form");
+  const enterpriseWithdrawFormElt = document.getElementById("enterprise-withdraw-form");
   const enterpriseDepositAmountInput = document.getElementById("enterprise-deposit-amount-input");
   const enterpriseDepositAmountMessage = document.getElementById("enterprise-deposit-amount-message");
   const enterpriseWithdrawAmountInput = document.getElementById("enterprise-withdraw-amount-input");
   const enterpriseWithdrawAmountMessage = document.getElementById("enterprise-withdraw-amount-message");
   const enterpriseTabInput = document.getElementById("enterprise-tab-input");
+  const enterpriseDepositFormButton = document.getElementById("enterprise-deposit-form-button");
+  const enterpriseWithdrawFormButton = document.getElementById("enterprise-withdraw-form-button");
 
   const enterpriseAccount = new Account(
     data.account.enterprise,
@@ -658,43 +646,49 @@ if (data.hasEnterprise) {
 
   tabList.addTab(enterpriseTab);
 
+  const enterpriseDepositField = new Field(enterpriseDepositAmountInput);
+  const enterpriseWithdrawField = new Field(enterpriseWithdrawAmountInput);
+
+  const enterpriseDepositForm = new Form(
+    [enterpriseDepositField],
+    enterpriseDepositFormButton
+  );
+
+  const enterpriseWithdrawForm = new Form(
+    [enterpriseWithdrawField],
+    enterpriseWithdrawFormButton
+  );
+
   function handleEnterpriseDepositForm(event) {
     event.preventDefault();
-    const amountFieldIsValid = checkAmountField(enterpriseDepositAmountInput, enterpriseDepositAmountMessage);
-    if (amountFieldIsValid) {
-      const depositAmount = Number(enterpriseDepositAmountInput.value);
-      const log = {
-        label: "Dépot",
-        amount: depositAmount,
-        date: getCurrentFormattedDate(),
-        reference: "Dépot sur votre compte",
-        type: "operation"
-      }
-      enterpriseAccount.logList.addLog(log);
-      enterpriseAccount.balance += depositAmount;
-      enterpriseAccount.displayBalance();
-      enterpriseDepositForm.reset();
+    const depositAmount = Number(enterpriseDepositAmountInput.value);
+    const log = {
+      label: "Dépot",
+      amount: depositAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Dépot sur votre compte",
+      type: "operation"
     }
+    enterpriseAccount.logList.addLog(log);
+    enterpriseAccount.balance += depositAmount;
+    enterpriseAccount.displayBalance();
+    enterpriseDepositForm.reset();
   }
 
   function handleEnterpriseWithdrawForm(event) {
     event.preventDefault();
-    const withdrawFieldIsValid = checkAmountField(enterpriseWithdrawAmountInput, enterpriseWithdrawAmountMessage);
-    const withdrawAmountIsValid = withdrawFieldIsValid ? checkWithdrawAmount(enterpriseWithdrawAmountInput, enterpriseWithdrawAmountMessage, enterpriseAccount.balance) : false;
-    if (withdrawFieldIsValid && withdrawAmountIsValid) {
-      const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
-      const log = {
-        label: "Retrait",
-        amount: -withdrawAmount,
-        date: getCurrentFormattedDate(),
-        reference: "Retrait depuis votre compte",
-        type: "operation"
-      }
-      enterpriseAccount.logList.addLog(log);
-      enterpriseAccount.balance -= withdrawAmount;
-      enterpriseAccount.displayBalance();
-      enterpriseWithdrawForm.reset();
+    const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
+    const log = {
+      label: "Retrait",
+      amount: -withdrawAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Retrait depuis votre compte",
+      type: "operation"
     }
+    enterpriseAccount.logList.addLog(log);
+    enterpriseAccount.balance -= withdrawAmount;
+    enterpriseAccount.displayBalance();
+    enterpriseWithdrawForm.reset();
   }
 
   enterpriseTabInput.addEventListener("change", () => {
@@ -704,14 +698,15 @@ if (data.hasEnterprise) {
     enterpriseAccount.logList.createPageLogs();
   });
 
-  enterpriseDepositForm.addEventListener("submit", handleEnterpriseDepositForm);
-  enterpriseWithdrawForm.addEventListener("submit", handleEnterpriseWithdrawForm);
+  enterpriseDepositFormElt.addEventListener("submit", handleEnterpriseDepositForm);
+  enterpriseWithdrawFormElt.addEventListener("submit", handleEnterpriseWithdrawForm);
 
   if (data.hasOffshore) {
-    const offshoreDepositForm = document.getElementById("offshore-deposit-form.js");
+    const offshoreDepositFormElt = document.getElementById("offshore-deposit-form");
     const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
     const offshoreDepositAmountMessage = document.getElementById("offshore-deposit-amount-message");
     const offshoreTabInput = document.getElementById("offshore-tab-input");
+    const offshoreDepositFormButton = document.getElementById("offshore-deposit-form-button");
 
     const offshoreAccount = new Account(
       data.account.offshore,
@@ -724,23 +719,27 @@ if (data.hasEnterprise) {
 
     tabList.addTab(offshoreTab);
 
+    const offshoreDepositField = new Field(offshoreDepositAmountInput);
+
+    const offshoreDepositForm = new Form(
+      [offshoreDepositField],
+      offshoreDepositFormButton
+    );
+
     function handleOffshoreDepositForm(event) {
       event.preventDefault();
-      const amountFieldIsValid = checkAmountField(offshoreDepositAmountInput, offshoreDepositAmountMessage);
-      if (amountFieldIsValid) {
-        const depositAmount = Number(offshoreDepositAmountInput.value);
-        const log = {
-          label: "Dépot",
-          amount: depositAmount,
-          date: getCurrentFormattedDate(),
-          reference: "Dépot sur votre compte",
-          type: "operation"
-        }
-        offshoreAccount.logList.addLog(log);
-        offshoreAccount.balance += depositAmount;
-        offshoreAccount.displayBalance();
-        offshoreDepositForm.reset();
+      const depositAmount = Number(offshoreDepositAmountInput.value);
+      const log = {
+        label: "Dépot",
+        amount: depositAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot sur votre compte",
+        type: "operation"
       }
+      offshoreAccount.logList.addLog(log);
+      offshoreAccount.balance += depositAmount;
+      offshoreAccount.displayBalance();
+      offshoreDepositForm.reset();
     }
 
     offshoreTabInput.addEventListener("change", () => {
@@ -750,7 +749,7 @@ if (data.hasEnterprise) {
       offshoreAccount.logList.createPageLogs();
     });
 
-    offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
+    offshoreDepositFormElt.addEventListener("submit", handleOffshoreDepositForm);
   } else {
     offshoreTabContainer.remove();
     offshoreTabView.remove();
