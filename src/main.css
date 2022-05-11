@@ -141,7 +141,7 @@ html {
 /*------------------------------------*\
   BAR
 \*------------------------------------*/
-.bar {
+.top-app-bar {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -155,30 +155,30 @@ html {
     border-bottom: 1px solid var(--color-border);
 }
 
-.bar__section {
+.top-app-bar__section {
     box-sizing: border-box;
     flex: 1 1 0;
 }
 
-.bar__section--middle {
+.top-app-bar__section--middle {
     height: 100%;
 }
 
-.bar__section--right {
+.top-app-bar__section--right {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-start;
 }
 
-.bar__section--row {
+.top-app-bar__section--row {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 }
 
-.bar__logo {
+.top-app-bar__logo {
     box-sizing: border-box;
     display: block;
     width: 36px;
@@ -187,19 +187,19 @@ html {
     pointer-events: none;
 }
 
-.maze .bar__logo {
+.maze .top-app-bar__logo {
     color: var(--color-maze);
 }
 
-.fleeca .bar__logo {
+.fleeca .top-app-bar__logo {
     color: var(--color-fleeca);
 }
 
-.maze .bar__logo--fleeca {
+.maze .top-app-bar__logo--fleeca {
     display: none;
 }
 
-.fleeca .bar__logo--maze {
+.fleeca .top-app-bar__logo--maze {
     display: none;
 }
 
@@ -315,6 +315,18 @@ html {
     height: auto;
     padding-top: 16px;
     padding-bottom: 16px;
+}
+
+.toggle-button__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .toggle-button__input {
@@ -537,6 +549,18 @@ html {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.button__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .button__input {

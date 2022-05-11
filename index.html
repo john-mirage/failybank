@@ -24,12 +24,12 @@
         <div class="app__container" id="app-container">
 
             <!-- Bar -->
-            <header class="bar">
-                <div class="bar__section bar__section--row">
-                    <svg class="bar__logo bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <header class="top-app-bar">
+                <div class="top-app-bar__section top-app-bar__section--row">
+                    <svg class="top-app-bar__logo top-app-bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
                     </svg>
-                    <svg class="bar__logo bar__logo--fleeca" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="top-app-bar__logo top-app-bar__logo--fleeca" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M31.167 25.5L29.917 33H41.917L41 38.5H23L27.167 13.5H12.167L11 20.5H24L23.167 25.5H10.167L8.917 33H21.917L21 38.5H2L7 8.5H46L45.167 13.5H33.167L32 20.5H44L43.167 25.5H31.167Z"/>
                     </svg>
                     <!-- Balance -->
@@ -38,7 +38,7 @@
                         <p class="balance__value" id="personal-account-balance"></p>
                     </div>
                 </div>
-                <div class="bar__section bar__section--middle">
+                <div class="top-app-bar__section top-app-bar__section--middle">
                     <!-- Tab list -->
                     <div class="tab-list">
                         <div class="tab-list__item tab-list__item--active" id="personal-tab">
@@ -59,28 +59,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="bar__section bar__section--right">
+                <div class="top-app-bar__section top-app-bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
+                        <label class="toggle-button__label" for="personal-theme-button">Theme</label>
                         <input class="toggle-button__input" id="personal-theme-button" type="checkbox">
-                        <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            fill="currentColor">
-                            <path
-                                d="M256 118a22 22 0 01-22-22V48a22 22 0 0144 0v48a22 22 0 01-22 22zM256 486a22 22 0 01-22-22v-48a22 22 0 0144 0v48a22 22 0 01-22 22zM369.14 164.86a22 22 0 01-15.56-37.55l33.94-33.94a22 22 0 0131.11 31.11l-33.94 33.94a21.93 21.93 0 01-15.55 6.44zM108.92 425.08a22 22 0 01-15.55-37.56l33.94-33.94a22 22 0 1131.11 31.11l-33.94 33.94a21.94 21.94 0 01-15.56 6.45zM464 278h-48a22 22 0 010-44h48a22 22 0 010 44zM96 278H48a22 22 0 010-44h48a22 22 0 010 44zM403.08 425.08a21.94 21.94 0 01-15.56-6.45l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.55 37.56zM142.86 164.86a21.89 21.89 0 01-15.55-6.44l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.56 37.55zM256 358a102 102 0 11102-102 102.12 102.12 0 01-102 102z" />
+                        <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                            <path d="M256 118a22 22 0 01-22-22V48a22 22 0 0144 0v48a22 22 0 01-22 22zM256 486a22 22 0 01-22-22v-48a22 22 0 0144 0v48a22 22 0 01-22 22zM369.14 164.86a22 22 0 01-15.56-37.55l33.94-33.94a22 22 0 0131.11 31.11l-33.94 33.94a21.93 21.93 0 01-15.55 6.44zM108.92 425.08a22 22 0 01-15.55-37.56l33.94-33.94a22 22 0 1131.11 31.11l-33.94 33.94a21.94 21.94 0 01-15.56 6.45zM464 278h-48a22 22 0 010-44h48a22 22 0 010 44zM96 278H48a22 22 0 010-44h48a22 22 0 010 44zM403.08 425.08a21.94 21.94 0 01-15.56-6.45l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.55 37.56zM142.86 164.86a21.89 21.89 0 01-15.55-6.44l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.56 37.55zM256 358a102 102 0 11102-102 102.12 102.12 0 01-102 102z" />
                         </svg>
                         <div class="toggle-button__track">
                             <div class="toggle-button__handle"></div>
                         </div>
-                        <svg class="toggle-button__icon toggle-button__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            fill="currentColor">
-                            <path
-                                d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z" />
+                        <svg class="toggle-button__icon toggle-button__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                            <path d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z" />
                         </svg>
                     </div>
                 </div>
             </header>
 
-            <!-- View / account -->
+            <!-- View / personal -->
             <div class="view view--active" id="personal-tab-view">
                 <div class="grid grid--account">
                     <!-- Account owner -->
@@ -146,7 +143,7 @@
                 </div>
             </div>
 
-            <!-- View / operation -->
+            <!-- View / personal operation -->
             <div class="view" id="personal-operation-tab-view">
                 <div class="grid grid--operation">
                     <!-- Operation deposit form -->
@@ -192,7 +189,7 @@
                 </div>
             </div>
 
-            <!-- View / transfer -->
+            <!-- View / personal transfer -->
             <div class="view" id="personal-transfer-tab-view">
                 <div class="grid grid--transfer">
                     <!-- Transfer form -->
@@ -253,6 +250,7 @@
                                     <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
                                     </svg>
+                                    <label class="button__label" for="offshore-tab-input">Offshore</label>
                                     <input class="button__input" type="radio" name="tab" id="offshore-tab-input">
                                 </div>
                             </div>

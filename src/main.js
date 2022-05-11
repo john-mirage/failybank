@@ -123,14 +123,13 @@ const LOGS_PER_PAGE = 10;
 
 class LogList {
   constructor(logs, list) {
-    this.logList = list;
+    this.listElt = list;
     this.logs = logs;
     this.page = 1;
     this.observer = new IntersectionObserver((entries) => this.getNextPage(entries));
     this.observedLog = false;
     this.getPageNumber();
     this.getPageLogs();
-    this.createPageLogs();
   }
 
   addLog(log) {
@@ -157,9 +156,9 @@ class LogList {
     logAmount.textContent = currencyFormatter.format(log.amount);
     logReference.textContent = log.reference;
     if (prepend) {
-      this.logList.prepend(logFragment);
+      this.listElt.prepend(logFragment);
     } else {
-      this.logList.appendChild(logFragment);
+      this.listElt.appendChild(logFragment);
     }
     if (observe) {
       this.observedLog = logRow;
@@ -185,6 +184,7 @@ class LogList {
 
   getNextPage(entries) {
     if (entries[0].isIntersecting) {
+      console.log("intersecting")
       this.page += 1;
       this.getPageLogs();
       this.createPageLogs();
@@ -203,10 +203,19 @@ class LogList {
   }
 
   resetList() {
-    this.logList.innerHTML = "";
+    this.clearList();
+    this.createPageLogs();
+  }
+
+  clearList() {
+    if (this.observedLog) {
+      this.observer.unobserve(this.observedLog);
+      this.observedLog = false;
+    }
+    this.listElt.scrollTop = 0;
+    this.listElt.innerHTML = "";
     this.page = 1;
     this.getPageLogs();
-    this.createPageLogs();
   }
 }
 
@@ -361,7 +370,7 @@ class PersonalAccount extends Account {
       account,
       ownerElement,
       balanceElement,
-      logListElement,
+      logListElement
     );
     this.number = account.number;
     this.numberElement = numberElement;
@@ -401,12 +410,10 @@ class TabList {
   constructor(...tabs) {
     this.tabs = tabs;
     this.activeTab = tabs[0];
-    this.listenTabs();
   }
 
   addTab(tab) {
     this.tabs = [...this.tabs, tab];
-    this.listenTab(tab);
   }
 
   setActiveTab(tab) {
@@ -414,54 +421,36 @@ class TabList {
     this.activeTab = tab;
     this.activeTab.activate();
   }
-
-  listenTab(tab) {
-    tab.inputElt.addEventListener("change", () => {
-      this.setActiveTab(tab);
-    });
-  }
-
-  listenTabs() {
-    this.tabs.forEach((tab) => {
-      this.listenTab(tab);
-    });
-  }
 }
 
 class Tab {
-  constructor(containerElt, inputElt, viewElt) {
-    this.containerElt = containerElt;
-    this.inputElt = inputElt;
+  constructor(viewElt) {
     this.viewElt = viewElt;
   }
 
   activate() {
-    this.containerElt.classList.add("tab-list__item--active");
     this.viewElt.classList.add("view--active");
   }
 
   deactivate() {
-    this.containerElt.classList.remove("tab-list__item--active");
     this.viewElt.classList.remove("view--active");
-  }
-
-  remove() {
-    this.containerElt.remove();
-    this.viewElt.remove();
   }
 }
 
-class OffshoreTab extends Tab {
-  constructor(containerElt, inputElt, viewElt) {
-    super(containerElt, inputElt, viewElt);
+class TopAppBarTab extends Tab {
+  constructor(containerElt, viewElt) {
+    super(viewElt);
+    this.containerElt = containerElt;
   }
 
   activate() {
-    this.viewElt.classList.add("view--active");
+    super.activate();
+    this.containerElt.classList.add("tab-list__item--active");
   }
 
   deactivate() {
-    this.viewElt.classList.remove("view--active");
+    super.deactivate();
+    this.containerElt.classList.remove("tab-list__item--active");
   }
 }
 
@@ -506,30 +495,6 @@ function getCurrentFormattedDate() {
   return date.toISOString();
 }
 
-const personalTab = new Tab(
-  personalTabContainer,
-  personalTabInput,
-  personalTabView
-);
-
-const personalOperationTab = new Tab(
-  personalOperationTabContainer,
-  personalOperationTabInput,
-  personalOperationTabView
-);
-
-const personalTransferTab = new Tab(
-  personalTransferTabContainer,
-  personalTransferTabInput,
-  personalTransferTabView
-);
-
-const tabList = new TabList(
-  personalTab,
-  personalOperationTab,
-  personalTransferTab
-);
-
 const personalAccount = new PersonalAccount(
   data.account.personal,
   document.getElementById("personal-account-owner"),
@@ -538,6 +503,16 @@ const personalAccount = new PersonalAccount(
   document.getElementById("personal-account-number"),
   document.getElementById("personal-account-operation-log-list")
 );
+
+personalAccount.logList.createPageLogs();
+
+let previousLogList = personalAccount.logList;
+
+const personalTab = new TopAppBarTab(personalTabContainer, personalTabView);
+const personalOperationTab = new TopAppBarTab(personalOperationTabContainer, personalOperationTabView);
+const personalTransferTab = new TopAppBarTab(personalTransferTabContainer, personalTransferTabView);
+
+const tabList = new TabList(personalTab, personalOperationTab, personalTransferTab);
 
 function handlePersonalThemeButton(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
@@ -562,6 +537,7 @@ function handlePersonalFavoriteAccountForm(event) {
       number: personalFavoriteAccountNumberInput.value
     }
     personalAccount.favoriteAccountList.addAccount(account);
+    personalFavoriteAccountForm.reset();
   }
 }
 
@@ -581,6 +557,7 @@ function handlePersonalDepositForm(event) {
     personalAccount.operationLogList.addLog(log);
     personalAccount.balance += depositAmount;
     personalAccount.displayBalance();
+    personalDepositForm.reset();
   }
 }
 
@@ -601,6 +578,7 @@ function handlePersonalWithdrawForm(event) {
     personalAccount.operationLogList.addLog(log);
     personalAccount.balance -= withdrawAmount;
     personalAccount.displayBalance();
+    personalWithdrawForm.reset();
   }
 }
 
@@ -624,8 +602,30 @@ function handlePersonalTransferForm(event) {
     personalAccount.logList.addLog(log);
     personalAccount.balance -= transferAmount;
     personalAccount.displayBalance();
+    personalTransferForm.reset();
   }
 }
+
+personalTabInput.addEventListener("change", () => {
+  tabList.setActiveTab(personalTab);
+  previousLogList.clearList();
+  previousLogList = personalAccount.logList;
+  personalAccount.logList.createPageLogs();
+});
+
+personalOperationTabInput.addEventListener("change", () => {
+  tabList.setActiveTab(personalOperationTab);
+  previousLogList.clearList();
+  previousLogList = personalAccount.operationLogList;
+  personalAccount.operationLogList.createPageLogs();
+});
+
+personalTransferTabInput.addEventListener("change", () => {
+  tabList.setActiveTab(personalTransferTab);
+  if (previousLogList.page > 1) {
+    previousLogList.clearList();
+  }
+});
 
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountForm.addEventListener("submit", handlePersonalFavoriteAccountForm);
@@ -646,20 +646,16 @@ if (data.hasEnterprise) {
   const enterpriseWithdrawAmountMessage = document.getElementById("enterprise-withdraw-amount-message");
   const enterpriseTabInput = document.getElementById("enterprise-tab-input");
 
-  const enterpriseTab = new Tab(
-    enterpriseTabContainer,
-    enterpriseTabInput,
-    enterpriseTabView
-  );
-
-  tabList.addTab(enterpriseTab);
-
   const enterpriseAccount = new Account(
     data.account.enterprise,
     document.getElementById("enterprise-account-owner"),
     document.getElementById("enterprise-account-balance"),
     document.getElementById("enterprise-account-log-list")
   );
+
+  const enterpriseTab = new TopAppBarTab(enterpriseTabContainer, enterpriseTabView);
+
+  tabList.addTab(enterpriseTab);
 
   function handleEnterpriseDepositForm(event) {
     event.preventDefault();
@@ -676,6 +672,7 @@ if (data.hasEnterprise) {
       enterpriseAccount.logList.addLog(log);
       enterpriseAccount.balance += depositAmount;
       enterpriseAccount.displayBalance();
+      enterpriseDepositForm.reset();
     }
   }
 
@@ -695,8 +692,16 @@ if (data.hasEnterprise) {
       enterpriseAccount.logList.addLog(log);
       enterpriseAccount.balance -= withdrawAmount;
       enterpriseAccount.displayBalance();
+      enterpriseWithdrawForm.reset();
     }
   }
+
+  enterpriseTabInput.addEventListener("change", () => {
+    tabList.setActiveTab(enterpriseTab);
+    previousLogList.clearList();
+    previousLogList = enterpriseAccount.logList;
+    enterpriseAccount.logList.createPageLogs();
+  });
 
   enterpriseDepositForm.addEventListener("submit", handleEnterpriseDepositForm);
   enterpriseWithdrawForm.addEventListener("submit", handleEnterpriseWithdrawForm);
@@ -707,20 +712,16 @@ if (data.hasEnterprise) {
     const offshoreDepositAmountMessage = document.getElementById("offshore-deposit-amount-message");
     const offshoreTabInput = document.getElementById("offshore-tab-input");
 
-    const offshoreTab = new OffshoreTab(
-      offshoreTabContainer,
-      offshoreTabInput,
-      offshoreTabView
-    );
-
-    tabList.addTab(offshoreTab);
-
     const offshoreAccount = new Account(
       data.account.offshore,
       document.getElementById("offshore-account-owner"),
       document.getElementById("offshore-account-balance"),
       document.getElementById("offshore-account-log-list")
     );
+
+    const offshoreTab = new Tab(offshoreTabView);
+
+    tabList.addTab(offshoreTab);
 
     function handleOffshoreDepositForm(event) {
       event.preventDefault();
@@ -737,8 +738,16 @@ if (data.hasEnterprise) {
         offshoreAccount.logList.addLog(log);
         offshoreAccount.balance += depositAmount;
         offshoreAccount.displayBalance();
+        offshoreDepositForm.reset();
       }
     }
+
+    offshoreTabInput.addEventListener("change", () => {
+      tabList.setActiveTab(offshoreTab);
+      previousLogList.clearList();
+      previousLogList = offshoreAccount.logList;
+      offshoreAccount.logList.createPageLogs();
+    });
 
     offshoreDepositForm.addEventListener("submit", handleOffshoreDepositForm);
   } else {
