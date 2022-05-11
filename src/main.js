@@ -394,6 +394,7 @@ class Form {
 
   reset() {
     this.formElt.reset();
+    this.deactivateSubmitButton();
   }
 
   activate() {
