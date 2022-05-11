@@ -58,14 +58,12 @@ class LogList {
 
   addLog(log) {
     this.logs.unshift(log);
-    this.resetList();
+    if (this.page > 1) {
+      this.page = 1;
+    }
   }
 
-  createLog(
-    log,
-    prepend = false,
-    observe = false
-  ) {
+  createLog(log, prepend = false, observe = false) {
     const logFragment = logTemplate.content.cloneNode(true);
     const logRow = logFragment.querySelector(".log");
     const logIcon = logRow.querySelector(".log__icon");
@@ -91,6 +89,7 @@ class LogList {
   }
 
   createPageLogs() {
+    this.getPageLogs();
     if (this.observedLog) {
       this.observer.unobserve(this.observedLog);
       this.observedLog = false;
@@ -131,15 +130,18 @@ class LogList {
   }
 
   clearList() {
-    if (this.observedLog) {
-      this.observer.unobserve(this.observedLog);
-      this.observedLog = false;
-    }
+    this.unobserveList();
     this.listElt.scrollTop = 0;
     this.listElt.innerHTML = "";
     if (this.page > 1) {
       this.page = 1;
-      this.getPageLogs();
+    }
+  }
+
+  unobserveList() {
+    if (this.observedLog) {
+      this.observer.unobserve(this.observedLog);
+      this.observedLog = false;
     }
   }
 }
@@ -331,7 +333,8 @@ class TabList {
 }
 
 class Tab {
-  constructor(viewElt) {
+  constructor(name, viewElt) {
+    this.name = name;
     this.viewElt = viewElt;
   }
 
@@ -345,8 +348,8 @@ class Tab {
 }
 
 class TopAppBarTab extends Tab {
-  constructor(containerElt, viewElt) {
-    super(viewElt);
+  constructor(name, viewElt, containerElt) {
+    super(name, viewElt);
     this.containerElt = containerElt;
   }
 
@@ -366,8 +369,9 @@ class TopAppBarTab extends Tab {
 \*------------------------------------*/
 
 class Form {
-  constructor(fields, buttonElt) {
+  constructor(fields, formElt, buttonElt) {
     this.fields = fields;
+    this.formElt = formElt;
     this.buttonElt = buttonElt;
     this.buttonIsActive = false;
     this.isActive = true;
@@ -386,6 +390,10 @@ class Form {
         this.deactivateSubmitButton();
       }
     }
+  }
+
+  reset() {
+    this.formElt.reset();
   }
 
   activate() {
@@ -431,20 +439,13 @@ const personalDepositFormElt = document.getElementById("personal-deposit-form");
 const personalWithdrawFormElt = document.getElementById("personal-withdraw-form");
 const personalTransferFormElt = document.getElementById("personal-transfer-form");
 const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
-const personalDepositAmountMessage = document.getElementById("personal-deposit-amount-message");
 const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
-const personalWithdrawAmountMessage = document.getElementById("personal-withdraw-amount-message");
 const personalTransferAmountInput = document.getElementById("personal-transfer-amount-input");
-const personalTransferAmountMessage = document.getElementById("personal-transfer-amount-message");
 const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
-const personalTransferAccountNumberMessage = document.getElementById("personal-transfer-account-number-message");
 const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
-const personalTransferReferenceMessage = document.getElementById("personal-transfer-reference-message");
 const personalFavoriteAccountFormElt = document.getElementById("personal-favorite-account-form");
 const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
-const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
 const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
-const personalFavoriteAccountNumberMessage = document.getElementById("personal-favorite-account-number-message");
 const personalTabContainer = document.getElementById("personal-tab");
 const personalTabInput = document.getElementById("personal-tab-input");
 const personalTabView = document.getElementById("personal-tab-view");
@@ -458,7 +459,6 @@ const enterpriseTabContainer = document.getElementById("enterprise-tab");
 const enterpriseTabView = document.getElementById("enterprise-tab-view");
 const offshoreTabContainer = document.getElementById("offshore-tab");
 const offshoreTabView = document.getElementById("offshore-tab-view");
-const personalFavoriteAccountSumText = document.getElementById("personal-favorite-account-sum-text");
 const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form-button");
 const personalDepositFormButton = document.getElementById("personal-deposit-form-button");
 const personalWithdrawFormButton = document.getElementById("personal-withdraw-form-button");
@@ -482,9 +482,9 @@ personalAccount.logList.createPageLogs();
 
 let previousLogList = personalAccount.logList;
 
-const personalTab = new TopAppBarTab(personalTabContainer, personalTabView);
-const personalOperationTab = new TopAppBarTab(personalOperationTabContainer, personalOperationTabView);
-const personalTransferTab = new TopAppBarTab(personalTransferTabContainer, personalTransferTabView);
+const personalTab = new TopAppBarTab("personal", personalTabView, personalTabContainer);
+const personalOperationTab = new TopAppBarTab("personal-operation", personalOperationTabView, personalOperationTabContainer);
+const personalTransferTab = new TopAppBarTab("personal-transfer", personalTransferTabView, personalTransferTabContainer);
 
 const tabList = new TabList(personalTab, personalOperationTab, personalTransferTab);
 
@@ -498,21 +498,25 @@ const personalTransferReferenceField = new Field(personalTransferReferenceInput)
 
 const personalFavoriteAccountForm = new Form(
   [personalFavoriteAccountNameField, personalFavoriteAccountNumberField],
+  personalFavoriteAccountFormElt,
   personalFavoriteAccountFormButton
 );
 
 const personalDepositForm = new Form(
   [personalDepositAmountField],
+  personalDepositFormElt,
   personalDepositFormButton
 );
 
 const personalWithdrawForm = new Form(
   [personalWithdrawAmountField],
+  personalWithdrawFormElt,
   personalWithdrawFormButton
 );
 
 const personalTransferForm = new Form(
   [personalTransferAmountField, personalTransferAccountNumberField, personalTransferReferenceField],
+  personalTransferFormElt,
   personalTransferFormButton
 );
 
@@ -554,7 +558,13 @@ function handlePersonalDepositForm(event) {
     type: "operation"
   }
   personalAccount.logList.addLog(log);
+  if (tabList.activeTab.name === "personal") {
+    personalAccount.logList.resetList();
+  }
   personalAccount.operationLogList.addLog(log);
+  if (tabList.activeTab.name === "personal-operation") {
+    personalAccount.operationLogList.resetList();
+  }
   personalAccount.balance += depositAmount;
   personalAccount.displayBalance();
   personalDepositForm.reset();
@@ -571,7 +581,13 @@ function handlePersonalWithdrawForm(event) {
     type: "operation"
   }
   personalAccount.logList.addLog(log);
+  if (tabList.activeTab.name === "personal") {
+    personalAccount.logList.resetList();
+  }
   personalAccount.operationLogList.addLog(log);
+  if (tabList.activeTab.name === "personal-operation") {
+    personalAccount.operationLogList.resetList();
+  }
   personalAccount.balance -= withdrawAmount;
   personalAccount.displayBalance();
   personalWithdrawForm.reset();
@@ -590,6 +606,9 @@ function handlePersonalTransferForm(event) {
     type: "operation"
   }
   personalAccount.logList.addLog(log);
+  if (tabList.activeTab.name === "personal") {
+    personalAccount.logList.resetList();
+  }
   personalAccount.balance -= transferAmount;
   personalAccount.displayBalance();
   personalTransferForm.reset();
@@ -628,9 +647,7 @@ if (data.hasEnterprise) {
   const enterpriseDepositFormElt = document.getElementById("enterprise-deposit-form");
   const enterpriseWithdrawFormElt = document.getElementById("enterprise-withdraw-form");
   const enterpriseDepositAmountInput = document.getElementById("enterprise-deposit-amount-input");
-  const enterpriseDepositAmountMessage = document.getElementById("enterprise-deposit-amount-message");
   const enterpriseWithdrawAmountInput = document.getElementById("enterprise-withdraw-amount-input");
-  const enterpriseWithdrawAmountMessage = document.getElementById("enterprise-withdraw-amount-message");
   const enterpriseTabInput = document.getElementById("enterprise-tab-input");
   const enterpriseDepositFormButton = document.getElementById("enterprise-deposit-form-button");
   const enterpriseWithdrawFormButton = document.getElementById("enterprise-withdraw-form-button");
@@ -642,7 +659,7 @@ if (data.hasEnterprise) {
     document.getElementById("enterprise-account-log-list")
   );
 
-  const enterpriseTab = new TopAppBarTab(enterpriseTabContainer, enterpriseTabView);
+  const enterpriseTab = new TopAppBarTab("enterprise", enterpriseTabView, enterpriseTabContainer);
 
   tabList.addTab(enterpriseTab);
 
@@ -651,11 +668,13 @@ if (data.hasEnterprise) {
 
   const enterpriseDepositForm = new Form(
     [enterpriseDepositField],
+    enterpriseDepositFormElt,
     enterpriseDepositFormButton
   );
 
   const enterpriseWithdrawForm = new Form(
     [enterpriseWithdrawField],
+    enterpriseWithdrawFormElt,
     enterpriseWithdrawFormButton
   );
 
@@ -670,6 +689,9 @@ if (data.hasEnterprise) {
       type: "operation"
     }
     enterpriseAccount.logList.addLog(log);
+    if (tabList.activeTab.name === "enterprise") {
+      enterpriseAccount.logList.resetList();
+    }
     enterpriseAccount.balance += depositAmount;
     enterpriseAccount.displayBalance();
     enterpriseDepositForm.reset();
@@ -704,7 +726,6 @@ if (data.hasEnterprise) {
   if (data.hasOffshore) {
     const offshoreDepositFormElt = document.getElementById("offshore-deposit-form");
     const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
-    const offshoreDepositAmountMessage = document.getElementById("offshore-deposit-amount-message");
     const offshoreTabInput = document.getElementById("offshore-tab-input");
     const offshoreDepositFormButton = document.getElementById("offshore-deposit-form-button");
 
@@ -715,7 +736,7 @@ if (data.hasEnterprise) {
       document.getElementById("offshore-account-log-list")
     );
 
-    const offshoreTab = new Tab(offshoreTabView);
+    const offshoreTab = new Tab("offshore", offshoreTabView);
 
     tabList.addTab(offshoreTab);
 
@@ -723,6 +744,7 @@ if (data.hasEnterprise) {
 
     const offshoreDepositForm = new Form(
       [offshoreDepositField],
+      offshoreDepositFormElt,
       offshoreDepositFormButton
     );
 
@@ -737,6 +759,9 @@ if (data.hasEnterprise) {
         type: "operation"
       }
       offshoreAccount.logList.addLog(log);
+      if (tabList.activeTab.name === "offshore") {
+        offshoreAccount.logList.resetList();
+      }
       offshoreAccount.balance += depositAmount;
       offshoreAccount.displayBalance();
       offshoreDepositForm.reset();
