@@ -126,7 +126,9 @@ class LogList {
     this.listElt = list;
     this.logs = logs;
     this.page = 1;
-    this.observer = new IntersectionObserver((entries) => this.getNextPage(entries));
+    this.observer = new IntersectionObserver((entries) => {
+      this.getNextPage(entries);
+    });
     this.observedLog = false;
     this.getPageNumber();
     this.getPageLogs();
@@ -184,7 +186,6 @@ class LogList {
 
   getNextPage(entries) {
     if (entries[0].isIntersecting) {
-      console.log("intersecting")
       this.page += 1;
       this.getPageLogs();
       this.createPageLogs();
@@ -214,8 +215,10 @@ class LogList {
     }
     this.listElt.scrollTop = 0;
     this.listElt.innerHTML = "";
-    this.page = 1;
-    this.getPageLogs();
+    if (this.page > 1) {
+      this.page = 1;
+      this.getPageLogs();
+    }
   }
 }
 
@@ -622,9 +625,7 @@ personalOperationTabInput.addEventListener("change", () => {
 
 personalTransferTabInput.addEventListener("change", () => {
   tabList.setActiveTab(personalTransferTab);
-  if (previousLogList.page > 1) {
-    previousLogList.clearList();
-  }
+  previousLogList.clearList();
 });
 
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
