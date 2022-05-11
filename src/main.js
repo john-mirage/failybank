@@ -231,7 +231,7 @@ const deleteAccountTemplate = document.getElementById("account-delete-template")
 const pasteAccountList = document.getElementById("account-paste-list");
 const pasteAccountTemplate = document.getElementById("account-paste-template");
 const personalFavoriteAccountSumText = document.getElementById("personal-favorite-account-sum-text");
-const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form-button");
+const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form.js-button");
 
 const ACCOUNTS_LIMIT = 5;
 
@@ -461,9 +461,9 @@ class TopAppBarTab extends Tab {
   Personal account
 \*------------------------------------*/
 
-const personalDepositForm = document.getElementById("personal-deposit-form");
-const personalWithdrawForm = document.getElementById("personal-withdraw-form");
-const personalTransferForm = document.getElementById("personal-transfer-form");
+const personalDepositForm = document.getElementById("personal-deposit-form.js");
+const personalWithdrawForm = document.getElementById("personal-withdraw-form.js");
+const personalTransferForm = document.getElementById("personal-transfer-form.js");
 const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
 const personalDepositAmountMessage = document.getElementById("personal-deposit-amount-message");
 const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
@@ -474,7 +474,7 @@ const personalTransferAccountNumberInput = document.getElementById("personal-tra
 const personalTransferAccountNumberMessage = document.getElementById("personal-transfer-account-number-message");
 const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
 const personalTransferReferenceMessage = document.getElementById("personal-transfer-reference-message");
-const personalFavoriteAccountForm = document.getElementById("personal-favorite-account-form");
+const personalFavoriteAccountForm = document.getElementById("personal-favorite-account-form.js");
 const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
 const personalFavoriteAccountNameMessage = document.getElementById("personal-favorite-account-name-message");
 const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
@@ -639,8 +639,8 @@ personalTransferForm.addEventListener("submit", handlePersonalTransferForm);
 \*------------------------------------*/
 
 if (data.hasEnterprise) {
-  const enterpriseDepositForm = document.getElementById("enterprise-deposit-form");
-  const enterpriseWithdrawForm = document.getElementById("enterprise-withdraw-form");
+  const enterpriseDepositForm = document.getElementById("enterprise-deposit-form.js");
+  const enterpriseWithdrawForm = document.getElementById("enterprise-withdraw-form.js");
   const enterpriseDepositAmountInput = document.getElementById("enterprise-deposit-amount-input");
   const enterpriseDepositAmountMessage = document.getElementById("enterprise-deposit-amount-message");
   const enterpriseWithdrawAmountInput = document.getElementById("enterprise-withdraw-amount-input");
@@ -708,7 +708,7 @@ if (data.hasEnterprise) {
   enterpriseWithdrawForm.addEventListener("submit", handleEnterpriseWithdrawForm);
 
   if (data.hasOffshore) {
-    const offshoreDepositForm = document.getElementById("offshore-deposit-form");
+    const offshoreDepositForm = document.getElementById("offshore-deposit-form.js");
     const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
     const offshoreDepositAmountMessage = document.getElementById("offshore-deposit-amount-message");
     const offshoreTabInput = document.getElementById("offshore-tab-input");
