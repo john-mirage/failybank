@@ -281,6 +281,7 @@ class PersonalAccount extends Account {
       balanceElement,
       logListElement
     );
+    this.cash = account.cash;
     this.number = account.number;
     this.numberElement = numberElement;
     this.theme = account.theme;
@@ -561,80 +562,129 @@ function handlePersonalFavoriteAccountForm(event) {
     name: personalFavoriteAccountNameInput.value,
     number: personalFavoriteAccountNumberInput.value
   }
-  personalAccount.favoriteAccountList.addAccount(account);
-  personalFavoriteAccountForm.reset();
+  if (personalAccount.favoriteAccountList.accounts.length < 5) {
+    personalAccount.favoriteAccountList.addAccount(account);
+    personalFavoriteAccountForm.reset();
+    notificationList.displayNotification({
+      title: "Compte favoris",
+      description: "le compte a était enregistré avec succès",
+      type: "success"
+    });
+  } else {
+    notificationList.displayNotification({
+      title: "Compte favoris",
+      description: "Limite de compte favoris enregistrés atteinte",
+      type: "error"
+    });
+  }
 }
 
 function handlePersonalDepositForm(event) {
   event.preventDefault();
   const depositAmount = Number(personalDepositAmountInput.value);
-  const log = {
-    label: "Dépot",
-    amount: depositAmount,
-    date: getCurrentFormattedDate(),
-    reference: "Dépot sur votre compte",
-    type: "operation"
+  if (personalAccount.cash > depositAmount) {
+    const log = {
+      label: "Dépot",
+      amount: depositAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Dépot sur votre compte",
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    if (tabList.activeTab.name === "personal") {
+      personalAccount.logList.resetList();
+    }
+    personalAccount.operationLogList.addLog(log);
+    if (tabList.activeTab.name === "personal-operation") {
+      personalAccount.operationLogList.resetList();
+    }
+    personalAccount.cash -= depositAmount;
+    personalAccount.balance += depositAmount;
+    personalAccount.displayBalance();
+    personalDepositForm.reset();
+    notificationList.displayNotification({
+      title: "Dépot",
+      description: "le dépot a était éffectué avec succès",
+      type: "success"
+    });
+  } else {
+    notificationList.displayNotification({
+      title: "Dépot",
+      description: "Vous ne disposé pas des fonds nécessaires sur vous",
+      type: "error"
+    });
   }
-  personalAccount.logList.addLog(log);
-  if (tabList.activeTab.name === "personal") {
-    personalAccount.logList.resetList();
-  }
-  personalAccount.operationLogList.addLog(log);
-  if (tabList.activeTab.name === "personal-operation") {
-    personalAccount.operationLogList.resetList();
-  }
-  personalAccount.balance += depositAmount;
-  personalAccount.displayBalance();
-  personalDepositForm.reset();
-  notificationList.displayNotification({
-    title: "Dépot",
-    description: "le dépot a était éffectué avec succès",
-    type: "success"
-  });
 }
 
 function handlePersonalWithdrawForm(event) {
   event.preventDefault();
   const withdrawAmount = Number(personalWithdrawAmountInput.value);
-  const log = {
-    label: "Retrait",
-    amount: -withdrawAmount,
-    date: getCurrentFormattedDate(),
-    reference: "Retrait depuis votre compte",
-    type: "operation"
+  if (personalAccount.balance >= withdrawAmount) {
+    const log = {
+      label: "Retrait",
+      amount: -withdrawAmount,
+      date: getCurrentFormattedDate(),
+      reference: "Retrait depuis votre compte",
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    if (tabList.activeTab.name === "personal") {
+      personalAccount.logList.resetList();
+    }
+    personalAccount.operationLogList.addLog(log);
+    if (tabList.activeTab.name === "personal-operation") {
+      personalAccount.operationLogList.resetList();
+    }
+    personalAccount.cash += depositAmount;
+    personalAccount.balance -= withdrawAmount;
+    personalAccount.displayBalance();
+    personalWithdrawForm.reset();
+    notificationList.displayNotification({
+      title: "Retrait",
+      description: "le retrait a était éffectué avec succès",
+      type: "success"
+    });
+  } else {
+    notificationList.displayNotification({
+      title: "Retrait",
+      description: "Vous ne disposé pas des fonds nécessaires sur votre compte",
+      type: "error"
+    });
   }
-  personalAccount.logList.addLog(log);
-  if (tabList.activeTab.name === "personal") {
-    personalAccount.logList.resetList();
-  }
-  personalAccount.operationLogList.addLog(log);
-  if (tabList.activeTab.name === "personal-operation") {
-    personalAccount.operationLogList.resetList();
-  }
-  personalAccount.balance -= withdrawAmount;
-  personalAccount.displayBalance();
-  personalWithdrawForm.reset();
 }
 
 function handlePersonalTransferForm(event) {
   event.preventDefault();
   const transferAmount = Number(personalTransferAmountInput.value);
-  const transferAccountNumber = personalTransferAccountNumberInput.value;
-  const transferReference = personalTransferReferenceInput.value;
-  const log = {
-    label: "Transfert",
-    amount: -transferAmount,
-    date: getCurrentFormattedDate(),
-    reference: transferReference,
-    type: "operation"
+  if (personalAccount.balance >= transferAmount) {
+    const transferAccountNumber = personalTransferAccountNumberInput.value;
+    const transferReference = personalTransferReferenceInput.value;
+    const log = {
+      label: "Transfert",
+      amount: -transferAmount,
+      date: getCurrentFormattedDate(),
+      reference: transferReference,
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    if (tabList.activeTab.name === "personal") {
+      personalAccount.logList.resetList();
+    }
+    personalAccount.balance -= transferAmount;
+    personalAccount.displayBalance();
+    personalTransferForm.reset();
+    notificationList.displayNotification({
+      title: "Transfert",
+      description: "le transfert a était éffectué avec succès",
+      type: "success"
+    });
+  } else {
+    notificationList.displayNotification({
+      title: "Transfert",
+      description: "Vous ne disposé pas des fonds nécessaires sur votre compte",
+      type: "error"
+    });
   }
-  personalAccount.logList.addLog(log);
-  if (tabList.activeTab.name === "personal") {
-    personalAccount.logList.resetList();
-  }
-  personalAccount.balance -= transferAmount;
-  personalAccount.displayBalance();
-  personalTransferForm.reset();
 }
 
 personalTabInput.addEventListener("change", () => {
@@ -704,36 +754,64 @@ if (data.hasEnterprise) {
   function handleEnterpriseDepositForm(event) {
     event.preventDefault();
     const depositAmount = Number(enterpriseDepositAmountInput.value);
-    const log = {
-      label: "Dépot",
-      amount: depositAmount,
-      date: getCurrentFormattedDate(),
-      reference: "Dépot sur votre compte",
-      type: "operation"
+    if (personalAccount.cash > depositAmount) {
+      const log = {
+        label: "Dépot",
+        amount: depositAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot sur votre compte",
+        type: "operation"
+      }
+      enterpriseAccount.logList.addLog(log);
+      if (tabList.activeTab.name === "enterprise") {
+        enterpriseAccount.logList.resetList();
+      }
+      personalAccount.cash -= depositAmount;
+      enterpriseAccount.balance += depositAmount;
+      enterpriseAccount.displayBalance();
+      enterpriseDepositForm.reset();
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "le dépot a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "Vous ne disposé pas des fonds nécessaires sur vous",
+        type: "error"
+      });
     }
-    enterpriseAccount.logList.addLog(log);
-    if (tabList.activeTab.name === "enterprise") {
-      enterpriseAccount.logList.resetList();
-    }
-    enterpriseAccount.balance += depositAmount;
-    enterpriseAccount.displayBalance();
-    enterpriseDepositForm.reset();
   }
 
   function handleEnterpriseWithdrawForm(event) {
     event.preventDefault();
     const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
-    const log = {
-      label: "Retrait",
-      amount: -withdrawAmount,
-      date: getCurrentFormattedDate(),
-      reference: "Retrait depuis votre compte",
-      type: "operation"
+    if (enterpriseAccount.balance > withdrawAmount) {
+      const log = {
+        label: "Retrait",
+        amount: -withdrawAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Retrait depuis votre compte",
+        type: "operation"
+      }
+      enterpriseAccount.logList.addLog(log);
+      personalAccount.cash += depositAmount;
+      enterpriseAccount.balance -= withdrawAmount;
+      enterpriseAccount.displayBalance();
+      enterpriseWithdrawForm.reset();
+      notificationList.displayNotification({
+        title: "Retrait",
+        description: "le retrait a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Retrait",
+        description: "Vous ne disposé pas des fonds nécessaires sur votre compte",
+        type: "error"
+      });
     }
-    enterpriseAccount.logList.addLog(log);
-    enterpriseAccount.balance -= withdrawAmount;
-    enterpriseAccount.displayBalance();
-    enterpriseWithdrawForm.reset();
   }
 
   enterpriseTabInput.addEventListener("change", () => {
@@ -774,20 +852,34 @@ if (data.hasEnterprise) {
     function handleOffshoreDepositForm(event) {
       event.preventDefault();
       const depositAmount = Number(offshoreDepositAmountInput.value);
-      const log = {
-        label: "Dépot",
-        amount: depositAmount,
-        date: getCurrentFormattedDate(),
-        reference: "Dépot sur votre compte",
-        type: "operation"
+      if (personalAccount.cash > depositAmount) {
+        const log = {
+          label: "Dépot",
+          amount: depositAmount,
+          date: getCurrentFormattedDate(),
+          reference: "Dépot sur votre compte",
+          type: "operation"
+        }
+        offshoreAccount.logList.addLog(log);
+        if (tabList.activeTab.name === "offshore") {
+          offshoreAccount.logList.resetList();
+        }
+        personalAccount.cash -= depositAmount;
+        offshoreAccount.balance += depositAmount;
+        offshoreAccount.displayBalance();
+        offshoreDepositForm.reset();
+        notificationList.displayNotification({
+          title: "Dépot",
+          description: "le dépot a était éffectué avec succès",
+          type: "success"
+        });
+      } else {
+        notificationList.displayNotification({
+          title: "Dépot",
+          description: "Vous ne disposé pas des fonds nécessaires sur vous",
+          type: "error"
+        });
       }
-      offshoreAccount.logList.addLog(log);
-      if (tabList.activeTab.name === "offshore") {
-        offshoreAccount.logList.resetList();
-      }
-      offshoreAccount.balance += depositAmount;
-      offshoreAccount.displayBalance();
-      offshoreDepositForm.reset();
     }
 
     offshoreTabInput.addEventListener("change", () => {
