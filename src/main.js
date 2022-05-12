@@ -484,6 +484,7 @@ const personalFavoriteAccountFormButton = document.getElementById("personal-favo
 const personalDepositFormButton = document.getElementById("personal-deposit-form-button");
 const personalWithdrawFormButton = document.getElementById("personal-withdraw-form-button");
 const personalTransferFormButton = document.getElementById("personal-transfer-form-button");
+const personalDepositAllDepositButton = document.getElementById("personal-all-deposit-button");
 
 function getCurrentFormattedDate() {
   const date = new Date();
@@ -616,6 +617,38 @@ function handlePersonalDepositForm(event) {
   }
 }
 
+function handlePersonalAllDepositButton() {
+  if (personalAccount.cash > 0) {
+    const log = {
+      label: "Dépot",
+      amount: personalAccount.cash,
+      date: getCurrentFormattedDate(),
+      reference: "Dépot sur votre compte",
+      type: "operation"
+    }
+    personalAccount.logList.addLog(log);
+    if (tabList.activeTab.name === "personal") {
+      personalAccount.logList.resetList();
+    }
+    personalAccount.operationLogList.addLog(log);
+    if (tabList.activeTab.name === "personal-operation") {
+      personalAccount.operationLogList.resetList();
+    }
+    personalAccount.cash = 0;
+    notificationList.displayNotification({
+      title: "Dépot",
+      description: "le dépot a était éffectué avec succès",
+      type: "success"
+    });
+  } else {
+    notificationList.displayNotification({
+      title: "Dépot",
+      description: "Vous n'avez pas d'argent sur vous",
+      type: "error"
+    });
+  }
+}
+
 function handlePersonalWithdrawForm(event) {
   event.preventDefault();
   const withdrawAmount = Number(personalWithdrawAmountInput.value);
@@ -635,7 +668,7 @@ function handlePersonalWithdrawForm(event) {
     if (tabList.activeTab.name === "personal-operation") {
       personalAccount.operationLogList.resetList();
     }
-    personalAccount.cash += depositAmount;
+    personalAccount.cash += withdrawAmount;
     personalAccount.balance -= withdrawAmount;
     personalAccount.displayBalance();
     personalWithdrawForm.reset();
@@ -709,6 +742,7 @@ personalTransferTabInput.addEventListener("change", () => {
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
 personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
+personalDepositAllDepositButton.addEventListener("click", handlePersonalAllDepositButton);
 personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
 personalTransferFormElt.addEventListener("submit", handlePersonalTransferForm);
 
@@ -724,6 +758,7 @@ if (data.hasEnterprise) {
   const enterpriseTabInput = document.getElementById("enterprise-tab-input");
   const enterpriseDepositFormButton = document.getElementById("enterprise-deposit-form-button");
   const enterpriseWithdrawFormButton = document.getElementById("enterprise-withdraw-form-button");
+  const enterpriseAllDepositButton = document.getElementById("enterprise-all-deposit-button");
 
   const enterpriseAccount = new Account(
     data.account.enterprise,
@@ -784,6 +819,35 @@ if (data.hasEnterprise) {
     }
   }
 
+  function handleEnterpriseAllDepositButton() {
+    if (personalAccount.cash > 0) {
+      const log = {
+        label: "Dépot",
+        amount: personalAccount.cash,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot le compte de l'entreprise",
+        type: "operation"
+      }
+      enterpriseAccount.logList.addLog(log);
+      if (tabList.activeTab.name === "enterprise") {
+        enterpriseAccount.logList.resetList();
+      }
+      personalAccount.cash = 0;
+      enterpriseAccount.displayBalance();
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "le dépot a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "Vous n'avez pas d'argent sur vous",
+        type: "error"
+      });
+    }
+  }
+
   function handleEnterpriseWithdrawForm(event) {
     event.preventDefault();
     const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
@@ -796,7 +860,10 @@ if (data.hasEnterprise) {
         type: "operation"
       }
       enterpriseAccount.logList.addLog(log);
-      personalAccount.cash += depositAmount;
+      if (tabList.activeTab.name === "enterprise") {
+        enterpriseAccount.logList.resetList();
+      }
+      personalAccount.cash += withdrawAmount;
       enterpriseAccount.balance -= withdrawAmount;
       enterpriseAccount.displayBalance();
       enterpriseWithdrawForm.reset();
@@ -822,6 +889,7 @@ if (data.hasEnterprise) {
   });
 
   enterpriseDepositFormElt.addEventListener("submit", handleEnterpriseDepositForm);
+  enterpriseAllDepositButton.addEventListener("click", handleEnterpriseAllDepositButton)
   enterpriseWithdrawFormElt.addEventListener("submit", handleEnterpriseWithdrawForm);
 
   if (data.hasOffshore) {
