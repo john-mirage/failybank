@@ -857,6 +857,12 @@ html {
     height: 100%;
 }
 
+.section__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .section__title {
     box-sizing: border-box;
     display: block;
