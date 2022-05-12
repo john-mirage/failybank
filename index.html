@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&display=swap" rel="stylesheet">
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.01813982.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.a805b97b.css">
+  <script type="module" crossorigin src="/failybank/assets/index.1b4e4cae.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.77240982.css">
 </head>
 
 <!-- Screen -->
@@ -25,7 +25,7 @@
         <!-- App container -->
         <div class="app__container" id="app-container">
 
-            <!-- Bar -->
+            <!-- Top app bar -->
             <header class="top-app-bar">
                 <div class="top-app-bar__section top-app-bar__section--row">
                     <svg class="top-app-bar__logo top-app-bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@
                                     <p class="form__message" id="personal-favorite-account-number-message"></p>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--icon button--primary" type="submit" id="personal-favorite-account-form-button">
+                                    <button class="button button--icon button--disabled" disabled type="submit" id="personal-favorite-account-form-button">
                                         <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                                             <path d="M0 0h24v24H0V0z" fill="none"/>
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
@@ -154,15 +154,15 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="personal-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--disabled" id="personal-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--text button--secondary" id="personal-all-deposit-button" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -182,10 +182,10 @@
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="personal-withdraw-amount-message"></p>
                             </div>
-                            <button class="button button--text button--primary" type="submit">Retirer</button>
+                            <button class="button button--text button--disabled" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -201,7 +201,7 @@
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="[0-9]+">
+                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                     <p class="form__message" id="personal-transfer-amount-message"></p>
                                 </div>
                                 <div class="form__section form__section--fluid">
@@ -215,7 +215,7 @@
                                 <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
                                 <p class="form__message" id="personal-transfer-reference-message"></p>
                             </div>
-                            <button class="button button--text button--primary" type="submit">Transférer</button>
+                            <button class="button button--text button--disabled" id="personal-transfer-form-button" disabled type="submit">Transférer</button>
                         </form>
                     </section>
                     <!-- Transfer account list -->
@@ -271,15 +271,15 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="enterprise-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary" type="submit">Déposer</button>
+                                    <button class="button button--text button--disabled" id="enterprise-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--secondary" type="button">Tout déposer</button>
+                                    <button class="button button--text button--secondary" id="enterprise-all-deposit-button" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -290,10 +290,10 @@
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$">
                                 <p class="form__message" id="enterprise-withdraw-amount-message"></p>
                             </div>
-                            <button class="button button--text button--primary">Retirer</button>
+                            <button class="button button--text button--disabled" id="enterprise-withdraw-form-button" disabled>Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -331,15 +331,15 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="offshore-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="[0-9]+">
+                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 <p class="form__message" id="offshore-deposit-amount-message"></p>
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--primary">Déposer</button>
+                                    <button class="button button--text button--disabled" id="offshore-deposit-form-button" type="submit" disabled>Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--text button--secondary">Tout déposer</button>
+                                    <button class="button button--text button--secondary" id="offshore-all-deposit-button" type="button">Tout déposer</button>
                                 </div>
                             </div>
                         </form>
@@ -347,6 +347,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- App notification list -->
+        <ul class="app__notification-list" id="notification-list"></ul>
 
     </main>
 
@@ -397,6 +400,19 @@
                 <p class="log__reference"></p>
             </div>
         </details>
+    </template>
+
+    <!-- Template / Notification -->
+    <template id="notification-template">
+        <li class="notification">
+            <div class="notification__section">
+                <div class="notification__icon"></div>
+            </div>
+            <div class="notification__section">
+                <h3 class="notification__title"></h3>
+                <p class="notification__description"></p>
+            </div>
+        </li>
     </template>
 
     
