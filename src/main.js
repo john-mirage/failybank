@@ -374,39 +374,23 @@ class Form {
     this.formElt = formElt;
     this.buttonElt = buttonElt;
     this.buttonIsActive = false;
-    this.isActive = true;
     this.fields.forEach((field) => {
       field.inputElt.addEventListener("keyup", () => this.checkFields());
     });
   }
 
   checkFields() {
-    if (this.isActive) {
-      const fieldsAreValid = this.fields.every((field) => field.checkField());
-      console.log(fieldsAreValid);
-      if (fieldsAreValid && !this.buttonIsActive) {
-        this.activateSubmitButton();
-      } else if (!fieldsAreValid && this.buttonIsActive) {
-        this.deactivateSubmitButton();
-      }
+    const fieldsAreValid = this.fields.every((field) => field.checkField());
+    if (fieldsAreValid && !this.buttonIsActive) {
+      this.activateSubmitButton();
+    } else if (!fieldsAreValid && this.buttonIsActive) {
+      this.deactivateSubmitButton();
     }
   }
 
   reset() {
     this.formElt.reset();
     this.deactivateSubmitButton();
-  }
-
-  activate() {
-    this.isActive = true;
-    this.checkFields();
-  }
-
-  deactivate() {
-    this.isActive = false;
-    if (this.buttonIsActive) {
-      this.deactivateSubmitButton();
-    }
   }
 
   activateSubmitButton() {
@@ -422,13 +406,48 @@ class Form {
   }
 }
 
-class Field {
+class FormField {
   constructor(inputElt) {
     this.inputElt = inputElt;
   }
 
   checkField() {
     return this.inputElt.validity.valid;
+  }
+}
+
+/*------------------------------------*\
+  Notification list
+\*------------------------------------*/
+
+const notificationTemplate = document.getElementById("notification-template");
+
+class NotificationList {
+  constructor(notificationListElt) {
+    this.notificationListElt = notificationListElt;
+  }
+
+  createNotification(notification) {
+    const notificationFragment = notificationTemplate.content.cloneNode(true);
+    const notificationElement = notificationFragment.querySelector(".notification");
+    const notificationTitle = notificationFragment.querySelector(".notification__title");
+    const notificationDescription = notificationFragment.querySelector(".notification__description");
+    notificationElement.classList.add(`notification--${notification.type}`);
+    notificationTitle.textContent = notification.title;
+    notificationDescription.textContent = notification.description;
+    return notificationElement;
+  }
+
+  deleteNotification(notificationElt) {
+    this.notificationListElt.removeChild(notificationElt);
+  }
+
+  displayNotification(notification) {
+    const notificationElt = this.createNotification(notification);
+    this.notificationListElt.prepend(notificationElt);
+    setTimeout(() => {
+      this.deleteNotification(notificationElt);
+    }, 5000);
   }
 }
 
@@ -489,13 +508,13 @@ const personalTransferTab = new TopAppBarTab("personal-transfer", personalTransf
 
 const tabList = new TabList(personalTab, personalOperationTab, personalTransferTab);
 
-const personalFavoriteAccountNameField = new Field(personalFavoriteAccountNameInput);
-const personalFavoriteAccountNumberField = new Field(personalFavoriteAccountNumberInput);
-const personalDepositAmountField = new Field(personalDepositAmountInput);
-const personalWithdrawAmountField = new Field(personalWithdrawAmountInput);
-const personalTransferAmountField = new Field(personalTransferAmountInput);
-const personalTransferAccountNumberField = new Field(personalTransferAccountNumberInput);
-const personalTransferReferenceField = new Field(personalTransferReferenceInput);
+const personalFavoriteAccountNameField = new FormField(personalFavoriteAccountNameInput);
+const personalFavoriteAccountNumberField = new FormField(personalFavoriteAccountNumberInput);
+const personalDepositAmountField = new FormField(personalDepositAmountInput);
+const personalWithdrawAmountField = new FormField(personalWithdrawAmountInput);
+const personalTransferAmountField = new FormField(personalTransferAmountInput);
+const personalTransferAccountNumberField = new FormField(personalTransferAccountNumberInput);
+const personalTransferReferenceField = new FormField(personalTransferReferenceInput);
 
 const personalFavoriteAccountForm = new Form(
   [personalFavoriteAccountNameField, personalFavoriteAccountNumberField],
@@ -521,9 +540,7 @@ const personalTransferForm = new Form(
   personalTransferFormButton
 );
 
-if (personalAccount.favoriteAccountList.accounts.length >= 5) {
-  personalFavoriteAccountForm.deactivate();
-}
+const notificationList = new NotificationList(document.getElementById("notification-list"));
 
 function handlePersonalThemeButton(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
@@ -569,6 +586,11 @@ function handlePersonalDepositForm(event) {
   personalAccount.balance += depositAmount;
   personalAccount.displayBalance();
   personalDepositForm.reset();
+  notificationList.displayNotification({
+    title: "Dépot",
+    description: "le dépot a était éffectué avec succès",
+    type: "success"
+  });
 }
 
 function handlePersonalWithdrawForm(event) {
@@ -664,8 +686,8 @@ if (data.hasEnterprise) {
 
   tabList.addTab(enterpriseTab);
 
-  const enterpriseDepositField = new Field(enterpriseDepositAmountInput);
-  const enterpriseWithdrawField = new Field(enterpriseWithdrawAmountInput);
+  const enterpriseDepositField = new FormField(enterpriseDepositAmountInput);
+  const enterpriseWithdrawField = new FormField(enterpriseWithdrawAmountInput);
 
   const enterpriseDepositForm = new Form(
     [enterpriseDepositField],
@@ -741,7 +763,7 @@ if (data.hasEnterprise) {
 
     tabList.addTab(offshoreTab);
 
-    const offshoreDepositField = new Field(offshoreDepositAmountInput);
+    const offshoreDepositField = new FormField(offshoreDepositAmountInput);
 
     const offshoreDepositForm = new Form(
       [offshoreDepositField],

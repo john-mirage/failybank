@@ -83,6 +83,7 @@ html {
 
 .app {
     box-sizing: border-box;
+    position: relative;
     display: flex;
     width: 1224px;
     height: 720px;
@@ -90,6 +91,10 @@ html {
     background-color: var(--color-bg);
     border: 1px solid var(--color-border-on-bg);
     overflow: hidden;
+}
+
+.app--loading > .app__spinner {
+    display: block;
 }
 
 .app__spinner {
@@ -103,8 +108,12 @@ html {
     margin: auto;
 }
 
-.app--loading > .app__spinner {
-    display: block;
+.maze .app__spinner {
+    border-top: 8px solid var(--color-maze);
+}
+
+.fleeca .app__spinner {
+    border-top: 8px solid var(--color-fleeca);
 }
 
 .app__container {
@@ -118,28 +127,73 @@ html {
     display: block;
 }
 
-.app__tab-selector {
+.app__notification-list {
+    box-sizing: border-box;
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-.maze .app__spinner {
-    border-top: 8px solid var(--color-maze);
-}
-
-.fleeca .app__spinner {
-    border-top: 8px solid var(--color-fleeca);
+    z-index: 100;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: auto;
+    margin: 0;
+    padding: 0 24px 0 0;
+    list-style: none;
 }
 
 /*------------------------------------*\
-  BAR
+  NOTIFICATION
+\*------------------------------------*/
+
+.notification {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.notification--success {
+    background-color: var(--color-up);
+}
+
+.notification--error {
+    background-color: var(--color-down);
+}
+
+.notification__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px auto;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin-right: 24px;
+}
+
+.notification--success .notification__icon {
+    background-image: url("/src/images/success.svg");
+}
+
+.notification--error .notification__icon {
+    background-image: url("/src/images/error.svg");
+}
+
+.notification__title {
+    margin: 0 0 4px 0;
+}
+
+.notification__description {
+    margin: 0;
+}
+
+/*------------------------------------*\
+  TOP APP BAR
 \*------------------------------------*/
 .top-app-bar {
     box-sizing: border-box;
