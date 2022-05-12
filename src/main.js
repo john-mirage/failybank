@@ -868,7 +868,7 @@ if (data.hasEnterprise) {
         label: "Retrait",
         amount: -withdrawAmount,
         date: getCurrentFormattedDate(),
-        reference: "Retrait depuis votre compte",
+        reference: "Retrait depuis le compte de l'entreprise",
         type: "operation"
       }
       enterpriseAccount.logList.addLog(log);
@@ -909,6 +909,7 @@ if (data.hasEnterprise) {
     const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
     const offshoreTabInput = document.getElementById("offshore-tab-input");
     const offshoreDepositFormButton = document.getElementById("offshore-deposit-form-button");
+    const offshoreAllDepositButton = document.getElementById("offshore-all-deposit-button");
 
     const offshoreAccount = new Account(
       data.account.offshore,
@@ -937,7 +938,7 @@ if (data.hasEnterprise) {
           label: "Dépot",
           amount: depositAmount,
           date: getCurrentFormattedDate(),
-          reference: "Dépot sur votre compte",
+          reference: "Dépot sur le compte offshore",
           type: "operation"
         }
         offshoreAccount.logList.addLog(log);
@@ -962,6 +963,35 @@ if (data.hasEnterprise) {
       }
     }
 
+    function handleOffshoreAllDepositButton() {
+      if (personalAccount.cash > 0) {
+        const log = {
+          label: "Dépot",
+          amount: personalAccount.cash,
+          date: getCurrentFormattedDate(),
+          reference: "Dépot sur le compte offshore",
+          type: "operation"
+        }
+        offshoreAccount.logList.addLog(log);
+        if (tabList.activeTab.name === "offshore") {
+          offshoreAccount.logList.resetList();
+        }
+        personalAccount.cash = 0;
+        offshoreAccount.displayBalance();
+        notificationList.displayNotification({
+          title: "Dépot",
+          description: "le dépot a était éffectué avec succès",
+          type: "success"
+        });
+      } else {
+        notificationList.displayNotification({
+          title: "Dépot",
+          description: "Vous n'avez pas d'argent sur vous",
+          type: "error"
+        });
+      }
+    }
+
     offshoreTabInput.addEventListener("change", () => {
       tabList.setActiveTab(offshoreTab);
       previousLogList.clearList();
@@ -970,6 +1000,7 @@ if (data.hasEnterprise) {
     });
 
     offshoreDepositFormElt.addEventListener("submit", handleOffshoreDepositForm);
+    offshoreAllDepositButton.addEventListener("click", handleOffshoreAllDepositButton)
   } else {
     offshoreTabContainer.remove();
     offshoreTabView.remove();
