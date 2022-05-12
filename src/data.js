@@ -7,6 +7,7 @@ const data = {
       owner: "Garry Green",
       number: "0123456789",
       balance: 48569,
+      cash: 40000,
       theme: "dark",
       favoriteAccounts: [
         {
