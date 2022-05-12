@@ -92,6 +92,14 @@
                         <div class="section section--column">
                             <div class="section__row">
                                 <h3 class="section__title">Historique des opérations</h3>
+                                <details class="filter" id="personal-filter">
+                                    <summary class="filter__header">Filtrer les résultats</summary>
+                                    <div class="filter__body">
+                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
+                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
+                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
+                                    </div>
+                                </details>
                             </div>
                             <div class="paper section__body">
                                 <div class="paper__frame" id="personal-account-log-list"></div>

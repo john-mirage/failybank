@@ -47,6 +47,7 @@ class LogList {
   constructor(logs, list) {
     this.listElt = list;
     this.logs = logs;
+    this.filter = false;
     this.page = 1;
     this.observer = new IntersectionObserver((entries) => {
       this.getNextPage(entries);
@@ -86,6 +87,11 @@ class LogList {
       this.observedLog = logRow;
       this.observer.observe(logRow);
     }
+  }
+
+  setFilter(filter) {
+    this.filter = filter === "all" ? false : filter;
+    this.resetList();
   }
 
   createPageLogs() {
@@ -455,6 +461,55 @@ class NotificationList {
 }
 
 /*------------------------------------*\
+  Filter
+\*------------------------------------*/
+
+class Filter {
+  constructor(detailsElement, buttonElements, eventType) {
+    this.filterElement = detailsElement;
+    this.titleElement = this.filterElement.querySelector(".filter__header");
+    this.buttonElements = buttonElements;
+    this.eventType = eventType;
+    this.activeButton = buttonElements[0];
+    this.closeDetails = this.closeDetails.bind(this);
+    this.handleButton = this.handleButton.bind(this);
+    this.handleDetails = this.handleDetails.bind(this);
+    this.buttonElements.forEach(this.handleButton);
+    this.filterElement.addEventListener("toggle", this.handleDetails);
+  }
+
+  closeDetails(event) {
+    const clickIsInsideDetails = this.filterElement.contains(event.target);
+    if (!clickIsInsideDetails) {
+      this.filterElement.removeAttribute("open");
+    }
+  }
+
+  handleButton(buttonElement) {
+    buttonElement.addEventListener("click", (event) => {
+      const filter = event.target.dataset.filter;
+      const customEvent = new CustomEvent(this.eventType, { detail: { filter } });
+      this.filterElement.dispatchEvent(customEvent);
+      this.filterElement.removeAttribute("open");
+      this.activeButton.classList.replace("filter__button--inactive", "filter__button--active");
+      this.activeButton.removeAttribute("disabled");
+      this.activeButton = event.target;
+      this.activeButton.classList.replace("filter__button--active", "filter__button--inactive");
+      this.activeButton.setAttribute("disabled", "");
+      this.titleElement.textContent = this.activeButton.textContent === "Aucun" ? "Filtrer les résultats" : `Filtrer par: ${this.activeButton.textContent}`;
+    });
+  }
+
+  handleDetails() {
+    if (this.filterElement.open) {
+      document.addEventListener("click", this.closeDetails);
+    } else {
+      document.removeEventListener("click", this.closeDetails);
+    }
+  }
+}
+
+/*------------------------------------*\
   Personal account
 \*------------------------------------*/
 
@@ -545,6 +600,14 @@ const personalTransferForm = new Form(
 );
 
 const notificationList = new NotificationList(document.getElementById("notification-list"));
+
+const personalFilterDetails = document.getElementById("personal-filter");
+
+const personalFilter = new Filter(
+  personalFilterDetails,
+  personalFilterDetails.querySelectorAll(".filter__button"),
+  "update-personal-filter"
+);
 
 function handlePersonalThemeButton(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
@@ -736,6 +799,11 @@ function handlePersonalTransferForm(event) {
   }
 }
 
+function handlePersonalFilter(event) {
+  const filter = event.detail.filter;
+  console.log(filter);
+}
+
 personalTabInput.addEventListener("change", () => {
   tabList.setActiveTab(personalTab);
   previousLogList.clearList();
@@ -755,6 +823,7 @@ personalTransferTabInput.addEventListener("change", () => {
   previousLogList.clearList();
 });
 
+personalFilterDetails.addEventListener("update-personal-filter", handlePersonalFilter);
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
 document.addEventListener("personal-favorite-account-delete", handlePersonalFavoriteAccountDelete);

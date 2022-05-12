@@ -843,6 +843,67 @@ html {
 }
 
 /*------------------------------------*\
+  FILTER
+\*------------------------------------*/
+
+.filter {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.filter__header {
+    box-sizing: border-box;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-text-alt);
+    line-height: 1;
+    margin: 0 0 8px 0;
+    cursor: pointer;
+    text-align: end;
+}
+
+.filter__body {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    z-index: 100;
+    width: 200px;
+    background-color: var(--color-fg);
+    border: 0.1rem solid var(--color-border);
+}
+
+.filter__button {
+    display: block;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.filter__button--active {
+    color: var(--color-text-alt);
+}
+
+.filter__button--inactive {
+    color: var(--color-border);
+}
+
+.filter__button--active:hover {
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+
+/*------------------------------------*\
   SECTION
 \*------------------------------------*/
 .section {
@@ -860,6 +921,7 @@ html {
 .section__row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
