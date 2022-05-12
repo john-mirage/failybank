@@ -189,6 +189,7 @@ class AccountList {
     accountNumberElement.textContent = account.number;
     accountDeleteButtonElement.addEventListener("click", () => {
       this.deleteAccount(account);
+      document.dispatchEvent(new CustomEvent("personal-favorite-account-delete", { detail: { account } }));
     }, {once: true});
     deleteAccountList.appendChild(accountFragment);
   }
@@ -580,6 +581,16 @@ function handlePersonalFavoriteAccountForm(event) {
   }
 }
 
+function handlePersonalFavoriteAccountDelete(event) {
+  const account = event.detail.account;
+  personalAccount.favoriteAccountList.deleteAccount(account);
+  notificationList.displayNotification({
+    title: "Compte favoris",
+    description: "le compte a était supprimé avec succès",
+    type: "success"
+  });
+}
+
 function handlePersonalDepositForm(event) {
   event.preventDefault();
   const depositAmount = Number(personalDepositAmountInput.value);
@@ -741,6 +752,7 @@ personalTransferTabInput.addEventListener("change", () => {
 
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
+document.addEventListener("personal-favorite-account-delete", handlePersonalFavoriteAccountDelete);
 personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
 personalDepositAllDepositButton.addEventListener("click", handlePersonalAllDepositButton);
 personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
