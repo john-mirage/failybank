@@ -346,6 +346,9 @@
             </div>
         </div>
 
+        <!-- App notification list -->
+        <ul class="app__notification-list" id="notification-list"></ul>
+
     </main>
 
     <!-- Template / account with delete button -->
@@ -395,6 +398,19 @@
                 <p class="log__reference"></p>
             </div>
         </details>
+    </template>
+
+    <!-- Template / Notification -->
+    <template id="notification-template">
+        <li class="notification">
+            <div class="notification__section">
+                <div class="notification__icon"></div>
+            </div>
+            <div class="notification__section">
+                <h3 class="notification__title"></h3>
+                <p class="notification__description"></p>
+            </div>
+        </li>
     </template>
 
     <script type="module" src="/src/main.js"></script>
