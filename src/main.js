@@ -204,6 +204,7 @@ class AccountList {
     accountElement.addEventListener("click", () => {
       if (personalTransferAccountNumberInput.value !== account.number) {
         personalTransferAccountNumberInput.value = account.number;
+        document.dispatchEvent(new CustomEvent("personal-favorite-account-number-paste"));
       }
     });
     pasteAccountList.appendChild(accountFragment);
@@ -660,6 +661,10 @@ function handlePersonalAllDepositButton() {
   }
 }
 
+function handlePersonalFavoriteAccountNumberPaste() {
+  personalTransferForm.checkFields();
+}
+
 function handlePersonalWithdrawForm(event) {
   event.preventDefault();
   const withdrawAmount = Number(personalWithdrawAmountInput.value);
@@ -753,6 +758,7 @@ personalTransferTabInput.addEventListener("change", () => {
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
 document.addEventListener("personal-favorite-account-delete", handlePersonalFavoriteAccountDelete);
+document.addEventListener("personal-favorite-account-number-paste", handlePersonalFavoriteAccountNumberPaste);
 personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
 personalDepositAllDepositButton.addEventListener("click", handlePersonalAllDepositButton);
 personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
