@@ -1,17 +1,27 @@
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  signDisplay: "always",
+  maximumFractionDigits: 0
+});
+
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
+  dateStyle: "long",
+  timeStyle: "short",
+});
+
 const LOGS_PER_PAGE = 10;
 
-class LogList {
-  constructor(logs, logListElement, logTemplate) {
+export class LogList {
+  constructor(logs, logListElement) {
     this.logs = logs;
     this.logListElement = logListElement;
-    this.logTemplate = logTemplate;
+    this.logTemplate = document.getElementById("log-template");
     this.filteredLogs = false;
     this.filter = false;
     this.page = 1;
-    this.observer = new IntersectionObserver(this.getNextPage);
+    this.observer = new IntersectionObserver((entries) => this.getNextPage(entries));
     this.observedLogElement = false;
-    this.getPageTotal();
-    this.getPageLogs();
     this.getNextPage = this.getNextPage.bind(this);
   }
 
@@ -41,7 +51,10 @@ class LogList {
       const isLastLog = pageLogIndex === (pageLogs.length - 1);
       const isNotLastPage = this.page < this.pageTotal;
       const logElement = this.createLog(pageLog);
-      if (isLastLog && isNotLastPage) this.observe(logElement);
+      if (isLastLog && isNotLastPage) {
+        this.observeLastPageLog(logElement);
+        this.observedLogElement = logElement;
+      }
       this.logListElement.appendChild(logElement);
     });
   }
@@ -49,7 +62,7 @@ class LogList {
   getNextPage(entries) {
     if (entries[0].isIntersecting) {
       this.page += 1;
-      this.unobserve();
+      this.unobserveLastPageLog();
       if (this.filter) {
         this.displayFilteredLogs();
       } else {
@@ -96,13 +109,13 @@ class LogList {
     this.createPageLogs(pageLogs);
   }
 
-  resetList() {
-    this.clearList();
+  reset() {
+    this.clear();
     this.displayInitialLogs();
   }
 
-  clearList() {
-    this.unobserve();
+  clear() {
+    this.unobserveLastPageLog();
     this.logListElement.scrollTop = 0;
     this.logListElement.innerHTML = "";
     if (this.page > 1) {
@@ -110,12 +123,14 @@ class LogList {
     }
   }
 
-  observe(logElement) {
-    this.observer.observe(logElement);
-    this.observedLogElement = logElement;
+  observeLastPageLog(logElement) {
+    if (!this.observedLogElement) {
+      this.observer.observe(logElement);
+      this.observedLogElement = logElement;
+    }
   }
 
-  unobserve() {
+  unobserveLastPageLog() {
     if (this.observedLogElement) {
       this.observer.unobserve(this.observedLogElement);
       this.observedLogElement = false;

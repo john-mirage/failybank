@@ -1,4 +1,4 @@
-class Form {
+export class Form {
   constructor(inputElements, formElement, buttonElement) {
     this.inputElements = inputElements;
     this.formElement = formElement;

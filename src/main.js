@@ -1,4 +1,12 @@
 import data from "./data";
+import {PersonalAccount} from "./classes/account";
+import {Tab, TabList} from "./classes/tab-list";
+import {Form} from "./classes/form";
+import {NotificationList} from "./classes/notification-list";
+import {FilterDropdown} from "./classes/filter";
+import {LogList} from "./classes/log-list";
+import {AccountList, PasteAccountList, DeleteAccountList} from "./classes/account-list";
+import {ViewSwitcher, View} from "./classes/view-list";
 
 /*------------------------------------*\
   Formatters
@@ -47,81 +55,152 @@ function getCurrentFormattedDate() {
 const personalAccount = new PersonalAccount(
   data.account.personal,
   document.getElementById("personal-account-owner"),
-  document.getElementById("personal-account-balance"),
-  document.getElementById("personal-account-log-list"),
   document.getElementById("personal-account-number"),
-  document.getElementById("personal-account-operation-log-list")
+  document.getElementById("personal-account-balance")
 );
 
-personalAccount.logList.createPageLogs();
+if (personalAccount.theme === "dark") {
+  const personalThemeButton = document.getElementById("personal-theme-button");
+  personalThemeButton.checked = true;
+  document.documentElement.classList.add("dark");
+}
 
-let previousLogList = personalAccount.logList;
-
-const personalTab = new TopAppBarTab(
-  "personal",
-  personalTabView,
-  personalTabContainer
+const personalLogList = new LogList(
+  data.account.personal.logs,
+  document.getElementById("personal-log-list")
 );
 
-const personalOperationTab = new TopAppBarTab(
-  "personal-operation",
-  personalOperationTabView,
-  personalOperationTabContainer
+personalLogList.displayInitialLogs();
+
+const personalTab = new Tab(
+  "mon compte",
+  "personal-tab"
 );
 
-const personalTransferTab = new TopAppBarTab(
-  "personal-transfer",
-  personalTransferTabView,
-  personalTransferTabContainer
+const personalOperationTab = new Tab(
+  "opération",
+  "personal-operation-tab"
+);
+
+const personalTransferTab = new Tab(
+  "transfert",
+  "personal-transfer-tab"
 );
 
 const tabList = new TabList(
-  personalTab,
-  personalOperationTab,
-  personalTransferTab
+  [
+    personalTab,
+    personalOperationTab,
+    personalTransferTab
+  ],
+  document.getElementById("tab-list")
 );
 
-const personalFavoriteAccountNameField = new FormField(personalFavoriteAccountNameInput);
-const personalFavoriteAccountNumberField = new FormField(personalFavoriteAccountNumberInput);
-const personalDepositAmountField = new FormField(personalDepositAmountInput);
-const personalWithdrawAmountField = new FormField(personalWithdrawAmountInput);
-const personalTransferAmountField = new FormField(personalTransferAmountInput);
-const personalTransferAccountNumberField = new FormField(personalTransferAccountNumberInput);
-const personalTransferReferenceField = new FormField(personalTransferReferenceInput);
+const personalView = new View(
+  document.getElementById("personal-view")
+);
+
+const personalOperationView = new View(
+  document.getElementById("personal-operation-view")
+);
+
+const personalTransferView = new View(
+  document.getElementById("personal-transfer-view")
+);
+
+const viewSwitcher = new ViewSwitcher(
+  personalView
+);
 
 const personalFavoriteAccountForm = new Form(
-  [personalFavoriteAccountNameField, personalFavoriteAccountNumberField],
-  personalFavoriteAccountFormElt,
-  personalFavoriteAccountFormButton
+  [
+    document.getElementById("personal-favorite-account-name-input"),
+    document.getElementById("personal-favorite-account-number-input")
+  ],
+  document.getElementById("personal-favorite-account-form"),
+  document.getElementById("personal-favorite-account-form-button")
 );
 
 const personalDepositForm = new Form(
-  [personalDepositAmountField],
-  personalDepositFormElt,
-  personalDepositFormButton
+  [
+    document.getElementById("personal-deposit-amount-input")
+  ],
+  document.getElementById("personal-deposit-form"),
+  document.getElementById("personal-deposit-form-button")
 );
 
 const personalWithdrawForm = new Form(
-  [personalWithdrawAmountField],
-  personalWithdrawFormElt,
-  personalWithdrawFormButton
+  [
+    document.getElementById("personal-withdraw-amount-input")
+  ],
+  document.getElementById("personal-withdraw-form"),
+  document.getElementById("personal-withdraw-form-button")
 );
 
 const personalTransferForm = new Form(
-  [personalTransferAmountField, personalTransferAccountNumberField, personalTransferReferenceField],
-  personalTransferFormElt,
-  personalTransferFormButton
+  [
+    document.getElementById("personal-transfer-amount-input"),
+    document.getElementById("personal-transfer-account-number-input"),
+    document.getElementById("personal-transfer-reference-input")
+  ],
+  document.getElementById("personal-transfer-form"),
+  document.getElementById("personal-transfer-form-button")
 );
 
 const notificationList = new NotificationList(
   document.getElementById("notification-list")
 );
 
-const personalFilter = new Filter(
-  document.getElementById("personal-filter"),
-  "update-personal-filter"
+const filterDropdown = new FilterDropdown(
+  document.getElementById("personal-filter-dropdown")
 );
 
+const filterDropdownButtons = document.querySelectorAll(".filter__button");
+
+filterDropdownButtons.forEach((filterDropdownButton) => {
+  filterDropdownButton.addEventListener("click", (event) => {
+    const filter = event.target.dataset.filter;
+    filterDropdown.setActiveFilter(event.target);
+    personalLogList.filter = filter === "all" ? false : filter;
+    personalLogList.reset();
+  });
+});
+
+const favoriteAccountList = new AccountList(
+  data.account.personal.favoriteAccounts
+);
+
+const deleteFavoriteAccountList = new DeleteAccountList(
+  favoriteAccountList,
+  document.getElementById("delete-favorite-account-list")
+);
+
+deleteFavoriteAccountList.createAccounts();
+
+const personalTabInput = document.getElementById("personal-tab");
+const personalOperationInput = document.getElementById("personal-operation-tab");
+const personalTransferInput = document.getElementById("personal-transfer-tab");
+
+function showPersonalView() {
+  tabList.setActiveTab(personalTab);
+  viewSwitcher.switch(personalView);
+}
+
+function showPersonalOperationView() {
+  tabList.setActiveTab(personalOperationTab);
+  viewSwitcher.switch(personalOperationView);
+}
+
+function showPersonalTransferView() {
+  tabList.setActiveTab(personalTransferTab);
+  viewSwitcher.switch(personalTransferView);
+}
+
+personalTabInput.addEventListener("change", showPersonalView);
+personalOperationInput.addEventListener("change", showPersonalOperationView);
+personalTransferInput.addEventListener("change", showPersonalTransferView);
+
+/*
 function handlePersonalThemeButton(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
   if (personalAccount.theme === "dark") {
@@ -345,20 +424,14 @@ personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
 personalDepositAllDepositButton.addEventListener("click", handlePersonalAllDepositButton);
 personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
 personalTransferFormElt.addEventListener("submit", handlePersonalTransferForm);
+*/
 
 /*------------------------------------*\
   Enterprise & Offshore accounts
 \*------------------------------------*/
 
+/*
 if (data.hasEnterprise) {
-  const enterpriseDepositFormElt = document.getElementById("enterprise-deposit-form");
-  const enterpriseWithdrawFormElt = document.getElementById("enterprise-withdraw-form");
-  const enterpriseDepositAmountInput = document.getElementById("enterprise-deposit-amount-input");
-  const enterpriseWithdrawAmountInput = document.getElementById("enterprise-withdraw-amount-input");
-  const enterpriseTabInput = document.getElementById("enterprise-tab-input");
-  const enterpriseDepositFormButton = document.getElementById("enterprise-deposit-form-button");
-  const enterpriseWithdrawFormButton = document.getElementById("enterprise-withdraw-form-button");
-  const enterpriseAllDepositButton = document.getElementById("enterprise-all-deposit-button");
 
   const enterpriseAccount = new Account(
     data.account.enterprise,
@@ -599,6 +672,7 @@ if (data.hasEnterprise) {
   offshoreTabContainer.remove();
   offshoreTabView.remove();
 }
+ */
 
 /*------------------------------------*\
   Load app
@@ -609,8 +683,3 @@ const app = document.getElementById("app");
 setTimeout(() => {
   app.classList.replace("app--loading", "app--loaded");
 }, 1000);
-
-if (this.theme === "dark") {
-  personalThemeButton.checked = true;
-  document.documentElement.classList.add("dark");
-}

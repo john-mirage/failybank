@@ -434,10 +434,6 @@ body {
     background-color: var(--color-toggle-button-track);
 }
 
-.toggle-button__input:focus ~ .toggle-button__track {
-    background-color: var(--color-toggle-button-track-focus);
-}
-
 .toggle-button__handle {
     box-sizing: border-box;
     position: relative;
