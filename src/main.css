@@ -766,7 +766,6 @@ body {
 
 .form__section {
     box-sizing: border-box;
-    position: relative;
 }
 
 .form__section--margin {
@@ -815,15 +814,6 @@ body {
 
 .form__input:focus {
     outline: none;
-}
-
-.form__message {
-    position: absolute;
-    margin: 2px 0 0 0;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-down);
-    line-height: 16px;
 }
 
 .maze .form__input:focus {
@@ -946,11 +936,16 @@ body {
     margin: 0;
 }
 
-.section__number--up {
+.section__balance {
+    font-size: 24px;
+    font-weight: 700;
     color: var(--color-up);
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin: 0;
 }
 
-.section__number--down {
+.section__balance--negative {
     color: var(--color-down);
 }
 

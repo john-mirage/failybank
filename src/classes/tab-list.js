@@ -1,48 +1,48 @@
 class TabList {
-  constructor(...tabs) {
-    this.tabs = tabs;
-    this.activeTab = tabs[0];
+  constructor(initialTabs, tabListElement) {
+    this.initialTabs = initialTabs;
+    this.tabListElement = tabListElement;
+    this.activeTab = initialTabs[0];
+    this.createInitialTabs();
   }
 
   addTab(tab) {
-    this.tabs = [...this.tabs, tab];
+    this.tabListElement.appendChild(tab.element);
+  }
+
+  deleteTab(tab) {
+    this.tabListElement.removeChild(tab.element);
+  }
+
+  createInitialTabs() {
+    this.initialTabs.forEach((initialTab) => {
+      this.tabListElement.appendChild(initialTab.element);
+    });
   }
 
   setActiveTab(tab) {
-    this.activeTab.deactivate();
+    this.activeTab.element.classList.remove("tab--active");
     this.activeTab = tab;
-    this.activeTab.activate();
+    this.activeTab.element.classList.add("tab--active");
   }
 }
 
 class Tab {
-  constructor(name, viewElt) {
+  constructor(name, elementId, template) {
     this.name = name;
-    this.viewElt = viewElt;
+    this.elementId = elementId;
+    this.template = template;
+    this.element = this.create();
   }
 
-  activate() {
-    this.viewElt.classList.add("view--active");
-  }
-
-  deactivate() {
-    this.viewElt.classList.remove("view--active");
-  }
-}
-
-class TopAppBarTab extends Tab {
-  constructor(name, viewElt, containerElt) {
-    super(name, viewElt);
-    this.containerElt = containerElt;
-  }
-
-  activate() {
-    super.activate();
-    this.containerElt.classList.add("tab-list__item--active");
-  }
-
-  deactivate() {
-    super.deactivate();
-    this.containerElt.classList.remove("tab-list__item--active");
+  create() {
+    const tabFragment = this.template.content.cloneNode(true);
+    const tabElement = tabFragment.querySelector(".tab");
+    const tabLabelElement = tabFragment.querySelector(".tab__label");
+    const tabInputElement = tabFragment.querySelector(".tab__input");
+    tabLabelElement.textContent = this.name;
+    tabLabelElement.setAttribute("for", this.elementId);
+    tabInputElement.setAttribute("id", this.elementId);
+    return tabElement;
   }
 }
