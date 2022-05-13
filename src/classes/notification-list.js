@@ -1,4 +1,4 @@
-class NotificationList {
+export class NotificationList {
   constructor(notificationListElement, notificationTemplate) {
     this.notificationListElement = notificationListElement;
     this.notificationTemplate = notificationTemplate;

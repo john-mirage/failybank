@@ -57,7 +57,7 @@
             </header>
 
             <!-- View / personal account -->
-            <div class="view view--active" id="personal-tab-view">
+            <div class="view view--active" id="personal-view">
                 <div class="grid grid--account">
                     <!-- Personal account owner -->
                     <section class="grid__section">
@@ -71,7 +71,7 @@
                         <div class="section section--column">
                             <div class="section__row">
                                 <h3 class="section__title">Historique des opérations</h3>
-                                <details class="filter" id="personal-filter">
+                                <details class="filter" id="personal-filter-dropdown">
                                     <summary class="filter__header">Filtrer les résultats</summary>
                                     <div class="filter__body">
                                         <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
@@ -81,7 +81,7 @@
                                 </details>
                             </div>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="personal-account-log-list"></div>
+                                <div class="paper__frame" id="personal-log-list"></div>
                             </div>
                         </div>
                     </section>
@@ -122,7 +122,7 @@
                             <h3 class="section__title">Comptes enregistrés <span id="personal-favorite-account-sum-text"></span></h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="account-delete-list"></table>
+                                    <table class="paper__table" id="delete-favorite-account-list"></table>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
             </div>
 
             <!-- View / personal account operation -->
-            <div class="view" id="personal-operation-tab-view">
+            <div class="view" id="personal-operation-view">
                 <div class="grid grid--operation">
                     <!-- Personal account operation Deposit form -->
                     <section class="grid__section grid__section--with-border">
@@ -175,7 +175,7 @@
             </div>
 
             <!-- View / personal account transfer -->
-            <div class="view" id="personal-transfer-tab-view">
+            <div class="view" id="personal-transfer-view">
                 <div class="grid grid--transfer">
                     <!-- personal account transfer form -->
                     <section class="grid__section">
@@ -213,7 +213,7 @@
             </div>
 
             <!-- View / enterprise account -->
-            <div class="view" id="enterprise-tab-view">
+            <div class="view" id="enterprise-view">
                 <div class="grid grid--enterprise">
                     <!-- Enterprise account owner -->
                     <section class="grid__section">
@@ -278,7 +278,7 @@
             </div>
 
             <!-- View / offshore -->
-            <div class="view" id="offshore-tab-view">
+            <div class="view" id="offshore-view">
                 <div class="grid grid--offshore">
                     <!-- Offshore account owner -->
                     <section class="grid__section">
@@ -334,7 +334,7 @@
     <template id="tab-template">
         <div class="tab">
             <label class="tab__label">Mon compte</label>
-            <input class="tab__input" type="radio" name="tab-selector" checked>
+            <input class="tab__input" type="radio" name="tab-selector">
         </div>
     </template>
 

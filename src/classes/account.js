@@ -1,15 +1,21 @@
-class Account {
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  signDisplay: "always",
+  maximumFractionDigits: 0
+});
+
+export class Account {
   constructor(
     account,
-    ownerElement,
-    balanceElement,
-    balanceNegativeClass
+    accountOwnerElement,
+    accountBalanceElement
   ) {
     this.owner = account.owner;
-    this.ownerElement = ownerElement;
+    this.ownerElement = accountOwnerElement;
     this.balance = account.balance;
-    this.balanceElement = balanceElement;
-    this.balanceNegativeClass = balanceNegativeClass;
+    this.balanceElement = accountBalanceElement;
+    this.balanceNegativeClass = "balance__value--negative";
     this.displayOwner();
     this.displayBalance();
   }
@@ -32,20 +38,19 @@ class Account {
   }
 }
 
-class PersonalAccount extends Account {
+export class PersonalAccount extends Account {
   constructor(
     account,
     accountOwnerElement,
     accountNumberElement,
-    accountBalanceElement,
-    accountBalanceNegativeClass
+    accountBalanceElement
   ) {
     super(
       account,
       accountOwnerElement,
-      accountBalanceElement,
-      accountBalanceNegativeClass
+      accountBalanceElement
     );
+    this.balanceNegativeClass = "section__balance--negative";
     this.accountNumber = account.number;
     this.accountNumberElement = accountNumberElement;
     this.cash = account.cash;
@@ -54,6 +59,6 @@ class PersonalAccount extends Account {
   }
 
   displayNumber() {
-    this.accountNumberElement.textContent = this.number;
+    this.accountNumberElement.textContent = this.accountNumber;
   }
 }

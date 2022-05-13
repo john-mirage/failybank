@@ -1,9 +1,9 @@
-class FilterList {
+export class FilterDropdown {
   constructor(detailsElement) {
     this.detailsElement = detailsElement;
     this.titleElement = this.detailsElement.querySelector(".filter__header");
     this.initialButtonElement = this.detailsElement.querySelector(".filter__button");
-    this.activeButton = this.initialButtonElement;
+    this.activeButtonElement = this.initialButtonElement;
     this.closeDetails = this.closeDetails.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
     this.detailsElement.addEventListener("toggle", this.handleDetails);
@@ -24,17 +24,19 @@ class FilterList {
     }
   }
 
-  updateActiveButton(buttonElement) {
+  setActiveFilter(buttonElement) {
     this.detailsElement.removeAttribute("open");
-    this.activeButton.classList.replace("filter__button--inactive", "filter__button--active");
-    this.activeButton.removeAttribute("disabled");
-    this.activeButton = buttonElement;
-    this.activeButton.classList.replace("filter__button--active", "filter__button--inactive");
-    this.activeButton.setAttribute("disabled", "");
-    this.titleElement.textContent = this.activeButton.dataset.filter === "all" ? "Filtrer les résultats" : `Filtre: ${this.activeButton.textContent}`;
+    this.activeButtonElement.classList.replace("filter__button--inactive", "filter__button--active");
+    this.activeButtonElement.removeAttribute("disabled");
+    this.activeButtonElement = buttonElement;
+    this.activeButtonElement.classList.replace("filter__button--active", "filter__button--inactive");
+    this.activeButtonElement.setAttribute("disabled", "");
+    this.titleElement.textContent = this.activeButtonElement.dataset.filter === "all"
+      ? "Filtrer les résultats"
+      : `Filtre: ${this.activeButtonElement.textContent}`;
   }
 
   reset() {
-    this.updateActiveButton(this.initialButtonElement);
+    this.setActiveFilter(this.initialButtonElement);
   }
 }

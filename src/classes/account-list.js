@@ -1,6 +1,6 @@
 const ACCOUNTS_LIMIT = 5;
 
-class AccountList {
+export class AccountList {
   constructor(accounts) {
     this.accounts = accounts;
   }
@@ -20,15 +20,14 @@ class AccountList {
   }
 }
 
-class DeleteAccountList {
+export class DeleteAccountList {
   constructor(
     accountList,
-    accountListElement,
-    accountTemplate
+    accountListElement
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
-    this.accountTemplate = accountTemplate;
+    this.accountTemplate = document.getElementById("favorite-account-delete-template");
     this.deleteAccountProps = [];
     this.createAccount = this.createAccount.bind(this);
   }
@@ -55,15 +54,14 @@ class DeleteAccountList {
   }
 }
 
-class PasteAccountList {
+export class PasteAccountList {
   constructor(
     accountList,
-    accountListElement,
-    accountTemplate,
+    accountListElement
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
-    this.accountTemplate = accountTemplate;
+    this.accountTemplate = document.getElementById("favorite-account-paste-template");
     this.pasteAccountProps = [];
     this.createAccount = this.createAccount.bind(this);
   }

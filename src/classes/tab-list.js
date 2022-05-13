@@ -1,8 +1,9 @@
-class TabList {
+export class TabList {
   constructor(initialTabs, tabListElement) {
     this.initialTabs = initialTabs;
     this.tabListElement = tabListElement;
     this.activeTab = initialTabs[0];
+    this.activeTab.element.classList.add("tab--active");
     this.createInitialTabs();
   }
 
@@ -27,11 +28,11 @@ class TabList {
   }
 }
 
-class Tab {
-  constructor(name, elementId, template) {
+export class Tab {
+  constructor(name, elementId) {
     this.name = name;
     this.elementId = elementId;
-    this.template = template;
+    this.template = document.getElementById("tab-template");
     this.element = this.create();
   }
 
