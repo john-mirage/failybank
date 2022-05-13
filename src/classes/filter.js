@@ -1,35 +1,31 @@
-class Filter {
-  constructor(detailsElement, eventType) {
-    this.filterElement = detailsElement;
-    this.titleElement = this.filterElement.querySelector(".filter__header");
-    this.buttonElements = this.filterElement.querySelectorAll(".filter__button");
-    this.eventType = eventType;
-    this.activeButton = this.buttonElements[0];
+class FilterList {
+  constructor(detailsElement) {
+    this.detailsElement = detailsElement;
+    this.titleElement = this.detailsElement.querySelector(".filter__header");
+    this.initialButtonElement = this.detailsElement.querySelector(".filter__button");
+    this.activeButton = this.initialButtonElement;
     this.closeDetails = this.closeDetails.bind(this);
-    this.handleButton = this.handleButton.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
-    this.buttonElements.forEach(this.handleButton);
-    this.filterElement.addEventListener("toggle", this.handleDetails);
+    this.detailsElement.addEventListener("toggle", this.handleDetails);
   }
 
   closeDetails(event) {
-    const clickIsInsideDetails = this.filterElement.contains(event.target);
+    const clickIsInsideDetails = this.detailsElement.contains(event.target);
     if (!clickIsInsideDetails) {
-      this.filterElement.removeAttribute("open");
+      this.detailsElement.removeAttribute("open");
     }
   }
 
-  handleButton(buttonElement) {
-    buttonElement.addEventListener("click", (event) => {
-      const filter = event.target.dataset.filter;
-      const customEvent = new CustomEvent(this.eventType, { detail: { filter } });
-      this.filterElement.dispatchEvent(customEvent);
-      this.updateActiveButton(event.target);
-    });
+  handleDetails() {
+    if (this.detailsElement.open) {
+      document.addEventListener("click", this.closeDetails);
+    } else {
+      document.removeEventListener("click", this.closeDetails);
+    }
   }
 
   updateActiveButton(buttonElement) {
-    this.filterElement.removeAttribute("open");
+    this.detailsElement.removeAttribute("open");
     this.activeButton.classList.replace("filter__button--inactive", "filter__button--active");
     this.activeButton.removeAttribute("disabled");
     this.activeButton = buttonElement;
@@ -39,14 +35,6 @@ class Filter {
   }
 
   reset() {
-    this.updateActiveButton(this.buttonElements[0]);
-  }
-
-  handleDetails() {
-    if (this.filterElement.open) {
-      document.addEventListener("click", this.closeDetails);
-    } else {
-      document.removeEventListener("click", this.closeDetails);
-    }
+    this.updateActiveButton(this.initialButtonElement);
   }
 }

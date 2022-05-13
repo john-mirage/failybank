@@ -1,16 +1,16 @@
 class Form {
-  constructor(fields, formElt, buttonElt) {
-    this.fields = fields;
-    this.formElt = formElt;
-    this.buttonElt = buttonElt;
+  constructor(inputElements, formElement, buttonElement) {
+    this.inputElements = inputElements;
+    this.formElement = formElement;
+    this.buttonElement = buttonElement;
     this.buttonIsActive = false;
-    this.fields.forEach((field) => {
-      field.inputElt.addEventListener("keyup", () => this.checkFields());
+    this.inputElements.forEach((inputElement) => {
+      inputElement.addEventListener("keyup", () => this.checkFields());
     });
   }
 
   checkFields() {
-    const fieldsAreValid = this.fields.every((field) => field.checkField());
+    const fieldsAreValid = this.inputElements.every((field) => field.validity.valid);
     if (fieldsAreValid && !this.buttonIsActive) {
       this.activateSubmitButton();
     } else if (!fieldsAreValid && this.buttonIsActive) {
@@ -19,29 +19,19 @@ class Form {
   }
 
   reset() {
-    this.formElt.reset();
+    this.formElement.reset();
     this.deactivateSubmitButton();
   }
 
   activateSubmitButton() {
     this.buttonIsActive = true;
-    this.buttonElt.classList.replace("button--disabled", "button--primary");
-    this.buttonElt.removeAttribute("disabled");
+    this.buttonElement.classList.replace("button--disabled", "button--primary");
+    this.buttonElement.removeAttribute("disabled");
   }
 
   deactivateSubmitButton() {
     this.buttonIsActive = false;
-    this.buttonElt.classList.replace("button--primary", "button--disabled");
-    this.buttonElt.setAttribute("disabled", "");
-  }
-}
-
-class FormField {
-  constructor(inputElt) {
-    this.inputElt = inputElt;
-  }
-
-  checkField() {
-    return this.inputElt.validity.valid;
+    this.buttonElement.classList.replace("button--primary", "button--disabled");
+    this.buttonElement.setAttribute("disabled", "");
   }
 }

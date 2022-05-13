@@ -11,15 +11,6 @@ class ViewList {
   }
 }
 
-const viewList = {
-  element: "",
-  account: "",
-  forms: [],
-  logList: "",
-  logListFilter: "",
-  accountList: "",
-}
-
 class View {
   constructor(view) {
     this.viewElement = view.element;
@@ -32,12 +23,12 @@ class View {
   }
 
   activate() {
-    this.viewElement.classList.add("viewList--active");
+    this.viewElement.classList.add("view--active");
     this.logList.displayLogs();
   }
 
   deactivate() {
-    this.viewElement.classList.remove("viewList--active");
+    this.viewElement.classList.remove("view--active");
     this.forms.forEach((form) => form.reset());
     if (this.logList) {
       this.logList.clearList();

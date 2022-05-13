@@ -50,10 +50,6 @@ class PersonalAccount extends Account {
     this.accountNumberElement = accountNumberElement;
     this.cash = account.cash;
     this.theme = account.theme;
-    if (this.theme === "dark") {
-      personalThemeButton.checked = true;
-      document.documentElement.classList.add("dark");
-    }
     this.displayNumber();
   }
 
