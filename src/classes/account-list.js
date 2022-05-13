@@ -5,6 +5,13 @@ export class AccountList {
     this.accounts = accounts;
   }
 
+  displayCount(countElement) {
+    const accountTotal = String(this.accounts.length);
+    if (countElement.textContent !== accountTotal) {
+      countElement.textContent = accountTotal;
+    }
+  }
+
   addAccount(account) {
     if (this.accounts.length < ACCOUNTS_LIMIT) {
       this.accounts = [account, ...this.accounts];
@@ -28,6 +35,7 @@ export class DeleteAccountList {
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
+    this.accountListCountElement = document.getElementById("personal-favorite-account-count");
     this.deleteFavoriteAccount = deleteFavoriteAccount;
     this.accountTemplate = document.getElementById("favorite-account-delete-template");
     this.createAccount = this.createAccount.bind(this);
@@ -49,6 +57,11 @@ export class DeleteAccountList {
 
   createAccounts() {
     this.accountList.accounts.forEach(this.createAccount);
+    this.accountList.displayCount(this.accountListCountElement);
+  }
+
+  displayCount() {
+
   }
 
   reset() {
@@ -69,6 +82,7 @@ export class PasteAccountList {
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
+    this.accountListCountElement = document.getElementById("personal-transfer-favorite-account-count");
     this.pasteAccountNumber = pasteAccountNumberToForm;
     this.accountTemplate = document.getElementById("favorite-account-paste-template");
     this.createAccount = this.createAccount.bind(this);
@@ -89,6 +103,7 @@ export class PasteAccountList {
 
   createAccounts() {
     this.accountList.accounts.forEach(this.createAccount);
+    this.accountList.displayCount(this.accountListCountElement);
   }
 
   reset() {
