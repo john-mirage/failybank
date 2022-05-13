@@ -49,10 +49,7 @@ html {
     font-family: "Red Hat Display", sans-serif;
 }
 
-/*
- * SCREEN
- */
-.screen {
+body {
     box-sizing: border-box;
     display: flex;
     width: 100%;
@@ -60,11 +57,11 @@ html {
     margin: 0;
 }
 
-.maze .screen {
+.maze body {
     background: radial-gradient(#ffa8a8, #c92a2a);
 }
 
-.fleeca .screen {
+.fleeca body {
     background: radial-gradient(#8ce99a, #2b8a3e);
 }
 
@@ -216,6 +213,8 @@ html {
 
 .top-app-bar__section--middle {
     height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .top-app-bar__section--right {
@@ -304,17 +303,10 @@ html {
 }
 
 /*------------------------------------*\
-  TAB LIST
+  TAB
 \*------------------------------------*/
-.tab-list {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    height: 100%;
-}
 
-.tab-list__item {
+.tab {
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -324,15 +316,15 @@ html {
     border-bottom: 4px solid transparent;
 }
 
-.fleeca .tab-list__item--active {
+.fleeca .tab--active {
     border-bottom: 4px solid var(--color-fleeca);
 }
 
-.maze .tab-list__item--active {
+.maze .tab--active {
     border-bottom: 4px solid var(--color-maze);
 }
 
-.tab-list__label {
+.tab__label {
     margin: auto;
     font-size: 12px;
     font-weight: 700;
@@ -341,11 +333,11 @@ html {
     color: var(--color-text-alt);
 }
 
-.tab-list__item--active > .tab-list__label {
+.tab--active > .tab__label {
     color: var(--color-text);
 }
 
-.tab-list__input {
+.tab__input {
     position: absolute;
     top: 0;
     left: 0;
@@ -863,6 +855,14 @@ html {
     margin: 0 0 8px 0;
     cursor: pointer;
     text-align: end;
+}
+
+.maze .filter__header:hover {
+    color: var(--color-maze);
+}
+
+.fleeca .filter__header:hover {
+    color: var(--color-fleeca);
 }
 
 .filter__body {

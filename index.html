@@ -11,8 +11,7 @@
     <title>FailyBank</title>
 </head>
 
-<!-- Screen -->
-<body class="screen">
+<body>
 
     <!-- App -->
     <main class="app app--loading" id="app">
@@ -38,27 +37,7 @@
                         <p class="balance__value" id="personal-account-balance"></p>
                     </div>
                 </div>
-                <div class="top-app-bar__section top-app-bar__section--middle">
-                    <!-- Tab list -->
-                    <div class="tab-list">
-                        <div class="tab-list__item tab-list__item--active" id="personal-tab">
-                            <label class="tab-list__label" for="personal-tab-input">Mon compte</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-tab-input" checked>
-                        </div>
-                        <div class="tab-list__item" id="personal-operation-tab">
-                            <label class="tab-list__label" for="personal-operation-tab-input">Opération</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-operation-tab-input">
-                        </div>
-                        <div class="tab-list__item" id="personal-transfer-tab">
-                            <label class="tab-list__label" for="personal-transfer-tab-input">Transfert</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-transfer-tab-input">
-                        </div>
-                        <div class="tab-list__item" id="enterprise-tab">
-                            <label class="tab-list__label" for="enterprise-tab-input">Entreprise</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="enterprise-tab-input">
-                        </div>
-                    </div>
-                </div>
+                <div class="top-app-bar__section top-app-bar__section--middle" id="tab-list"></div>
                 <div class="top-app-bar__section top-app-bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
@@ -360,6 +339,14 @@
         <ul class="app__notification-list" id="notification-list"></ul>
 
     </main>
+
+    <!-- Template / tab -->
+    <template id="tab-template">
+        <div class="tab">
+            <label class="tab__label">Mon compte</label>
+            <input class="tab__input" type="radio" name="tab-selector" checked>
+        </div>
+    </template>
 
     <!-- Template / account with delete button -->
     <template id="account-delete-template">
