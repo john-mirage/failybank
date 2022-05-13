@@ -116,16 +116,16 @@ const notificationList = new NotificationList(
   document.getElementById("notification-list")
 );
 
-const filterDropdown = new FilterDropdown(
+const personalFilterDropdown = new FilterDropdown(
   document.getElementById("personal-filter-dropdown")
 );
 
-const filterDropdownButtons = document.querySelectorAll(".filter__button");
+const personalFilterDropdownButtonElements = personalFilterDropdown.detailsElement.querySelectorAll(".filter__button");
 
-filterDropdownButtons.forEach((filterDropdownButton) => {
-  filterDropdownButton.addEventListener("click", (event) => {
+personalFilterDropdownButtonElements.forEach((buttonElement) => {
+  buttonElement.addEventListener("click", (event) => {
     const filter = event.target.dataset.filter;
-    filterDropdown.setActiveFilter(event.target);
+    personalFilterDropdown.setActiveFilter(event.target);
     personalLogList.filter = filter === "all" ? false : filter;
     personalLogList.reset();
   });
@@ -187,7 +187,7 @@ const tabList = new TabList(
 
 const personalView = new View(
   document.getElementById("personal-view"),
-  filterDropdown,
+  personalFilterDropdown,
   personalLogList,
   deleteFavoriteAccountList
 );
@@ -471,6 +471,26 @@ if (data.hasEnterprise) {
     document.getElementById("enterprise-account-balance")
   );
 
+  const enterpriseLogList = new LogList(
+    data.account.enterprise.logs,
+    document.getElementById("enterprise-log-list")
+  );
+
+  const enterpriseFilterDropdown = new FilterDropdown(
+    document.getElementById("enterprise-filter-dropdown")
+  );
+
+  const enterpriseFilterDropdownButtonElements = enterpriseFilterDropdown.detailsElement.querySelectorAll(".filter__button");
+
+  enterpriseFilterDropdownButtonElements.forEach((buttonElement) => {
+    buttonElement.addEventListener("click", (event) => {
+      const filter = event.target.dataset.filter;
+      enterpriseFilterDropdown.setActiveFilter(event.target);
+      enterpriseLogList.filter = filter === "all" ? false : filter;
+      enterpriseLogList.reset();
+    });
+  });
+
   const enterpriseTab = new Tab(
     "entreprise",
     "enterprise-tab",
@@ -483,8 +503,8 @@ if (data.hasEnterprise) {
 
   const enterpriseView = new View(
     document.getElementById("enterprise-view"),
-    false,
-    false,
+    enterpriseFilterDropdown,
+    enterpriseLogList,
     false
   );
 
@@ -503,6 +523,26 @@ if (data.hasEnterprise) {
       document.getElementById("offshore-account-balance")
     );
 
+    const offshoreLogList = new LogList(
+      data.account.offshore.logs,
+      document.getElementById("offshore-log-list")
+    );
+
+    const offshoreFilterDropdown = new FilterDropdown(
+      document.getElementById("offshore-filter-dropdown")
+    );
+
+    const offshoreFilterDropdownButtonElements = offshoreFilterDropdown.detailsElement.querySelectorAll(".filter__button");
+
+    offshoreFilterDropdownButtonElements.forEach((buttonElement) => {
+      buttonElement.addEventListener("click", (event) => {
+        const filter = event.target.dataset.filter;
+        offshoreFilterDropdown.setActiveFilter(event.target);
+        offshoreLogList.filter = filter === "all" ? false : filter;
+        offshoreLogList.reset();
+      });
+    });
+
     const offshoreTab = new Tab(
       "offshore",
       "offshore-tab",
@@ -513,8 +553,8 @@ if (data.hasEnterprise) {
 
     const offshoreView = new View(
       document.getElementById("offshore-view"),
-      false,
-      false,
+      offshoreFilterDropdown,
+      offshoreLogList,
       false
     );
 
