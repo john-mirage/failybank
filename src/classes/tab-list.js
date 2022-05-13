@@ -29,11 +29,15 @@ export class TabList {
 }
 
 export class Tab {
-  constructor(name, elementId) {
+  constructor(name, elementId, active = false) {
     this.name = name;
     this.elementId = elementId;
     this.template = document.getElementById("tab-template");
     this.element = this.create();
+    if (active) {
+      const inputElement = this.element.querySelector(".tab__input");
+      inputElement.checked = true;
+    }
   }
 
   create() {
