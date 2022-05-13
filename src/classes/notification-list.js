@@ -1,7 +1,7 @@
 export class NotificationList {
   constructor(notificationListElement, notificationTemplate) {
     this.notificationListElement = notificationListElement;
-    this.notificationTemplate = notificationTemplate;
+    this.notificationTemplate = document.getElementById("notification-template");
   }
 
   createNotification(notification) {

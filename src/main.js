@@ -138,6 +138,11 @@ const favoriteAccountList = new AccountList(
 function deleteFavoriteAccount(account) {
   favoriteAccountList.deleteAccount(account);
   deleteFavoriteAccountList.reset();
+  notificationList.displayNotification({
+    title: "Compte favoris",
+    description: "le compte a était supprimé avec succès",
+    type: "success"
+  });
 }
 
 const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input")
@@ -229,12 +234,7 @@ function showPersonalTransferView() {
   viewSwitcher.switch(personalTransferView);
 }
 
-personalTabInput.addEventListener("change", showPersonalView);
-personalOperationTabInput.addEventListener("change", showPersonalOperationView);
-personalTransferTabInput.addEventListener("change", showPersonalTransferView);
-
-/*
-function handlePersonalThemeButton(event) {
+function switchTheme(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
   if (personalAccount.theme === "dark") {
     if (!document.documentElement.classList.contains("dark")) {
@@ -247,14 +247,18 @@ function handlePersonalThemeButton(event) {
   }
 }
 
-function handlePersonalFavoriteAccountForm(event) {
+const personalThemeButton = document.getElementById("personal-theme-button");
+
+function addFavoriteAccount(event) {
   event.preventDefault();
+  const formData = new FormData(personalFavoriteAccountForm.formElement);
   const account = {
-    name: personalFavoriteAccountNameInput.value,
-    number: personalFavoriteAccountNumberInput.value
+    name: formData.get("name"),
+    number: formData.get("number")
   }
-  if (personalAccount.favoriteAccountList.accounts.length < 5) {
-    personalAccount.favoriteAccountList.addAccount(account);
+  if (favoriteAccountList.accounts.length < 5) {
+    favoriteAccountList.addAccount(account);
+    deleteFavoriteAccountList.reset();
     personalFavoriteAccountForm.reset();
     notificationList.displayNotification({
       title: "Compte favoris",
@@ -270,15 +274,14 @@ function handlePersonalFavoriteAccountForm(event) {
   }
 }
 
-function handlePersonalFavoriteAccountDelete(event) {
-  const account = event.detail.account;
-  personalAccount.favoriteAccountList.deleteAccount(account);
-  notificationList.displayNotification({
-    title: "Compte favoris",
-    description: "le compte a était supprimé avec succès",
-    type: "success"
-  });
-}
+personalFavoriteAccountForm.formElement.addEventListener("submit", addFavoriteAccount);
+
+personalThemeButton.addEventListener("click", switchTheme);
+personalTabInput.addEventListener("change", showPersonalView);
+personalOperationTabInput.addEventListener("change", showPersonalOperationView);
+personalTransferTabInput.addEventListener("change", showPersonalTransferView);
+
+/*
 
 function handlePersonalDepositForm(event) {
   event.preventDefault();
@@ -423,40 +426,6 @@ function handlePersonalTransferForm(event) {
     });
   }
 }
-
-function handlePersonalFilter(event) {
-  const filter = event.detail.filter;
-  console.log(filter);
-}
-
-personalTabInput.addEventListener("change", () => {
-  tabList.setActiveTab(personalTab);
-  previousLogList.clearList();
-  previousLogList = personalAccount.logList;
-  personalAccount.logList.createPageLogs();
-});
-
-personalOperationTabInput.addEventListener("change", () => {
-  tabList.setActiveTab(personalOperationTab);
-  previousLogList.clearList();
-  previousLogList = personalAccount.operationLogList;
-  personalAccount.operationLogList.createPageLogs();
-});
-
-personalTransferTabInput.addEventListener("change", () => {
-  tabList.setActiveTab(personalTransferTab);
-  previousLogList.clearList();
-});
-
-personalFilter.filterElement.addEventListener("update-personal-filter", handlePersonalFilter);
-personalThemeButton.addEventListener("change", handlePersonalThemeButton);
-personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
-document.addEventListener("personal-favorite-account-delete", handlePersonalFavoriteAccountDelete);
-document.addEventListener("personal-favorite-account-number-paste", handlePersonalFavoriteAccountNumberPaste);
-personalDepositFormElt.addEventListener("submit", handlePersonalDepositForm);
-personalDepositAllDepositButton.addEventListener("click", handlePersonalAllDepositButton);
-personalWithdrawFormElt.addEventListener("submit", handlePersonalWithdrawForm);
-personalTransferFormElt.addEventListener("submit", handlePersonalTransferForm);
 */
 
 /*------------------------------------*\
@@ -549,7 +518,7 @@ if (data.hasEnterprise) {
       false
     );
 
-    const offshoreTabInput = document.getElementById("offshore-tab-input");
+    const offshoreTabButton = document.getElementById("offshore-tab-button");
 
     const offshoreView = new View(
       document.getElementById("offshore-view"),
@@ -560,43 +529,19 @@ if (data.hasEnterprise) {
 
     function showOffshoreView() {
       tabList.addTab(offshoreTab);
+      const offshoreTabInput = document.getElementById("offshore-tab");
+      offshoreTabInput.checked = true;
       tabList.setActiveTab(offshoreTab);
       viewSwitcher.switch(offshoreView);
     }
 
-    offshoreTabInput.addEventListener("click", showOffshoreView);
+    offshoreTabButton.addEventListener("click", showOffshoreView);
 
   }
 }
 
 /*
 if (data.hasEnterprise) {
-
-  const enterpriseAccount = new Account(
-    data.account.enterprise,
-    document.getElementById("enterprise-account-owner"),
-    document.getElementById("enterprise-account-balance"),
-    document.getElementById("enterprise-account-log-list")
-  );
-
-  const enterpriseTab = new TopAppBarTab("enterprise", enterpriseTabView, enterpriseTabContainer);
-
-  tabList.addTab(enterpriseTab);
-
-  const enterpriseDepositField = new FormField(enterpriseDepositAmountInput);
-  const enterpriseWithdrawField = new FormField(enterpriseWithdrawAmountInput);
-
-  const enterpriseDepositForm = new Form(
-    [enterpriseDepositField],
-    enterpriseDepositFormElt,
-    enterpriseDepositFormButton
-  );
-
-  const enterpriseWithdrawForm = new Form(
-    [enterpriseWithdrawField],
-    enterpriseWithdrawFormElt,
-    enterpriseWithdrawFormButton
-  );
 
   function handleEnterpriseDepositForm(event) {
     event.preventDefault();
@@ -693,42 +638,11 @@ if (data.hasEnterprise) {
     }
   }
 
-  enterpriseTabInput.addEventListener("change", () => {
-    tabList.setActiveTab(enterpriseTab);
-    previousLogList.clearList();
-    previousLogList = enterpriseAccount.logList;
-    enterpriseAccount.logList.createPageLogs();
-  });
-
   enterpriseDepositFormElt.addEventListener("submit", handleEnterpriseDepositForm);
   enterpriseAllDepositButton.addEventListener("click", handleEnterpriseAllDepositButton)
   enterpriseWithdrawFormElt.addEventListener("submit", handleEnterpriseWithdrawForm);
 
   if (data.hasOffshore) {
-    const offshoreDepositFormElt = document.getElementById("offshore-deposit-form");
-    const offshoreDepositAmountInput = document.getElementById("offshore-deposit-amount-input");
-    const offshoreTabInput = document.getElementById("offshore-tab-input");
-    const offshoreDepositFormButton = document.getElementById("offshore-deposit-form-button");
-    const offshoreAllDepositButton = document.getElementById("offshore-all-deposit-button");
-
-    const offshoreAccount = new Account(
-      data.account.offshore,
-      document.getElementById("offshore-account-owner"),
-      document.getElementById("offshore-account-balance"),
-      document.getElementById("offshore-account-log-list")
-    );
-
-    const offshoreTab = new Tab("offshore", offshoreTabView);
-
-    tabList.addTab(offshoreTab);
-
-    const offshoreDepositField = new FormField(offshoreDepositAmountInput);
-
-    const offshoreDepositForm = new Form(
-      [offshoreDepositField],
-      offshoreDepositFormElt,
-      offshoreDepositFormButton
-    );
 
     function handleOffshoreDepositForm(event) {
       event.preventDefault();
@@ -791,13 +705,6 @@ if (data.hasEnterprise) {
         });
       }
     }
-
-    offshoreTabInput.addEventListener("change", () => {
-      tabList.setActiveTab(offshoreTab);
-      previousLogList.clearList();
-      previousLogList = offshoreAccount.logList;
-      offshoreAccount.logList.createPageLogs();
-    });
 
     offshoreDepositFormElt.addEventListener("submit", handleOffshoreDepositForm);
     offshoreAllDepositButton.addEventListener("click", handleOffshoreAllDepositButton)
