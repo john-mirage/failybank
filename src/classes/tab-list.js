@@ -22,8 +22,7 @@ export class TabList {
   }
 
   setActiveTab(tab) {
-    const tabInputId = this.activeTab.element.querySelector(".tab__input").getAttribute("id");
-    if (tabInputId === "offshore-tab") {
+    if (this.activeTab.name === "offshore") {
       this.deleteTab(this.activeTab);
     } else {
       this.activeTab.element.classList.remove("tab--active");
