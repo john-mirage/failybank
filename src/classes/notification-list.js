@@ -1,6 +1,6 @@
 class NotificationList {
-  constructor(notificationListElt, notificationTemplate) {
-    this.notificationListElt = notificationListElt;
+  constructor(notificationListElement, notificationTemplate) {
+    this.notificationListElement = notificationListElement;
     this.notificationTemplate = notificationTemplate;
   }
 
@@ -16,12 +16,12 @@ class NotificationList {
   }
 
   deleteNotification(notificationElt) {
-    this.notificationListElt.removeChild(notificationElt);
+    this.notificationListElement.removeChild(notificationElt);
   }
 
   displayNotification(notification) {
     const notificationElt = this.createNotification(notification);
-    this.notificationListElt.prepend(notificationElt);
+    this.notificationListElement.prepend(notificationElt);
     setTimeout(() => {
       this.deleteNotification(notificationElt);
     }, 5000);

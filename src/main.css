@@ -293,11 +293,11 @@ body {
     text-shadow: none;
 }
 
-.balance__value--down {
+.balance__value--negative {
     text-shadow: 0 0 12px var(--color-down);
 }
 
-.balance__value--down:hover {
+.balance__value--negative:hover {
     color: var(--color-down);
     text-shadow: none;
 }
