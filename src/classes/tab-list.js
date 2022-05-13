@@ -22,7 +22,12 @@ export class TabList {
   }
 
   setActiveTab(tab) {
-    this.activeTab.element.classList.remove("tab--active");
+    const tabInputId = this.activeTab.element.querySelector(".tab__input").getAttribute("id");
+    if (tabInputId === "offshore-tab") {
+      this.deleteTab(this.activeTab);
+    } else {
+      this.activeTab.element.classList.remove("tab--active");
+    }
     this.activeTab = tab;
     this.activeTab.element.classList.add("tab--active");
   }

@@ -1,5 +1,5 @@
 import data from "./data";
-import {PersonalAccount} from "./classes/account";
+import {Account, PersonalAccount} from "./classes/account";
 import {Tab, TabList} from "./classes/tab-list";
 import {Form} from "./classes/form";
 import {NotificationList} from "./classes/notification-list";
@@ -462,6 +462,72 @@ personalTransferFormElt.addEventListener("submit", handlePersonalTransferForm);
 /*------------------------------------*\
   Enterprise & Offshore accounts
 \*------------------------------------*/
+
+if (data.hasEnterprise) {
+
+  const enterpriseAccount = new Account(
+    data.account.enterprise,
+    document.getElementById("enterprise-account-owner"),
+    document.getElementById("enterprise-account-balance")
+  );
+
+  const enterpriseTab = new Tab(
+    "entreprise",
+    "enterprise-tab",
+    false
+  );
+
+  tabList.addTab(enterpriseTab);
+
+  const enterpriseTabInput = document.getElementById("enterprise-tab");
+
+  const enterpriseView = new View(
+    document.getElementById("enterprise-view"),
+    false,
+    false,
+    false
+  );
+
+  function showEnterpriseView() {
+    tabList.setActiveTab(enterpriseTab);
+    viewSwitcher.switch(enterpriseView);
+  }
+
+  enterpriseTabInput.addEventListener("click", showEnterpriseView);
+
+  if (data.hasOffshore) {
+
+    const offshoreAccount = new Account(
+      data.account.offshore,
+      document.getElementById("offshore-account-owner"),
+      document.getElementById("offshore-account-balance")
+    );
+
+    const offshoreTab = new Tab(
+      "offshore",
+      "offshore-tab",
+      false
+    );
+
+    const offshoreTabInput = document.getElementById("offshore-tab-input");
+
+    const offshoreView = new View(
+      document.getElementById("offshore-view"),
+      false,
+      false,
+      false
+    );
+
+    function showOffshoreView() {
+      tabList.addTab(offshoreTab);
+      tabList.setActiveTab(offshoreTab);
+      viewSwitcher.switch(offshoreView);
+    }
+
+    offshoreTabInput.addEventListener("click", showOffshoreView);
+
+  }
+}
 
 /*
 if (data.hasEnterprise) {
