@@ -23,12 +23,13 @@ export class AccountList {
 export class DeleteAccountList {
   constructor(
     accountList,
-    accountListElement
+    accountListElement,
+    deleteFavoriteAccount
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
+    this.deleteFavoriteAccount = deleteFavoriteAccount;
     this.accountTemplate = document.getElementById("favorite-account-delete-template");
-    this.deleteAccountProps = [];
     this.createAccount = this.createAccount.bind(this);
   }
 
@@ -40,7 +41,9 @@ export class DeleteAccountList {
     const accountDeleteButtonElement = accountElement.querySelector(".account__text-button");
     accountNameElement.textContent = account.name;
     accountNumberElement.textContent = account.number;
-    this.deleteAccountProps.push({account, accountDeleteButtonElement});
+    accountDeleteButtonElement.addEventListener("click", () => {
+      this.deleteFavoriteAccount(account);
+    }, { once: true });
     this.accountListElement.appendChild(accountFragment);
   }
 
@@ -49,20 +52,25 @@ export class DeleteAccountList {
   }
 
   reset() {
-    this.accountListElement.innerHTML = "";
+    this.clear();
     this.createAccounts();
+  }
+
+  clear() {
+    this.accountListElement.innerHTML = "";
   }
 }
 
 export class PasteAccountList {
   constructor(
     accountList,
-    accountListElement
+    accountListElement,
+    pasteAccountNumberToForm
   ) {
     this.accountList = accountList;
     this.accountListElement = accountListElement;
+    this.pasteAccountNumber = pasteAccountNumberToForm;
     this.accountTemplate = document.getElementById("favorite-account-paste-template");
-    this.pasteAccountProps = [];
     this.createAccount = this.createAccount.bind(this);
   }
 
@@ -73,7 +81,9 @@ export class PasteAccountList {
     const accountNumberElement = accountElement.querySelector(".account__number");
     accountNameElement.textContent = account.name;
     accountNumberElement.textContent = account.number;
-    this.pasteAccountProps.push({account, accountNumber: account.number});
+    accountElement.addEventListener("click", () => {
+      this.pasteAccountNumber(account.number);
+    });
     this.accountListElement.appendChild(accountFragment);
   }
 
@@ -82,7 +92,11 @@ export class PasteAccountList {
   }
 
   reset() {
-    this.accountListElement.innerHTML = "";
+    this.clear();
     this.createAccounts();
+  }
+
+  clear() {
+    this.accountListElement.innerHTML = "";
   }
 }

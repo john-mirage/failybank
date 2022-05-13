@@ -70,47 +70,12 @@ const personalLogList = new LogList(
   document.getElementById("personal-log-list")
 );
 
+const personalOperationLogList = new LogList(
+  data.account.personal.logs.filter((log) => log.type === "operation"),
+  document.getElementById("personal-operation-log-list")
+);
+
 personalLogList.displayInitialLogs();
-
-const personalTab = new Tab(
-  "mon compte",
-  "personal-tab"
-);
-
-const personalOperationTab = new Tab(
-  "opération",
-  "personal-operation-tab"
-);
-
-const personalTransferTab = new Tab(
-  "transfert",
-  "personal-transfer-tab"
-);
-
-const tabList = new TabList(
-  [
-    personalTab,
-    personalOperationTab,
-    personalTransferTab
-  ],
-  document.getElementById("tab-list")
-);
-
-const personalView = new View(
-  document.getElementById("personal-view")
-);
-
-const personalOperationView = new View(
-  document.getElementById("personal-operation-view")
-);
-
-const personalTransferView = new View(
-  document.getElementById("personal-transfer-view")
-);
-
-const viewSwitcher = new ViewSwitcher(
-  personalView
-);
 
 const personalFavoriteAccountForm = new Form(
   [
@@ -170,16 +135,84 @@ const favoriteAccountList = new AccountList(
   data.account.personal.favoriteAccounts
 );
 
+function deleteFavoriteAccount(account) {
+  favoriteAccountList.deleteAccount(account);
+  deleteFavoriteAccountList.reset();
+}
+
+const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input")
+
+function pasteFavoriteAccount(accountNumber) {
+  personalTransferAccountNumberInput.value = accountNumber;
+}
+
 const deleteFavoriteAccountList = new DeleteAccountList(
   favoriteAccountList,
-  document.getElementById("delete-favorite-account-list")
+  document.getElementById("delete-favorite-account-list"),
+  deleteFavoriteAccount
+);
+
+const pasteFavoriteAccountList = new PasteAccountList(
+  favoriteAccountList,
+  document.getElementById("paste-favorite-account-list"),
+  pasteFavoriteAccount
 );
 
 deleteFavoriteAccountList.createAccounts();
 
+const personalTab = new Tab(
+  "mon compte",
+  "personal-tab",
+  true
+);
+
+const personalOperationTab = new Tab(
+  "opération",
+  "personal-operation-tab"
+);
+
+const personalTransferTab = new Tab(
+  "transfert",
+  "personal-transfer-tab"
+);
+
+const tabList = new TabList(
+  [
+    personalTab,
+    personalOperationTab,
+    personalTransferTab
+  ],
+  document.getElementById("tab-list")
+);
+
+const personalView = new View(
+  document.getElementById("personal-view"),
+  filterDropdown,
+  personalLogList,
+  deleteFavoriteAccountList
+);
+
+const personalOperationView = new View(
+  document.getElementById("personal-operation-view"),
+  false,
+  personalOperationLogList,
+  false
+);
+
+const personalTransferView = new View(
+  document.getElementById("personal-transfer-view"),
+  false,
+  false,
+  pasteFavoriteAccountList
+);
+
+const viewSwitcher = new ViewSwitcher(
+  personalView
+);
+
 const personalTabInput = document.getElementById("personal-tab");
-const personalOperationInput = document.getElementById("personal-operation-tab");
-const personalTransferInput = document.getElementById("personal-transfer-tab");
+const personalOperationTabInput = document.getElementById("personal-operation-tab");
+const personalTransferTabInput = document.getElementById("personal-transfer-tab");
 
 function showPersonalView() {
   tabList.setActiveTab(personalTab);
@@ -197,8 +230,8 @@ function showPersonalTransferView() {
 }
 
 personalTabInput.addEventListener("change", showPersonalView);
-personalOperationInput.addEventListener("change", showPersonalOperationView);
-personalTransferInput.addEventListener("change", showPersonalTransferView);
+personalOperationTabInput.addEventListener("change", showPersonalOperationView);
+personalTransferTabInput.addEventListener("change", showPersonalTransferView);
 
 /*
 function handlePersonalThemeButton(event) {
