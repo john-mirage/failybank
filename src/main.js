@@ -36,512 +36,8 @@ function setAppTheme(bank) {
 setAppTheme(data.bank);
 
 /*------------------------------------*\
-  Logs
-\*------------------------------------*/
-
-const logTemplate = document.getElementById("log-template");
-
-const LOGS_PER_PAGE = 10;
-
-class LogList {
-  constructor(logs, list) {
-    this.listElt = list;
-    this.logs = logs;
-    this.filter = false;
-    this.page = 1;
-    this.observer = new IntersectionObserver((entries) => {
-      this.getNextPage(entries);
-    });
-    this.observedLog = false;
-    this.getPageNumber();
-    this.getPageLogs();
-  }
-
-  addLog(log) {
-    this.logs.unshift(log);
-    if (this.page > 1) {
-      this.page = 1;
-    }
-  }
-
-  createLog(log, prepend = false, observe = false) {
-    const logFragment = logTemplate.content.cloneNode(true);
-    const logRow = logFragment.querySelector(".log");
-    const logIcon = logRow.querySelector(".log__icon");
-    const logType = logRow.querySelector(".log__type");
-    const logDate = logRow.querySelector(".log__date");
-    const logAmount = logRow.querySelector(".log__amount");
-    const logReference = logRow.querySelector(".log__reference");
-    logIcon.classList.add(`log__icon--${log.type}`);
-    logAmount.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
-    logType.textContent = log.label;
-    logDate.textContent = dateTimeFormatter.format(new Date(log.date));
-    logAmount.textContent = currencyFormatter.format(log.amount);
-    logReference.textContent = log.reference;
-    if (prepend) {
-      this.listElt.prepend(logFragment);
-    } else {
-      this.listElt.appendChild(logFragment);
-    }
-    if (observe) {
-      this.observedLog = logRow;
-      this.observer.observe(logRow);
-    }
-  }
-
-  setFilter(filter) {
-    this.filter = filter === "all" ? false : filter;
-    this.resetList();
-  }
-
-  createPageLogs() {
-    this.getPageLogs();
-    if (this.observedLog) {
-      this.observer.unobserve(this.observedLog);
-      this.observedLog = false;
-    }
-    this.pageLogs.forEach((pageLog, pageLogIndex) => {
-      const isLastLog = pageLogIndex === (this.pageLogs.length - 1);
-      const isNotLastPage = this.page < this.pageNumber;
-      if (isLastLog && isNotLastPage) {
-        this.createLog(pageLog, false, true);
-      } else {
-        this.createLog(pageLog);
-      }
-    });
-  }
-
-  getNextPage(entries) {
-    if (entries[0].isIntersecting) {
-      this.page += 1;
-      this.getPageLogs();
-      this.createPageLogs();
-    }
-  }
-
-  getPageNumber() {
-    const logNumber = this.logs.length;
-    this.pageNumber = Math.ceil( logNumber / LOGS_PER_PAGE);
-  }
-
-  getPageLogs() {
-    const firstIndex = LOGS_PER_PAGE * (this.page - 1);
-    const lastIndex = LOGS_PER_PAGE * this.page;
-    this.pageLogs = this.logs.slice(firstIndex, lastIndex);
-  }
-
-  resetList() {
-    this.clearList();
-    this.createPageLogs();
-  }
-
-  clearList() {
-    this.unobserveList();
-    this.listElt.scrollTop = 0;
-    this.listElt.innerHTML = "";
-    if (this.page > 1) {
-      this.page = 1;
-    }
-  }
-
-  unobserveList() {
-    if (this.observedLog) {
-      this.observer.unobserve(this.observedLog);
-      this.observedLog = false;
-    }
-  }
-}
-
-/*------------------------------------*\
-  Account list
-\*------------------------------------*/
-
-const deleteAccountList = document.getElementById("account-delete-list");
-const deleteAccountTemplate = document.getElementById("account-delete-template");
-const pasteAccountList = document.getElementById("account-paste-list");
-const pasteAccountTemplate = document.getElementById("account-paste-template");
-
-const ACCOUNTS_LIMIT = 5;
-
-class AccountList {
-  constructor(accounts) {
-    this.accounts = accounts;
-    this.createList();
-  }
-
-  addAccount(account) {
-    if (this.accounts.length < ACCOUNTS_LIMIT) {
-      this.accounts = [account, ...this.accounts];
-      this.resetList();
-    } else {
-      throw new Error("Account limit is reached");
-    }
-  }
-
-  deleteAccount(account) {
-    this.accounts = this.accounts.filter((savedAccount) => {
-      return savedAccount.number !== account.number;
-    });
-    this.resetList();
-  }
-
-  createDeleteAccount(account) {
-    const accountFragment = deleteAccountTemplate.content.cloneNode(true);
-    const accountElement = accountFragment.querySelector(".account");
-    const accountNameElement = accountElement.querySelector(".account__name");
-    const accountNumberElement = accountElement.querySelector(".account__number");
-    const accountDeleteButtonElement = accountElement.querySelector(".account__text-button");
-    accountNameElement.textContent = account.name;
-    accountNumberElement.textContent = account.number;
-    accountDeleteButtonElement.addEventListener("click", () => {
-      this.deleteAccount(account);
-      document.dispatchEvent(new CustomEvent("personal-favorite-account-delete", { detail: { account } }));
-    }, {once: true});
-    deleteAccountList.appendChild(accountFragment);
-  }
-
-  createPasteAccount(account) {
-    const accountFragment = pasteAccountTemplate.content.cloneNode(true);
-    const accountElement = accountFragment.querySelector(".account");
-    const accountNameElement = accountElement.querySelector(".account__name");
-    const accountNumberElement = accountElement.querySelector(".account__number");
-    accountNameElement.textContent = account.name;
-    accountNumberElement.textContent = account.number;
-    accountElement.addEventListener("click", () => {
-      if (personalTransferAccountNumberInput.value !== account.number) {
-        personalTransferAccountNumberInput.value = account.number;
-        document.dispatchEvent(new CustomEvent("personal-favorite-account-number-paste"));
-      }
-    });
-    pasteAccountList.appendChild(accountFragment);
-  }
-
-  createList() {
-    this.accounts.forEach((account) => {
-      this.createDeleteAccount(account);
-      this.createPasteAccount(account);
-    });
-  }
-
-  resetList() {
-    deleteAccountList.innerHTML = "";
-    pasteAccountList.innerText = "";
-    this.createList();
-  }
-}
-
-/*------------------------------------*\
-  Account
-\*------------------------------------*/
-
-const personalThemeButton = document.getElementById("personal-theme-button");
-
-class Account {
-  constructor(
-    account,
-    ownerElement,
-    balanceElement,
-    logListElement
-  ) {
-    this.owner = account.owner;
-    this.ownerElement = ownerElement;
-    this.balance = account.balance;
-    this.balanceElement = balanceElement;
-    this.logList = new LogList(account.logs, logListElement);
-    this.displayOwner();
-    this.displayBalance();
-  }
-
-  displayOwner() {
-    this.ownerElement.textContent = this.owner;
-  }
-
-  displayBalance() {
-    if (this.balance < 1) {
-      if (this.balanceElement.classList.contains("section__number--up")) {
-        this.balanceElement.classList.replace("section__number--up","section__number--down");
-      } else if (!this.balanceElement.classList.contains("section__number--down")) {
-        this.balanceElement.classList.add("section__number--down");
-      }
-    } else {
-      if (this.balanceElement.classList.contains("section__number--down")) {
-        this.balanceElement.classList.replace("section__number--down","section__number--up");
-      } else if (!this.balanceElement.classList.contains("section__number--up")) {
-        this.balanceElement.classList.add("section__number--up");
-      }
-    }
-    this.balanceElement.textContent = currencyFormatter.format(this.balance);
-  }
-}
-
-class PersonalAccount extends Account {
-  constructor(
-    account,
-    ownerElement,
-    balanceElement,
-    logListElement,
-    numberElement,
-    operationLogListElement
-  ) {
-    super(
-      account,
-      ownerElement,
-      balanceElement,
-      logListElement
-    );
-    this.cash = account.cash;
-    this.number = account.number;
-    this.numberElement = numberElement;
-    this.theme = account.theme;
-    if (this.theme === "dark") {
-      personalThemeButton.checked = true;
-      document.documentElement.classList.add("dark");
-    }
-    this.favoriteAccountList = new AccountList(account.favoriteAccounts);
-    this.operationLogList = new LogList(account.logs.filter(log => log.type === "operation"), operationLogListElement);
-    this.displayNumber();
-  }
-
-  displayNumber() {
-    this.numberElement.textContent = this.number;
-  }
-
-  displayBalance() {
-    if (this.balance < 1) {
-      if (!this.balanceElement.classList.contains("balance__value--down")) {
-        this.balanceElement.classList.add("balance__value--down");
-      }
-    } else {
-      if (this.balanceElement.classList.contains("balance__value--down")) {
-        this.balanceElement.classList.remove("balance__value--down");
-      }
-    }
-    this.balanceElement.textContent = currencyFormatter.format(this.balance);
-  }
-}
-
-/*------------------------------------*\
-  Tabs
-\*------------------------------------*/
-
-class TabList {
-  constructor(...tabs) {
-    this.tabs = tabs;
-    this.activeTab = tabs[0];
-  }
-
-  addTab(tab) {
-    this.tabs = [...this.tabs, tab];
-  }
-
-  setActiveTab(tab) {
-    this.activeTab.deactivate();
-    this.activeTab = tab;
-    this.activeTab.activate();
-  }
-}
-
-class Tab {
-  constructor(name, viewElt) {
-    this.name = name;
-    this.viewElt = viewElt;
-  }
-
-  activate() {
-    this.viewElt.classList.add("view--active");
-  }
-
-  deactivate() {
-    this.viewElt.classList.remove("view--active");
-  }
-}
-
-class TopAppBarTab extends Tab {
-  constructor(name, viewElt, containerElt) {
-    super(name, viewElt);
-    this.containerElt = containerElt;
-  }
-
-  activate() {
-    super.activate();
-    this.containerElt.classList.add("tab-list__item--active");
-  }
-
-  deactivate() {
-    super.deactivate();
-    this.containerElt.classList.remove("tab-list__item--active");
-  }
-}
-
-/*------------------------------------*\
-  Forms
-\*------------------------------------*/
-
-class Form {
-  constructor(fields, formElt, buttonElt) {
-    this.fields = fields;
-    this.formElt = formElt;
-    this.buttonElt = buttonElt;
-    this.buttonIsActive = false;
-    this.fields.forEach((field) => {
-      field.inputElt.addEventListener("keyup", () => this.checkFields());
-    });
-  }
-
-  checkFields() {
-    const fieldsAreValid = this.fields.every((field) => field.checkField());
-    if (fieldsAreValid && !this.buttonIsActive) {
-      this.activateSubmitButton();
-    } else if (!fieldsAreValid && this.buttonIsActive) {
-      this.deactivateSubmitButton();
-    }
-  }
-
-  reset() {
-    this.formElt.reset();
-    this.deactivateSubmitButton();
-  }
-
-  activateSubmitButton() {
-    this.buttonIsActive = true;
-    this.buttonElt.classList.replace("button--disabled", "button--primary");
-    this.buttonElt.removeAttribute("disabled");
-  }
-
-  deactivateSubmitButton() {
-    this.buttonIsActive = false;
-    this.buttonElt.classList.replace("button--primary", "button--disabled");
-    this.buttonElt.setAttribute("disabled", "");
-  }
-}
-
-class FormField {
-  constructor(inputElt) {
-    this.inputElt = inputElt;
-  }
-
-  checkField() {
-    return this.inputElt.validity.valid;
-  }
-}
-
-/*------------------------------------*\
-  Notification list
-\*------------------------------------*/
-
-const notificationTemplate = document.getElementById("notification-template");
-
-class NotificationList {
-  constructor(notificationListElt) {
-    this.notificationListElt = notificationListElt;
-  }
-
-  createNotification(notification) {
-    const notificationFragment = notificationTemplate.content.cloneNode(true);
-    const notificationElement = notificationFragment.querySelector(".notification");
-    const notificationTitle = notificationFragment.querySelector(".notification__title");
-    const notificationDescription = notificationFragment.querySelector(".notification__description");
-    notificationElement.classList.add(`notification--${notification.type}`);
-    notificationTitle.textContent = notification.title;
-    notificationDescription.textContent = notification.description;
-    return notificationElement;
-  }
-
-  deleteNotification(notificationElt) {
-    this.notificationListElt.removeChild(notificationElt);
-  }
-
-  displayNotification(notification) {
-    const notificationElt = this.createNotification(notification);
-    this.notificationListElt.prepend(notificationElt);
-    setTimeout(() => {
-      this.deleteNotification(notificationElt);
-    }, 5000);
-  }
-}
-
-/*------------------------------------*\
-  Filter
-\*------------------------------------*/
-
-class Filter {
-  constructor(detailsElement, buttonElements, eventType) {
-    this.filterElement = detailsElement;
-    this.titleElement = this.filterElement.querySelector(".filter__header");
-    this.buttonElements = buttonElements;
-    this.eventType = eventType;
-    this.activeButton = buttonElements[0];
-    this.closeDetails = this.closeDetails.bind(this);
-    this.handleButton = this.handleButton.bind(this);
-    this.handleDetails = this.handleDetails.bind(this);
-    this.buttonElements.forEach(this.handleButton);
-    this.filterElement.addEventListener("toggle", this.handleDetails);
-  }
-
-  closeDetails(event) {
-    const clickIsInsideDetails = this.filterElement.contains(event.target);
-    if (!clickIsInsideDetails) {
-      this.filterElement.removeAttribute("open");
-    }
-  }
-
-  handleButton(buttonElement) {
-    buttonElement.addEventListener("click", (event) => {
-      const filter = event.target.dataset.filter;
-      const customEvent = new CustomEvent(this.eventType, { detail: { filter } });
-      this.filterElement.dispatchEvent(customEvent);
-      this.filterElement.removeAttribute("open");
-      this.activeButton.classList.replace("filter__button--inactive", "filter__button--active");
-      this.activeButton.removeAttribute("disabled");
-      this.activeButton = event.target;
-      this.activeButton.classList.replace("filter__button--active", "filter__button--inactive");
-      this.activeButton.setAttribute("disabled", "");
-      this.titleElement.textContent = this.activeButton.textContent === "Aucun" ? "Filtrer les résultats" : `Filtrer par: ${this.activeButton.textContent}`;
-    });
-  }
-
-  handleDetails() {
-    if (this.filterElement.open) {
-      document.addEventListener("click", this.closeDetails);
-    } else {
-      document.removeEventListener("click", this.closeDetails);
-    }
-  }
-}
-
-/*------------------------------------*\
   Personal account
 \*------------------------------------*/
-
-const personalDepositFormElt = document.getElementById("personal-deposit-form");
-const personalWithdrawFormElt = document.getElementById("personal-withdraw-form");
-const personalTransferFormElt = document.getElementById("personal-transfer-form");
-const personalDepositAmountInput = document.getElementById("personal-deposit-amount-input");
-const personalWithdrawAmountInput = document.getElementById("personal-withdraw-amount-input");
-const personalTransferAmountInput = document.getElementById("personal-transfer-amount-input");
-const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
-const personalTransferReferenceInput = document.getElementById("personal-transfer-reference-input");
-const personalFavoriteAccountFormElt = document.getElementById("personal-favorite-account-form");
-const personalFavoriteAccountNameInput = document.getElementById("personal-favorite-account-name-input");
-const personalFavoriteAccountNumberInput = document.getElementById("personal-favorite-account-number-input");
-const personalTabContainer = document.getElementById("personal-tab");
-const personalTabInput = document.getElementById("personal-tab-input");
-const personalTabView = document.getElementById("personal-tab-view");
-const personalOperationTabContainer = document.getElementById("personal-operation-tab");
-const personalOperationTabInput = document.getElementById("personal-operation-tab-input");
-const personalOperationTabView = document.getElementById("personal-operation-tab-view");
-const personalTransferTabContainer = document.getElementById("personal-transfer-tab");
-const personalTransferTabInput = document.getElementById("personal-transfer-tab-input");
-const personalTransferTabView = document.getElementById("personal-transfer-tab-view");
-const enterpriseTabContainer = document.getElementById("enterprise-tab");
-const enterpriseTabView = document.getElementById("enterprise-tab-view");
-const offshoreTabContainer = document.getElementById("offshore-tab");
-const offshoreTabView = document.getElementById("offshore-tab-view");
-const personalFavoriteAccountFormButton = document.getElementById("personal-favorite-account-form-button");
-const personalDepositFormButton = document.getElementById("personal-deposit-form-button");
-const personalWithdrawFormButton = document.getElementById("personal-withdraw-form-button");
-const personalTransferFormButton = document.getElementById("personal-transfer-form-button");
-const personalDepositAllDepositButton = document.getElementById("personal-all-deposit-button");
 
 function getCurrentFormattedDate() {
   const date = new Date();
@@ -561,11 +57,29 @@ personalAccount.logList.createPageLogs();
 
 let previousLogList = personalAccount.logList;
 
-const personalTab = new TopAppBarTab("personal", personalTabView, personalTabContainer);
-const personalOperationTab = new TopAppBarTab("personal-operation", personalOperationTabView, personalOperationTabContainer);
-const personalTransferTab = new TopAppBarTab("personal-transfer", personalTransferTabView, personalTransferTabContainer);
+const personalTab = new TopAppBarTab(
+  "personal",
+  personalTabView,
+  personalTabContainer
+);
 
-const tabList = new TabList(personalTab, personalOperationTab, personalTransferTab);
+const personalOperationTab = new TopAppBarTab(
+  "personal-operation",
+  personalOperationTabView,
+  personalOperationTabContainer
+);
+
+const personalTransferTab = new TopAppBarTab(
+  "personal-transfer",
+  personalTransferTabView,
+  personalTransferTabContainer
+);
+
+const tabList = new TabList(
+  personalTab,
+  personalOperationTab,
+  personalTransferTab
+);
 
 const personalFavoriteAccountNameField = new FormField(personalFavoriteAccountNameInput);
 const personalFavoriteAccountNumberField = new FormField(personalFavoriteAccountNumberInput);
@@ -599,13 +113,12 @@ const personalTransferForm = new Form(
   personalTransferFormButton
 );
 
-const notificationList = new NotificationList(document.getElementById("notification-list"));
-
-const personalFilterDetails = document.getElementById("personal-filter");
+const notificationList = new NotificationList(
+  document.getElementById("notification-list")
+);
 
 const personalFilter = new Filter(
-  personalFilterDetails,
-  personalFilterDetails.querySelectorAll(".filter__button"),
+  document.getElementById("personal-filter"),
   "update-personal-filter"
 );
 
@@ -823,7 +336,7 @@ personalTransferTabInput.addEventListener("change", () => {
   previousLogList.clearList();
 });
 
-personalFilterDetails.addEventListener("update-personal-filter", handlePersonalFilter);
+personalFilter.filterElement.addEventListener("update-personal-filter", handlePersonalFilter);
 personalThemeButton.addEventListener("change", handlePersonalThemeButton);
 personalFavoriteAccountFormElt.addEventListener("submit", handlePersonalFavoriteAccountForm);
 document.addEventListener("personal-favorite-account-delete", handlePersonalFavoriteAccountDelete);
