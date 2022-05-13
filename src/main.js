@@ -75,8 +75,6 @@ const personalOperationLogList = new LogList(
   document.getElementById("personal-operation-log-list")
 );
 
-personalLogList.displayInitialLogs();
-
 const personalFavoriteAccountForm = new Form(
   [
     document.getElementById("personal-favorite-account-name-input"),
@@ -145,10 +143,17 @@ function deleteFavoriteAccount(account) {
   });
 }
 
-const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input")
+const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
 
 function pasteFavoriteAccount(accountNumber) {
-  personalTransferAccountNumberInput.value = accountNumber;
+  if (personalTransferAccountNumberInput.value !== accountNumber) {
+    personalTransferAccountNumberInput.value = accountNumber;
+    notificationList.displayNotification({
+      title: "Compte favoris",
+      description: `le compte ${accountNumber} a était ajouter au formulaire`,
+      type: "success"
+    });
+  }
 }
 
 const deleteFavoriteAccountList = new DeleteAccountList(
@@ -162,8 +167,6 @@ const pasteFavoriteAccountList = new PasteAccountList(
   document.getElementById("paste-favorite-account-list"),
   pasteFavoriteAccount
 );
-
-deleteFavoriteAccountList.createAccounts();
 
 const personalTab = new Tab(
   "mon compte",
@@ -252,12 +255,14 @@ const personalThemeButton = document.getElementById("personal-theme-button");
 function addFavoriteAccount(event) {
   event.preventDefault();
   const formData = new FormData(personalFavoriteAccountForm.formElement);
-  const account = {
+  const newAccount = {
     name: formData.get("name"),
     number: formData.get("number")
   }
-  if (favoriteAccountList.accounts.length < 5) {
-    favoriteAccountList.addAccount(account);
+  const accountListIsNotFull = favoriteAccountList.accounts.length < 5;
+  const accountIsNotInTheList = favoriteAccountList.accounts.find((account) => account.number === newAccount) === -1;
+  if (accountListIsNotFull && accountIsNotInTheList) {
+    favoriteAccountList.addAccount(newAccount);
     deleteFavoriteAccountList.reset();
     personalFavoriteAccountForm.reset();
     notificationList.displayNotification({
@@ -265,10 +270,16 @@ function addFavoriteAccount(event) {
       description: "le compte a était enregistré avec succès",
       type: "success"
     });
-  } else {
+  } else if (!accountListIsNotFull) {
     notificationList.displayNotification({
       title: "Compte favoris",
       description: "Limite de compte favoris enregistrés atteinte",
+      type: "error"
+    });
+  } else if (!accountIsNotInTheList) {
+    notificationList.displayNotification({
+      title: "Compte favoris",
+      description: `Le compte ${newAccount.number} existe deja dans la liste`,
       type: "error"
     });
   }
