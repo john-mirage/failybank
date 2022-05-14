@@ -743,25 +743,20 @@ if (data.hasEnterprise) {
     offshoreDepositForm.formElement.addEventListener("submit", depositToOffshoreAccount);
     offshoreAllDepositButton.addEventListener("click", depositAllToOffshoreAccount);
 
-  }
-}
-
-/*
-if (data.hasEnterprise) {
-
-  if (data.hasOffshore) {
-
   } else {
-    offshoreTabContainer.remove();
-    offshoreTabView.remove();
+    const offshoreView = document.getElementById("offshore-view");
+    const offshoreTabButton = document.getElementById("offshore-tab-button");
+    offshoreView.remove();
+    offshoreTabButton.remove();
   }
 } else {
-  enterpriseTabContainer.remove();
-  enterpriseTabView.remove();
-  offshoreTabContainer.remove();
-  offshoreTabView.remove();
+  const enterpriseView = document.getElementById("enterprise-view");
+  const offshoreView = document.getElementById("offshore-view");
+  const offshoreTabButton = document.getElementById("offshore-tab-button");
+  enterpriseView.remove();
+  offshoreView.remove();
+  offshoreTabButton.remove();
 }
- */
 
 /*------------------------------------*\
   Load app
