@@ -9,12 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700&display=swap" rel="stylesheet">
     <title>FailyBank</title>
-  <script type="module" crossorigin src="/failybank/assets/index.1b4e4cae.js"></script>
-  <link rel="stylesheet" href="/failybank/assets/index.77240982.css">
+  <script type="module" crossorigin src="/failybank/assets/index.063f5dd4.js"></script>
+  <link rel="stylesheet" href="/failybank/assets/index.98c2809b.css">
 </head>
 
-<!-- Screen -->
-<body class="screen">
+<body>
 
     <!-- App -->
     <main class="app app--loading" id="app">
@@ -40,27 +39,7 @@
                         <p class="balance__value" id="personal-account-balance"></p>
                     </div>
                 </div>
-                <div class="top-app-bar__section top-app-bar__section--middle">
-                    <!-- Tab list -->
-                    <div class="tab-list">
-                        <div class="tab-list__item tab-list__item--active" id="personal-tab">
-                            <label class="tab-list__label" for="personal-tab-input">Mon compte</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-tab-input" checked>
-                        </div>
-                        <div class="tab-list__item" id="personal-operation-tab">
-                            <label class="tab-list__label" for="personal-operation-tab-input">Opération</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-operation-tab-input">
-                        </div>
-                        <div class="tab-list__item" id="personal-transfer-tab">
-                            <label class="tab-list__label" for="personal-transfer-tab-input">Transfert</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="personal-transfer-tab-input">
-                        </div>
-                        <div class="tab-list__item" id="enterprise-tab">
-                            <label class="tab-list__label" for="enterprise-tab-input">Entreprise</label>
-                            <input class="tab-list__input" type="radio" name="tab" id="enterprise-tab-input">
-                        </div>
-                    </div>
-                </div>
+                <div class="top-app-bar__section top-app-bar__section--middle" id="tab-list"></div>
                 <div class="top-app-bar__section top-app-bar__section--right">
                     <!-- Toggle button -->
                     <div class="toggle-button">
@@ -79,46 +58,54 @@
                 </div>
             </header>
 
-            <!-- View / personal -->
-            <div class="view view--active" id="personal-tab-view">
+            <!-- View / personal account -->
+            <div class="view view--active" id="personal-view">
                 <div class="grid grid--account">
-                    <!-- Account owner -->
+                    <!-- Personal account owner -->
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte</h3>
                             <p class="section__text" id="personal-account-owner"></p>
                         </div>
                     </section>
-                    <!-- Account history -->
+                    <!-- Personal account log list -->
                     <section class="grid__section grid__section--row-span-4">
                         <div class="section section--column">
-                            <h3 class="section__title">Historique des opérations</h3>
+                            <div class="section__row">
+                                <h3 class="section__title">Historique des opérations</h3>
+                                <details class="filter" id="personal-filter-dropdown">
+                                    <summary class="filter__header">Filtrer les résultats</summary>
+                                    <div class="filter__body">
+                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
+                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
+                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
+                                    </div>
+                                </details>
+                            </div>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="personal-account-log-list"></div>
+                                <div class="paper__frame" id="personal-log-list"></div>
                             </div>
                         </div>
                     </section>
-                    <!-- Account number -->
+                    <!-- Personal account number -->
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Numéro du compte</h3>
                             <p class="section__number" id="personal-account-number"></p>
                         </div>
                     </section>
-                    <!-- Account add form -->
+                    <!-- Personal account favorite account add form -->
                     <section class="grid__section">
                         <form class="form" id="personal-favorite-account-form" novalidate>
                             <h2 class="form__title">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-favorite-account-name-input">Nom du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="personal-favorite-account-name" required maxlength="40" id="personal-favorite-account-name-input">
-                                    <p class="form__message" id="personal-favorite-account-name-message"></p>
+                                    <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="name" required maxlength="40" id="personal-favorite-account-name-input">
                                 </div>
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-favorite-account-number-input">Numéro du compte</label>
-                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="account-number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
-                                    <p class="form__message" id="personal-favorite-account-number-message"></p>
+                                    <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="button button--icon button--disabled" disabled type="submit" id="personal-favorite-account-form-button">
@@ -131,13 +118,13 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Account list -->
+                    <!-- Personal account favorite account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés <span id="personal-favorite-account-sum-text"></span></h3>
+                            <h3 class="section__title">Comptes enregistrés [<span id="personal-favorite-account-count"></span>/5]</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="account-delete-list"></table>
+                                    <table class="paper__table" id="delete-favorite-account-list"></table>
                                 </div>
                             </div>
                         </div>
@@ -145,17 +132,16 @@
                 </div>
             </div>
 
-            <!-- View / personal operation -->
-            <div class="view" id="personal-operation-tab-view">
+            <!-- View / personal account operation -->
+            <div class="view" id="personal-operation-view">
                 <div class="grid grid--operation">
-                    <!-- Operation deposit form -->
+                    <!-- Personal account operation Deposit form -->
                     <section class="grid__section grid__section--with-border">
                         <form class="form" id="personal-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="personal-deposit-amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
-                                <p class="form__message" id="personal-deposit-amount-message"></p>
+                                <input class="form__input" type="text" name="amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -167,23 +153,22 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Operation History -->
+                    <!-- Personal account operation log list -->
                     <section class="grid__section grid__section--row-span-2">
                         <div class="section section--column">
                             <h3 class="section__title">Historique des opérations</h3>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="personal-account-operation-log-list"></div>
+                                <div class="paper__frame" id="personal-operation-log-list"></div>
                             </div>
                         </div>
                     </section>
-                    <!-- Operation Withdraw form -->
+                    <!-- Personal account operation Withdraw form -->
                     <section class="grid__section">
                         <form class="form" id="personal-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="personal-withdraw-amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
-                                <p class="form__message" id="personal-withdraw-amount-message"></p>
+                                <input class="form__input" type="text" name="amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <button class="button button--text button--disabled" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
                         </form>
@@ -191,40 +176,37 @@
                 </div>
             </div>
 
-            <!-- View / personal transfer -->
-            <div class="view" id="personal-transfer-tab-view">
+            <!-- View / personal account transfer -->
+            <div class="view" id="personal-transfer-view">
                 <div class="grid grid--transfer">
-                    <!-- Transfer form -->
+                    <!-- personal account transfer form -->
                     <section class="grid__section">
                         <form class="form" id="personal-transfer-form" novalidate>
                             <h2 class="form__title">Effectuer un transfert</h2>
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="personal-transfer-amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
-                                    <p class="form__message" id="personal-transfer-amount-message"></p>
+                                    <input class="form__input" type="text" name="amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 </div>
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-account-number-input">Numéro de compte du déstinataire</label>
-                                    <input class="form__input" type="text" name="personal-transfer-account-number" placeholder="Entrer le numéro de compte" id="personal-transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
-                                    <p class="form__message" id="personal-transfer-account-number-message"></p>
+                                    <input class="form__input" type="text" name="number" placeholder="Entrer le numéro de compte" id="personal-transfer-account-number-input" required minlength="10" maxlength="10" pattern="[0-9]{10}">
                                 </div>
                             </div>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-transfer-reference-input">Référence du transfert</label>
-                                <input class="form__input" type="text" name="transfer-reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
-                                <p class="form__message" id="personal-transfer-reference-message"></p>
+                                <input class="form__input" type="text" name="reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
                             </div>
                             <button class="button button--text button--disabled" id="personal-transfer-form-button" disabled type="submit">Transférer</button>
                         </form>
                     </section>
-                    <!-- Transfer account list -->
+                    <!-- Personal account favorite account paste list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés</h3>
+                            <h3 class="section__title">Comptes enregistrés [<span id="personal-transfer-favorite-account-count"></span>/5]</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame">
-                                    <table class="paper__table" id="account-paste-list"></table>
+                                    <table class="paper__table" id="paste-favorite-account-list"></table>
                                 </div>
                             </div>
                         </div>
@@ -232,47 +214,54 @@
                 </div>
             </div>
 
-            <!-- View / enterprise -->
-            <div class="view" id="enterprise-tab-view">
+            <!-- View / enterprise account -->
+            <div class="view" id="enterprise-view">
                 <div class="grid grid--enterprise">
-                    <!-- Enterprise owner -->
+                    <!-- Enterprise account owner -->
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire de l'entreprise</h3>
                             <p class="section__text" id="enterprise-account-owner"></p>
                         </div>
                     </section>
-                    <!-- Enterprise history -->
+                    <!-- Enterprise account log list -->
                     <section class="grid__section grid__section--row-span-4">
                         <div class="section section--column">
-                            <h3 class="section__title">Historique des opérations</h3>
+                            <div class="section__row">
+                                <h3 class="section__title">Historique des opérations</h3>
+                                <details class="filter" id="enterprise-filter-dropdown">
+                                    <summary class="filter__header">Filtrer les résultats</summary>
+                                    <div class="filter__body">
+                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
+                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
+                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
+                                    </div>
+                                </details>
+                            </div>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="enterprise-account-log-list"></div>
-                                <div class="button button--has-input button--icon button--primary paper__button" id="offshore-tab">
+                                <div class="paper__frame" id="enterprise-log-list"></div>
+                                <div class="button button--has-input button--icon button--primary paper__button" id="offshore-tab-button">
                                     <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
                                     </svg>
-                                    <label class="button__label" for="offshore-tab-input">Offshore</label>
-                                    <input class="button__input" type="radio" name="tab" id="offshore-tab-input">
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <!-- Enterprise balance -->
+                    <!-- Enterprise account balance -->
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Solde de l'entreprise</h3>
-                            <p class="section__number" id="enterprise-account-balance"></p>
+                            <p class="section__balance" id="enterprise-account-balance"></p>
                         </div>
                     </section>
-                    <!-- Enterprise deposit form -->
+                    <!-- Enterprise account deposit form -->
                     <section class="grid__section grid__section--with-border">
                         <form class="form" id="enterprise-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="enterprise-deposit-amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
-                                <p class="form__message" id="enterprise-deposit-amount-message"></p>
+                                <input class="form__input" type="text" name="amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -284,14 +273,13 @@
                             </div>
                         </form>
                     </section>
-                    <!-- Enterprise withdraw form -->
+                    <!-- Enterprise account withdraw form -->
                     <section class="grid__section">
                         <form class="form" id="enterprise-withdraw-form" novalidate>
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="enterprise-withdraw-amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$">
-                                <p class="form__message" id="enterprise-withdraw-amount-message"></p>
+                                <input class="form__input" type="text" name="amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$">
                             </div>
                             <button class="button button--text button--disabled" id="enterprise-withdraw-form-button" disabled>Retirer</button>
                         </form>
@@ -300,39 +288,48 @@
             </div>
 
             <!-- View / offshore -->
-            <div class="view" id="offshore-tab-view">
+            <div class="view" id="offshore-view">
                 <div class="grid grid--offshore">
-                    <!-- Offshore owner -->
+                    <!-- Offshore account owner -->
                     <section class="grid__section">
                         <div class="section">
                             <h3 class="section__title">Propriétaire du compte offshore</h3>
                             <p class="section__text section__text--reversed" id="offshore-account-owner"></p>
                         </div>
                     </section>
-                    <!-- Offshore history -->
+                    <!-- Offshore account log list -->
                     <section class="grid__section grid__section--row-span-4">
                         <div class="section section--column">
-                            <h3 class="section__title">Historique des opérations</h3>
+                            <div class="section__row">
+                                <h3 class="section__title">Historique des opérations</h3>
+                                <details class="filter" id="offshore-filter-dropdown">
+                                    <summary class="filter__header">Filtrer les résultats</summary>
+                                    <div class="filter__body">
+                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
+                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
+                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
+                                    </div>
+                                </details>
+                            </div>
                             <div class="paper section__body">
-                                <div class="paper__frame" id="offshore-account-log-list"></div>
+                                <div class="paper__frame" id="offshore-log-list"></div>
                             </div>
                         </div>
                     </section>
-                    <!-- Offshore balance -->
+                    <!-- Offshore account balance -->
                     <section class="grid__section grid__section--with-border">
                         <div class="section">
                             <h3 class="section__title">Solde du compte offshore</h3>
-                            <p class="section__number" id="offshore-account-balance"></p>
+                            <p class="section__balance" id="offshore-account-balance"></p>
                         </div>
                     </section>
-                    <!-- offshore deposit form -->
+                    <!-- offshore account deposit form -->
                     <section class="grid__section">
                         <form class="form" id="offshore-deposit-form" novalidate>
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="offshore-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="offshore-deposit-amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
-                                <p class="form__message" id="offshore-deposit-amount-message"></p>
+                                <input class="form__input" type="text" name="amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -353,8 +350,16 @@
 
     </main>
 
-    <!-- Template / account with delete button -->
-    <template id="account-delete-template">
+    <!-- Template / tab -->
+    <template id="tab-template">
+        <div class="tab">
+            <label class="tab__label">Mon compte</label>
+            <input class="tab__input" type="radio" name="tab-selector">
+        </div>
+    </template>
+
+    <!-- Template / favorite account with delete button -->
+    <template id="favorite-account-delete-template">
         <tr class="account">
             <td class="account__section">
                 <h4 class="account__name"></h4>
@@ -371,8 +376,8 @@
         </tr>
     </template>
 
-    <!-- Template / account with paste feature -->
-    <template id="account-paste-template">
+    <!-- Template / favorite account with paste feature -->
+    <template id="favorite-account-paste-template">
         <tr class="account account--clickable">
             <td class="account__section">
                 <h4 class="account__name account__name--margin"></h4>
@@ -402,7 +407,7 @@
         </details>
     </template>
 
-    <!-- Template / Notification -->
+    <!-- Template / notification -->
     <template id="notification-template">
         <li class="notification">
             <div class="notification__section">
