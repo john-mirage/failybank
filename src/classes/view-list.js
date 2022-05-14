@@ -14,12 +14,12 @@ export class ViewSwitcher {
 export class View {
   constructor(
     viewElement,
-    filterDropdown,
+    filterList,
     logList,
     favoriteAccountList
     ) {
     this.viewElement = viewElement;
-    this.filterDropdown = filterDropdown;
+    this.filterList = filterList;
     this.logList = logList;
     this.favoriteAccountList = favoriteAccountList;
   }
@@ -35,7 +35,7 @@ export class View {
 
   deactivate() {
     this.viewElement.classList.remove("view--active");
-    if (this.filterDropdown) this.filterDropdown.reset();
+    if (this.filterList) this.filterList.reset();
     if (this.logList) {
       if (this.logList.filter) this.logList.filter = false;
       this.logList.clear();

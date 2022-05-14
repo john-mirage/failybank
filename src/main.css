@@ -794,15 +794,15 @@ body {
 }
 
 /*------------------------------------*\
-  FILTER
+  DROPDOWN
 \*------------------------------------*/
 
-.filter {
+.dropdown {
     box-sizing: border-box;
     position: relative;
 }
 
-.filter__header {
+.dropdown__header {
     box-sizing: border-box;
     list-style: none;
     font-size: 12px;
@@ -816,15 +816,15 @@ body {
     text-align: end;
 }
 
-.maze .filter__header:hover {
+.maze .dropdown__header:hover {
     color: var(--color-maze);
 }
 
-.fleeca .filter__header:hover {
+.fleeca .dropdown__header:hover {
     color: var(--color-fleeca);
 }
 
-.filter__body {
+.dropdown__body {
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
@@ -836,7 +836,11 @@ body {
     border: 0.1rem solid var(--color-border);
 }
 
-.filter__button {
+/*------------------------------------*\
+  FILTER
+\*------------------------------------*/
+
+.filter {
     display: block;
     border: none;
     background-color: transparent;
@@ -847,19 +851,16 @@ body {
     width: 100%;
     text-align: left;
     cursor: pointer;
-}
-
-.filter__button--active {
     color: var(--color-text-alt);
 }
 
-.filter__button--inactive {
-    color: var(--color-border);
-}
-
-.filter__button--active:hover {
+.filter:hover {
     background-color: var(--color-border);
     color: var(--color-text);
+}
+
+.filter--active {
+    color: var(--color-border);
 }
 
 /*------------------------------------*\

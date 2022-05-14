@@ -71,13 +71,9 @@
                         <div class="section section--column">
                             <div class="section__row">
                                 <h3 class="section__title">Historique des opérations</h3>
-                                <details class="filter" id="personal-filter-dropdown">
-                                    <summary class="filter__header">Filtrer les résultats</summary>
-                                    <div class="filter__body">
-                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
-                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
-                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
-                                    </div>
+                                <details class="dropdown" id="personal-filter-dropdown">
+                                    <summary class="dropdown__header">Filtrer les résultats</summary>
+                                    <div class="dropdown__body" id="personal-filter-list"></div>
                                 </details>
                             </div>
                             <div class="paper section__body">
@@ -227,13 +223,9 @@
                         <div class="section section--column">
                             <div class="section__row">
                                 <h3 class="section__title">Historique des opérations</h3>
-                                <details class="filter" id="enterprise-filter-dropdown">
-                                    <summary class="filter__header">Filtrer les résultats</summary>
-                                    <div class="filter__body">
-                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
-                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
-                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
-                                    </div>
+                                <details class="dropdown" id="enterprise-filter-dropdown">
+                                    <summary class="dropdown__header">Filtrer les résultats</summary>
+                                    <div class="dropdown__body" id="enterprise-filter-list"></div>
                                 </details>
                             </div>
                             <div class="paper section__body">
@@ -300,13 +292,9 @@
                         <div class="section section--column">
                             <div class="section__row">
                                 <h3 class="section__title">Historique des opérations</h3>
-                                <details class="filter" id="offshore-filter-dropdown">
-                                    <summary class="filter__header">Filtrer les résultats</summary>
-                                    <div class="filter__body">
-                                        <button class="filter__button filter__button--inactive" disabled data-filter="all">Aucun</button>
-                                        <button class="filter__button filter__button--active" data-filter="operation">Opérations</button>
-                                        <button class="filter__button filter__button--active" data-filter="transfer">Transferts</button>
-                                    </div>
+                                <details class="dropdown" id="offshore-filter-dropdown">
+                                    <summary class="dropdown__header">Filtrer les résultats</summary>
+                                    <div class="dropdown__body" id="offshore-filter-list"></div>
                                 </details>
                             </div>
                             <div class="paper section__body">
@@ -416,6 +404,11 @@
                 <p class="notification__description"></p>
             </div>
         </li>
+    </template>
+
+    <!-- Template / filter -->
+    <template id="filter-template">
+        <button class="filter"></button>
     </template>
 
     <script type="module" src="/src/main.js"></script>

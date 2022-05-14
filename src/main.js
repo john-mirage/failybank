@@ -3,7 +3,8 @@ import {Account, PersonalAccount} from "./classes/account";
 import {Tab, TabList} from "./classes/tab-list";
 import {Form} from "./classes/form";
 import {NotificationList} from "./classes/notification-list";
-import {FilterDropdown} from "./classes/filter";
+import {Dropdown} from "./classes/dropdown";
+import {FilterList, Filter} from "./classes/filter";
 import {LogList} from "./classes/log-list";
 import {AccountList, PasteAccountList, DeleteAccountList} from "./classes/account-list";
 import {ViewSwitcher, View} from "./classes/view-list";
@@ -114,20 +115,40 @@ const notificationList = new NotificationList(
   document.getElementById("notification-list")
 );
 
-const personalFilterDropdown = new FilterDropdown(
+const personalFilterDropdown = new Dropdown(
   document.getElementById("personal-filter-dropdown")
 );
 
-const personalFilterDropdownButtonElements = personalFilterDropdown.detailsElement.querySelectorAll(".filter__button");
+const personalAllFilter = new Filter(
+  "Aucun",
+  false,
+);
 
-personalFilterDropdownButtonElements.forEach((buttonElement) => {
-  buttonElement.addEventListener("click", (event) => {
-    const filter = event.target.dataset.filter;
-    personalFilterDropdown.setActiveFilter(event.target);
-    personalLogList.filter = filter === "all" ? false : filter;
-    personalLogList.reset();
-  });
-});
+const personalOperationFilter = new Filter(
+  "Opérations",
+  "operation"
+);
+
+const personalTransferFilter = new Filter(
+  "Transferts",
+  "transfer"
+);
+
+function setPersonalLogListFilter(value) {
+  personalLogList.filter = value;
+  personalLogList.reset();
+  personalFilterDropdown.close();
+}
+
+const personalFilterList = new FilterList(
+  [
+    personalAllFilter,
+    personalOperationFilter,
+    personalTransferFilter
+  ],
+  document.getElementById("personal-filter-list"),
+  setPersonalLogListFilter
+);
 
 const favoriteAccountList = new AccountList(
   data.account.personal.favoriteAccounts
@@ -196,7 +217,7 @@ const tabList = new TabList(
 
 const personalView = new View(
   document.getElementById("personal-view"),
-  personalFilterDropdown,
+  personalFilterList,
   personalLogList,
   deleteFavoriteAccountList
 );
@@ -458,8 +479,39 @@ if (data.hasEnterprise) {
     document.getElementById("enterprise-log-list")
   );
 
-  const enterpriseFilterDropdown = new FilterDropdown(
+  const enterpriseFilterDropdown = new Dropdown(
     document.getElementById("enterprise-filter-dropdown")
+  );
+
+  const enterpriseAllFilter = new Filter(
+    "Aucun",
+    false,
+  );
+
+  const enterpriseOperationFilter = new Filter(
+    "Opérations",
+    "operation"
+  );
+
+  const enterpriseTransferFilter = new Filter(
+    "Transferts",
+    "transfer"
+  );
+
+  function setEnterpriseLogListFilter(value) {
+    enterpriseLogList.filter = value;
+    enterpriseLogList.reset();
+    enterpriseFilterDropdown.close();
+  }
+
+  const enterpriseFilterList = new FilterList(
+    [
+      enterpriseAllFilter,
+      enterpriseOperationFilter,
+      enterpriseTransferFilter
+    ],
+    document.getElementById("enterprise-filter-list"),
+    setEnterpriseLogListFilter
   );
 
   const enterpriseDepositForm = new Form(
@@ -478,17 +530,6 @@ if (data.hasEnterprise) {
     document.getElementById("enterprise-withdraw-form-button")
   );
 
-  const enterpriseFilterDropdownButtonElements = enterpriseFilterDropdown.detailsElement.querySelectorAll(".filter__button");
-
-  enterpriseFilterDropdownButtonElements.forEach((buttonElement) => {
-    buttonElement.addEventListener("click", (event) => {
-      const filter = event.target.dataset.filter;
-      enterpriseFilterDropdown.setActiveFilter(event.target);
-      enterpriseLogList.filter = filter === "all" ? false : filter;
-      enterpriseLogList.reset();
-    });
-  });
-
   const enterpriseTab = new Tab(
     "entreprise",
     "enterprise-tab",
@@ -501,7 +542,7 @@ if (data.hasEnterprise) {
 
   const enterpriseView = new View(
     document.getElementById("enterprise-view"),
-    enterpriseFilterDropdown,
+    enterpriseFilterList,
     enterpriseLogList,
     false
   );
@@ -628,8 +669,39 @@ if (data.hasEnterprise) {
       document.getElementById("offshore-log-list")
     );
 
-    const offshoreFilterDropdown = new FilterDropdown(
+    const offshoreFilterDropdown = new Dropdown(
       document.getElementById("offshore-filter-dropdown")
+    );
+
+    const offshoreAllFilter = new Filter(
+      "Aucun",
+      false,
+    );
+
+    const offshoreOperationFilter = new Filter(
+      "Opérations",
+      "operation"
+    );
+
+    const offshoreTransferFilter = new Filter(
+      "Transferts",
+      "transfer"
+    );
+
+    function setOffshoreLogListFilter(value) {
+      offshoreLogList.filter = value;
+      offshoreLogList.reset();
+      offshoreFilterDropdown.close();
+    }
+
+    const offshoreFilterList = new FilterList(
+      [
+        offshoreAllFilter,
+        offshoreOperationFilter,
+        offshoreTransferFilter
+      ],
+      document.getElementById("offshore-filter-list"),
+      setOffshoreLogListFilter
     );
 
     const offshoreDepositForm = new Form(
@@ -639,17 +711,6 @@ if (data.hasEnterprise) {
       document.getElementById("offshore-deposit-form"),
       document.getElementById("offshore-deposit-form-button")
     );
-
-    const offshoreFilterDropdownButtonElements = offshoreFilterDropdown.detailsElement.querySelectorAll(".filter__button");
-
-    offshoreFilterDropdownButtonElements.forEach((buttonElement) => {
-      buttonElement.addEventListener("click", (event) => {
-        const filter = event.target.dataset.filter;
-        offshoreFilterDropdown.setActiveFilter(event.target);
-        offshoreLogList.filter = filter === "all" ? false : filter;
-        offshoreLogList.reset();
-      });
-    });
 
     const offshoreTab = new Tab(
       "offshore",
@@ -661,7 +722,7 @@ if (data.hasEnterprise) {
 
     const offshoreView = new View(
       document.getElementById("offshore-view"),
-      offshoreFilterDropdown,
+      offshoreFilterList,
       offshoreLogList,
       false
     );
