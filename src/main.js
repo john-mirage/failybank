@@ -651,7 +651,7 @@ if (data.hasEnterprise) {
 
   const enterpriseAllDepositButton = document.getElementById("enterprise-all-deposit-button");
 
-  enterpriseTabInput.addEventListener("click", showEnterpriseView);
+  enterpriseTabInput.addEventListener("change", showEnterpriseView);
   enterpriseDepositForm.formElement.addEventListener("submit", depositToEnterpriseAccount);
   enterpriseWithdrawForm.formElement.addEventListener("submit", withdrawToEnterpriseAccount);
   enterpriseAllDepositButton.addEventListener("click", depositAllToEnterpriseAccount);
