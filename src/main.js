@@ -148,6 +148,7 @@ const personalTransferAccountNumberInput = document.getElementById("personal-tra
 function pasteFavoriteAccount(accountNumber) {
   if (personalTransferAccountNumberInput.value !== accountNumber) {
     personalTransferAccountNumberInput.value = accountNumber;
+    personalTransferForm.checkFields();
     notificationList.displayNotification({
       title: "Compte favoris",
       description: `le compte ${accountNumber} a était ajouter au formulaire`,
@@ -285,18 +286,10 @@ function addFavoriteAccount(event) {
   }
 }
 
-personalFavoriteAccountForm.formElement.addEventListener("submit", addFavoriteAccount);
-
-personalThemeButton.addEventListener("click", switchTheme);
-personalTabInput.addEventListener("change", showPersonalView);
-personalOperationTabInput.addEventListener("change", showPersonalOperationView);
-personalTransferTabInput.addEventListener("change", showPersonalTransferView);
-
-/*
-
-function handlePersonalDepositForm(event) {
+function depositToPersonalAccount(event) {
   event.preventDefault();
-  const depositAmount = Number(personalDepositAmountInput.value);
+  const formData = new FormData(personalDepositForm.formElement);
+  const depositAmount = Number(formData.get("amount"));
   if (personalAccount.cash > depositAmount) {
     const log = {
       label: "Dépot",
@@ -305,13 +298,13 @@ function handlePersonalDepositForm(event) {
       reference: "Dépot sur votre compte",
       type: "operation"
     }
-    personalAccount.logList.addLog(log);
-    if (tabList.activeTab.name === "personal") {
-      personalAccount.logList.resetList();
+    personalLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-tab") {
+      personalLogList.reset();
     }
-    personalAccount.operationLogList.addLog(log);
-    if (tabList.activeTab.name === "personal-operation") {
-      personalAccount.operationLogList.resetList();
+    personalOperationLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-operation-tab") {
+      personalOperationLogList.reset();
     }
     personalAccount.cash -= depositAmount;
     personalAccount.balance += depositAmount;
@@ -331,7 +324,7 @@ function handlePersonalDepositForm(event) {
   }
 }
 
-function handlePersonalAllDepositButton() {
+function depositAllToPersonalAccount() {
   if (personalAccount.cash > 0) {
     const log = {
       label: "Dépot",
@@ -340,13 +333,13 @@ function handlePersonalAllDepositButton() {
       reference: "Dépot sur votre compte",
       type: "operation"
     }
-    personalAccount.logList.addLog(log);
-    if (tabList.activeTab.name === "personal") {
-      personalAccount.logList.resetList();
+    personalLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-tab") {
+      personalLogList.reset();
     }
-    personalAccount.operationLogList.addLog(log);
-    if (tabList.activeTab.name === "personal-operation") {
-      personalAccount.operationLogList.resetList();
+    personalOperationLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-operation-tab") {
+      personalOperationLogList.reset();
     }
     personalAccount.cash = 0;
     notificationList.displayNotification({
@@ -363,13 +356,10 @@ function handlePersonalAllDepositButton() {
   }
 }
 
-function handlePersonalFavoriteAccountNumberPaste() {
-  personalTransferForm.checkFields();
-}
-
-function handlePersonalWithdrawForm(event) {
+function withdrawToPersonalAccount(event) {
   event.preventDefault();
-  const withdrawAmount = Number(personalWithdrawAmountInput.value);
+  const formData = new FormData(personalWithdrawForm.formElement);
+  const withdrawAmount = Number(formData.get("amount"));
   if (personalAccount.balance >= withdrawAmount) {
     const log = {
       label: "Retrait",
@@ -378,13 +368,13 @@ function handlePersonalWithdrawForm(event) {
       reference: "Retrait depuis votre compte",
       type: "operation"
     }
-    personalAccount.logList.addLog(log);
-    if (tabList.activeTab.name === "personal") {
-      personalAccount.logList.resetList();
+    personalLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-tab") {
+      personalLogList.reset();
     }
-    personalAccount.operationLogList.addLog(log);
-    if (tabList.activeTab.name === "personal-operation") {
-      personalAccount.operationLogList.resetList();
+    personalOperationLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-operation-tab") {
+      personalOperationLogList.reset();
     }
     personalAccount.cash += withdrawAmount;
     personalAccount.balance -= withdrawAmount;
@@ -404,22 +394,22 @@ function handlePersonalWithdrawForm(event) {
   }
 }
 
-function handlePersonalTransferForm(event) {
+function transferToAccount(event) {
   event.preventDefault();
-  const transferAmount = Number(personalTransferAmountInput.value);
+  const formData = new FormData(personalTransferForm.formElement);
+  const transferAmount = Number(formData.get("amount"));
   if (personalAccount.balance >= transferAmount) {
-    const transferAccountNumber = personalTransferAccountNumberInput.value;
-    const transferReference = personalTransferReferenceInput.value;
+    //const transferAccountNumber = formData.get("number");
     const log = {
       label: "Transfert",
       amount: -transferAmount,
       date: getCurrentFormattedDate(),
-      reference: transferReference,
+      reference: formData.get("reference"),
       type: "operation"
     }
-    personalAccount.logList.addLog(log);
-    if (tabList.activeTab.name === "personal") {
-      personalAccount.logList.resetList();
+    personalLogList.addLog(log);
+    if (tabList.activeTab.elementId === "personal-tab") {
+      personalLogList.reset();
     }
     personalAccount.balance -= transferAmount;
     personalAccount.displayBalance();
@@ -437,7 +427,19 @@ function handlePersonalTransferForm(event) {
     });
   }
 }
-*/
+
+const personalAllDepositButton = document.getElementById("personal-all-deposit-button");
+
+personalFavoriteAccountForm.formElement.addEventListener("submit", addFavoriteAccount);
+personalDepositForm.formElement.addEventListener("submit", depositToPersonalAccount);
+personalAllDepositButton.addEventListener("click", depositAllToPersonalAccount);
+personalWithdrawForm.formElement.addEventListener("submit", withdrawToPersonalAccount);
+personalTransferForm.formElement.addEventListener("submit", transferToAccount);
+
+personalThemeButton.addEventListener("click", switchTheme);
+personalTabInput.addEventListener("change", showPersonalView);
+personalOperationTabInput.addEventListener("change", showPersonalOperationView);
+personalTransferTabInput.addEventListener("change", showPersonalTransferView);
 
 /*------------------------------------*\
   Enterprise & Offshore accounts
@@ -458,6 +460,22 @@ if (data.hasEnterprise) {
 
   const enterpriseFilterDropdown = new FilterDropdown(
     document.getElementById("enterprise-filter-dropdown")
+  );
+
+  const enterpriseDepositForm = new Form(
+    [
+      document.getElementById("enterprise-deposit-amount-input")
+    ],
+    document.getElementById("enterprise-deposit-form"),
+    document.getElementById("enterprise-deposit-form-button")
+  );
+
+  const enterpriseWithdrawForm = new Form(
+    [
+      document.getElementById("enterprise-withdraw-amount-input")
+    ],
+    document.getElementById("enterprise-withdraw-form"),
+    document.getElementById("enterprise-withdraw-form-button")
   );
 
   const enterpriseFilterDropdownButtonElements = enterpriseFilterDropdown.detailsElement.querySelectorAll(".filter__button");
@@ -493,7 +511,109 @@ if (data.hasEnterprise) {
     viewSwitcher.switch(enterpriseView);
   }
 
+  function depositToEnterpriseAccount(event) {
+    event.preventDefault();
+    const formData = new FormData(enterpriseDepositForm.formElement);
+    const depositAmount = Number(formData.get("amount"));
+    if (personalAccount.cash > depositAmount) {
+      const log = {
+        label: "Dépot",
+        amount: depositAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot sur votre compte",
+        type: "operation"
+      }
+      enterpriseLogList.addLog(log);
+      if (tabList.activeTab.elementId === "enterprise-tab") {
+        enterpriseLogList.reset();
+      }
+      personalAccount.cash -= depositAmount;
+      enterpriseAccount.balance += depositAmount;
+      enterpriseAccount.displayBalance();
+      enterpriseDepositForm.reset();
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "le dépot a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "Vous ne disposé pas des fonds nécessaires sur vous",
+        type: "error"
+      });
+    }
+  }
+
+  function depositAllToEnterpriseAccount() {
+    if (personalAccount.cash > 0) {
+      const log = {
+        label: "Dépot",
+        amount: personalAccount.cash,
+        date: getCurrentFormattedDate(),
+        reference: "Dépot le compte de l'entreprise",
+        type: "operation"
+      }
+      enterpriseLogList.addLog(log);
+      if (tabList.activeTab.elementId === "enterprise-tab") {
+        enterpriseLogList.reset();
+      }
+      personalAccount.cash = 0;
+      enterpriseAccount.displayBalance();
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "le dépot a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Dépot",
+        description: "Vous n'avez pas d'argent sur vous",
+        type: "error"
+      });
+    }
+  }
+
+  function withdrawToEnterpriseAccount(event) {
+    event.preventDefault();
+    const formData = new FormData(enterpriseWithdrawForm.formElement);
+    const withdrawAmount = Number(formData.get("amount"));
+    if (enterpriseAccount.balance > withdrawAmount) {
+      const log = {
+        label: "Retrait",
+        amount: -withdrawAmount,
+        date: getCurrentFormattedDate(),
+        reference: "Retrait depuis le compte de l'entreprise",
+        type: "operation"
+      }
+      enterpriseLogList.addLog(log);
+      if (tabList.activeTab.elementId === "enterprise-tab") {
+        enterpriseLogList.reset();
+      }
+      personalAccount.cash += withdrawAmount;
+      enterpriseAccount.balance -= withdrawAmount;
+      enterpriseAccount.displayBalance();
+      enterpriseWithdrawForm.reset();
+      notificationList.displayNotification({
+        title: "Retrait",
+        description: "le retrait a était éffectué avec succès",
+        type: "success"
+      });
+    } else {
+      notificationList.displayNotification({
+        title: "Retrait",
+        description: "Vous ne disposé pas des fonds nécessaires sur votre compte",
+        type: "error"
+      });
+    }
+  }
+
+  const enterpriseAllDepositButton = document.getElementById("enterprise-all-deposit-button");
+
   enterpriseTabInput.addEventListener("click", showEnterpriseView);
+  enterpriseDepositForm.formElement.addEventListener("submit", depositToEnterpriseAccount);
+  enterpriseWithdrawForm.formElement.addEventListener("submit", withdrawToEnterpriseAccount);
+  enterpriseAllDepositButton.addEventListener("click", depositAllToEnterpriseAccount);
 
   if (data.hasOffshore) {
 
@@ -510,6 +630,14 @@ if (data.hasEnterprise) {
 
     const offshoreFilterDropdown = new FilterDropdown(
       document.getElementById("offshore-filter-dropdown")
+    );
+
+    const offshoreDepositForm = new Form(
+      [
+        document.getElementById("offshore-deposit-amount-input")
+      ],
+      document.getElementById("offshore-deposit-form"),
+      document.getElementById("offshore-deposit-form-button")
     );
 
     const offshoreFilterDropdownButtonElements = offshoreFilterDropdown.detailsElement.querySelectorAll(".filter__button");
@@ -546,118 +674,10 @@ if (data.hasEnterprise) {
       viewSwitcher.switch(offshoreView);
     }
 
-    offshoreTabButton.addEventListener("click", showOffshoreView);
-
-  }
-}
-
-/*
-if (data.hasEnterprise) {
-
-  function handleEnterpriseDepositForm(event) {
-    event.preventDefault();
-    const depositAmount = Number(enterpriseDepositAmountInput.value);
-    if (personalAccount.cash > depositAmount) {
-      const log = {
-        label: "Dépot",
-        amount: depositAmount,
-        date: getCurrentFormattedDate(),
-        reference: "Dépot sur votre compte",
-        type: "operation"
-      }
-      enterpriseAccount.logList.addLog(log);
-      if (tabList.activeTab.name === "enterprise") {
-        enterpriseAccount.logList.resetList();
-      }
-      personalAccount.cash -= depositAmount;
-      enterpriseAccount.balance += depositAmount;
-      enterpriseAccount.displayBalance();
-      enterpriseDepositForm.reset();
-      notificationList.displayNotification({
-        title: "Dépot",
-        description: "le dépot a était éffectué avec succès",
-        type: "success"
-      });
-    } else {
-      notificationList.displayNotification({
-        title: "Dépot",
-        description: "Vous ne disposé pas des fonds nécessaires sur vous",
-        type: "error"
-      });
-    }
-  }
-
-  function handleEnterpriseAllDepositButton() {
-    if (personalAccount.cash > 0) {
-      const log = {
-        label: "Dépot",
-        amount: personalAccount.cash,
-        date: getCurrentFormattedDate(),
-        reference: "Dépot le compte de l'entreprise",
-        type: "operation"
-      }
-      enterpriseAccount.logList.addLog(log);
-      if (tabList.activeTab.name === "enterprise") {
-        enterpriseAccount.logList.resetList();
-      }
-      personalAccount.cash = 0;
-      enterpriseAccount.displayBalance();
-      notificationList.displayNotification({
-        title: "Dépot",
-        description: "le dépot a était éffectué avec succès",
-        type: "success"
-      });
-    } else {
-      notificationList.displayNotification({
-        title: "Dépot",
-        description: "Vous n'avez pas d'argent sur vous",
-        type: "error"
-      });
-    }
-  }
-
-  function handleEnterpriseWithdrawForm(event) {
-    event.preventDefault();
-    const withdrawAmount = Number(enterpriseWithdrawAmountInput.value);
-    if (enterpriseAccount.balance > withdrawAmount) {
-      const log = {
-        label: "Retrait",
-        amount: -withdrawAmount,
-        date: getCurrentFormattedDate(),
-        reference: "Retrait depuis le compte de l'entreprise",
-        type: "operation"
-      }
-      enterpriseAccount.logList.addLog(log);
-      if (tabList.activeTab.name === "enterprise") {
-        enterpriseAccount.logList.resetList();
-      }
-      personalAccount.cash += withdrawAmount;
-      enterpriseAccount.balance -= withdrawAmount;
-      enterpriseAccount.displayBalance();
-      enterpriseWithdrawForm.reset();
-      notificationList.displayNotification({
-        title: "Retrait",
-        description: "le retrait a était éffectué avec succès",
-        type: "success"
-      });
-    } else {
-      notificationList.displayNotification({
-        title: "Retrait",
-        description: "Vous ne disposé pas des fonds nécessaires sur votre compte",
-        type: "error"
-      });
-    }
-  }
-
-  enterpriseDepositFormElt.addEventListener("submit", handleEnterpriseDepositForm);
-  enterpriseAllDepositButton.addEventListener("click", handleEnterpriseAllDepositButton)
-  enterpriseWithdrawFormElt.addEventListener("submit", handleEnterpriseWithdrawForm);
-
-  if (data.hasOffshore) {
-
-    function handleOffshoreDepositForm(event) {
+    function depositToOffshoreAccount(event) {
       event.preventDefault();
-      const depositAmount = Number(offshoreDepositAmountInput.value);
+      const formData = new FormData(offshoreDepositForm.formElement);
+      const depositAmount = Number(formData.get("amount"));
       if (personalAccount.cash > depositAmount) {
         const log = {
           label: "Dépot",
@@ -666,9 +686,9 @@ if (data.hasEnterprise) {
           reference: "Dépot sur le compte offshore",
           type: "operation"
         }
-        offshoreAccount.logList.addLog(log);
-        if (tabList.activeTab.name === "offshore") {
-          offshoreAccount.logList.resetList();
+        offshoreLogList.addLog(log);
+        if (tabList.activeTab.elementId === "offshore-tab") {
+          offshoreLogList.reset();
         }
         personalAccount.cash -= depositAmount;
         offshoreAccount.balance += depositAmount;
@@ -688,7 +708,7 @@ if (data.hasEnterprise) {
       }
     }
 
-    function handleOffshoreAllDepositButton() {
+    function depositAllToOffshoreAccount() {
       if (personalAccount.cash > 0) {
         const log = {
           label: "Dépot",
@@ -697,9 +717,9 @@ if (data.hasEnterprise) {
           reference: "Dépot sur le compte offshore",
           type: "operation"
         }
-        offshoreAccount.logList.addLog(log);
+        offshoreLogList.addLog(log);
         if (tabList.activeTab.name === "offshore") {
-          offshoreAccount.logList.resetList();
+          offshoreLogList.reset();
         }
         personalAccount.cash = 0;
         offshoreAccount.displayBalance();
@@ -717,8 +737,20 @@ if (data.hasEnterprise) {
       }
     }
 
-    offshoreDepositFormElt.addEventListener("submit", handleOffshoreDepositForm);
-    offshoreAllDepositButton.addEventListener("click", handleOffshoreAllDepositButton)
+    const offshoreAllDepositButton = document.getElementById("offshore-all-deposit-button");
+
+    offshoreTabButton.addEventListener("click", showOffshoreView);
+    offshoreDepositForm.formElement.addEventListener("submit", depositToOffshoreAccount);
+    offshoreAllDepositButton.addEventListener("click", depositAllToOffshoreAccount);
+
+  }
+}
+
+/*
+if (data.hasEnterprise) {
+
+  if (data.hasOffshore) {
+
   } else {
     offshoreTabContainer.remove();
     offshoreTabView.remove();
