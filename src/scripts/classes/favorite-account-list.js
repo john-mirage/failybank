@@ -1,6 +1,6 @@
 const ACCOUNTS_LIMIT = 5;
 
-export class AccountList {
+export class FavoriteAccountList {
   constructor(accounts) {
     this.accounts = accounts;
   }
