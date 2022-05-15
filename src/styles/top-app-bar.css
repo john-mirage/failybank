@@ -44,14 +44,7 @@
     height: auto;
     margin-right: 16px;
     pointer-events: none;
-}
-
-.maze .top-app-bar__logo {
-    color: var(--color-maze);
-}
-
-.fleeca .top-app-bar__logo {
-    color: var(--color-fleeca);
+    color: var(--color-bank);
 }
 
 .maze .top-app-bar__logo--fleeca {

@@ -23,15 +23,8 @@
 }
 
 .log__header:focus-visible {
+    outline: 2px solid var(--color-bank);
     outline-offset: 4px;
-}
-
-.maze .log__header:focus-visible {
-    outline: 2px solid var(--color-maze);
-}
-
-.fleeca .log__header:focus-visible {
-    outline: 2px solid var(--color-fleeca);
 }
 
 .log__body {
@@ -132,10 +125,6 @@
     line-height: 20px;
 }
 
-.maze .log__header:hover .log__type {
-    color: var(--color-maze);
-}
-
-.fleeca .log__header:hover .log__type {
-    color: var(--color-fleeca);
+.log__header:hover .log__type {
+    color: var(--color-bank);
 }

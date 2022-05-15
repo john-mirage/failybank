@@ -81,14 +81,7 @@
     width: 12px;
     height: 12px;
     border-radius: 9999px;
-}
-
-.maze .toggle-button__handle {
-    background-color: var(--color-maze);
-}
-
-.fleeca .toggle-button__handle {
-    background-color: var(--color-fleeca);
+    background-color: var(--color-bank);
 }
 
 .toggle-button__input:checked ~ .toggle-button__track > .toggle-button__handle {

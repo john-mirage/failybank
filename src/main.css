@@ -34,8 +34,6 @@
     --color-toggle-button-icon-active: #f59f00;
     --color-up: #20c997;
     --color-down: #d6336c;
-    --color-fleeca: #40c057;
-    --color-maze: #ff6b6b;
 }
 
 :root.dark {
@@ -56,8 +54,22 @@
     --color-toggle-button-icon-active: #fcc419;
     --color-up: #0ca678;
     --color-down: #f06595;
-    --color-fleeca: #37b24d;
-    --color-maze: #c92a2a;
+}
+
+:root.fleeca {
+    --color-bank: #40c057;
+}
+
+:root.maze {
+    --color-bank: #ff6b6b;
+}
+
+:root.fleeca.dark {
+    --color-bank: #37b24d;
+}
+
+:root.maze.dark {
+    --color-bank: #c92a2a;
 }
 
 html {

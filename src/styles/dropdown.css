@@ -17,12 +17,8 @@
     text-align: end;
 }
 
-.maze .dropdown__header:hover {
-    color: var(--color-maze);
-}
-
-.fleeca .dropdown__header:hover {
-    color: var(--color-fleeca);
+.dropdown__header:hover {
+    color: var(--color-bank);
 }
 
 .dropdown__body {

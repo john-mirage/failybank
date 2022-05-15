@@ -123,10 +123,6 @@
     margin-right: -12px;
 }
 
-.maze .favorite-account--clickable:hover .favorite-account__name {
-    color: var(--color-maze);
-}
-
-.fleeca .favorite-account--clickable:hover .favorite-account__name {
-    color: var(--color-fleeca);
+.favorite-account--clickable:hover .favorite-account__name {
+    color: var(--color-bank);
 }

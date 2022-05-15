@@ -218,16 +218,19 @@ const viewSwitcher = new ViewSwitcher(
 
 const personalTab = new Tab(
   "mon compte",
+  "personal",
   showPersonalView
 );
 
 const personalOperationTab = new Tab(
   "opération",
+  "personal-operation",
   showPersonalOperationView
 );
 
 const personalTransferTab = new Tab(
   "transfert",
+  "transfer",
   showPersonalTransferView
 );
 
@@ -301,11 +304,11 @@ function depositToPersonalAccount(event) {
       type: "operation"
     }
     personalLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-tab") {
+    if (tabList.activeTab.name === "personal") {
       personalLogList.reset();
     }
     personalOperationLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-operation-tab") {
+    if (tabList.activeTab.name === "personal-operation") {
       personalOperationLogList.reset();
     }
     personalAccount.cash -= depositAmount;
@@ -336,11 +339,11 @@ function depositAllToPersonalAccount() {
       type: "operation"
     }
     personalLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-tab") {
+    if (tabList.activeTab.name === "personal") {
       personalLogList.reset();
     }
     personalOperationLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-operation-tab") {
+    if (tabList.activeTab.name === "personal-operation") {
       personalOperationLogList.reset();
     }
     personalAccount.cash = 0;
@@ -371,11 +374,11 @@ function withdrawToPersonalAccount(event) {
       type: "operation"
     }
     personalLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-tab") {
+    if (tabList.activeTab.name === "personal") {
       personalLogList.reset();
     }
     personalOperationLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-operation-tab") {
+    if (tabList.activeTab.name === "personal-operation") {
       personalOperationLogList.reset();
     }
     personalAccount.cash += withdrawAmount;
@@ -410,7 +413,7 @@ function transferToAccount(event) {
       type: "operation"
     }
     personalLogList.addLog(log);
-    if (tabList.activeTab.elementId === "personal-tab") {
+    if (tabList.activeTab.name === "personal") {
       personalLogList.reset();
     }
     personalAccount.balance -= transferAmount;
@@ -515,6 +518,7 @@ if (data.hasEnterprise) {
 
   const enterpriseTab = new Tab(
     "entreprise",
+    "enterprise",
     showEnterpriseView
   );
 
@@ -541,7 +545,7 @@ if (data.hasEnterprise) {
         type: "operation"
       }
       enterpriseLogList.addLog(log);
-      if (tabList.activeTab.elementId === "enterprise-tab") {
+      if (tabList.activeTab.name === "enterprise") {
         enterpriseLogList.reset();
       }
       personalAccount.cash -= depositAmount;
@@ -572,7 +576,7 @@ if (data.hasEnterprise) {
         type: "operation"
       }
       enterpriseLogList.addLog(log);
-      if (tabList.activeTab.elementId === "enterprise-tab") {
+      if (tabList.activeTab.name === "enterprise") {
         enterpriseLogList.reset();
       }
       personalAccount.cash = 0;
@@ -604,7 +608,7 @@ if (data.hasEnterprise) {
         type: "operation"
       }
       enterpriseLogList.addLog(log);
-      if (tabList.activeTab.elementId === "enterprise-tab") {
+      if (tabList.activeTab.name === "enterprise") {
         enterpriseLogList.reset();
       }
       personalAccount.cash += withdrawAmount;
@@ -695,6 +699,7 @@ if (data.hasEnterprise) {
 
     const offshoreTab = new Tab(
       "offshore",
+      "offshore",
       showOffshoreView,
       true
     );
@@ -722,7 +727,7 @@ if (data.hasEnterprise) {
           type: "operation"
         }
         offshoreLogList.addLog(log);
-        if (tabList.activeTab.elementId === "offshore-tab") {
+        if (tabList.activeTab.name === "offshore") {
           offshoreLogList.reset();
         }
         personalAccount.cash -= depositAmount;

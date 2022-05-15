@@ -76,12 +76,5 @@
 
 .form__input:focus {
     outline: none;
-}
-
-.maze .form__input:focus {
-    border: 1px solid var(--color-maze);
-}
-
-.fleeca .form__input:focus {
-    border: 1px solid var(--color-fleeca);
+    border: 1px solid var(--color-bank);
 }

@@ -34,14 +34,7 @@
     border: 8px solid var(--color-toggle-button-track);
     animation: spin 2s linear infinite;
     margin: auto;
-}
-
-.maze .app__spinner {
-    border-top: 8px solid var(--color-maze);
-}
-
-.fleeca .app__spinner {
-    border-top: 8px solid var(--color-fleeca);
+    border-top: 8px solid var(--color-bank);
 }
 
 .app__container {

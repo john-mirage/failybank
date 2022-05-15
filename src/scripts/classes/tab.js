@@ -1,5 +1,11 @@
 export class Tab {
-  constructor(name, handleClick, temporary = false) {
+  constructor(
+    label,
+    name,
+    handleClick,
+    temporary = false
+  ) {
+    this.label = label;
     this.name = name;
     this.handleClick = handleClick;
     this.temporary = temporary;
@@ -10,7 +16,7 @@ export class Tab {
   createElement() {
     const button = document.createElement("button");
     button.classList.add("tab");
-    button.textContent = this.name;
+    button.textContent = this.label;
     button.addEventListener("click", () => {
       this.handleClick();
     });

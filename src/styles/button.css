@@ -1,6 +1,5 @@
 .button {
     box-sizing: border-box;
-    height: 48px;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -9,6 +8,7 @@
 .button--text {
     display: block;
     min-width: 168px;
+    height: 48px;
     padding-left: 24px;
     padding-right: 24px;
     font-family: inherit;
@@ -18,41 +18,45 @@
     letter-spacing: 1px;
 }
 
-.button--icon {
+.button--large-icon {
     display: flex;
     width: 48px;
+    height: 48px;
+}
+
+.button--small-icon {
+    display: flex;
+    width: 40px;
+    height: 40px;
 }
 
 .button__icon {
     box-sizing: border-box;
+    margin: auto;
+}
+
+.button--large-icon > .button__icon {
     width: 24px;
     height: 24px;
-    margin: auto;
+}
+
+.button--small-icon > .button__icon {
+    width: 20px;
+    height: 20px;
 }
 
 /*------------------------------------*\
   #Button-primary
 \*------------------------------------*/
 
-.maze .button--primary {
-    background-color: var(--color-maze);
-}
-
-.fleeca .button--primary {
-    background-color: var(--color-fleeca);
+.button--primary {
+    background-color: var(--color-bank);
     color: #fff;
 }
 
 .button--primary:focus-visible {
+    outline: 2px solid var(--color-bank);
     outline-offset: 3px;
-}
-
-.maze .button--primary:focus-visible {
-    outline: 2px solid var(--color-maze);
-}
-
-.fleeca .button--primary:focus-visible {
-    outline: 2px solid var(--color-fleeca);
 }
 
 .button--primary > .button__icon {
@@ -63,20 +67,12 @@
   #Button-secondary
 \*------------------------------------*/
 
-.maze .button--secondary {
-    color: var(--color-maze);
+.button--secondary {
+    color: var(--color-bank);
 }
 
-.fleeca .button--secondary {
-    color: var(--color-fleeca);
-}
-
-.maze .button--secondary:focus {
-    outline: 2px solid var(--color-maze);
-}
-
-.fleeca .button--secondary:focus {
-    outline: 2px solid var(--color-fleeca);
+.button--secondary:focus {
+    outline: 2px solid var(--color-bank);
 }
 
 /*------------------------------------*\
