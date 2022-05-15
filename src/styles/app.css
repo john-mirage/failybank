@@ -18,6 +18,7 @@
     background-color: var(--color-bg);
     border: 1px solid var(--color-border-on-bg);
     overflow: hidden;
+    user-select: none;
 }
 
 .app--loading > .app__spinner {
