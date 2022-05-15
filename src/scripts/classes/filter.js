@@ -1,6 +1,6 @@
 export class Filter {
-  constructor(label, value) {
-    this.label = label;
+  constructor(name, value) {
+    this.name = name;
     this.value = value;
     this.element = this.createElement();
   }
@@ -8,7 +8,7 @@ export class Filter {
   createElement() {
     const button = document.createElement("button");
     button.classList.add("filter");
-    button.textContent = this.label;
+    button.textContent = this.name;
     return button;
   }
 

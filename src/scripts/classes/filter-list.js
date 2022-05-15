@@ -12,7 +12,7 @@ export class FilterList {
       this.filterListElement.appendChild(filter.element);
       filter.element.addEventListener("click", () => {
         this.setActiveFilter(filter);
-        this.handleFilterClick(filter.value);
+        this.handleFilterClick(filter);
       });
     });
   }

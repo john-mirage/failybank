@@ -5,8 +5,8 @@
     font-family: inherit;
     font-size: 16px;
     font-weight: 600;
-    line-height: 24px;
     width: 100%;
+    height: 36px;
     text-align: left;
     cursor: pointer;
     color: var(--color-text-alt);
@@ -18,5 +18,10 @@
 }
 
 .filter--active {
+    color: var(--color-border);
+}
+
+.filter--active:hover {
+    background-color: transparent;
     color: var(--color-border);
 }
