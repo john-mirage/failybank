@@ -73,7 +73,7 @@
 }
 
 .favorite-account__accordion[open] > .favorite-account__icon-button {
-    background-image: url("./images/close.svg");
+    background-image: url("/src/images/close.svg");
 }
 
 .favorite-account__icon-button:hover {
