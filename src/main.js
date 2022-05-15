@@ -158,11 +158,6 @@ function pasteFavoriteAccount(accountNumber) {
   if (personalTransferAccountNumberInput.value !== accountNumber) {
     personalTransferAccountNumberInput.value = accountNumber;
     personalTransferForm.checkFields();
-    notificationList.displayNotification({
-      title: "Compte favoris",
-      description: `le compte ${accountNumber} a était ajouter au formulaire`,
-      type: "success"
-    });
   }
 }
 
