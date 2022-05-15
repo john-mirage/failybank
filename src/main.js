@@ -801,4 +801,4 @@ const app = document.getElementById("app");
 
 setTimeout(() => {
   app.classList.replace("app--loading", "app--loaded");
-}, 1000);
+}, 500);

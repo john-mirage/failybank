@@ -140,7 +140,7 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
+                                <input class="form__input" type="text" name="amount" id="personal-deposit-amount-input" placeholder="Entrer le montant du dépot" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -167,7 +167,7 @@
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="personal-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
+                                <input class="form__input" type="text" name="amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <button class="button button--text button--disabled" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
                         </form>
@@ -185,7 +185,7 @@
                             <div class="form__row form__row--margin">
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-amount-input">Montant du transfert</label>
-                                    <input class="form__input" type="text" name="amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
+                                    <input class="form__input" type="text" name="amount" placeholder="Entrer le montant du transfert" id="personal-transfer-amount-input" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                                 </div>
                                 <div class="form__section form__section--fluid">
                                     <label class="form__label" for="personal-transfer-account-number-input">Numéro de compte du déstinataire</label>
@@ -257,7 +257,7 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
+                                <input class="form__input" type="text" name="amount" id="enterprise-deposit-amount-input" placeholder="Entrer le montant du dépot" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
@@ -275,7 +275,7 @@
                             <h2 class="form__title">Effectuer un retrait</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="enterprise-withdraw-amount-input">Montant du retrait</label>
-                                <input class="form__input" type="text" name="amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" required pattern="^[5-9]\d{2}\d*$">
+                                <input class="form__input" type="text" name="amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" maxlength="8" required pattern="^[5-9]\d{2}\d*$">
                             </div>
                             <button class="button button--text button--disabled" id="enterprise-withdraw-form-button" disabled>Retirer</button>
                         </form>
@@ -321,7 +321,7 @@
                             <h2 class="form__title">Effectuer un dépot</h2>
                             <div class="form__section form__section--margin">
                                 <label class="form__label" for="offshore-deposit-amount-input">Montant du dépot</label>
-                                <input class="form__input" type="text" name="amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
+                                <input class="form__input" type="text" name="amount" id="offshore-deposit-amount-input" placeholder="Entrer le montant du dépot" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">

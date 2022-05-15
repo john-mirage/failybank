@@ -6,8 +6,7 @@
     align-items: center;
     width: 100%;
     height: auto;
-    padding: 16px;
-    color: #fff;
+    padding: 12px;
     margin-bottom: 24px;
 }
 
@@ -20,14 +19,14 @@
 }
 
 .notification__icon {
-    width: 56px;
-    height: 56px;
+    width: 40px;
+    height: 40px;
     border-radius: 9999px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 32px auto;
+    background-size: 20px auto;
     background-color: rgba(0, 0, 0, 0.15);
-    margin-right: 24px;
+    margin-right: 16px;
 }
 
 .notification--success .notification__icon {
@@ -39,9 +38,17 @@
 }
 
 .notification__title {
-    margin: 0 0 4px 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
 }
 
 .notification__description {
     margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
 }
