@@ -1,0 +1,47 @@
+.notification {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.notification--success {
+    background-color: var(--color-up);
+}
+
+.notification--error {
+    background-color: var(--color-down);
+}
+
+.notification__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px auto;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin-right: 24px;
+}
+
+.notification--success .notification__icon {
+    background-image: url("/src/images/success.svg");
+}
+
+.notification--error .notification__icon {
+    background-image: url("/src/images/error.svg");
+}
+
+.notification__title {
+    margin: 0 0 4px 0;
+}
+
+.notification__description {
+    margin: 0;
+}

@@ -1,0 +1,38 @@
+.dropdown {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.dropdown__header {
+    box-sizing: border-box;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-text-alt);
+    line-height: 1;
+    margin: 0 0 8px 0;
+    cursor: pointer;
+    text-align: end;
+}
+
+.maze .dropdown__header:hover {
+    color: var(--color-maze);
+}
+
+.fleeca .dropdown__header:hover {
+    color: var(--color-fleeca);
+}
+
+.dropdown__body {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    z-index: 100;
+    width: 200px;
+    background-color: var(--color-fg);
+    border: 0.1rem solid var(--color-border);
+}

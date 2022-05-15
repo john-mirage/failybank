@@ -1,0 +1,67 @@
+.grid {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
+    gap: 24px;
+}
+
+.grid--auto-height {
+    height: auto;
+}
+
+.grid--margin {
+    margin-bottom: 24px;
+}
+
+.grid--account {
+    grid-template-rows: auto auto auto 1fr;
+}
+
+.grid--operation {
+    grid-template-rows: auto 1fr;
+}
+
+.grid--transfer {
+    grid-template-rows: 1fr;
+}
+
+.grid--enterprise {
+    grid-template-rows: auto auto auto 1fr;
+}
+
+.grid--offshore {
+    grid-template-rows: auto auto 1fr;
+}
+
+.grid__section {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.grid__section--with-border {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-border-on-bg);
+}
+
+.grid__section--align-bottom {
+    align-self: end;
+}
+
+.grid__section--col-span-2 {
+    grid-column: span 2 / span 2;
+}
+
+.grid__section--row-span-2 {
+    grid-row: span 2 / span 2;
+}
+
+.grid__section--row-span-3 {
+    grid-row: span 3 / span 3;
+}
+
+.grid__section--row-span-4 {
+    grid-row: span 4 / span 4;
+}

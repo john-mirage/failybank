@@ -1,9 +1,4 @@
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  signDisplay: "always",
-  maximumFractionDigits: 0
-});
+import {currencyFormatter} from "@scripts/utils/formatters";
 
 export class Account {
   constructor(

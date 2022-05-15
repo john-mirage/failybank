@@ -1,29 +1,16 @@
-import data from "./data";
-import {Account, PersonalAccount} from "./classes/account";
-import {Tab, TabList} from "./classes/tab-list";
-import {Form} from "./classes/form";
-import {NotificationList} from "./classes/notification-list";
-import {Dropdown} from "./classes/dropdown";
-import {FilterList, Filter} from "./classes/filter";
-import {LogList} from "./classes/log-list";
-import {AccountList, PasteAccountList, DeleteAccountList} from "./classes/account-list";
-import {ViewSwitcher, View} from "./classes/view-list";
-
-/*------------------------------------*\
-  Formatters
-\*------------------------------------*/
-
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  signDisplay: "always",
-  maximumFractionDigits: 0
-});
-
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
-  dateStyle: "long",
-  timeStyle: "short",
-});
+import {data} from "@data/data";
+import {Account, PersonalAccount} from "@scripts/classes/account";
+import {LogList} from "@scripts/classes/log-list";
+import {Form} from "@scripts/classes/form";
+import {NotificationList} from "@scripts/classes/notification-list";
+import {Tab} from "@scripts/classes/tab";
+import {TabList} from "@scripts/classes/tab-list";
+import {Dropdown} from "@scripts/classes/dropdown";
+import {Filter} from "@scripts/classes/filter";
+import {FilterList} from "@scripts/classes/filter-list";
+import {AccountList, DeleteAccountList, PasteAccountList} from "@scripts/classes/account-list";
+import {View} from "@scripts/classes/view";
+import {ViewSwitcher} from "@scripts/classes/view-switcher";
 
 /*------------------------------------*\
   App theme
