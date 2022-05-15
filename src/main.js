@@ -177,30 +177,20 @@ const pasteFavoriteAccountList = new PasteAccountList(
   pasteFavoriteAccount
 );
 
-const personalTab = new Tab(
-  "mon compte",
-  "personal-tab",
-  true
-);
+function showPersonalView() {
+  tabList.setActiveTab(personalTab);
+  viewSwitcher.switch(personalView);
+}
 
-const personalOperationTab = new Tab(
-  "opération",
-  "personal-operation-tab"
-);
+function showPersonalOperationView() {
+  tabList.setActiveTab(personalOperationTab);
+  viewSwitcher.switch(personalOperationView);
+}
 
-const personalTransferTab = new Tab(
-  "transfert",
-  "personal-transfer-tab"
-);
-
-const tabList = new TabList(
-  [
-    personalTab,
-    personalOperationTab,
-    personalTransferTab
-  ],
-  document.getElementById("tab-list")
-);
+function showPersonalTransferView() {
+  tabList.setActiveTab(personalTransferTab);
+  viewSwitcher.switch(personalTransferView);
+}
 
 const personalView = new View(
   document.getElementById("personal-view"),
@@ -227,24 +217,29 @@ const viewSwitcher = new ViewSwitcher(
   personalView
 );
 
-const personalTabInput = document.getElementById("personal-tab");
-const personalOperationTabInput = document.getElementById("personal-operation-tab");
-const personalTransferTabInput = document.getElementById("personal-transfer-tab");
+const personalTab = new Tab(
+  "mon compte",
+  showPersonalView
+);
 
-function showPersonalView() {
-  tabList.setActiveTab(personalTab);
-  viewSwitcher.switch(personalView);
-}
+const personalOperationTab = new Tab(
+  "opération",
+  showPersonalOperationView
+);
 
-function showPersonalOperationView() {
-  tabList.setActiveTab(personalOperationTab);
-  viewSwitcher.switch(personalOperationView);
-}
+const personalTransferTab = new Tab(
+  "transfert",
+  showPersonalTransferView
+);
 
-function showPersonalTransferView() {
-  tabList.setActiveTab(personalTransferTab);
-  viewSwitcher.switch(personalTransferView);
-}
+const tabList = new TabList(
+  [
+    personalTab,
+    personalOperationTab,
+    personalTransferTab
+  ],
+  document.getElementById("tab-list")
+);
 
 function switchTheme(event) {
   personalAccount.theme = event.target.checked ? "dark" : "light";
@@ -443,11 +438,7 @@ personalDepositForm.formElement.addEventListener("submit", depositToPersonalAcco
 personalAllDepositButton.addEventListener("click", depositAllToPersonalAccount);
 personalWithdrawForm.formElement.addEventListener("submit", withdrawToPersonalAccount);
 personalTransferForm.formElement.addEventListener("submit", transferToAccount);
-
 personalThemeButton.addEventListener("click", switchTheme);
-personalTabInput.addEventListener("change", showPersonalView);
-personalOperationTabInput.addEventListener("change", showPersonalOperationView);
-personalTransferTabInput.addEventListener("change", showPersonalTransferView);
 
 /*------------------------------------*\
   Enterprise & Offshore accounts
@@ -517,15 +508,17 @@ if (data.hasEnterprise) {
     document.getElementById("enterprise-withdraw-form-button")
   );
 
+  function showEnterpriseView() {
+    tabList.setActiveTab(enterpriseTab);
+    viewSwitcher.switch(enterpriseView);
+  }
+
   const enterpriseTab = new Tab(
     "entreprise",
-    "enterprise-tab",
-    false
+    showEnterpriseView
   );
 
   tabList.addTab(enterpriseTab);
-
-  const enterpriseTabInput = document.getElementById("enterprise-tab");
 
   const enterpriseView = new View(
     document.getElementById("enterprise-view"),
@@ -533,11 +526,6 @@ if (data.hasEnterprise) {
     enterpriseLogList,
     false
   );
-
-  function showEnterpriseView() {
-    tabList.setActiveTab(enterpriseTab);
-    viewSwitcher.switch(enterpriseView);
-  }
 
   function depositToEnterpriseAccount(event) {
     event.preventDefault();
@@ -638,7 +626,6 @@ if (data.hasEnterprise) {
 
   const enterpriseAllDepositButton = document.getElementById("enterprise-all-deposit-button");
 
-  enterpriseTabInput.addEventListener("change", showEnterpriseView);
   enterpriseDepositForm.formElement.addEventListener("submit", depositToEnterpriseAccount);
   enterpriseWithdrawForm.formElement.addEventListener("submit", withdrawToEnterpriseAccount);
   enterpriseAllDepositButton.addEventListener("click", depositAllToEnterpriseAccount);
@@ -699,10 +686,15 @@ if (data.hasEnterprise) {
       document.getElementById("offshore-deposit-form-button")
     );
 
+    function showOffshoreView() {
+      tabList.setActiveTab(offshoreTab);
+      viewSwitcher.switch(offshoreView);
+    }
+
     const offshoreTab = new Tab(
       "offshore",
-      "offshore-tab",
-      false
+      showOffshoreView,
+      true
     );
 
     const offshoreTabButton = document.getElementById("offshore-tab-button");
@@ -713,14 +705,6 @@ if (data.hasEnterprise) {
       offshoreLogList,
       false
     );
-
-    function showOffshoreView() {
-      tabList.addTab(offshoreTab);
-      const offshoreTabInput = document.getElementById("offshore-tab");
-      offshoreTabInput.checked = true;
-      tabList.setActiveTab(offshoreTab);
-      viewSwitcher.switch(offshoreView);
-    }
 
     function depositToOffshoreAccount(event) {
       event.preventDefault();

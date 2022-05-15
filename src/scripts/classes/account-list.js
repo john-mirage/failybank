@@ -43,10 +43,10 @@ export class DeleteAccountList {
 
   createAccount(account) {
     const accountFragment = this.accountTemplate.content.cloneNode(true);
-    const accountElement = accountFragment.querySelector(".account");
-    const accountNameElement = accountElement.querySelector(".account__name");
-    const accountNumberElement = accountElement.querySelector(".account__number");
-    const accountDeleteButtonElement = accountElement.querySelector(".account__text-button");
+    const accountElement = accountFragment.querySelector(".favorite-account");
+    const accountNameElement = accountElement.querySelector(".favorite-account__name");
+    const accountNumberElement = accountElement.querySelector(".favorite-account__number");
+    const accountDeleteButtonElement = accountElement.querySelector(".favorite-account__text-button");
     accountNameElement.textContent = account.name;
     accountNumberElement.textContent = account.number;
     accountDeleteButtonElement.addEventListener("click", () => {
@@ -90,9 +90,9 @@ export class PasteAccountList {
 
   createAccount(account) {
     const accountFragment = this.accountTemplate.content.cloneNode(true);
-    const accountElement = accountFragment.querySelector(".account");
-    const accountNameElement = accountElement.querySelector(".account__name");
-    const accountNumberElement = accountElement.querySelector(".account__number");
+    const accountElement = accountFragment.querySelector(".favorite-account");
+    const accountNameElement = accountElement.querySelector(".favorite-account__name");
+    const accountNumberElement = accountElement.querySelector(".favorite-account__number");
     accountNameElement.textContent = account.name;
     accountNumberElement.textContent = account.number;
     accountElement.addEventListener("click", () => {
