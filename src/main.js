@@ -266,7 +266,7 @@ function addFavoriteAccount(event) {
     number: formData.get("number")
   }
   const accountListIsNotFull = favoriteAccountList.accounts.length < 5;
-  const accountIsNotInTheList = favoriteAccountList.accounts.find((account) => account.number === newAccount) === -1;
+  const accountIsNotInTheList = favoriteAccountList.accounts.findIndex((account) => account.number === newAccount.number) === -1;
   if (accountListIsNotFull && accountIsNotInTheList) {
     favoriteAccountList.addAccount(newAccount);
     deleteFavoriteAccountList.reset();
