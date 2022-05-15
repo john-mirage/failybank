@@ -1,0 +1,141 @@
+.log {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.log:last-child {
+    border: none;
+}
+
+.log__header {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    list-style: none;
+}
+
+.log__header:focus-visible {
+    outline-offset: 4px;
+}
+
+.maze .log__header:focus-visible {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .log__header:focus-visible {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.log__body {
+    box-sizing: border-box;
+    padding-top: 8px;
+}
+
+.log__icon {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+    background-color: var(--color-icon-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+}
+
+.log__icon--transfer {
+    background-image: url("/src/images/person.svg");
+}
+
+.log__icon--police {
+    background-image: url("/src/images/police.svg");
+}
+
+.log__icon--operation {
+    background-image: url("/src/images/bank.svg");
+}
+
+.log__amount {
+    flex: 0 0 auto;
+}
+
+.log__info {
+    flex: 1 1 0;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.log__type {
+    box-sizing: border-box;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    margin: 0 0 8px 0;
+}
+
+.log__date {
+    box-sizing: border-box;
+    display: block;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-alt);
+    line-height: 1;
+}
+
+.log__amount {
+    box-sizing: border-box;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 5px 0 0 0;
+}
+
+.log__amount--up {
+    color: var(--color-up);
+}
+
+.log__amount--down {
+    color: var(--color-down);
+}
+
+.log__reference-label {
+    box-sizing: border-box;
+    display: inline;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 20px;
+}
+
+.log__reference {
+    box-sizing: border-box;
+    display: inline;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-alt);
+    line-height: 20px;
+}
+
+.maze .log__header:hover .log__type {
+    color: var(--color-maze);
+}
+
+.fleeca .log__header:hover .log__type {
+    color: var(--color-fleeca);
+}

@@ -1,0 +1,103 @@
+.toggle-button {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.toggle-button__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.toggle-button__input {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.toggle-button__input:focus-visible {
+    outline-offset: 6px;
+}
+
+.maze .toggle-button__input:focus-visible {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .toggle-button__input:focus-visible {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.toggle-button__icon {
+    box-sizing: border-box;
+    width: 16px;
+    height: auto;
+}
+
+.toggle-button__icon--sun {
+    color: var(--color-toggle-button-icon-active);
+}
+
+.toggle-button__icon--moon {
+    color: var(--color-toggle-button-icon);
+}
+
+.dark .toggle-button__icon--sun {
+    color: var(--color-toggle-button-icon);
+}
+
+.dark .toggle-button__icon--moon {
+    color: var(--color-toggle-button-icon-active);
+}
+
+.toggle-button__track {
+    box-sizing: border-box;
+    width: 40px;
+    height: 20px;
+    padding: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 9999px;
+    background-color: var(--color-toggle-button-track);
+}
+
+.toggle-button__handle {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+}
+
+.maze .toggle-button__handle {
+    background-color: var(--color-maze);
+}
+
+.fleeca .toggle-button__handle {
+    background-color: var(--color-fleeca);
+}
+
+.toggle-button__input:checked ~ .toggle-button__track > .toggle-button__handle {
+    transform: translateX(20px);
+}

@@ -1,0 +1,87 @@
+.form {
+    box-sizing: border-box;
+}
+
+.form__title {
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1;
+    margin: 0 0 20px 0;
+}
+
+.form__row {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.form__row--margin {
+    margin-bottom: 24px;
+}
+
+.form__row--items-end {
+    align-items: flex-end;
+}
+
+.form__section {
+    box-sizing: border-box;
+}
+
+.form__section--margin {
+    margin-bottom: 24px;
+}
+
+.form__row > .form__section--fluid {
+    flex: 1 1 0;
+}
+
+.form__row > .form__section--fixed {
+    flex: 0 0 auto;
+}
+
+.form__label {
+    box-sizing: border-box;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-text-alt);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.form__input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    background-color: var(--color-fg);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form__input::placeholder {
+    font-weight: 600;
+    color: var(--color-text-placeholder);
+}
+
+.form__input:focus {
+    outline: none;
+}
+
+.maze .form__input:focus {
+    border: 1px solid var(--color-maze);
+}
+
+.fleeca .form__input:focus {
+    border: 1px solid var(--color-fleeca);
+}

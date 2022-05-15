@@ -1,14 +1,4 @@
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  signDisplay: "always",
-  maximumFractionDigits: 0
-});
-
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", {
-  dateStyle: "long",
-  timeStyle: "short",
-});
+import {currencyFormatter, dateTimeFormatter} from "@scripts/utils/formatters";
 
 const LOGS_PER_PAGE = 10;
 

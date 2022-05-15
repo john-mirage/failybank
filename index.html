@@ -336,14 +336,6 @@
 
     </main>
 
-    <!-- Template / tab -->
-    <template id="tab-template">
-        <div class="tab">
-            <label class="tab__label">Mon compte</label>
-            <input class="tab__input" type="radio" name="tab-selector">
-        </div>
-    </template>
-
     <!-- Template / favorite account with delete button -->
     <template id="favorite-account-delete-template">
         <tr class="account">
@@ -364,13 +356,13 @@
 
     <!-- Template / favorite account with paste feature -->
     <template id="favorite-account-paste-template">
-        <tr class="account account--clickable">
-            <td class="account__section">
-                <h4 class="account__name account__name--margin"></h4>
-                <p class="account__number"></p>
+        <tr class="favorite-account favorite-account--clickable">
+            <td class="favorite-account__section">
+                <h4 class="favorite-account__name favorite-account__name--margin"></h4>
+                <p class="favorite-account__number"></p>
             </td>
-            <td class="account__section account__section--right">
-                <div class="account__paste-icon"></div>
+            <td class="favorite-account__section favorite-account__section--right">
+                <div class="favorite-account__paste-icon"></div>
             </td>
         </tr>
     </template>
@@ -404,11 +396,6 @@
                 <p class="notification__description"></p>
             </div>
         </li>
-    </template>
-
-    <!-- Template / filter -->
-    <template id="filter-template">
-        <button class="filter"></button>
     </template>
 
     <script type="module" src="/src/main.js"></script>

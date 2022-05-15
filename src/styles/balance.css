@@ -1,0 +1,42 @@
+.balance {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+}
+
+.balance__name {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--color-text);
+    text-transform: uppercase;
+    line-height: 10px;
+    margin: 0 0 4px 0;
+}
+
+.balance__value {
+    display: inline;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: transparent;
+    text-shadow: 0 0 12px var(--color-up);
+    text-transform: uppercase;
+    line-height: 24px;
+    margin: 0;
+    cursor: default;
+}
+
+.balance__value:hover {
+    color: var(--color-up);
+    text-shadow: none;
+}
+
+.balance__value--negative {
+    text-shadow: 0 0 12px var(--color-down);
+}
+
+.balance__value--negative:hover {
+    color: var(--color-down);
+    text-shadow: none;
+}

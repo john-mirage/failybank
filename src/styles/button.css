@@ -1,0 +1,76 @@
+.button {
+    box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.button--text {
+    display: block;
+    min-width: 168px;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.button--icon {
+    display: flex;
+    width: 48px;
+}
+
+.button__icon {
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
+    margin: auto;
+}
+
+.button--primary {
+    color: #ffffff;
+}
+
+.button--primary:focus-visible {
+    outline-offset: 3px;
+}
+
+.maze .button--primary {
+    background-color: var(--color-maze);
+}
+
+.fleeca .button--primary {
+    background-color: var(--color-fleeca);
+}
+
+.maze .button--primary:focus-visible {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .button--primary:focus-visible {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.maze .button--secondary {
+    color: var(--color-maze);
+}
+
+.fleeca .button--secondary {
+    color: var(--color-fleeca);
+}
+
+.maze .button--secondary:focus {
+    outline: 2px solid var(--color-maze);
+}
+
+.fleeca .button--secondary:focus {
+    outline: 2px solid var(--color-fleeca);
+}
+
+.button--disabled {
+    color: var(--color-text-alt);
+    background-color: var(--color-border);
+}

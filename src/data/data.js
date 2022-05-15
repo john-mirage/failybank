@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   bank: "fleeca",
   hasEnterprise: true,
   hasOffshore: true,
@@ -405,5 +405,3 @@ const data = {
     }
   }
 }
-
-export default data;
