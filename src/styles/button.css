@@ -30,13 +30,9 @@
     margin: auto;
 }
 
-.button--primary {
-    color: #ffffff;
-}
-
-.button--primary:focus-visible {
-    outline-offset: 3px;
-}
+/*------------------------------------*\
+  #Button-primary
+\*------------------------------------*/
 
 .maze .button--primary {
     background-color: var(--color-maze);
@@ -46,6 +42,10 @@
     background-color: var(--color-fleeca);
 }
 
+.button--primary:focus-visible {
+    outline-offset: 3px;
+}
+
 .maze .button--primary:focus-visible {
     outline: 2px solid var(--color-maze);
 }
@@ -53,6 +53,14 @@
 .fleeca .button--primary:focus-visible {
     outline: 2px solid var(--color-fleeca);
 }
+
+.button--primary > .button__icon {
+    color: #ffffff;
+}
+
+/*------------------------------------*\
+  #Button-secondary
+\*------------------------------------*/
 
 .maze .button--secondary {
     color: var(--color-maze);
@@ -70,7 +78,36 @@
     outline: 2px solid var(--color-fleeca);
 }
 
+/*------------------------------------*\
+  #Button-disabled
+\*------------------------------------*/
+
 .button--disabled {
-    color: var(--color-text-alt);
     background-color: var(--color-border);
+    color: var(--color-text-alt);
+}
+
+.button--disabled > .button__icon {
+    color: var(--color-text-alt);
+}
+
+/*------------------------------------*\
+  #Button-shutdown
+\*------------------------------------*/
+
+.button--shutdown {
+    background-color: var(--color-border);
+    border-radius: 9999px;
+}
+
+.button--shutdown > .button__icon {
+    color: var(--color-text-alt);
+}
+
+.button--shutdown:hover {
+    background-color: var(--color-down);
+}
+
+.button--shutdown:hover > .button__icon {
+    color: #fff;
 }

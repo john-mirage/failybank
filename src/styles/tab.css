@@ -16,10 +16,6 @@
     cursor: pointer;
 }
 
-.tab:hover {
-    color: var(--color-text);
-}
-
 .tab:focus-visible {
     outline: none;
     color: var(--color-text);
