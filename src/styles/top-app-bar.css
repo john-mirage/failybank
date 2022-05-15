@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .top-app-bar__section--row {
