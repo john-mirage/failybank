@@ -1,6 +1,7 @@
 export class Dropdown {
   constructor(detailsElement) {
     this.detailsElement = detailsElement;
+    this.summaryElement = this.detailsElement.querySelector(".dropdown__header");
     this.closeWhenClickOutside = this.closeWhenClickOutside.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.detailsElement.addEventListener("toggle", this.handleChange);
@@ -8,6 +9,10 @@ export class Dropdown {
 
   close() {
     this.detailsElement.removeAttribute("open");
+  }
+
+  updateLabel(name) {
+    this.summaryElement.textContent = name;
   }
 
   closeWhenClickOutside(event) {
@@ -21,5 +26,9 @@ export class Dropdown {
     } else {
       document.removeEventListener("click", this.closeWhenClickOutside);
     }
+  }
+
+  reset() {
+    this.summaryElement.textContent = "filtrer les résultats";
   }
 }

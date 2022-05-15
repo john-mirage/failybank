@@ -18,20 +18,20 @@ export class TabList {
     this.initialTabs.forEach((initialTab) => {
       this.tabListElement.appendChild(initialTab.element);
     });
-    this.activeTab.element.classList.add("tab--active");
+    this.activeTab.activate();
   }
 
   setActiveTab(tab) {
     if (this.activeTab.temporary) {
       this.deleteTab(this.activeTab);
     } else {
-      this.activeTab.element.classList.remove("tab--active");
+      this.activeTab.disable();
     }
     this.activeTab = tab;
     if (this.activeTab.temporary) {
       this.addTab(this.activeTab);
     } else {
-      this.activeTab.element.classList.add("tab--active");
+      this.activeTab.activate();
     }
   }
 }

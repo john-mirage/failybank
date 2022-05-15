@@ -121,10 +121,11 @@ const personalTransferFilter = new Filter(
   "transfer"
 );
 
-function setPersonalLogListFilter(value) {
-  personalLogList.filter = value;
+function setPersonalLogListFilter(filter) {
+  personalLogList.filter = filter.value;
   personalLogList.reset();
   personalFilterDropdown.close();
+  personalFilterDropdown.updateLabel(filter.value ? `filtre: ${filter.name}` : "filtrer les résultats");
 }
 
 const personalFilterList = new FilterList(
@@ -194,6 +195,7 @@ function showPersonalTransferView() {
 
 const personalView = new View(
   document.getElementById("personal-view"),
+  personalFilterDropdown,
   personalFilterList,
   personalLogList,
   deleteFavoriteAccountList
@@ -202,12 +204,14 @@ const personalView = new View(
 const personalOperationView = new View(
   document.getElementById("personal-operation-view"),
   false,
+  false,
   personalOperationLogList,
   false
 );
 
 const personalTransferView = new View(
   document.getElementById("personal-transfer-view"),
+  false,
   false,
   false,
   pasteFavoriteAccountList
@@ -476,10 +480,11 @@ if (data.hasEnterprise) {
     "transfer"
   );
 
-  function setEnterpriseLogListFilter(value) {
-    enterpriseLogList.filter = value;
+  function setEnterpriseLogListFilter(filter) {
+    enterpriseLogList.filter = filter.value;
     enterpriseLogList.reset();
     enterpriseFilterDropdown.close();
+    enterpriseFilterDropdown.updateLabel(filter.value ? `filtre: ${filter.name}` : "filtrer les résultats");
   }
 
   const enterpriseFilterList = new FilterList(
@@ -522,6 +527,7 @@ if (data.hasEnterprise) {
 
   const enterpriseView = new View(
     document.getElementById("enterprise-view"),
+    enterpriseFilterDropdown,
     enterpriseFilterList,
     enterpriseLogList,
     false
@@ -662,10 +668,11 @@ if (data.hasEnterprise) {
       "transfer"
     );
 
-    function setOffshoreLogListFilter(value) {
-      offshoreLogList.filter = value;
+    function setOffshoreLogListFilter(filter) {
+      offshoreLogList.filter = filter.value;
       offshoreLogList.reset();
       offshoreFilterDropdown.close();
+      offshoreFilterDropdown.updateLabel(filter.value ? `filtre: ${filter.name}` : "filtrer les résultats");
     }
 
     const offshoreFilterList = new FilterList(
@@ -701,6 +708,7 @@ if (data.hasEnterprise) {
 
     const offshoreView = new View(
       document.getElementById("offshore-view"),
+      offshoreFilterDropdown,
       offshoreFilterList,
       offshoreLogList,
       false

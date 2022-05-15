@@ -37,15 +37,7 @@
 }
 
 .toggle-button__input:focus-visible {
-    outline-offset: 6px;
-}
-
-.maze .toggle-button__input:focus-visible {
-    outline: 2px solid var(--color-maze);
-}
-
-.fleeca .toggle-button__input:focus-visible {
-    outline: 2px solid var(--color-fleeca);
+    outline: none;
 }
 
 .toggle-button__icon {
