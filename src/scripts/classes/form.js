@@ -19,7 +19,6 @@ export class Form {
   }
 
   checkFields() {
-    console.log("check fields")
     const fieldsAreValid = this.inputElements.every((field) => field.validity.valid);
     if (fieldsAreValid && !this.buttonIsActive) {
       this.activateSubmitButton();

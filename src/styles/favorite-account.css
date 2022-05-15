@@ -34,6 +34,10 @@
     width: auto;
 }
 
+.favorite-account__accordion-header {
+    list-style: none;
+}
+
 .favorite-account__name {
     box-sizing: border-box;
     display: block;
@@ -62,17 +66,24 @@
     box-sizing: border-box;
     width: 36px;
     height: 36px;
-    list-style: none;
     background-color: transparent;
-    background-image: url("/src/images/delete.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16px;
+    border: none;
     cursor: pointer;
-    margin-right: -10px;
 }
 
-.favorite-account__accordion[open] > .favorite-account__icon-button {
+.favorite-account__icon-button--delete {
+    margin-right: -10px;
+    background-image: url("/src/images/delete.svg");
+}
+
+.favorite-account__icon-button--edit {
+    background-image: url("/src/images/edit.svg");
+}
+
+.favorite-account__accordion[open] .favorite-account__icon-button--delete {
     background-image: url("/src/images/close.svg");
 }
 

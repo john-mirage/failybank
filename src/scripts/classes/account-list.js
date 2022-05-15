@@ -46,22 +46,18 @@ export class DeleteAccountList {
     const accountElement = accountFragment.querySelector(".favorite-account");
     const accountNameElement = accountElement.querySelector(".favorite-account__name");
     const accountNumberElement = accountElement.querySelector(".favorite-account__number");
-    const accountDeleteButtonElement = accountElement.querySelector(".favorite-account__text-button");
-    accountNameElement.textContent = account.name;
-    accountNumberElement.textContent = account.number;
+    const accountDeleteButtonElement = accountElement.querySelector(".favorite-account__icon-button--delete");
     accountDeleteButtonElement.addEventListener("click", () => {
       this.deleteFavoriteAccount(account);
-    }, { once: true });
+    });
+    accountNameElement.textContent = account.name;
+    accountNumberElement.textContent = account.number;
     this.accountListElement.appendChild(accountFragment);
   }
 
   createAccounts() {
     this.accountList.accounts.forEach(this.createAccount);
     this.accountList.displayCount(this.accountListCountElement);
-  }
-
-  displayCount() {
-
   }
 
   reset() {
