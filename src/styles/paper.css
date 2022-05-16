@@ -30,23 +30,3 @@
 .paper__frame::-webkit-scrollbar-track {
     background-color: transparent;
 }
-
-.paper__table {
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    border-collapse: collapse;
-}
-
-.paper__button {
-    box-sizing: border-box;
-    display: none;
-    position: absolute;
-    z-index: 60;
-    bottom: 16px;
-    right: 16px;
-}
-
-.paper:hover > .paper__button {
-    display: flex;
-}

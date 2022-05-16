@@ -27,17 +27,6 @@
     justify-content: flex-end;
 }
 
-.favorite-account__accordion {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    width: auto;
-}
-
-.favorite-account__accordion-header {
-    list-style: none;
-}
-
 .favorite-account__name {
     box-sizing: border-box;
     display: block;
@@ -83,43 +72,8 @@
     background-image: url("/src/images/edit.svg");
 }
 
-.favorite-account__accordion[open] .favorite-account__icon-button--delete {
-    background-image: url("/src/images/close.svg");
-}
-
 .favorite-account__icon-button:hover {
     background-color: var(--color-icon-bg);
-}
-
-.favorite-account__icon-button:focus-visible {
-    outline: 2px solid var(--color-down);
-}
-
-.favorite-account__text-button {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -8px;
-    transform: translateX(-100%);
-    width: auto;
-    height: 36px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border: none;
-    background-color: var(--color-down);
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.favorite-account__text-button:focus-visible {
-    outline-offset: 3px;
-    outline: 2px solid var(--color-down);
 }
 
 .favorite-account__paste-icon {
