@@ -52,12 +52,14 @@
 }
 
 .favorite-account__input--name {
+    width: calc(100% - 9px);
     font-size: 16px;
     font-weight: 700;
     color: var(--color-text);
 }
 
 .favorite-account__input--number {
+    width: 100%;
     font-size: 14px;
     font-weight: 600;
     color: var(--color-text-alt);

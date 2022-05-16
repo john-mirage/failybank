@@ -30,9 +30,9 @@ export class FavoriteAccountEditList {
   listenButtons(favoriteAccount) {
     const normalView = favoriteAccount.getNormalView();
     const editView = favoriteAccount.getEditView();
-    const normalViewEditButton = normalView.querySelector(".favorite-account__icon-button--edit");
-    const normalViewDeleteButton = normalView.querySelector(".favorite-account__icon-button--delete");
-    const editViewCancelButton = editView.querySelector(".favorite-account__text-button--cancel");
+    const normalViewEditButton = normalView.querySelector(".button--edit");
+    const normalViewDeleteButton = normalView.querySelector(".button--delete");
+    const editViewCancelButton = editView.querySelector(".button--cancel");
     const editViewConfirmButton = editView.querySelector(".button--confirm");
     normalViewEditButton.addEventListener("click", () => {
       this.enterEditMode(favoriteAccount);
@@ -61,7 +61,7 @@ export class FavoriteAccountEditList {
       formElement,
       confirmButton
     );
-    form.checkFields();
+    form.activateSubmitButton();
   }
 
   displayCount() {
@@ -95,10 +95,6 @@ export class FavoriteAccountEditList {
   enterEditMode(favoriteAccount) {
     const normalView = favoriteAccount.getNormalView();
     const editView = favoriteAccount.getEditView();
-    const nameInputElement = editView.querySelector(".favorite-account__input--name");
-    const numberInputElement = editView.querySelector(".favorite-account__input--number");
-    nameInputElement.value = favoriteAccount.name;
-    numberInputElement.value = favoriteAccount.number;
     favoriteAccountEditListElement.replaceChild(editView, normalView);
   }
 

@@ -131,24 +131,3 @@
 .button--error > .button__icon {
     color: #fff;
 }
-
-/*------------------------------------*\
-  #Button-shutdown
-\*------------------------------------*/
-
-.button--shutdown {
-    background-color: var(--color-border);
-    border-radius: 9999px;
-}
-
-.button--shutdown > .button__icon {
-    color: var(--color-text-alt);
-}
-
-.button--shutdown:hover {
-    background-color: var(--color-down);
-}
-
-.button--shutdown:hover > .button__icon {
-    color: #fff;
-}
