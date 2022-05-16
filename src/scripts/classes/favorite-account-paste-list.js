@@ -22,6 +22,13 @@ export class FavoriteAccountPasteList {
     this.handleClick = handleClick;
   }
 
+  displayCount() {
+    const favoriteAccountsTotal = String(this.favoriteAccountList.favoriteAccounts.length);
+    if (favoriteAccountPasteListCountElement.textContent !== favoriteAccountsTotal) {
+      favoriteAccountPasteListCountElement.textContent = favoriteAccountsTotal;
+    }
+  }
+
   /**
    * Display the favorite accounts in the list represented by an HTML element.
    */
@@ -30,6 +37,7 @@ export class FavoriteAccountPasteList {
       const element = favoriteAccount.getPasteView();
       favoriteAccountPasteListElement.appendChild(element);
     });
+    this.displayCount();
   }
 
   /**

@@ -27,6 +27,7 @@ export class FavoriteAccount {
   ) {
     this.name = name;
     this.number = number;
+    this.isListened = false;
     this.normalElement = false;
     this.editElement = false;
     this.pasteElement = false;
@@ -59,12 +60,7 @@ export class FavoriteAccount {
   getEditView() {
     if (!this.editElement) {
       const fragment = editTemplate.content.cloneNode(true);
-      const element = fragment.querySelector(".favorite-account");
-      const nameInputElement = element.querySelector(".favorite-account__input--name");
-      const numberInputElement = element.querySelector(".favorite-account__input--number");
-      nameInputElement.value = this.name;
-      numberInputElement.value = this.number;
-      this.editElement = element;
+      this.editElement = fragment.querySelector(".favorite-account");
       return this.editElement;
     }
     return this.editElement;

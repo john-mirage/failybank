@@ -25,10 +25,42 @@
     padding-bottom: 10px;
 }
 
+.favorite-account__section--left {
+    flex: 0 0 50%;
+}
+
 .favorite-account__section--right {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.favorite-account__input {
+    box-sizing: border-box;
+    height: 36px;
+    margin-left: -9px;
+    padding: 0 0 0 8px;
+    font-family: inherit;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+}
+
+.favorite-account__input:focus {
+    outline: none;
+    border: 1px solid var(--color-bank);
+}
+
+.favorite-account__input--name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.favorite-account__input--number {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-alt);
 }
 
 .favorite-account__name {
@@ -55,41 +87,10 @@
     line-height: 1;
 }
 
-.favorite-account__icon-button {
-    box-sizing: border-box;
-    width: 36px;
-    height: 36px;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.favorite-account__icon-button--delete {
-    margin-right: -10px;
-    background-image: url("/src/images/delete.svg");
-}
-
-.favorite-account__icon-button--edit {
-    background-image: url("/src/images/edit.svg");
-}
-
-.favorite-account__icon-button:hover {
-    background-color: var(--color-icon-bg);
-}
-
-.favorite-account__paste-icon {
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    background-color: transparent;
-    background-image: url("/src/images/paste-form.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 24px;
-    margin-right: -12px;
+.favorite-account__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-alt);
 }
 
 .favorite-account--clickable:hover .favorite-account__name {

@@ -120,7 +120,7 @@
                     <!-- Personal account favorite account list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés [<span id="personal-favorite-account-count"></span>/5]</h3>
+                            <h3 class="section__title">Comptes enregistrés [<span id="favorite-account-edit-list-count"></span>/5]</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame" id="favorite-account-edit-list"></div>
                             </div>
@@ -200,7 +200,7 @@
                     <!-- Personal account favorite account paste list -->
                     <section class="grid__section">
                         <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés [<span id="personal-transfer-favorite-account-count"></span>/5]</h3>
+                            <h3 class="section__title">Comptes enregistrés [<span id="favorite-account-paste-list-count"></span>/5]</h3>
                             <div class="paper section__body">
                                 <div class="paper__frame" id="favorite-account-paste-list"></div>
                             </div>
@@ -341,21 +341,21 @@
     <!-- Template / favorite account / normal view -->
     <template id="favorite-account-normal-template">
         <div class="favorite-account">
-            <div class="favorite-account__section">
+            <div class="favorite-account__section favorite-account__section--left">
                 <h4 class="favorite-account__name"></h4>
             </div>
             <div class="favorite-account__section">
                 <p class="favorite-account__number"></p>
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <button class="favorite-account__icon-button favorite-account__icon-button--edit">
-                    <svg class="favorite-account__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                <button class="button button--small-icon button--subtle favorite-account__icon-button--edit">
+                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                         <path d="M0 0h24v24H0V0z" fill="none"/>
                         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"/>
                     </svg>
                 </button>
-                <button class="favorite-account__icon-button favorite-account__icon-button--delete">
-                    <svg class="favorite-account__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                <button class="button button--small-icon button--subtle button--mr favorite-account__icon-button--delete">
+                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                         <path d="M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z" fill="none"/>
                         <path d="M292 64h-72a4 4 0 00-4 4v28h80V68a4 4 0 00-4-4z" fill="none"/>
                         <path d="M447.55 96H336V48a16 16 0 00-16-16H192a16 16 0 00-16 16v48H64.45L64 136h33l20.09 314A32 32 0 00149 480h214a32 32 0 0031.93-29.95L415 136h33zM176 416l-9-256h33l9 256zm96 0h-32V160h32zm24-320h-80V68a4 4 0 014-4h72a4 4 0 014 4zm40 320h-33l9-256h33z"/>
@@ -368,15 +368,24 @@
     <!-- Template / favorite account / edit view -->
     <template id="favorite-account-edit-template">
         <form class="favorite-account">
-            <div class="favorite-account__section">
-                <input class="favorite-account__input favorite-account__input--name" type="text">
+            <div class="favorite-account__section favorite-account__section--left">
+                <input class="favorite-account__input favorite-account__input--name" type="text" placeholder="Entrer le nom du compte" name="name" required maxlength="40">
             </div>
             <div class="favorite-account__section">
-                <input class="favorite-account__input favorite-account__input--number" type="text">
+                <input class="favorite-account__input favorite-account__input--number" type="text" placeholder="Entrer le numéro du compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}">
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <button class="favorite-account__text-button favorite-account__text-button--cancel" type="button">Annuler</button>
-                <button class="favorite-account__text-button favorite-account__text-button--edit" type="button">Modifier</button>
+                <button class="button button--small-icon button--subtle favorite-account__text-button--cancel" type="button">
+                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"/>
+                    </svg>
+                </button>
+                <button class="button button--small-icon button--primary button--disabled button--mr button--confirm" type="button">
+                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                    </svg>
+                </button>
             </div>
         </form>
     </template>
@@ -389,7 +398,7 @@
                 <p class="favorite-account__number"></p>
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <svg class="favorite-account__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                <svg class="favorite-account__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                     <path d="M0 0h24v24H0V0z" fill="none"/>
                     <path d="M16 1H2v16h2V3h12V1zm5 4H6v18h15V5zm-2 16H8V7h11v14z"/>
                 </svg>
