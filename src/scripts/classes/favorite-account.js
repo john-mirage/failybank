@@ -14,7 +14,7 @@ const pasteTemplate = document.getElementById("favorite-account-paste-template")
  *
  * @class
  */
-class FavoriteAccount {
+export class FavoriteAccount {
 
   /**
    * @constructor
@@ -43,6 +43,10 @@ class FavoriteAccount {
       const element = fragment.querySelector(".favorite-account");
       const nameElement = element.querySelector(".favorite-account__name");
       const numberElement = element.querySelector(".favorite-account__number");
+      nameElement.textContent = this.name;
+      numberElement.textContent = this.number;
+      this.normalElement = element;
+      return this.normalElement;
     }
     return this.normalElement;
   }
@@ -56,6 +60,12 @@ class FavoriteAccount {
     if (!this.editElement) {
       const fragment = editTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
+      const nameInputElement = element.querySelector(".favorite-account__input--name");
+      const numberInputElement = element.querySelector(".favorite-account__input--number");
+      nameInputElement.value = this.name;
+      numberInputElement.value = this.number;
+      this.editElement = element;
+      return this.editElement;
     }
     return this.editElement;
   }
@@ -71,6 +81,10 @@ class FavoriteAccount {
       const element = fragment.querySelector(".favorite-account");
       const nameElement = element.querySelector(".favorite-account__name");
       const numberElement = element.querySelector(".favorite-account__number");
+      nameElement.textContent = this.name;
+      numberElement.textContent = this.number;
+      this.pasteElement = element;
+      return this.pasteElement;
     }
     return this.pasteElement;
   }

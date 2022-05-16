@@ -30,9 +30,49 @@ export class FavoriteAccountEditList {
    */
   display() {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
-      const element = favoriteAccount.getNormalView();
-      favoriteAccountEditListElement.appendChild(element);
+      const normalView = favoriteAccount.getNormalView();
+      const editView = favoriteAccount.getEditView();
+      const normalViewEditButton = normalView.querySelector(".favorite-account__icon-button--edit");
+      const normalViewDeleteButton = normalView.querySelector(".favorite-account__icon-button--delete");
+      normalViewEditButton.addEventListener("click", () => {
+        this.enterEditMode(favoriteAccount);
+      });
+      normalViewDeleteButton.addEventListener("click", () => {
+        this.handleDeleteButtonClick();
+      });
+      const editViewCancelButton = editView.querySelector(".favorite-account__text-button--cancel");
+      const editViewEditButton = editView.querySelector(".favorite-account__text-button--edit");
+      editViewCancelButton.addEventListener("click", () => {
+        this.exitEditMode(favoriteAccount);
+      });
+      editViewEditButton.addEventListener("click", () => {
+        this.exitEditMode(favoriteAccount);
+        this.handleEditButtonClick(favoriteAccount);
+      });
+      favoriteAccountEditListElement.appendChild(normalView);
     });
+  }
+
+  /**
+   * Enter the edit mode to modify a favorite account.
+   *
+   * @param favoriteAccount {FavoriteAccount} - The favorite account.
+   */
+  enterEditMode(favoriteAccount) {
+    const normalView = favoriteAccount.getNormalView();
+    const editView = favoriteAccount.getEditView();
+    favoriteAccountEditListElement.replaceChild(editView, normalView);
+  }
+
+  /**
+   * Enter the edit mode.
+   *
+   * @param favoriteAccount {FavoriteAccount} - The favorite account.
+   */
+  exitEditMode(favoriteAccount) {
+    const normalView = favoriteAccount.getNormalView();
+    const editView = favoriteAccount.getEditView();
+    favoriteAccountEditListElement.replaceChild(normalView, editView);
   }
 
   /**

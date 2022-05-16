@@ -19,7 +19,7 @@ export class View {
       this.logList.logListElement.scrollTop = 0;
       this.logList.displayInitialLogs();
     }
-    if (this.favoriteAccountList) this.favoriteAccountList.createAccounts();
+    if (this.favoriteAccountList) this.favoriteAccountList.display();
   }
 
   deactivate() {
