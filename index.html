@@ -66,44 +66,50 @@
                 <div class="grid grid--account">
                     <!-- Personal account owner -->
                     <section class="grid__section">
-                        <div class="section">
-                            <h3 class="section__title">Propriétaire du compte</h3>
-                            <p class="section__text" id="personal-account-owner"></p>
-                        </div>
+                        <h3 class="typography typography--title-small">Propriétaire du compte</h3>
+                        <p class="typography typography--body-large" id="personal-account-owner"></p>
                     </section>
                     <!-- Personal account log list -->
                     <section class="grid__section grid__section--row-span-4">
-                        <div class="section section--column">
-                            <div class="section__row">
-                                <h3 class="section__title">Historique des opérations</h3>
-                                <details class="dropdown" id="personal-filter-dropdown">
-                                    <summary class="dropdown__header">Filtrer les résultats</summary>
-                                    <div class="dropdown__body" id="personal-filter-list"></div>
-                                </details>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <div class="group group--row">
+                                    <div class="group__section group__section--fluid">
+                                        <h3 class="typography typography--title-small">Historique des opérations</h3>
+                                    </div>
+                                    <div class="group__section group__section--fixed">
+                                        <details class="dropdown" id="personal-filter-dropdown">
+                                            <summary class="dropdown__header">
+                                                <span class="typography typography--title-small" data-name="dropdown-title">Filtrer les résultats</span>
+                                            </summary>
+                                            <div class="dropdown__body" id="personal-filter-list"></div>
+                                        </details>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="personal-log-list"></div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="personal-log-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
                     <!-- Personal account number -->
                     <section class="grid__section grid__section--with-border">
-                        <div class="section">
-                            <h3 class="section__title">Numéro du compte</h3>
-                            <p class="section__number" id="personal-account-number"></p>
-                        </div>
+                        <h3 class="typography typography--title-small">Numéro du compte</h3>
+                        <p class="typography typography--number-large" id="personal-account-number"></p>
                     </section>
                     <!-- Personal account favorite account add form -->
                     <section class="grid__section">
                         <form class="form" id="personal-favorite-account-form" novalidate>
-                            <h2 class="form__title">Ajouter un destinataire</h2>
+                            <h2 class="typography typography--title-large">Ajouter un destinataire</h2>
                             <div class="form__row form__row--items-end">
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="personal-favorite-account-name-input">Nom du compte</label>
+                                    <label class="typography typography--title-small" for="personal-favorite-account-name-input">Nom du compte</label>
                                     <input class="form__input" type="text" placeholder="Entrer le nom du compte" name="name" required maxlength="40" id="personal-favorite-account-name-input">
                                 </div>
                                 <div class="form__section form__section--fluid">
-                                    <label class="form__label" for="personal-favorite-account-number-input">Numéro du compte</label>
+                                    <label class="typography typography--title-small" for="personal-favorite-account-number-input">Numéro du compte</label>
                                     <input class="form__input" type="text" placeholder="Entrer le numéro du compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
                                 </div>
                                 <div class="form__section form__section--fixed">
@@ -119,10 +125,14 @@
                     </section>
                     <!-- Personal account favorite account list -->
                     <section class="grid__section">
-                        <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés [<span id="favorite-account-edit-list-count"></span>/5]</h3>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="favorite-account-edit-list"></div>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <h3 class="typography typography--title-small">Comptes enregistrés [<span id="favorite-account-edit-list-count"></span>/5]</h3>
+                            </div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="favorite-account-edit-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -152,10 +162,14 @@
                     </section>
                     <!-- Personal account operation log list -->
                     <section class="grid__section grid__section--row-span-2">
-                        <div class="section section--column">
-                            <h3 class="section__title">Historique des opérations</h3>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="personal-operation-log-list"></div>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <h3 class="typography typography--title-small">Historique des opérations</h3>
+                            </div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="personal-operation-log-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -199,10 +213,14 @@
                     </section>
                     <!-- Personal account favorite account paste list -->
                     <section class="grid__section">
-                        <div class="section section--column">
-                            <h3 class="section__title">Comptes enregistrés [<span id="favorite-account-paste-list-count"></span>/5]</h3>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="favorite-account-paste-list"></div>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <h3 class="typography typography--title-small">Comptes enregistrés [<span id="favorite-account-paste-list-count"></span>/5]</h3>
+                            </div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="favorite-account-paste-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -220,31 +238,45 @@
                     </button>
                     <!-- Enterprise account owner -->
                     <section class="grid__section">
-                        <div class="section">
-                            <h3 class="section__title">Propriétaire de l'entreprise</h3>
-                            <p class="section__text" id="enterprise-account-owner"></p>
-                        </div>
+                        <h3 class="typography typography--title-small">Propriétaire de l'entreprise</h3>
+                        <p class="typography typography--body-large" id="enterprise-account-owner"></p>
                     </section>
                     <!-- Enterprise account log list -->
                     <section class="grid__section grid__section--row-span-4">
-                        <div class="section section--column">
-                            <div class="section__row">
-                                <h3 class="section__title">Historique des opérations</h3>
-                                <details class="dropdown" id="enterprise-filter-dropdown">
-                                    <summary class="dropdown__header">Filtrer les résultats</summary>
-                                    <div class="dropdown__body" id="enterprise-filter-list"></div>
-                                </details>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <div class="group group--row">
+                                    <div class="group__section group__section--fluid">
+                                        <h3 class="typography typography--title-small">Historique des opérations</h3>
+                                    </div>
+                                    <div class="group__section group__section--fixed">
+                                        <details class="dropdown" id="enterprise-filter-dropdown">
+                                            <summary class="dropdown__header">
+                                                <span class="typography typography--title-small" data-name="dropdown-title">Filtrer les résultats</span>
+                                            </summary>
+                                            <div class="dropdown__body" id="enterprise-filter-list"></div>
+                                        </details>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="enterprise-log-list"></div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="enterprise-log-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
                     <!-- Enterprise account balance -->
                     <section class="grid__section grid__section--with-border">
-                        <div class="section">
-                            <h3 class="section__title">Solde de l'entreprise</h3>
-                            <p class="section__balance" id="enterprise-account-balance"></p>
+                        <div class="group group--row">
+                            <div class="group__section group__section--fluid">
+                                <h3 class="typography typography--title-small">Numéro du compte</h3>
+                                <p class="typography typography--number-large" id="enterprise-account-number">0123456789</p>
+                            </div>
+                            <div class="group__section group__section--fluid">
+                                <h3 class="typography typography--title-small">Solde de l'entreprise</h3>
+                                <p class="typography typography--number-large" id="enterprise-account-balance"></p>
+                            </div>
                         </div>
                     </section>
                     <!-- Enterprise account deposit form -->
@@ -284,31 +316,45 @@
                 <div class="grid grid--offshore">
                     <!-- Offshore account owner -->
                     <section class="grid__section">
-                        <div class="section">
-                            <h3 class="section__title">Propriétaire du compte offshore</h3>
-                            <p class="section__text section__text--reversed" id="offshore-account-owner"></p>
-                        </div>
+                        <h3 class="typography typography--title-small">Propriétaire du compte offshore</h3>
+                        <p class="typography typography--body-large typography--reversed" id="offshore-account-owner"></p>
                     </section>
                     <!-- Offshore account log list -->
                     <section class="grid__section grid__section--row-span-4">
-                        <div class="section section--column">
-                            <div class="section__row">
-                                <h3 class="section__title">Historique des opérations</h3>
-                                <details class="dropdown" id="offshore-filter-dropdown">
-                                    <summary class="dropdown__header">Filtrer les résultats</summary>
-                                    <div class="dropdown__body" id="offshore-filter-list"></div>
-                                </details>
+                        <div class="group group--column">
+                            <div class="group__section group__section--fixed">
+                                <div class="group group--row">
+                                    <div class="group__section group__section--fixed">
+                                        <h3 class="typography typography--title-small">Historique des opérations</h3>
+                                    </div>
+                                    <div class="group__section group__section--fluid">
+                                        <details class="dropdown" id="offshore-filter-dropdown">
+                                            <summary class="dropdown__header">
+                                                <span class="typography typography--title-small" data-name="dropdown-title">Filtrer les résultats</span>
+                                            </summary>
+                                            <div class="dropdown__body" id="offshore-filter-list"></div>
+                                        </details>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="paper section__body">
-                                <div class="paper__frame" id="offshore-log-list"></div>
+                            <div class="group__section group__section--fluid">
+                                <div class="paper">
+                                    <div class="paper__frame" id="offshore-log-list"></div>
+                                </div>
                             </div>
                         </div>
                     </section>
                     <!-- Offshore account balance -->
                     <section class="grid__section grid__section--with-border">
-                        <div class="section">
-                            <h3 class="section__title">Solde du compte offshore</h3>
-                            <p class="section__balance" id="offshore-account-balance"></p>
+                        <div class="group group--row">
+                            <div class="group__section group__section--fluid">
+                                <h3 class="typography typography--title-small">Numéro du compte</h3>
+                                <p class="typography typography--number-large" id="offshore-account-number">0123456789</p>
+                            </div>
+                            <div class="group__section group__section--fluid">
+                                <h3 class="typography typography--title-small">Solde du compte offshore</h3>
+                                <p class="typography typography--number-large" id="offshore-account-balance"></p>
+                            </div>
                         </div>
                     </section>
                     <!-- offshore account deposit form -->
@@ -342,10 +388,10 @@
     <template id="favorite-account-normal-template">
         <div class="favorite-account">
             <div class="favorite-account__section favorite-account__section--left">
-                <h4 class="favorite-account__name"></h4>
+                <h4 class="typography typography--title-medium" data-name="account-owner"></h4>
             </div>
             <div class="favorite-account__section">
-                <p class="favorite-account__number"></p>
+                <p class="typography typography--number-small" data-name="account-number"></p>
             </div>
             <div class="favorite-account__section favorite-account__section--right">
                 <button class="button button--small-icon button--subtle button--edit">
@@ -369,10 +415,10 @@
     <template id="favorite-account-edit-template">
         <form class="favorite-account">
             <div class="favorite-account__section favorite-account__section--left">
-                <input class="favorite-account__input favorite-account__input--name" type="text" placeholder="Entrer le nom du compte" name="name" required maxlength="40">
+                <input class="favorite-account__input favorite-account__input--name" data-name="account-owner" type="text" placeholder="Entrer le nom du compte" name="name" required maxlength="40">
             </div>
             <div class="favorite-account__section">
-                <input class="favorite-account__input favorite-account__input--number" type="text" placeholder="Entrer le numéro du compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}">
+                <input class="favorite-account__input favorite-account__input--number" data-name="account-number" type="text" placeholder="Entrer le numéro du compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}">
             </div>
             <div class="favorite-account__section favorite-account__section--right">
                 <button class="button button--small-icon button--subtle button--cancel" type="button">
@@ -412,10 +458,10 @@
             <summary class="log__header">
                 <span class="log__icon"></span>
                 <span class="log__info">
-                    <span class="log__type"></span>
-                    <span class="log__date"></span>
+                    <span class="typography typography--title-medium typography--mb" data-name="log-label"></span>
+                    <span class="typography typography--body-small" data-name="log-datetime"></span>
                 </span>
-                <span class="log__amount"></span>
+                <span class="typography typography--number-medium" data-name="log-amount"></span>
             </summary>
             <div class="log__body">
                 <h5 class="log__reference-label">Référence: </h5>

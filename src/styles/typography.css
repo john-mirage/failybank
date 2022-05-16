@@ -1,0 +1,88 @@
+.typography {
+    box-sizing: border-box;
+    display: block;
+    margin: 0;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.typography--mb {
+    margin-bottom: 0.8rem;
+}
+
+.typography--reversed {
+    text-align: right;
+    transform: rotateY(-180deg);
+}
+
+.typography--tab {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--color-text-alt);
+}
+
+.typography--title-large {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+}
+
+.typography--title-medium {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.01rem;
+    color: var(--color-text);
+}
+
+.typography--title-small {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    color: var(--color-text-alt);
+    margin-bottom: 0.8rem;
+}
+
+.typography--body-large {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.typography--body-small {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-text-alt);
+}
+
+.typography--number-large {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.2rem;
+}
+
+.typography--number-medium {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04rem;
+    color: var(--color-text-alt);
+}
+
+.typography--number-small {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+    color: var(--color-text-alt);
+}
+
+.typography--number-positive {
+    color: var(--color-up);
+}
+
+.typography--number-negative {
+    color: var(--color-down);
+}

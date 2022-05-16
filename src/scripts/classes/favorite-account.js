@@ -42,8 +42,8 @@ export class FavoriteAccount {
     if (!this.normalElement) {
       const fragment = normalTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
-      const nameElement = element.querySelector(".favorite-account__name");
-      const numberElement = element.querySelector(".favorite-account__number");
+      const nameElement = element.querySelector('[data-name="account-owner"]');
+      const numberElement = element.querySelector('[data-name="account-number"]');
       nameElement.textContent = this.name;
       numberElement.textContent = this.number;
       this.normalElement = element;
@@ -61,8 +61,8 @@ export class FavoriteAccount {
     if (!this.editElement) {
       const fragment = editTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
-      const nameInputElement = element.querySelector(".favorite-account__input--name");
-      const numberInputElement = element.querySelector(".favorite-account__input--number");
+      const nameInputElement = element.querySelector('[data-name="account-owner"]');
+      const numberInputElement = element.querySelector('[data-name="account-number"]');
       nameInputElement.value = this.name;
       numberInputElement.value = this.number;
       this.editElement = element;

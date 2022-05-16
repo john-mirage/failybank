@@ -15,7 +15,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     height: auto;
     cursor: pointer;
@@ -64,8 +64,6 @@
 .log__info {
     flex: 1 1 0;
     display: block;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .log__type {

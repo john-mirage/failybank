@@ -23,13 +23,13 @@ export class LogList {
     const logFragment = this.logTemplate.content.cloneNode(true);
     const logElement = logFragment.querySelector(".log");
     const logIconElement = logElement.querySelector(".log__icon");
-    const logTypeElement = logElement.querySelector(".log__type");
-    const logDateElement = logElement.querySelector(".log__date");
-    const logAmountElement = logElement.querySelector(".log__amount");
+    const logLabelElement = logElement.querySelector('[data-name="log-label"]');
+    const logDateElement = logElement.querySelector('[data-name="log-datetime"]');
+    const logAmountElement = logElement.querySelector('[data-name="log-amount"]');
     const logReferenceElement = logElement.querySelector(".log__reference");
     logIconElement.classList.add(`log__icon--${log.type}`);
-    logAmountElement.classList.add(`log__amount--${log.amount > 0 ? "up" : "down"}`);
-    logTypeElement.textContent = log.label;
+    logAmountElement.classList.add(`typography--${log.amount > 0 ? "number-positive" : "number-negative"}`);
+    logLabelElement.textContent = log.label;
     logDateElement.textContent = dateTimeFormatter.format(new Date(log.date));
     logAmountElement.textContent = currencyFormatter.format(log.amount);
     logReferenceElement.textContent = log.reference;
