@@ -36,6 +36,9 @@ export class FavoriteAccountPasteList {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
       const element = favoriteAccount.getPasteView();
       favoriteAccountPasteListElement.appendChild(element);
+      element.addEventListener("click", () => {
+        this.handleClick(favoriteAccount.number);
+      });
     });
     this.displayCount();
   }

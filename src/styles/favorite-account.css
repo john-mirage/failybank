@@ -95,6 +95,6 @@
     color: var(--color-text-alt);
 }
 
-.favorite-account--clickable:hover .favorite-account__name {
-    color: var(--color-bank);
+.favorite-account--clickable:hover .favorite-account__icon {
+    color: var(--color-text);
 }

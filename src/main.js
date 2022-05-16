@@ -152,8 +152,8 @@ const favoriteAccountList = new FavoriteAccountList(
   accounts
 );
 
-function deleteFavoriteAccount(account) {
-  favoriteAccountList.deleteFavoriteAccount(account);
+function deleteFavoriteAccount(favoriteAccount) {
+  favoriteAccountList.deleteFavoriteAccount(favoriteAccount);
   favoriteAccountEditList.reset();
   notificationList.displayNotification({
     title: "Compte favoris",
@@ -171,8 +171,14 @@ function pasteFavoriteAccount(accountNumber) {
   }
 }
 
-function editFavoriteAccount() {
-  console.log("edit");
+function editFavoriteAccount(favoriteAccount, form, index) {
+  const formData = new FormData(form.formElement);
+  const newFavoriteAccount = new FavoriteAccount(
+    formData.get("name"),
+    formData.get("number")
+  );
+  favoriteAccountList.editFavoriteAccount(newFavoriteAccount, index);
+  favoriteAccountEditList.reset();
 }
 
 const favoriteAccountEditList = new FavoriteAccountEditList(
@@ -274,12 +280,12 @@ const personalThemeButton = document.getElementById("personal-theme-button");
 function addFavoriteAccount(event) {
   event.preventDefault();
   const formData = new FormData(personalFavoriteAccountForm.formElement);
-  const newAccount = {
-    name: formData.get("name"),
-    number: formData.get("number")
-  }
-  const accountListIsNotFull = favoriteAccountList.accounts.length < 5;
-  const accountIsNotInTheList = favoriteAccountList.accounts.find((account) => account.number === newAccount) === -1;
+  const newAccount = new FavoriteAccount(
+    formData.get("name"),
+    formData.get("number")
+  );
+  const accountListIsNotFull = favoriteAccountList.favoriteAccounts.length < 5;
+  const accountIsNotInTheList = favoriteAccountList.favoriteAccounts.findIndex((favoriteAccount) => favoriteAccount.number === newAccount.number) === -1;
   if (accountListIsNotFull && accountIsNotInTheList) {
     favoriteAccountList.addFavoriteAccount(newAccount);
     favoriteAccountEditList.reset();

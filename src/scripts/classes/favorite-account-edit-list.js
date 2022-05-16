@@ -27,7 +27,7 @@ export class FavoriteAccountEditList {
     this.handleDeleteButtonClick = handleDeleteButtonClick;
   }
 
-  listenButtons(favoriteAccount) {
+  listenButtons(favoriteAccount, form, index) {
     const normalView = favoriteAccount.getNormalView();
     const editView = favoriteAccount.getEditView();
     const normalViewEditButton = normalView.querySelector(".button--edit");
@@ -38,13 +38,13 @@ export class FavoriteAccountEditList {
       this.enterEditMode(favoriteAccount);
     });
     normalViewDeleteButton.addEventListener("click", () => {
-      this.handleDeleteButtonClick();
+      this.handleDeleteButtonClick(favoriteAccount);
     });
     editViewCancelButton.addEventListener("click", () => {
       this.exitEditMode(favoriteAccount);
     });
     editViewConfirmButton.addEventListener("click", () => {
-      this.handleEditButtonClick(favoriteAccount);
+      this.handleEditButtonClick(favoriteAccount, form, index);
     });
   }
 
@@ -62,6 +62,7 @@ export class FavoriteAccountEditList {
       confirmButton
     );
     form.activateSubmitButton();
+    return form;
   }
 
   displayCount() {
@@ -75,11 +76,11 @@ export class FavoriteAccountEditList {
    * Display the favorite accounts in the list represented by an HTML element.
    */
   display() {
-    this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
+    this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount, index) => {
       const normalView = favoriteAccount.getNormalView();
       if (!favoriteAccount.isListened) {
-        this.listenButtons(favoriteAccount);
-        this.createForm(favoriteAccount);
+        const form = this.createForm(favoriteAccount);
+        this.listenButtons(favoriteAccount, form, index);
         favoriteAccount.isListened = true;
       }
       favoriteAccountEditListElement.appendChild(normalView);

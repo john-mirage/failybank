@@ -43,6 +43,16 @@ export class FavoriteAccountList {
   }
 
   /**
+   * Edit a favorite account of the list.
+   *
+   * @param newFavoriteAccount {FavoriteAccount} - The edited favorite account.
+   * @param index {number} - The index of the modified favorite account.
+   */
+  editFavoriteAccount(newFavoriteAccount, index) {
+    this.favoriteAccounts[index] = newFavoriteAccount;
+  }
+
+  /**
    * Delete a favorite account from the list.
    *
    * @param favoriteAccount {FavoriteAccount} - The favorite account to delete.
