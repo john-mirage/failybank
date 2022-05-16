@@ -23,6 +23,29 @@ export class FavoriteAccountEditList {
     this.favoriteAccountList = favoriteAccountList;
     this.handleEditButtonClick = handleEditButtonClick;
     this.handleDeleteButtonClick = handleDeleteButtonClick;
+    this.hasNotBeenDisplayedOnce = true;
+  }
+
+  listenButtons(favoriteAccount) {
+    const normalView = favoriteAccount.getNormalView();
+    const editView = favoriteAccount.getEditView();
+    const normalViewEditButton = normalView.querySelector(".favorite-account__icon-button--edit");
+    const normalViewDeleteButton = normalView.querySelector(".favorite-account__icon-button--delete");
+    const editViewCancelButton = editView.querySelector(".favorite-account__text-button--cancel");
+    const editViewEditButton = editView.querySelector(".favorite-account__text-button--edit");
+    normalViewEditButton.addEventListener("click", () => {
+      this.enterEditMode(favoriteAccount);
+    });
+    normalViewDeleteButton.addEventListener("click", () => {
+      this.handleDeleteButtonClick();
+    });
+    editViewCancelButton.addEventListener("click", () => {
+      this.exitEditMode(favoriteAccount);
+    });
+    editViewEditButton.addEventListener("click", () => {
+      this.exitEditMode(favoriteAccount);
+      this.handleEditButtonClick(favoriteAccount);
+    });
   }
 
   /**
@@ -31,26 +54,12 @@ export class FavoriteAccountEditList {
   display() {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
       const normalView = favoriteAccount.getNormalView();
-      const editView = favoriteAccount.getEditView();
-      const normalViewEditButton = normalView.querySelector(".favorite-account__icon-button--edit");
-      const normalViewDeleteButton = normalView.querySelector(".favorite-account__icon-button--delete");
-      normalViewEditButton.addEventListener("click", () => {
-        this.enterEditMode(favoriteAccount);
-      });
-      normalViewDeleteButton.addEventListener("click", () => {
-        this.handleDeleteButtonClick();
-      });
-      const editViewCancelButton = editView.querySelector(".favorite-account__text-button--cancel");
-      const editViewEditButton = editView.querySelector(".favorite-account__text-button--edit");
-      editViewCancelButton.addEventListener("click", () => {
-        this.exitEditMode(favoriteAccount);
-      });
-      editViewEditButton.addEventListener("click", () => {
-        this.exitEditMode(favoriteAccount);
-        this.handleEditButtonClick(favoriteAccount);
-      });
+      if (this.hasNotBeenDisplayedOnce) {
+        this.listenButtons(favoriteAccount);
+      }
       favoriteAccountEditListElement.appendChild(normalView);
     });
+    this.hasNotBeenDisplayedOnce = false;
   }
 
   /**
