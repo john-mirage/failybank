@@ -4,8 +4,27 @@ const normalTemplate = document.getElementById("favorite-account-normal-template
 const editTemplate = document.getElementById("favorite-account-edit-template");
 const pasteTemplate = document.getElementById("favorite-account-paste-template");
 
+/**
+ * This class is used to create a favorite account that allow you to get 3 "views":
+ * - Normal view
+ * - Edit view
+ * - Paste view
+ *
+ * The views are used by the lists for display specific HTML elements.
+ *
+ * @class
+ */
 class FavoriteAccount {
-  constructor(name, number) {
+
+  /**
+   * @constructor
+   * @param name {string} - The favorite account name.
+   * @param number {string} - The favorite account number.
+   */
+  constructor(
+    name,
+    number
+  ) {
     this.name = name;
     this.number = number;
     this.normalElement = false;
@@ -13,7 +32,12 @@ class FavoriteAccount {
     this.pasteElement = false;
   }
 
-  getNormalElement() {
+  /**
+   * Get the HTML element of the normal view.
+   *
+   * @return {HTMLElement} - The HTML element of the view.
+   */
+  getNormalView() {
     if (!this.normalElement) {
       const fragment = normalTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
@@ -23,7 +47,12 @@ class FavoriteAccount {
     return this.normalElement;
   }
 
-  getEditElement() {
+  /**
+   * Get the HTML element of the edit view.
+   *
+   * @return {HTMLElement} - The HTML element of the view.
+   */
+  getEditView() {
     if (!this.editElement) {
       const fragment = editTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
@@ -31,7 +60,12 @@ class FavoriteAccount {
     return this.editElement;
   }
 
-  getPasteElement() {
+  /**
+   * Get the HTML element of the paste view.
+   *
+   * @return {HTMLElement} - The HTML element of the view.
+   */
+  getPasteView() {
     if (!this.pasteElement) {
       const fragment = pasteTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");

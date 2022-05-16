@@ -11,14 +11,14 @@ export class FavoriteAccountPasteList {
 
   /**
    * @constructor
-   * @param accountList {AccountList} - The account list.
+   * @param favoriteAccountList {FavoriteAccountList} - The favorite account list.
    * @param handleClick {Function} - A function called when the user click on the HTML element.
    */
   constructor(
-    accountList,
+    favoriteAccountList,
     handleClick
   ) {
-    this.accountList = accountList;
+    this.favoriteAccountList = favoriteAccountList;
     this.handleClick = handleClick;
   }
 
@@ -26,7 +26,10 @@ export class FavoriteAccountPasteList {
    * Display the favorite accounts in the list represented by an HTML element.
    */
   display() {
-
+    this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
+      const element = favoriteAccount.getPasteView();
+      favoriteAccountPasteListElement.appendChild(element);
+    });
   }
 
   /**

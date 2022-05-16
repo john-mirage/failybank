@@ -11,16 +11,16 @@ export class FavoriteAccountEditList {
 
   /**
    * @constructor
-   * @param accountList {AccountList} - The account list.
+   * @param favoriteAccountList {FavoriteAccountList} - The favorite account list.
    * @param handleEditButtonClick {Function} - A function called when the user click on an edit button.
    * @param handleDeleteButtonClick {Function} - A function called when the user click on a delete button.
    */
   constructor(
-    accountList,
+    favoriteAccountList,
     handleEditButtonClick,
     handleDeleteButtonClick,
   ) {
-    this.accountList = accountList;
+    this.favoriteAccountList = favoriteAccountList;
     this.handleEditButtonClick = handleEditButtonClick;
     this.handleDeleteButtonClick = handleDeleteButtonClick;
   }
@@ -29,7 +29,10 @@ export class FavoriteAccountEditList {
    * Display the favorite accounts in the list represented by an HTML element.
    */
   display() {
-
+    this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
+      const element = favoriteAccount.getNormalView();
+      favoriteAccountEditListElement.appendChild(element);
+    });
   }
 
   /**

@@ -8,7 +8,7 @@ import {TabList} from "@scripts/classes/tab-list";
 import {Dropdown} from "@scripts/classes/dropdown";
 import {Filter} from "@scripts/classes/filter";
 import {FilterList} from "@scripts/classes/filter-list";
-import {AccountList, DeleteAccountList, PasteAccountList} from "@scripts/classes/account-list";
+import {AccountList, DeleteAccountList, PasteAccountList} from "@scripts/classes/favorite-account-list";
 import {View} from "@scripts/classes/view";
 import {ViewSwitcher} from "@scripts/classes/view-switcher";
 

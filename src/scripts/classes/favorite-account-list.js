@@ -7,7 +7,7 @@ const ACCOUNTS_LIMIT = 5;
  *
  * @class
  */
-export class AccountList {
+export class FavoriteAccountList {
 
   /**
    * @constructor
