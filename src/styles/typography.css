@@ -104,13 +104,6 @@
     letter-spacing: 0.1rem;
 }
 
-.typography--filter {
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-}
-
 .typography--number-positive {
     color: var(--color-up);
 }

@@ -60,12 +60,7 @@ export class FavoriteAccount {
   getEditView() {
     if (!this.editElement) {
       const fragment = editTemplate.content.cloneNode(true);
-      const element = fragment.querySelector(".favorite-account");
-      const nameInputElement = element.querySelector('[data-name="account-owner"]');
-      const numberInputElement = element.querySelector('[data-name="account-number"]');
-      nameInputElement.value = this.name;
-      numberInputElement.value = this.number;
-      this.editElement = element;
+      this.editElement = fragment.querySelector(".favorite-account");
       return this.editElement;
     }
     return this.editElement;
