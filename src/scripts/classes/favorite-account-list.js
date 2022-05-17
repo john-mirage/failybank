@@ -15,6 +15,17 @@ export class FavoriteAccountList {
    */
   constructor(favoriteAccounts) {
     this.favoriteAccounts = favoriteAccounts;
+    this.sortByNames();
+  }
+
+  sortByNames() {
+    this.favoriteAccounts.sort((a, b) => {
+      const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
   }
 
   /**
@@ -24,7 +35,8 @@ export class FavoriteAccountList {
    */
   addFavoriteAccount(favoriteAccount) {
     if (this.favoriteAccounts.length < ACCOUNTS_LIMIT) {
-      this.favoriteAccounts = [favoriteAccount, ...this.favoriteAccounts];
+      this.favoriteAccounts.push(favoriteAccount);
+      this.sortByNames();
     } else {
       throw new Error("Account limit is reached");
     }
@@ -38,6 +50,7 @@ export class FavoriteAccountList {
    */
   editFavoriteAccount(newFavoriteAccount, index) {
     this.favoriteAccounts[index] = newFavoriteAccount;
+    this.sortByNames();
   }
 
   /**
