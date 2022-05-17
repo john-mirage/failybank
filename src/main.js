@@ -599,7 +599,6 @@ if (data.hasEnterprise) {
         enterpriseLogList.reset();
       }
       personalAccount.cash = 0;
-      enterpriseAccount.displayBalance();
       notificationList.displayNotification({
         title: "Dépot",
         description: "le dépot a était éffectué avec succès",

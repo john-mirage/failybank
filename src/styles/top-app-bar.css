@@ -8,8 +8,8 @@
     height: 72px;
     padding-left: 24px;
     padding-right: 24px;
-    background-color: var(--color-fg);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-top-app-bar);
+    box-shadow: var(--color-top-app-bar-shadow);
 }
 
 .top-app-bar__section {

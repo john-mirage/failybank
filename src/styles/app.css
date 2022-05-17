@@ -15,8 +15,8 @@
     width: 1224px;
     height: 720px;
     margin: auto;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border-on-bg);
+    background-color: var(--color-app);
+    box-shadow: var(--color-app-shadow);
     overflow: hidden;
     user-select: none;
 }

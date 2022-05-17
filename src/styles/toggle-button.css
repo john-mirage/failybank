@@ -63,6 +63,14 @@
     color: var(--color-toggle-button-icon-active);
 }
 
+.toggle-button:hover .toggle-button__input:not(:checked) ~ .toggle-button__icon--moon {
+    color: var(--color-toggle-button-icon-hover);
+}
+
+.toggle-button:hover .toggle-button__input:checked ~ .toggle-button__icon--sun {
+    color: var(--color-toggle-button-icon-hover);
+}
+
 .toggle-button__track {
     box-sizing: border-box;
     width: 40px;
