@@ -41,8 +41,8 @@
     height: 36px;
     margin-left: -9px;
     padding: 0 0 0 8px;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-bg);
+    border: 1px solid var(--color-form-input-border-on-paper);
+    background-color: var(--color-form-input-on-paper);
 }
 
 .favorite-account__input::placeholder {

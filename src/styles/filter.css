@@ -1,5 +1,7 @@
 .filter {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     border: none;
     background-color: transparent;
     width: 100%;
@@ -9,16 +11,23 @@
     color: var(--color-text-alt);
 }
 
+.filter__icon {
+    box-sizing: border-box;
+    display: block;
+    width: 2rem;
+    height: auto;
+    margin-right: 1.6rem;
+}
+
 .filter:hover {
-    background-color: var(--color-border);
+    background-color: var(--color-filter-background-hover);
     color: var(--color-text);
 }
 
 .filter--active {
-    color: var(--color-border);
+    color: var(--color-text);
 }
 
 .filter--active:hover {
     background-color: transparent;
-    color: var(--color-border);
 }

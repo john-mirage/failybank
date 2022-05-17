@@ -16,6 +16,64 @@
 @import "styles/view.css";
 
 :root {
+    --color-app: hsl(210, 17%, 98%);
+    --color-app-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    --color-tab: hsl(210, 7%, 60%);
+    --color-tab-active: hsl(210, 10%, 23%);
+
+    --color-top-app-bar: #ffffff;
+    --color-top-app-bar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+    --color-paper: hsl(0, 0%, 100%);
+    --color-paper-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+    --color-grid-section-divider: hsl(210, 17%, 92%);
+
+    --color-toggle-button-track: hsl(210, 16%, 93%);
+    --color-toggle-button-icon: hsl(210, 11%, 71%);
+    --color-toggle-button-icon-hover: hsl(210, 10%, 23%);
+    --color-toggle-button-icon-active: #f59f00;
+
+    --color-button-label: #fff;
+    --color-button-secondary-label-hover: hsl(0, 0%, 100%);
+    --color-button-disabled: hsl(0, 0%, 100%);
+    --color-button-disabled-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    --color-button-disabled-label: hsl(210, 14%, 88%);
+    --color-button-icon: #fff;
+
+    --color-dropdown-button: #fff;
+    --color-dropdown-button-label: #fff;
+    --color-dropdown-content: hsl(0, 0%, 100%);
+    --color-dropdown-content-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    --color-filter: #fff;
+    --color-filter-background-hover: #f1f3f5;
+    --color-filter-active: #fff;
+
+    --color-typo-primary: hsl(210, 10%, 23%);
+    --color-typo-secondary: hsl(210, 7%, 50%);
+    --color-typo-positive: #fff;
+    --color-typo-negative: #fff;
+
+    --color-notification-success: #fff;
+    --color-notification-error: #fff;
+    --color-notification-title: #fff;
+    --color-notification-description: #fff;
+
+    --color-form-input: hsl(0, 0%, 100%);
+    --color-form-input-on-paper: hsl(210, 17%, 96%);
+    --color-form-input-placeholder: hsl(210, 11%, 71%);
+    --color-form-input-border: hsl(210, 17%, 92%);
+    --color-form-input-border-on-paper: hsl(210, 17%, 90%);
+
+    --color-scrollbar-track: #e9ecef;
+    --color-scrollbar-track-hover: #ced4da;
+
+    --color-log-divider: hsl(210, 16%, 95%);
+    --color-log-icon: #e9ecef;
+    --color-log-icon-background: hsl(210, 17%, 96%);
+
     --color-bg: #F3F5F6;
     --color-fg: #ffffff;
     --color-text: #495057;
@@ -23,16 +81,10 @@
     --color-text-placeholder: #adb5bd;
     --color-border: #e9ecef;
     --color-border-on-bg: #dee2e6;
-    --color-scrollbar-track: #ced4da;
-    --color-scrollbar-thumb: #dee2e6;
     --color-icon-bg: #f1f3f5;
     --color-button-secondary: #e9ecef;
-    --color-toggle-button-track: #e9ecef;
-    --color-toggle-button-track-focus: #ced4da;
-    --color-toggle-button-icon: #9299A0;
-    --color-toggle-button-icon-active: #f59f00;
     --color-up: #20c997;
-    --color-down: #d6336c;
+    --color-down: #f06595;
 }
 
 :root.dark {

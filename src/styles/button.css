@@ -2,6 +2,7 @@
     box-sizing: border-box;
     cursor: pointer;
     background-color: transparent;
+    padding: 0;
     border: none;
 }
 
@@ -68,10 +69,18 @@
 
 .button--secondary {
     color: var(--color-bank);
+    border: 0.2rem solid var(--color-bank);
+}
+
+.button--secondary:hover {
+    color: var(--color-button-secondary-label-hover);
+    border: none;
+    background-color: var(--color-bank);
 }
 
 .button--secondary:focus {
-    outline: 2px solid var(--color-bank);
+    outline: 0.2rem solid var(--color-bank);
+    outline-offset: 0.3rem;
 }
 
 /*------------------------------------*\
@@ -79,12 +88,13 @@
 \*------------------------------------*/
 
 .button--disabled {
-    background-color: var(--color-border);
-    color: var(--color-text-alt);
+    background-color: var(--color-button-disabled);
+    box-shadow: var(--color-button-disabled-shadow);
+    color: var(--color-button-disabled-label);
 }
 
 .button--disabled > .button__icon {
-    color: var(--color-text-alt);
+    color: var(--color-button-disabled-label);
 }
 
 /*------------------------------------*\

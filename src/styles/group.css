@@ -4,8 +4,13 @@
     width: 100%;
 }
 
+.group--mb {
+    margin-bottom: 0.8rem;
+}
+
 .group--row {
     flex-direction: row;
+    align-items: center;
     gap: 24px;
 }
 

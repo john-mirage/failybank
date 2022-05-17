@@ -3,7 +3,8 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    background-color: var(--color-fg);
+    background-color: var(--color-paper);
+    box-shadow: var(--color-paper-shadow);
 }
 
 .paper__frame {
@@ -24,7 +25,11 @@
 }
 
 .paper__frame::-webkit-scrollbar-thumb {
-    background-color: var(--color-scrollbar-thumb);
+    background-color: transparent;
+}
+
+.paper__frame:hover.paper__frame::-webkit-scrollbar-thumb {
+    background-color: var(--color-scrollbar-track);
 }
 
 .paper__frame::-webkit-scrollbar-track {

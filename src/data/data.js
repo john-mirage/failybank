@@ -8,7 +8,7 @@ export const data = {
       number: "0123456789",
       balance: 48569,
       cash: 40000,
-      theme: "dark",
+      theme: "light",
       favoriteAccounts: [
         {
           name: "Lena Silvo",

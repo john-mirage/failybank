@@ -7,94 +7,74 @@
     line-height: 1;
 }
 
-.typography--mb {
-    margin-bottom: 0.8rem;
-}
-
-.typography--reversed {
-    text-align: right;
-    transform: rotateY(-180deg);
-}
-
-.typography--tab {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    color: var(--color-text-alt);
-}
-
 .typography--title-large {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--color-text);
     margin-bottom: 2rem;
+    color: var(--color-typo-primary);
 }
 
 .typography--title-medium {
     font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: 0.01rem;
-    color: var(--color-text);
+    color: var(--color-typo-primary);
 }
 
 .typography--title-small {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    color: var(--color-text-alt);
-    margin-bottom: 0.8rem;
+    letter-spacing: 0.06rem;
+    color: var(--color-typo-secondary);
 }
 
 .typography--body-large {
     font-size: 2.4rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--color-typo-primary);
 }
 
 .typography--body-medium {
     font-size: 1.6rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-typo-secondary);
 }
 
 .typography--body-small {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--color-text-alt);
+    color: var(--color-typo-secondary);
 }
 
 .typography--number-large {
     font-size: 2.4rem;
     font-weight: 700;
-    color: var(--color-text);
     letter-spacing: 0.1rem;
+    color: var(--color-typo-primary);
 }
 
 .typography--number-medium {
     font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: 0.04rem;
-    color: var(--color-text-alt);
 }
 
 .typography--number-small {
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: 0.02rem;
-    color: var(--color-text-alt);
+    color: var(--color-typo-secondary);
 }
 
 .typography--input {
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--color-text);
 }
 
 .typography--input::placeholder {
     font-weight: 600;
-    color: var(--color-text-placeholder);
+    color: var(--color-form-input-placeholder);
 }
 
 .typography--button {
@@ -104,10 +84,42 @@
     letter-spacing: 0.1rem;
 }
 
+.typography--tab {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+}
+
+.typography--filter {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+}
+
+.typography--balance {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
+    color: var(--color-typo-primary);
+    margin-bottom: 0.2rem;
+}
+
 .typography--number-positive {
     color: var(--color-up);
 }
 
 .typography--number-negative {
     color: var(--color-down);
+}
+
+.typography--mb {
+    margin-bottom: 0.8rem;
+}
+
+.typography--reversed {
+    text-align: right;
+    transform: rotateY(-180deg);
 }
