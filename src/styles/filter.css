@@ -2,11 +2,8 @@
     display: block;
     border: none;
     background-color: transparent;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
     width: 100%;
-    height: 36px;
+    height: 32px;
     text-align: left;
     cursor: pointer;
     color: var(--color-text-alt);

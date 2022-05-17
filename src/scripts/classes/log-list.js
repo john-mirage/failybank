@@ -26,7 +26,7 @@ export class LogList {
     const logLabelElement = logElement.querySelector('[data-name="log-label"]');
     const logDateElement = logElement.querySelector('[data-name="log-datetime"]');
     const logAmountElement = logElement.querySelector('[data-name="log-amount"]');
-    const logReferenceElement = logElement.querySelector(".log__reference");
+    const logReferenceElement = logElement.querySelector('[data-name="log-reference"]');
     logIconElement.classList.add(`log__icon--${log.type}`);
     logAmountElement.classList.add(`typography--${log.amount > 0 ? "number-positive" : "number-negative"}`);
     logLabelElement.textContent = log.label;

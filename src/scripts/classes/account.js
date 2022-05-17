@@ -10,7 +10,6 @@ export class Account {
     this.ownerElement = accountOwnerElement;
     this.balance = account.balance;
     this.balanceElement = accountBalanceElement;
-    this.balanceNegativeClass = "balance__value--negative";
     this.displayOwner();
     this.displayBalance();
   }
@@ -21,13 +20,10 @@ export class Account {
 
   displayBalance() {
     if (this.balance < 1) {
-      if (!this.balanceElement.classList.contains(this.balanceNegativeClass)) {
-        this.balanceElement.classList.add(this.balanceNegativeClass);
-      }
-    } else {
-      if (this.balanceElement.classList.contains(this.balanceNegativeClass)) {
-        this.balanceElement.classList.remove(this.balanceNegativeClass);
-      }
+      this.balanceElement.classList.replace(
+        "typography--number-positive",
+        "typography--number-negative"
+      );
     }
     this.balanceElement.textContent = currencyFormatter.format(this.balance);
   }
@@ -45,7 +41,6 @@ export class PersonalAccount extends Account {
       accountOwnerElement,
       accountBalanceElement
     );
-    this.balanceNegativeClass = "section__balance--negative";
     this.accountNumber = account.number;
     this.accountNumberElement = accountNumberElement;
     this.cash = account.cash;

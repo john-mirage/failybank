@@ -1,5 +1,5 @@
+@import "styles/typography.css";
 @import "styles/app.css";
-@import "styles/balance.css";
 @import "styles/button.css";
 @import "styles/dropdown.css";
 @import "styles/favorite-account.css";
@@ -10,7 +10,6 @@
 @import "styles/notification.css";
 @import "styles/paper.css";
 @import "styles/group.css";
-@import "styles/typography.css";
 @import "styles/tab.css";
 @import "styles/toggle-button.css";
 @import "styles/top-app-bar.css";

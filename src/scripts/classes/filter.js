@@ -7,7 +7,7 @@ export class Filter {
 
   createElement() {
     const button = document.createElement("button");
-    button.classList.add("filter");
+    button.classList.add("typography", "typography--filter", "filter");
     button.textContent = this.name;
     return button;
   }

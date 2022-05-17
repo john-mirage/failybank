@@ -80,8 +80,8 @@ export class FavoriteAccount {
     if (!this.pasteElement) {
       const fragment = pasteTemplate.content.cloneNode(true);
       const element = fragment.querySelector(".favorite-account");
-      const nameElement = element.querySelector(".favorite-account__name");
-      const numberElement = element.querySelector(".favorite-account__number");
+      const nameElement = element.querySelector('[data-name="favorite-account-name"]');
+      const numberElement = element.querySelector('[data-name="favorite-account-number"]');
       nameElement.textContent = this.name;
       numberElement.textContent = this.number;
       this.pasteElement = element;
