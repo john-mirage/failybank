@@ -18,18 +18,6 @@ export class FavoriteAccountList {
   }
 
   /**
-   * Display the count of the favorite accounts on a DOM element.
-   *
-   * @param countElement {HTMLElement} - The HTML element used to display the count.
-   */
-  displayCount(countElement) {
-    const accountTotal = String(this.favoriteAccounts.length);
-    if (countElement.textContent !== accountTotal) {
-      countElement.textContent = accountTotal;
-    }
-  }
-
-  /**
    * Add a favorite account in the list.
    *
    * @param favoriteAccount {FavoriteAccount} - The favorite account to add.
