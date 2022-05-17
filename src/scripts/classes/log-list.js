@@ -1,4 +1,4 @@
-import {currencyFormatter, dateTimeFormatter} from "@scripts/utils/formatters";
+import {amountFormatter, dateTimeFormatter} from "@scripts/utils/formatters";
 
 const LOGS_PER_PAGE = 10;
 
@@ -31,7 +31,7 @@ export class LogList {
     logAmountElement.classList.add(`typography--${log.amount > 0 ? "number-positive" : "number-negative"}`);
     logLabelElement.textContent = log.label;
     logDateElement.textContent = dateTimeFormatter.format(new Date(log.date));
-    logAmountElement.textContent = currencyFormatter.format(log.amount);
+    logAmountElement.textContent = amountFormatter.format(log.amount);
     logReferenceElement.textContent = log.reference;
     return logElement;
   }

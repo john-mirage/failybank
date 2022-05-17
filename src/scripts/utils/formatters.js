@@ -1,4 +1,10 @@
-export const currencyFormatter = new Intl.NumberFormat("en-US", {
+export const balanceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0
+});
+
+export const amountFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   signDisplay: "always",

@@ -1,4 +1,4 @@
-import {currencyFormatter} from "@scripts/utils/formatters";
+import {balanceFormatter} from "@scripts/utils/formatters";
 
 export class Account {
   constructor(
@@ -25,7 +25,7 @@ export class Account {
         "typography--number-negative"
       );
     }
-    this.balanceElement.textContent = currencyFormatter.format(this.balance);
+    this.balanceElement.textContent = balanceFormatter.format(this.balance);
   }
 }
 
