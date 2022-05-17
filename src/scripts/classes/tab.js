@@ -15,7 +15,7 @@ export class Tab {
 
   createElement() {
     const button = document.createElement("button");
-    button.classList.add("tab");
+    button.classList.add("tab", "typography", "typography--tab");
     button.textContent = this.label;
     button.addEventListener("click", () => {
       this.handleClick();

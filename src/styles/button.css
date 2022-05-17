@@ -11,11 +11,10 @@
     height: 48px;
     padding-left: 24px;
     padding-right: 24px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+}
+
+.button--mr {
+    margin-right: -9px;
 }
 
 .button--large-icon {
@@ -26,8 +25,8 @@
 
 .button--small-icon {
     display: flex;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
 }
 
 .button__icon {
@@ -41,8 +40,8 @@
 }
 
 .button--small-icon > .button__icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 /*------------------------------------*\
@@ -89,22 +88,41 @@
 }
 
 /*------------------------------------*\
-  #Button-shutdown
+  #Button-subtle
 \*------------------------------------*/
 
-.button--shutdown {
-    background-color: var(--color-border);
-    border-radius: 9999px;
-}
-
-.button--shutdown > .button__icon {
+.button--subtle > .button__icon {
     color: var(--color-text-alt);
 }
 
-.button--shutdown:hover {
+.button--subtle:hover {
+    background-color: var(--color-border);
+}
+
+.button--subtle:hover > .button__icon {
+    color: #fff;
+}
+
+/*------------------------------------*\
+  #Button-success
+\*------------------------------------*/
+
+.button--success {
+    background-color: var(--color-up);
+}
+
+.button--success > .button__icon {
+    color: #fff;
+}
+
+/*------------------------------------*\
+  #Button-error
+\*------------------------------------*/
+
+.button--error {
     background-color: var(--color-down);
 }
 
-.button--shutdown:hover > .button__icon {
+.button--error > .button__icon {
     color: #fff;
 }

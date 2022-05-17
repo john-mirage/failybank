@@ -8,7 +8,10 @@ import {TabList} from "@scripts/classes/tab-list";
 import {Dropdown} from "@scripts/classes/dropdown";
 import {Filter} from "@scripts/classes/filter";
 import {FilterList} from "@scripts/classes/filter-list";
-import {FavoriteAccountList, DeleteAccountList, PasteAccountList} from "@scripts/classes/favorite-account-list";
+import {FavoriteAccount} from "@scripts/classes/favorite-account";
+import {FavoriteAccountList} from "@scripts/classes/favorite-account-list";
+import {FavoriteAccountEditList} from "@scripts/classes/favorite-account-edit-list";
+import {FavoriteAccountPasteList} from "@scripts/classes/favorite-account-paste-list";
 import {View} from "@scripts/classes/view";
 import {ViewSwitcher} from "@scripts/classes/view-switcher";
 
@@ -138,13 +141,20 @@ const personalFilterList = new FilterList(
   setPersonalLogListFilter
 );
 
+const accounts = data.account.personal.favoriteAccounts.map((favoriteAccount) => {
+  return new FavoriteAccount(
+    favoriteAccount.name,
+    favoriteAccount.number
+  );
+});
+
 const favoriteAccountList = new FavoriteAccountList(
-  data.account.personal.favoriteAccounts
+  accounts
 );
 
-function deleteFavoriteAccount(account) {
-  favoriteAccountList.deleteAccount(account);
-  deleteFavoriteAccountList.reset();
+function deleteFavoriteAccount(favoriteAccount) {
+  favoriteAccountList.deleteFavoriteAccount(favoriteAccount);
+  favoriteAccountEditList.reset();
   notificationList.displayNotification({
     title: "Compte favoris",
     description: "le compte a était supprimé avec succès",
@@ -161,15 +171,24 @@ function pasteFavoriteAccount(accountNumber) {
   }
 }
 
-const deleteFavoriteAccountList = new DeleteAccountList(
+function editFavoriteAccount(favoriteAccount, form, index) {
+  const formData = new FormData(form.formElement);
+  const newFavoriteAccount = new FavoriteAccount(
+    formData.get("name"),
+    formData.get("number")
+  );
+  favoriteAccountList.editFavoriteAccount(newFavoriteAccount, index);
+  favoriteAccountEditList.reset();
+}
+
+const favoriteAccountEditList = new FavoriteAccountEditList(
   favoriteAccountList,
-  document.getElementById("delete-favorite-account-list"),
+  editFavoriteAccount,
   deleteFavoriteAccount
 );
 
-const pasteFavoriteAccountList = new PasteAccountList(
+const favoriteAccountPasteList = new FavoriteAccountPasteList(
   favoriteAccountList,
-  document.getElementById("paste-favorite-account-list"),
   pasteFavoriteAccount
 );
 
@@ -193,7 +212,7 @@ const personalView = new View(
   personalFilterDropdown,
   personalFilterList,
   personalLogList,
-  deleteFavoriteAccountList
+  favoriteAccountEditList
 );
 
 const personalOperationView = new View(
@@ -209,7 +228,7 @@ const personalTransferView = new View(
   false,
   false,
   false,
-  pasteFavoriteAccountList
+  favoriteAccountPasteList
 );
 
 const viewSwitcher = new ViewSwitcher(
@@ -261,15 +280,15 @@ const personalThemeButton = document.getElementById("personal-theme-button");
 function addFavoriteAccount(event) {
   event.preventDefault();
   const formData = new FormData(personalFavoriteAccountForm.formElement);
-  const newAccount = {
-    name: formData.get("name"),
-    number: formData.get("number")
-  }
-  const accountListIsNotFull = favoriteAccountList.accounts.length < 5;
-  const accountIsNotInTheList = favoriteAccountList.accounts.findIndex((account) => account.number === newAccount.number) === -1;
+  const newAccount = new FavoriteAccount(
+    formData.get("name"),
+    formData.get("number")
+  );
+  const accountListIsNotFull = favoriteAccountList.favoriteAccounts.length < 5;
+  const accountIsNotInTheList = favoriteAccountList.favoriteAccounts.findIndex((favoriteAccount) => favoriteAccount.number === newAccount.number) === -1;
   if (accountListIsNotFull && accountIsNotInTheList) {
-    favoriteAccountList.addAccount(newAccount);
-    deleteFavoriteAccountList.reset();
+    favoriteAccountList.addFavoriteAccount(newAccount);
+    favoriteAccountEditList.reset();
     personalFavoriteAccountForm.reset();
     notificationList.displayNotification({
       title: "Compte favoris",

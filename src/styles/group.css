@@ -1,0 +1,32 @@
+.group {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+}
+
+.group--row {
+    flex-direction: row;
+    gap: 24px;
+}
+
+.group--column {
+    flex-direction: column;
+    height: 100%;
+}
+
+.group__section {
+    box-sizing: border-box;
+}
+
+.group__section--fluid {
+    flex: 1 1 0;
+}
+
+.group__section--fixed {
+    flex: 0 0 auto;
+}
+
+.group__section--ref {
+    width: 8rem;
+}
+

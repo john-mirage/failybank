@@ -1,14 +1,15 @@
+const notificationTemplate = document.getElementById("notification-template");
+
 export class NotificationList {
-  constructor(notificationListElement, notificationTemplate) {
+  constructor(notificationListElement) {
     this.notificationListElement = notificationListElement;
-    this.notificationTemplate = document.getElementById("notification-template");
   }
 
   createNotification(notification) {
-    const notificationFragment = this.notificationTemplate.content.cloneNode(true);
+    const notificationFragment = notificationTemplate.content.cloneNode(true);
     const notificationElement = notificationFragment.querySelector(".notification");
-    const notificationTitle = notificationFragment.querySelector(".notification__title");
-    const notificationDescription = notificationFragment.querySelector(".notification__description");
+    const notificationTitle = notificationFragment.querySelector('[data-name="notification-name"]');
+    const notificationDescription = notificationFragment.querySelector('[data-name="notification-description"]');
     notificationElement.classList.add(`notification--${notification.type}`);
     notificationTitle.textContent = notification.title;
     notificationDescription.textContent = notification.description;

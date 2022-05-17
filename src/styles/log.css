@@ -15,7 +15,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     height: auto;
     cursor: pointer;
@@ -64,65 +64,6 @@
 .log__info {
     flex: 1 1 0;
     display: block;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.log__type {
-    box-sizing: border-box;
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1;
-    margin: 0 0 8px 0;
-}
-
-.log__date {
-    box-sizing: border-box;
-    display: block;
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text-alt);
-    line-height: 1;
-}
-
-.log__amount {
-    box-sizing: border-box;
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1;
-    margin: 5px 0 0 0;
-}
-
-.log__amount--up {
-    color: var(--color-up);
-}
-
-.log__amount--down {
-    color: var(--color-down);
-}
-
-.log__reference-label {
-    box-sizing: border-box;
-    display: inline;
-    margin: 0 0 8px 0;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 20px;
-}
-
-.log__reference {
-    box-sizing: border-box;
-    display: inline;
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text-alt);
-    line-height: 20px;
 }
 
 .log__header:hover .log__type {
