@@ -21,15 +21,11 @@
 }
 
 .paper__frame::-webkit-scrollbar {
-    width: 10px;
+    width: 1rem;
 }
 
 .paper__frame::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
-
-.paper__frame:hover.paper__frame::-webkit-scrollbar-thumb {
-    background-color: var(--color-scrollbar-track);
+    background-color: var(--color-scrollbar-thumb);
 }
 
 .paper__frame::-webkit-scrollbar-track {

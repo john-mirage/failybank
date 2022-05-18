@@ -70,6 +70,7 @@
 .typography--input {
     font-size: 1.4rem;
     font-weight: 700;
+    color: var(--color-form-input-typo);
 }
 
 .typography--input::placeholder {
@@ -108,11 +109,11 @@
 }
 
 .typography--number-positive {
-    color: var(--color-up);
+    color: var(--color-typo-positive);
 }
 
 .typography--number-negative {
-    color: var(--color-down);
+    color: var(--color-typo-negative);
 }
 
 .typography--mb {

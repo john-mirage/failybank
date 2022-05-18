@@ -6,7 +6,7 @@
     align-items: center;
     width: 100%;
     height: auto;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-favorite-account-divider);
 }
 
 .favorite-account--clickable {
@@ -23,6 +23,11 @@
     height: auto;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.favorite-account__section--large {
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
 }
 
 .favorite-account__section--left {
@@ -48,7 +53,7 @@
 .favorite-account__input::placeholder {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--color-text-placeholder);
+    color: var(--color-form-input-placeholder);
 }
 
 .favorite-account__input:focus {
@@ -58,18 +63,17 @@
 
 .favorite-account__input--name {
     width: calc(100% - 9px);
-    color: var(--color-text);
+    color: var(--color-typo-primary);
 }
 
 .favorite-account__input--number {
     width: 100%;
-    color: var(--color-text-alt);
+    color: var(--color-typo-secondary);
 }
 
 .favorite-account__name {
     box-sizing: border-box;
     display: block;
-    color: var(--color-text);
 }
 
 .favorite-account__name--margin {
@@ -79,15 +83,14 @@
 .favorite-account__number {
     box-sizing: border-box;
     display: block;
-    color: var(--color-text-alt);
 }
 
 .favorite-account__icon {
     width: 20px;
     height: 20px;
-    color: var(--color-text-alt);
+    color: var(--color-favorite-account-icon);
 }
 
 .favorite-account--clickable:hover .favorite-account__icon {
-    color: var(--color-text);
+    color: var(--color-bank);
 }

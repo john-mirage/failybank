@@ -16,11 +16,11 @@
 @import "styles/view.css";
 
 :root {
-    --color-app: hsl(210, 17%, 98%);
+    --color-app: hsl(210, 17%, 97%);
     --color-app-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
     --color-tab: hsl(210, 7%, 60%);
-    --color-tab-active: hsl(210, 10%, 23%);
+    --color-tab-active: hsl(210, 11%, 15%);
 
     --color-top-app-bar: #ffffff;
     --color-top-app-bar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
@@ -48,13 +48,13 @@
     --color-dropdown-content-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     --color-filter: #fff;
-    --color-filter-background-hover: #f1f3f5;
+    --color-filter-background-hover: hsl(210, 17%, 96%);
     --color-filter-active: #fff;
 
-    --color-typo-primary: hsl(210, 10%, 23%);
+    --color-typo-primary: hsl(210, 9%, 31%);
     --color-typo-secondary: hsl(210, 7%, 50%);
-    --color-typo-positive: #fff;
-    --color-typo-negative: #fff;
+    --color-typo-positive: #38d9a9;
+    --color-typo-negative: #f783ac;
 
     --color-notification-success: #fff;
     --color-notification-error: #fff;
@@ -62,53 +62,89 @@
     --color-notification-description: #fff;
 
     --color-form-input: hsl(0, 0%, 100%);
+    --color-form-input-typo: hsl(210, 9%, 31%);
     --color-form-input-on-paper: hsl(210, 17%, 96%);
     --color-form-input-placeholder: hsl(210, 11%, 71%);
     --color-form-input-border: hsl(210, 17%, 92%);
     --color-form-input-border-on-paper: hsl(210, 17%, 90%);
 
-    --color-scrollbar-track: #e9ecef;
-    --color-scrollbar-track-hover: #ced4da;
+    --color-scrollbar-thumb: #e9ecef;
+    --color-scrollbar-thumb-hover: #ced4da;
 
     --color-log-divider: hsl(210, 16%, 95%);
     --color-log-icon: #e9ecef;
     --color-log-icon-background: hsl(210, 17%, 96%);
 
-    --color-bg: #F3F5F6;
-    --color-fg: #ffffff;
-    --color-text: #495057;
-    --color-text-alt: #868e96;
-    --color-text-placeholder: #adb5bd;
-    --color-border: #e9ecef;
-    --color-border-on-bg: #dee2e6;
-    --color-icon-bg: #f1f3f5;
-    --color-button-secondary: #e9ecef;
-    --color-up: #20c997;
-    --color-down: #f06595;
+    --color-favorite-account-divider: hsl(210, 16%, 95%);
+    --color-favorite-account-icon: #ced4da;
 }
 
 :root.dark {
-    --color-bg: #121417;
-    --color-fg: #191C1F;
-    --color-text: #CED4DA;
-    --color-text-alt: #868E96;
-    --color-text-placeholder: #5D666F;
-    --color-border: #22262A;
-    --color-border-on-bg: #22262A;
-    --color-scrollbar-track: #1A1B1E;
-    --color-scrollbar-thumb: #272B30;
-    --color-icon-bg: #272B30;
-    --color-button-secondary: #272B30;
-    --color-toggle-button-track: #383D43;
-    --color-toggle-button-track-focus: #495057;
-    --color-toggle-button-icon: #868E96;
-    --color-toggle-button-icon-active: #fcc419;
-    --color-up: #0ca678;
-    --color-down: #f06595;
+    --color-app: hsl(216, 12%, 8%);
+    --color-app-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    --color-tab: hsl(210, 7%, 60%);
+    --color-tab-active: hsl(0, 0%, 100%);
+
+    --color-top-app-bar: hsl(210, 11%, 11%);
+    --color-top-app-bar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+    --color-paper: hsl(210, 11%, 11%);
+    --color-paper-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+    --color-grid-section-divider: hsl(210, 11%, 14%);
+
+    --color-toggle-button-track: hsl(210, 10%, 23%);
+    --color-toggle-button-icon: hsl(210, 11%, 71%);
+    --color-toggle-button-icon-hover: hsl(0, 0%, 100%);
+    --color-toggle-button-icon-active: #f59f00;
+
+    --color-button-label: #fff;
+    --color-button-secondary-label-hover: hsl(0, 0%, 100%);
+    --color-button-disabled: hsl(210, 11%, 14%);
+    --color-button-disabled-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    --color-button-disabled-label: hsl(210, 9%, 31%);
+    --color-button-icon: #fff;
+
+    --color-dropdown-button: #fff;
+    --color-dropdown-button-label: #fff;
+    --color-dropdown-content: hsl(210, 10%, 14%);
+    --color-dropdown-content-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    --color-filter: #fff;
+    --color-filter-background-hover: hsl(210, 9%, 20%);
+    --color-filter-active: #fff;
+
+    --color-typo-primary: hsl(210, 14%, 80%);
+    --color-typo-secondary: hsl(210, 7%, 52%);
+    --color-typo-positive: #0ca678;
+    --color-typo-negative: hsl(339, 65%, 60%);
+
+    --color-notification-success: hsl(162, 73%, 46%);
+    --color-notification-error: hsl(339, 82%, 67%);
+    --color-notification-title: hsl(210, 14%, 83%);
+    --color-notification-description: hsl(210, 7%, 56%);
+
+    --color-form-input: hsl(210, 11%, 11%);
+    --color-form-input-typo: hsl(210, 14%, 80%);
+    --color-form-input-on-paper: hsl(216, 12%, 8%);
+    --color-form-input-placeholder: hsl(210, 9%, 40%);
+    --color-form-input-border: hsl(210, 11%, 15%);
+    --color-form-input-border-on-paper: hsl(210, 11%, 17%);
+
+    --color-scrollbar-thumb: hsl(210, 10%, 20%);
+    --color-scrollbar-thumb-hover: #ced4da;
+
+    --color-log-divider: hsl(210, 11%, 15%);
+    --color-log-icon: #e9ecef;
+    --color-log-icon-background: hsl(210, 9%, 16%);
+
+    --color-favorite-account-divider: hsl(210, 11%, 15%);
+    --color-favorite-account-icon: #495057;
 }
 
 :root.fleeca {
-    --color-bank: #40c057;
+    --color-bank: #69db7c;
 }
 
 :root.maze {
@@ -116,7 +152,7 @@
 }
 
 :root.fleeca.dark {
-    --color-bank: #37b24d;
+    --color-bank: #2f9e44;
 }
 
 :root.maze.dark {

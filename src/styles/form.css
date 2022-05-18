@@ -45,6 +45,7 @@
 }
 
 .form__input:focus {
+    padding: 0 1.5rem;
     outline: none;
-    border: 1px solid var(--color-bank);
+    border: 0.2rem solid var(--color-bank);
 }

@@ -78,7 +78,7 @@
     background-color: var(--color-bank);
 }
 
-.button--secondary:focus {
+.button--secondary:focus-visible {
     outline: 0.2rem solid var(--color-bank);
     outline-offset: 0.3rem;
 }
