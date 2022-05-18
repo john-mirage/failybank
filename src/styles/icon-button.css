@@ -66,7 +66,7 @@
     color: var(--color-icon-button-secondary-icon);
 }
 
-.icon-button--secondary:hover > .icon-button__icon {
+.icon-button--secondary-hover:hover > .icon-button__icon {
     color: var(--color-bank);
 }
 

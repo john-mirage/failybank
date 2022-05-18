@@ -27,7 +27,6 @@ export class FavoriteAccount {
   ) {
     this.name = name;
     this.number = number;
-    this.isListened = false;
     this.normalElement = false;
     this.editElement = false;
     this.pasteElement = false;

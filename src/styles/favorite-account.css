@@ -38,6 +38,7 @@
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -87,11 +88,24 @@
 }
 
 .favorite-account__icon {
-    width: 20px;
-    height: 20px;
+    display: none;
+    width: 2rem;
+    height: auto;
+    margin-left: 1.2rem;
     color: var(--color-favorite-account-icon);
 }
 
-.favorite-account--clickable:hover .favorite-account__icon {
+.favorite-account__icon--check {
     color: var(--color-bank);
 }
+
+.favorite-account__copied-text {
+    display: none;
+    color: var(--color-bank);
+}
+
+.favorite-account--clickable[data-copied="false"] .favorite-account__icon--copy {display: block;}
+.favorite-account--clickable[data-copied="true"] .favorite-account__icon--check {display: block;}
+.favorite-account--clickable[data-copied="true"] .favorite-account__copied-text {display: block;}
+
+.favorite-account--clickable:hover .favorite-account__icon--copy {color: var(--color-bank);}

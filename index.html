@@ -235,7 +235,7 @@
             <div class="view" id="enterprise-view">
                 <div class="grid grid--enterprise">
                     <!-- Offshore button -->
-                    <button class="icon-button icon-button--small icon-button--secondary view__button" id="offshore-tab-button">
+                    <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-hover view__button" id="offshore-tab-button">
                         <svg class="icon-button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
                         </svg>
@@ -467,15 +467,20 @@
 
     <!-- Template / favorite account / paste view -->
     <template id="favorite-account-paste-template">
-        <div class="favorite-account favorite-account--clickable">
+        <div class="favorite-account favorite-account--clickable" data-copied="false">
             <div class="favorite-account__section favorite-account__section--large">
                 <h4 class="typography typography--title-medium typography--mb" data-name="favorite-account-name"></h4>
                 <p class="typography typography--number-small" data-name="favorite-account-number"></p>
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <svg class="favorite-account__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                <p class="typography typography--body-small favorite-account__copied-text">Copié sur le formulaire</p>
+                <svg class="favorite-account__icon favorite-account__icon--copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M0 0h24v24H0V0z" fill="none"/>
                     <path d="M16 1H2v16h2V3h12V1zm5 4H6v18h15V5zm-2 16H8V7h11v14z"/>
+                </svg>
+                <svg class="favorite-account__icon favorite-account__icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M0 0h24v24H0V0z" fill="none"/>
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
                 </svg>
             </div>
         </div>
