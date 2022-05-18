@@ -1,48 +1,13 @@
 .button {
     box-sizing: border-box;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 0;
-    border: none;
-}
-
-.button--text {
     display: block;
     min-width: 168px;
     height: 48px;
-    padding-left: 24px;
-    padding-right: 24px;
-}
-
-.button--mr {
-    margin-right: -9px;
-}
-
-.button--large-icon {
-    display: flex;
-    width: 48px;
-    height: 48px;
-}
-
-.button--small-icon {
-    display: flex;
-    width: 36px;
-    height: 36px;
-}
-
-.button__icon {
-    box-sizing: border-box;
-    margin: auto;
-}
-
-.button--large-icon > .button__icon {
-    width: 24px;
-    height: 24px;
-}
-
-.button--small-icon > .button__icon {
-    width: 18px;
-    height: 18px;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 /*------------------------------------*\
@@ -95,44 +60,4 @@
 
 .button--disabled > .button__icon {
     color: var(--color-button-disabled-label);
-}
-
-/*------------------------------------*\
-  #Button-subtle
-\*------------------------------------*/
-
-.button--subtle > .button__icon {
-    color: var(--color-text-alt);
-}
-
-.button--subtle:hover {
-    background-color: var(--color-border);
-}
-
-.button--subtle:hover > .button__icon {
-    color: #fff;
-}
-
-/*------------------------------------*\
-  #Button-success
-\*------------------------------------*/
-
-.button--success {
-    background-color: var(--color-up);
-}
-
-.button--success > .button__icon {
-    color: #fff;
-}
-
-/*------------------------------------*\
-  #Button-error
-\*------------------------------------*/
-
-.button--error {
-    background-color: var(--color-down);
-}
-
-.button--error > .button__icon {
-    color: #fff;
 }

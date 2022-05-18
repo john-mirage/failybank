@@ -1,0 +1,115 @@
+.icon-button {
+    box-sizing: border-box;
+    display: flex;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+/*------------------------------------*\
+  #Icon-button-size
+\*------------------------------------*/
+
+.icon-button--large {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+
+.icon-button--medium {
+    width: 4rem;
+    height: 4rem;
+}
+
+.icon-button--small {
+    width: 3.6rem;
+    height: 3.6rem;
+}
+
+/*------------------------------------*\
+  #Icon-button-negative-margin-right
+\*------------------------------------*/
+
+.icon-button--negative-mr.icon-button--large {
+    margin-right: -1.2rem;
+}
+
+.icon-button--negative-mr.icon-button--medium {
+    margin-right: -1rem;
+}
+
+.icon-button--negative-mr.icon-button--small {
+    margin-right: -0.9rem;
+}
+
+/*------------------------------------*\
+  #Icon-button-primary
+\*------------------------------------*/
+
+.icon-button--primary {
+    background-color: var(--color-bank);
+}
+
+.icon-button--primary > .icon-button__icon {
+    color: var(--color-icon-button-primary-icon);
+}
+
+/*------------------------------------*\
+  #Icon-button-secondary
+\*------------------------------------*/
+
+.icon-button--secondary {
+    background-color: transparent;
+}
+
+.icon-button--secondary > .icon-button__icon {
+    color: var(--color-icon-button-secondary-icon);
+}
+
+.icon-button--secondary:hover > .icon-button__icon {
+    color: var(--color-bank);
+}
+
+.icon-button--secondary-edit:hover > .icon-button__icon {
+    color: var(--color-icon-button-secondary-icon-edit);
+}
+
+.icon-button--secondary-delete:hover > .icon-button__icon {
+    color: var(--color-icon-button-secondary-icon-delete);
+}
+
+/*------------------------------------*\
+  #Icon-button-disabled
+\*------------------------------------*/
+
+.icon-button--disabled {
+    background-color: var(--color-icon-button-disabled);
+    box-shadow: var(--color-icon-button-disabled-shadow);
+}
+
+.icon-button--disabled > .icon-button__icon {
+    color: var(--color-icon-button-disabled-icon);
+}
+
+/*------------------------------------*\
+  #Icon-button-icon
+\*------------------------------------*/
+
+.icon-button__icon {
+    margin: auto;
+}
+
+.icon-button--large > .icon-button__icon {
+    width: 2.4rem;
+    height: auto;
+}
+
+.icon-button--medium > .icon-button__icon {
+    width: 2rem;
+    height: auto;
+}
+
+.icon-button--small > .icon-button__icon {
+    width: 1.8rem;
+    height: auto;
+}

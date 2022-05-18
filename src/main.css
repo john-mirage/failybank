@@ -1,6 +1,7 @@
 @import "styles/typography.css";
 @import "styles/app.css";
 @import "styles/button.css";
+@import "styles/icon-button.css";
 @import "styles/dropdown.css";
 @import "styles/favorite-account.css";
 @import "styles/filter.css";
@@ -42,6 +43,15 @@
     --color-button-disabled-label: hsl(210, 14%, 88%);
     --color-button-icon: #fff;
 
+    --color-icon-button-primary-icon: hsl(0, 0%, 100%);
+    --color-icon-button-secondary-icon: #adb5bd;
+    --color-icon-button-secondary-icon-edit: #4dabf7;
+    --color-icon-button-secondary-icon-delete: hsl(339, 88%, 74%);
+    --color-icon-button-disabled: hsl(0, 0%, 100%);
+    --color-icon-button-disabled-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    --color-icon-button-disabled-icon: hsl(210, 14%, 88%);
+    --color-icon-button-disabled-icon-hover: hsl(0, 0%, 100%);
+
     --color-dropdown-button: #fff;
     --color-dropdown-button-label: #fff;
     --color-dropdown-content: hsl(0, 0%, 100%);
@@ -53,11 +63,11 @@
 
     --color-typo-primary: hsl(210, 9%, 31%);
     --color-typo-secondary: hsl(210, 7%, 50%);
-    --color-typo-positive: #38d9a9;
-    --color-typo-negative: #f783ac;
+    --color-typo-positive: hsl(162, 68%, 54%);
+    --color-typo-negative: hsl(339, 88%, 74%);
 
-    --color-notification-success: #fff;
-    --color-notification-error: #fff;
+    --color-notification-success: hsl(162, 68%, 54%);
+    --color-notification-error: hsl(339, 88%, 74%);
     --color-notification-title: #fff;
     --color-notification-description: #fff;
 
@@ -106,6 +116,13 @@
     --color-button-disabled-label: hsl(210, 9%, 31%);
     --color-button-icon: #fff;
 
+    --color-icon-button-primary-icon: hsl(0, 0%, 100%);
+    --color-icon-button-secondary-icon: hsl(210, 7%, 56%);
+    --color-icon-button-disabled: hsl(210, 11%, 14%);
+    --color-icon-button-disabled-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    --color-icon-button-disabled-icon: hsl(210, 9%, 31%);
+    --color-icon-button-disabled-icon-hover: hsl(0, 0%, 100%);
+
     --color-dropdown-button: #fff;
     --color-dropdown-button-label: #fff;
     --color-dropdown-content: hsl(210, 10%, 14%);
@@ -117,11 +134,11 @@
 
     --color-typo-primary: hsl(210, 14%, 80%);
     --color-typo-secondary: hsl(210, 7%, 52%);
-    --color-typo-positive: #0ca678;
+    --color-typo-positive: hsl(162, 87%, 35%);
     --color-typo-negative: hsl(339, 65%, 60%);
 
-    --color-notification-success: hsl(162, 73%, 46%);
-    --color-notification-error: hsl(339, 82%, 67%);
+    --color-notification-success: hsl(162, 87%, 35%);
+    --color-notification-error: hsl(339, 65%, 60%);
     --color-notification-title: hsl(210, 14%, 83%);
     --color-notification-description: hsl(210, 7%, 56%);
 

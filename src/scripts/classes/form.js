@@ -34,13 +34,17 @@ export class Form {
 
   activateSubmitButton() {
     this.buttonIsActive = true;
-    this.buttonElement.classList.replace("button--disabled", "button--primary");
+    const oldClass = this.buttonElement.dataset.disabledClass;
+    const newClass = this.buttonElement.dataset.activeClass;
+    this.buttonElement.classList.replace(oldClass, newClass);
     this.buttonElement.removeAttribute("disabled");
   }
 
   deactivateSubmitButton() {
     this.buttonIsActive = false;
-    this.buttonElement.classList.replace("button--primary", "button--disabled");
+    const oldClass = this.buttonElement.dataset.activeClass;
+    const newClass = this.buttonElement.dataset.disabledClass;
+    this.buttonElement.classList.replace(oldClass, newClass);
     this.buttonElement.setAttribute("disabled", "");
   }
 }

@@ -64,6 +64,7 @@
 .favorite-account__input--name {
     width: calc(100% - 9px);
     color: var(--color-typo-primary);
+    line-height: 3.6rem;
 }
 
 .favorite-account__input--number {

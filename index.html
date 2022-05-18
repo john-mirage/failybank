@@ -53,8 +53,8 @@
                             <path d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z" />
                         </svg>
                     </div>
-                    <button class="button button--small-icon button--subtle button--mr">
-                        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/>
+                    <button class="icon-button icon-button--medium icon-button--secondary icon-button--secondary-delete icon-button--negative-mr">
+                        <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/>
                             <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/>
                         </svg>
                     </button>
@@ -117,8 +117,8 @@
                                     <input class="typography typography--input form__input" type="text" placeholder="Entrer le numéro de compte" name="number" required minlength="10" maxlength="10" pattern="[0-9]{10}" id="personal-favorite-account-number-input">
                                 </div>
                                 <div class="form__section form__section--fixed">
-                                    <button class="button button--large-icon button--disabled" disabled type="submit" id="personal-favorite-account-form-button">
-                                        <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                                    <button class="icon-button icon-button--large icon-button--disabled" data-disabled-class="icon-button--disabled" data-active-class="icon-button--primary" disabled type="submit" id="personal-favorite-account-form-button">
+                                        <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                                             <path d="M0 0h24v24H0V0z" fill="none"/>
                                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                                         </svg>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="typography typography--button button button--text button--disabled" id="personal-deposit-form-button" disabled type="submit">Déposer</button>
+                                    <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="personal-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="typography typography--button button button--text button--secondary" id="personal-all-deposit-button" type="button">Tout déposer</button>
@@ -185,7 +185,7 @@
                                 <label class="typography typography--title-small typography--mb" for="personal-withdraw-amount-input">Montant</label>
                                 <input class="typography typography--input form__input" type="text" name="amount" id="personal-withdraw-amount-input" placeholder="Entrer le montant du retrait" maxlength="8" required pattern="^[5-9]\d{2}\d*$|^[1-9]\d{3}\d*$">
                             </div>
-                            <button class="typography typography--button button button--text button--disabled" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
+                            <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="personal-withdraw-form-button" disabled type="submit">Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -212,7 +212,7 @@
                                 <label class="typography typography--title-small typography--mb" for="personal-transfer-reference-input">Référence</label>
                                 <input class="typography typography--input form__input" type="text" name="reference" placeholder="Entrer la référence du transfert" id="personal-transfer-reference-input" required maxlength="40">
                             </div>
-                            <button class="typography typography--button button button--text button--disabled" id="personal-transfer-form-button" disabled type="submit">Transférer</button>
+                            <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="personal-transfer-form-button" disabled type="submit">Transférer</button>
                         </form>
                     </section>
                     <!-- Personal account favorite account paste list -->
@@ -235,8 +235,8 @@
             <div class="view" id="enterprise-view">
                 <div class="grid grid--enterprise">
                     <!-- Offshore button -->
-                    <button class="button button--small-icon button--subtle view__button" id="offshore-tab-button">
-                        <svg class="button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <button class="icon-button icon-button--small icon-button--secondary view__button" id="offshore-tab-button">
+                        <svg class="icon-button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
                         </svg>
                     </button>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="typography typography--button button button--text button--disabled" id="enterprise-deposit-form-button" disabled type="submit">Déposer</button>
+                                    <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="enterprise-deposit-form-button" disabled type="submit">Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="typography typography--button button button--text button--secondary" id="enterprise-all-deposit-button" type="button">Tout déposer</button>
@@ -313,7 +313,7 @@
                                 <label class="typography typography--title-small typography--mb" for="enterprise-withdraw-amount-input">Montant</label>
                                 <input class="typography typography--input form__input" type="text" name="amount" id="enterprise-withdraw-amount-input" placeholder="Entrer le montant du retrait" maxlength="8" required pattern="^[5-9]\d{2}\d*$">
                             </div>
-                            <button class="typography typography--button button button--text button--disabled" id="enterprise-withdraw-form-button" disabled>Retirer</button>
+                            <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="enterprise-withdraw-form-button" disabled>Retirer</button>
                         </form>
                     </section>
                 </div>
@@ -379,7 +379,7 @@
                             </div>
                             <div class="form__row">
                                 <div class="form__section form__section--fixed">
-                                    <button class="typography typography--button button button--text button--disabled" id="offshore-deposit-form-button" type="submit" disabled>Déposer</button>
+                                    <button class="typography typography--button button button--text button--disabled" data-disabled-class="button--disabled" data-active-class="button--primary" id="offshore-deposit-form-button" type="submit" disabled>Déposer</button>
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="typography typography--button button button--text button--secondary" id="offshore-all-deposit-button" type="button">Tout déposer</button>
@@ -406,17 +406,16 @@
                 <p class="typography typography--number-small" data-name="account-number"></p>
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <button class="button button--small-icon button--subtle button--edit">
-                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-edit button--edit">
+                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                         <path d="M0 0h24v24H0V0z" fill="none"/>
                         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"/>
                     </svg>
                 </button>
-                <button class="button button--small-icon button--subtle button--mr button--delete">
-                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                        <path d="M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z" fill="none"/>
-                        <path d="M292 64h-72a4 4 0 00-4 4v28h80V68a4 4 0 00-4-4z" fill="none"/>
-                        <path d="M447.55 96H336V48a16 16 0 00-16-16H192a16 16 0 00-16 16v48H64.45L64 136h33l20.09 314A32 32 0 00149 480h214a32 32 0 0031.93-29.95L415 136h33zM176 416l-9-256h33l9 256zm96 0h-32V160h32zm24-320h-80V68a4 4 0 014-4h72a4 4 0 014 4zm40 320h-33l9-256h33z"/>
+                <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-delete icon-button--negative-mr button--delete">
+                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M6 21h12V7H6v14zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                     </svg>
                 </button>
             </div>
@@ -451,13 +450,13 @@
                 >
             </div>
             <div class="favorite-account__section favorite-account__section--right">
-                <button class="button button--small-icon button--subtle button--cancel" type="button">
-                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-delete button--cancel" type="button">
+                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
                         <path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"/>
                     </svg>
                 </button>
-                <button class="button button--small-icon button--disabled button--mr button--confirm" type="button">
-                    <svg class="button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
+                <button class="icon-button icon-button--small icon-button--disabled icon-button--negative-mr button--confirm" data-name="form-submit-button" data-disabled-class="icon-button--disabled" data-active-class="icon-button--primary" type="button">
+                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                         <path d="M0 0h24v24H0V0z" fill="none"/>
                         <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
                     </svg>
