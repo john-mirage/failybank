@@ -11,11 +11,11 @@
 }
 
 .notification--success {
-    background-color: var(--color-up);
+    background-color: var(--color-notification-success);
 }
 
 .notification--error {
-    background-color: var(--color-down);
+    background-color: var(--color-notification-error);
 }
 
 .notification__icon {
