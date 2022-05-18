@@ -15,6 +15,8 @@ import {FavoriteAccountPasteList} from "@scripts/classes/favorite-account-paste-
 import {View} from "@scripts/classes/view";
 import {ViewSwitcher} from "@scripts/classes/view-switcher";
 
+const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
+
 /*------------------------------------*\
   App theme
 \*------------------------------------*/
@@ -94,7 +96,7 @@ const personalWithdrawForm = new Form(
 const personalTransferForm = new Form(
   [
     document.getElementById("personal-transfer-amount-input"),
-    document.getElementById("personal-transfer-account-number-input"),
+    personalTransferAccountNumberInput,
     document.getElementById("personal-transfer-reference-input")
   ],
   document.getElementById("personal-transfer-form"),
@@ -162,13 +164,8 @@ function deleteFavoriteAccount(favoriteAccount) {
   });
 }
 
-const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
-
-function pasteFavoriteAccount(accountNumber) {
-  if (personalTransferAccountNumberInput.value !== accountNumber) {
-    personalTransferAccountNumberInput.value = accountNumber;
-    personalTransferForm.checkFields();
-  }
+function checkTransferForm() {
+  personalTransferForm.checkFields();
 }
 
 function editFavoriteAccount(favoriteAccount, form, index) {
@@ -189,7 +186,8 @@ const favoriteAccountEditList = new FavoriteAccountEditList(
 
 const favoriteAccountPasteList = new FavoriteAccountPasteList(
   favoriteAccountList,
-  pasteFavoriteAccount
+  personalTransferAccountNumberInput,
+  checkTransferForm
 );
 
 function showPersonalView() {

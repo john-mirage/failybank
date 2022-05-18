@@ -86,7 +86,7 @@
     --color-log-icon-background: hsl(210, 17%, 96%);
 
     --color-favorite-account-divider: hsl(210, 16%, 95%);
-    --color-favorite-account-icon: #ced4da;
+    --color-favorite-account-icon: #adb5bd;
 }
 
 :root.dark {

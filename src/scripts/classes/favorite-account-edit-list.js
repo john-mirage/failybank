@@ -25,6 +25,7 @@ export class FavoriteAccountEditList {
     this.favoriteAccountList = favoriteAccountList;
     this.handleEditButtonClick = handleEditButtonClick;
     this.handleDeleteButtonClick = handleDeleteButtonClick;
+    this.hasBeenDisplayedOnce = false;
   }
 
   listenButtons(favoriteAccount, form, index) {
@@ -76,13 +77,13 @@ export class FavoriteAccountEditList {
   display() {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount, index) => {
       const normalView = favoriteAccount.getNormalView();
-      if (!favoriteAccount.isListened) {
+      if (!this.hasBeenDisplayedOnce) {
         const form = this.createForm(favoriteAccount);
         this.listenButtons(favoriteAccount, form, index);
-        favoriteAccount.isListened = true;
       }
       favoriteAccountEditListElement.appendChild(normalView);
     });
+    this.hasBeenDisplayedOnce = true;
     this.displayCount();
   }
 
