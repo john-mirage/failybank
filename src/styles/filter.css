@@ -26,6 +26,7 @@
 
 .filter--active {
     color: var(--color-text);
+    cursor: default;
 }
 
 .filter--active:hover {
