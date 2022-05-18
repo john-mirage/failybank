@@ -90,7 +90,7 @@
 .favorite-account__icon {
     display: none;
     width: 2rem;
-    height: auto;
+    height: 2rem;
     margin-left: 1.2rem;
     color: var(--color-favorite-account-icon);
 }

@@ -34,13 +34,11 @@
 
 .button--secondary {
     color: var(--color-bank);
-    border: 0.2rem solid var(--color-bank);
+
 }
 
 .button--secondary:hover {
-    color: var(--color-button-secondary-label-hover);
-    border: none;
-    background-color: var(--color-bank);
+    border: 0.2rem solid var(--color-bank);
 }
 
 .button--secondary:focus-visible {
