@@ -43,8 +43,8 @@
 
 .toggle-button__icon {
     box-sizing: border-box;
-    width: 16px;
-    height: auto;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 .toggle-button__icon--sun {

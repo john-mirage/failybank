@@ -19,22 +19,11 @@
 }
 
 .notification__icon {
+    display: block;
     width: 40px;
     height: 40px;
-    border-radius: 9999px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 20px auto;
-    background-color: rgba(0, 0, 0, 0.15);
     margin-right: 16px;
-}
-
-.notification--success .notification__icon {
-    background-image: url("/src/images/success.svg");
-}
-
-.notification--error .notification__icon {
-    background-image: url("/src/images/error.svg");
+    color: var(--color-notification-title);
 }
 
 .notification__title {

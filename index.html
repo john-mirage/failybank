@@ -13,6 +13,76 @@
 
 <body>
 
+    <!-- Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Icon / filter -->
+        <symbol id="icon-filter" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+        </symbol>
+        <!-- Icon / maze logo -->
+        <symbol id="logo-maze" viewBox="0 0 48 48">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
+        </symbol>
+        <!-- Icon / fleeca logo -->
+        <symbol id="logo-fleeca" viewBox="0 0 48 48">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M31.167 25.5L29.917 33H41.917L41 38.5H23L27.167 13.5H12.167L11 20.5H24L23.167 25.5H10.167L8.917 33H21.917L21 38.5H2L7 8.5H46L45.167 13.5H33.167L32 20.5H44L43.167 25.5H31.167Z"/>
+        </symbol>
+        <!-- Icon / sun -->
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+            <rect fill="none" height="24" width="24"/>
+            <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M11,1v4h2V1L11,1z M11,19v4h2v-4L11,19z M23,11l-4,0v2 l4,0V11z M5,11l-4,0l0,2l4,0L5,11z M16.24,17.66l2.47,2.47l1.41-1.41l-2.47-2.47L16.24,17.66z M3.87,5.28l2.47,2.47l1.41-1.41 L5.28,3.87L3.87,5.28z M6.34,16.24l-2.47,2.47l1.41,1.41l2.47-2.47L6.34,16.24z M18.72,3.87l-2.47,2.47l1.41,1.41l2.47-2.47 L18.72,3.87z"/>
+        </symbol>
+        <!-- Icon / moon -->
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+            <rect fill="none" height="24" width="24"/>
+            <path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+        </symbol>
+        <!-- Icon / power -->
+        <symbol id="icon-power" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/>
+        </symbol>
+        <!-- Icon / palm tree -->
+        <symbol id="icon-palm" viewBox="0 0 24 24">
+            <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
+        </symbol>
+        <!-- Icon / add -->
+        <symbol id="icon-add" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+        </symbol>
+        <!-- Icon / edit -->
+        <symbol id="icon-edit" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"/>
+        </symbol>
+        <!-- Icon / delete -->
+        <symbol id="icon-delete" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M6 21h12V7H6v14zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+        </symbol>
+        <!-- Icon / close -->
+        <symbol id="icon-close" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+        </symbol>
+        <!-- Icon / check -->
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+        </symbol>
+        <!-- Icon / copy -->
+        <symbol id="icon-copy" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M16 1H2v16h2V3h12V1zm5 4H6v18h15V5zm-2 16H8V7h11v14z"/>
+        </symbol>
+        <!-- Icon / error -->
+        <symbol id="icon-error" viewBox="0 0 24 24">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+        </symbol>
+    </svg>
+
     <!-- App -->
     <main class="app app--loading" id="app">
 
@@ -25,11 +95,11 @@
             <!-- Top app bar -->
             <header class="top-app-bar">
                 <div class="top-app-bar__section top-app-bar__section--row">
-                    <svg class="top-app-bar__logo top-app-bar__logo--maze" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M36.48 4.8H4.80005V43.2H9.60004V9.6H18.24V36.48H23.04V9.6H31.68V37.44H36.48V4.8ZM38.4 38.4H29.76V11.52H24.96V38.4H16.32V11.52H11.52V43.2H43.2V4.8H38.4V38.4Z"/>
+                    <svg class="top-app-bar__logo top-app-bar__logo--maze">
+                        <use href="#logo-maze" fill="currentColor" />
                     </svg>
-                    <svg class="top-app-bar__logo top-app-bar__logo--fleeca" width="48" height="48" viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.167 25.5L29.917 33H41.917L41 38.5H23L27.167 13.5H12.167L11 20.5H24L23.167 25.5H10.167L8.917 33H21.917L21 38.5H2L7 8.5H46L45.167 13.5H33.167L32 20.5H44L43.167 25.5H31.167Z"/>
+                    <svg class="top-app-bar__logo top-app-bar__logo--fleeca">
+                        <use href="#logo-fleeca" fill="currentColor" />
                     </svg>
                     <!-- Balance -->
                     <div>
@@ -43,19 +113,19 @@
                     <div class="toggle-button">
                         <label class="toggle-button__label" for="personal-theme-button">Theme</label>
                         <input class="toggle-button__input" id="personal-theme-button" type="checkbox">
-                        <svg class="toggle-button__icon toggle-button__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M256 118a22 22 0 01-22-22V48a22 22 0 0144 0v48a22 22 0 01-22 22zM256 486a22 22 0 01-22-22v-48a22 22 0 0144 0v48a22 22 0 01-22 22zM369.14 164.86a22 22 0 01-15.56-37.55l33.94-33.94a22 22 0 0131.11 31.11l-33.94 33.94a21.93 21.93 0 01-15.55 6.44zM108.92 425.08a22 22 0 01-15.55-37.56l33.94-33.94a22 22 0 1131.11 31.11l-33.94 33.94a21.94 21.94 0 01-15.56 6.45zM464 278h-48a22 22 0 010-44h48a22 22 0 010 44zM96 278H48a22 22 0 010-44h48a22 22 0 010 44zM403.08 425.08a21.94 21.94 0 01-15.56-6.45l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.55 37.56zM142.86 164.86a21.89 21.89 0 01-15.55-6.44l-33.94-33.94a22 22 0 0131.11-31.11l33.94 33.94a22 22 0 01-15.56 37.55zM256 358a102 102 0 11102-102 102.12 102.12 0 01-102 102z" />
+                        <svg class="toggle-button__icon toggle-button__icon--sun">
+                            <use href="#icon-sun" fill="currentColor" />
                         </svg>
                         <div class="toggle-button__track">
                             <div class="toggle-button__handle"></div>
                         </div>
-                        <svg class="toggle-button__icon toggle-button__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z" />
+                        <svg class="toggle-button__icon toggle-button__icon--moon">
+                            <use href="#icon-sun" fill="currentColor" />
                         </svg>
                     </div>
                     <button class="icon-button icon-button--medium icon-button--secondary icon-button--secondary-delete icon-button--negative-mr">
-                        <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/>
+                        <svg class="icon-button__icon">
+                            <use href="#icon-power" fill="currentColor" />
                         </svg>
                     </button>
                 </div>
@@ -80,9 +150,8 @@
                                     <div class="group__section group__section--fixed">
                                         <details class="dropdown" id="personal-filter-dropdown">
                                             <summary class="dropdown__button">
-                                                <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                                                    <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                                                <svg class="dropdown__icon">
+                                                    <use href="#icon-filter" fill="currentColor" />
                                                 </svg>
                                                 <span class="typography typography--filter" data-name="dropdown-title">Filtrer les résultats</span>
                                             </summary>
@@ -118,9 +187,8 @@
                                 </div>
                                 <div class="form__section form__section--fixed">
                                     <button class="icon-button icon-button--large icon-button--disabled" data-disabled-class="icon-button--disabled" data-active-class="icon-button--primary" disabled type="submit" id="personal-favorite-account-form-button">
-                                        <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
-                                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                        <svg class="icon-button__icon">
+                                            <use href="#icon-add" fill="currentColor" />
                                         </svg>
                                     </button>
                                 </div>
@@ -236,8 +304,8 @@
                 <div class="grid grid--enterprise">
                     <!-- Offshore button -->
                     <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-hover view__button" id="offshore-tab-button">
-                        <svg class="icon-button__icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.296 2.86804C10.68 2.86804 11.004 2.92804 11.268 3.03604C12.768 3.69604 13.296 5.72404 13.308 7.80004C14.016 6.81604 15.888 5.05204 17.4 5.05204C18.912 5.05204 20.928 5.92804 21.636 9.31204C20.28 8.53204 18.732 8.18404 17.256 8.18404C15.744 8.18404 14.316 8.56804 13.308 9.25204C13.788 9.12004 14.34 9.06004 14.904 9.06004C16.572 9.06004 18.384 9.60004 18.984 10.632C19.8 12.024 19.548 14.688 18.072 15.6C17.904 13.08 16.044 10.656 13.908 10.656C13.38 10.656 12.852 10.8 12.312 11.112C9.6 12.744 8.4 17.472 8.4 22.8H2.4C2.4 16.164 7.452 11.22 11.616 9.85204C10.944 9.74404 10.212 9.67204 9.432 9.67204C7.32 9.67204 4.86 10.2 2.4 12C3.312 8.44804 5.736 7.08004 8.028 7.08004C9.528 7.08004 10.968 7.68004 11.868 8.62804C11.076 5.94004 8.88 5.19604 6.972 5.19604C6.012 5.19604 5.112 5.38804 4.512 5.61604C5.604 4.06804 8.484 2.86804 10.296 2.86804V2.86804ZM15.6 13.8C15.6 12.804 14.796 12 13.8 12C12.804 12 12 12.804 12 13.8C12 14.796 12.804 15.6 13.8 15.6C14.796 15.6 15.6 14.796 15.6 13.8Z"/>
+                        <svg class="icon-button__icon">
+                            <use href="#icon-palm" fill="currentColor" />
                         </svg>
                     </button>
                     <!-- Enterprise account owner -->
@@ -256,9 +324,8 @@
                                     <div class="group__section group__section--fixed">
                                         <details class="dropdown" id="enterprise-filter-dropdown">
                                             <summary class="dropdown__button">
-                                                <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                                                    <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                                                <svg class="dropdown__icon">
+                                                    <use href="#icon-filter" fill="currentColor" />
                                                 </svg>
                                                 <span class="typography typography--filter" data-name="dropdown-title">Filtrer les résultats</span>
                                             </summary>
@@ -338,9 +405,8 @@
                                     <div class="group__section group__section--fixed">
                                         <details class="dropdown" id="offshore-filter-dropdown">
                                             <summary class="dropdown__button">
-                                                <svg class="dropdown__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                                                    <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                                                <svg class="dropdown__icon">
+                                                    <use href="#icon-filter" fill="currentColor" />
                                                 </svg>
                                                 <span class="typography typography--filter" data-name="dropdown-title">Filtrer les résultats</span>
                                             </summary>
@@ -407,15 +473,13 @@
             </div>
             <div class="favorite-account__section favorite-account__section--right">
                 <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-edit button--edit">
-                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
-                        <path d="M0 0h24v24H0V0z" fill="none"/>
-                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"/>
+                    <svg class="icon-button__icon">
+                        <use href="#icon-edit" fill="currentColor" />
                     </svg>
                 </button>
                 <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-delete icon-button--negative-mr button--delete">
-                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M0 0h24v24H0V0z" fill="none"/>
-                        <path d="M6 21h12V7H6v14zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                    <svg class="icon-button__icon">
+                        <use href="#icon-delete" fill="currentColor" />
                     </svg>
                 </button>
             </div>
@@ -451,14 +515,13 @@
             </div>
             <div class="favorite-account__section favorite-account__section--right">
                 <button class="icon-button icon-button--small icon-button--secondary icon-button--secondary-delete button--cancel" type="button">
-                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                        <path d="M400 145.49L366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49z"/>
+                    <svg class="icon-button__icon">
+                        <use href="#icon-close" fill="currentColor" />
                     </svg>
                 </button>
                 <button class="icon-button icon-button--small icon-button--disabled icon-button--negative-mr button--confirm" data-name="form-submit-button" data-disabled-class="icon-button--disabled" data-active-class="icon-button--primary" type="button">
-                    <svg class="icon-button__icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
-                        <path d="M0 0h24v24H0V0z" fill="none"/>
-                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                    <svg class="icon-button__icon">
+                        <use href="#icon-check" fill="currentColor" />
                     </svg>
                 </button>
             </div>
@@ -474,13 +537,11 @@
             </div>
             <div class="favorite-account__section favorite-account__section--right">
                 <p class="typography typography--body-small favorite-account__copied-text">Copié sur le formulaire</p>
-                <svg class="favorite-account__icon favorite-account__icon--copy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                    <path d="M16 1H2v16h2V3h12V1zm5 4H6v18h15V5zm-2 16H8V7h11v14z"/>
+                <svg class="favorite-account__icon favorite-account__icon--copy">
+                    <use href="#icon-copy" fill="currentColor" />
                 </svg>
-                <svg class="favorite-account__icon favorite-account__icon--check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                <svg class="favorite-account__icon favorite-account__icon--check">
+                    <use href="#icon-check" fill="currentColor" />
                 </svg>
             </div>
         </div>
@@ -522,7 +583,9 @@
     <template id="notification-template">
         <li class="notification">
             <div class="notification__section">
-                <div class="notification__icon"></div>
+                <svg class="notification__icon">
+                    <use fill="currentColor" data-name="notification-icon" />
+                </svg>
             </div>
             <div class="notification__section">
                 <h3 class="typography typography--title-small notification__title" data-name="notification-name"></h3>

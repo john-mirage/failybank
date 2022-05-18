@@ -101,15 +101,15 @@
 
 .icon-button--large > .icon-button__icon {
     width: 2.4rem;
-    height: auto;
+    height: 2.4rem;
 }
 
 .icon-button--medium > .icon-button__icon {
     width: 2rem;
-    height: auto;
+    height: 2rem;
 }
 
 .icon-button--small > .icon-button__icon {
     width: 1.8rem;
-    height: auto;
+    height: 1.8rem;
 }
