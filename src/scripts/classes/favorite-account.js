@@ -1,5 +1,3 @@
-import {Form} from "@scripts/classes/form";
-
 const normalTemplate = document.getElementById("favorite-account-normal-template");
 const editTemplate = document.getElementById("favorite-account-edit-template");
 const pasteTemplate = document.getElementById("favorite-account-paste-template");
@@ -30,6 +28,8 @@ export class FavoriteAccount {
     this.normalElement = false;
     this.editElement = false;
     this.pasteElement = false;
+    this.isListenedForEditList = false;
+    this.isListenedForPasteList = false;
   }
 
   /**

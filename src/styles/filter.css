@@ -8,7 +8,7 @@
     height: 32px;
     text-align: left;
     cursor: pointer;
-    color: var(--color-text-alt);
+    color: var(--color-filter);
 }
 
 .filter__icon {
@@ -21,11 +21,11 @@
 
 .filter:hover {
     background-color: var(--color-filter-background-hover);
-    color: var(--color-text);
+    color: var(--color-filter-active);
 }
 
 .filter--active {
-    color: var(--color-text);
+    color: var(--color-filter-active);
     cursor: default;
 }
 

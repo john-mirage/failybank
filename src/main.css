@@ -24,10 +24,9 @@
     --color-tab-active: hsl(210, 11%, 15%);
 
     --color-top-app-bar: #ffffff;
-    --color-top-app-bar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --color-top-app-bar-border: hsl(210, 17%, 92%);
 
     --color-paper: hsl(0, 0%, 100%);
-    --color-paper-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
 
     --color-grid-section-divider: hsl(210, 17%, 92%);
 
@@ -52,14 +51,14 @@
     --color-icon-button-disabled-icon: hsl(210, 14%, 88%);
     --color-icon-button-disabled-icon-hover: hsl(0, 0%, 100%);
 
-    --color-dropdown-button: #fff;
-    --color-dropdown-button-label: #fff;
+    --color-dropdown-button: hsl(210, 7%, 50%);
+    --color-dropdown-button-active: hsl(210, 9%, 31%);
     --color-dropdown-content: hsl(0, 0%, 100%);
     --color-dropdown-content-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-    --color-filter: #fff;
+    --color-filter: hsl(210, 7%, 50%);
     --color-filter-background-hover: hsl(210, 17%, 96%);
-    --color-filter-active: #fff;
+    --color-filter-active: hsl(210, 9%, 31%);
 
     --color-typo-primary: hsl(210, 9%, 31%);
     --color-typo-secondary: hsl(210, 7%, 50%);
@@ -97,10 +96,9 @@
     --color-tab-active: hsl(0, 0%, 100%);
 
     --color-top-app-bar: hsl(210, 11%, 11%);
-    --color-top-app-bar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --color-top-app-bar-border: hsl(210, 11%, 15%);
 
     --color-paper: hsl(210, 11%, 11%);
-    --color-paper-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
 
     --color-grid-section-divider: hsl(210, 11%, 14%);
 
@@ -123,14 +121,14 @@
     --color-icon-button-disabled-icon: hsl(210, 9%, 31%);
     --color-icon-button-disabled-icon-hover: hsl(0, 0%, 100%);
 
-    --color-dropdown-button: #fff;
-    --color-dropdown-button-label: #fff;
+    --color-dropdown-button: hsl(210, 7%, 52%);
+    --color-dropdown-button-active: hsl(210, 14%, 80%);
     --color-dropdown-content: hsl(210, 10%, 14%);
     --color-dropdown-content-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-    --color-filter: #fff;
+    --color-filter: hsl(210, 7%, 52%);
     --color-filter-background-hover: hsl(210, 9%, 20%);
-    --color-filter-active: #fff;
+    --color-filter-active: hsl(210, 14%, 80%);
 
     --color-typo-primary: hsl(210, 14%, 80%);
     --color-typo-secondary: hsl(210, 7%, 52%);

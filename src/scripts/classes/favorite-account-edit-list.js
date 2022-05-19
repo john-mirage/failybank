@@ -25,30 +25,14 @@ export class FavoriteAccountEditList {
     this.favoriteAccountList = favoriteAccountList;
     this.handleEditButtonClick = handleEditButtonClick;
     this.handleDeleteButtonClick = handleDeleteButtonClick;
-    this.hasBeenDisplayedOnce = false;
   }
 
-  listenButtons(favoriteAccount, form, index) {
-    const normalView = favoriteAccount.getNormalView();
-    const editView = favoriteAccount.getEditView();
-    const normalViewEditButton = normalView.querySelector(".button--edit");
-    const normalViewDeleteButton = normalView.querySelector(".button--delete");
-    const editViewCancelButton = editView.querySelector(".button--cancel");
-    const editViewConfirmButton = editView.querySelector(".button--confirm");
-    normalViewEditButton.addEventListener("click", () => {
-      this.enterEditMode(favoriteAccount, form);
-    });
-    normalViewDeleteButton.addEventListener("click", () => {
-      this.handleDeleteButtonClick(favoriteAccount);
-    });
-    editViewCancelButton.addEventListener("click", () => {
-      this.exitEditMode(favoriteAccount);
-    });
-    editViewConfirmButton.addEventListener("click", () => {
-      this.handleEditButtonClick(favoriteAccount, form, index);
-    });
-  }
-
+  /**
+   * Create the form of the edit view.
+   *
+   * @param favoriteAccount {FavoriteAccount} - The favorite account.
+   * @return {Form} - The form.
+   */
   createForm(favoriteAccount) {
     const formElement = favoriteAccount.getEditView();
     const nameInput = formElement.querySelector(".favorite-account__input--name");
@@ -64,6 +48,9 @@ export class FavoriteAccountEditList {
     );
   }
 
+  /**
+   * Display the count of the favorite accounts.
+   */
   displayCount() {
     const favoriteAccountsTotal = String(this.favoriteAccountList.favoriteAccounts.length);
     if (favoriteAccountEditListCountElement.textContent !== favoriteAccountsTotal) {
@@ -77,13 +64,29 @@ export class FavoriteAccountEditList {
   display() {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount, index) => {
       const normalView = favoriteAccount.getNormalView();
-      if (!this.hasBeenDisplayedOnce) {
+      if (!favoriteAccount.isListenedForEditList) {
         const form = this.createForm(favoriteAccount);
-        this.listenButtons(favoriteAccount, form, index);
+        const editView = favoriteAccount.getEditView();
+        const normalViewEditButton = normalView.querySelector(".button--edit");
+        const normalViewDeleteButton = normalView.querySelector(".button--delete");
+        const editViewCancelButton = editView.querySelector(".button--cancel");
+        const editViewConfirmButton = editView.querySelector(".button--confirm");
+        normalViewEditButton.addEventListener("click", () => {
+          this.enterEditMode(favoriteAccount, form);
+        });
+        normalViewDeleteButton.addEventListener("click", () => {
+          this.handleDeleteButtonClick(favoriteAccount);
+        });
+        editViewCancelButton.addEventListener("click", () => {
+          this.exitEditMode(favoriteAccount);
+        });
+        editViewConfirmButton.addEventListener("click", () => {
+          this.handleEditButtonClick(favoriteAccount, form, index);
+        });
+        favoriteAccount.isListenedForEditList = true;
       }
       favoriteAccountEditListElement.appendChild(normalView);
     });
-    this.hasBeenDisplayedOnce = true;
     this.displayCount();
   }
 

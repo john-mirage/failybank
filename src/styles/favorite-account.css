@@ -96,12 +96,12 @@
 }
 
 .favorite-account__icon--check {
-    color: var(--color-bank);
+    color: var(--color-typo-secondary);
 }
 
 .favorite-account__copied-text {
     display: none;
-    color: var(--color-bank);
+    color: var(--color-typo-secondary);
 }
 
 .favorite-account--clickable[data-copied="false"] .favorite-account__icon--copy {display: block;}

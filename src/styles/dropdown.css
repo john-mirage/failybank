@@ -9,13 +9,13 @@
     flex-direction: row;
     align-items: center;
     list-style: none;
-    color: var(--color-text-alt);
+    color: var(--color-dropdown-button);
     cursor: pointer;
     text-align: end;
 }
 
 .dropdown__button:hover {
-    color: var(--color-text);
+    color: var(--color-dropdown-button-active);
 }
 
 .dropdown__icon {

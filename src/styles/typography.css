@@ -116,6 +116,11 @@
     color: var(--color-typo-negative);
 }
 
+.typography--log-ref {
+    font-weight: 700;
+    color: var(--color-typo-primary);
+}
+
 .typography--mb {
     margin-bottom: 0.8rem;
 }

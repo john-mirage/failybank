@@ -14,6 +14,10 @@
     gap: 24px;
 }
 
+.group--small-gap {
+    gap: 8px;
+}
+
 .group--column {
     flex-direction: column;
     height: 100%;
@@ -30,8 +34,3 @@
 .group__section--fixed {
     flex: 0 0 auto;
 }
-
-.group__section--ref {
-    width: 8rem;
-}
-
