@@ -9,7 +9,7 @@
     padding-left: 24px;
     padding-right: 24px;
     background-color: var(--color-top-app-bar);
-    box-shadow: var(--color-top-app-bar-shadow);
+    border-bottom: 0.1rem solid var(--color-top-app-bar-border);
 }
 
 .top-app-bar__section {

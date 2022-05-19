@@ -24,10 +24,12 @@ export class FavoriteAccountPasteList {
     this.targetInputElement = targetInputElement;
     this.handleClick = handleClick;
     this.activeFavoriteAccountElement = false;
-    this.hasBeenDisplayedOnce = false;
     this.resetActiveFavoriteAccountElement = this.resetActiveFavoriteAccountElement.bind(this);
   }
 
+  /**
+   * Display the count of the favorite accounts.
+   */
   displayCount() {
     const favoriteAccountsTotal = String(this.favoriteAccountList.favoriteAccounts.length);
     if (favoriteAccountPasteListCountElement.textContent !== favoriteAccountsTotal) {
@@ -35,6 +37,12 @@ export class FavoriteAccountPasteList {
     }
   }
 
+  /**
+   * Set the active favorite account element.
+   * The active element is the element who has been clicked.
+   *
+   * @param favoriteAccount {FavoriteAccount} - The favorite account.
+   */
   setActiveFavoriteAccountElement(favoriteAccount) {
     if (this.activeFavoriteAccountElement) this.targetInputElement.removeEventListener("keyup", this.resetActiveFavoriteAccountElement);
     this.targetInputElement.value = favoriteAccount.number;
@@ -44,8 +52,10 @@ export class FavoriteAccountPasteList {
     this.handleClick();
   }
 
+  /**
+   * Reset the active account element.
+   */
   resetActiveFavoriteAccountElement() {
-    console.log("reset copied Element");
     this.activeFavoriteAccountElement.dataset.copied = "false";
     this.activeFavoriteAccountElement = false;
   }
@@ -57,16 +67,16 @@ export class FavoriteAccountPasteList {
     this.favoriteAccountList.favoriteAccounts.forEach((favoriteAccount) => {
       const favoriteAccountElement = favoriteAccount.getPasteView();
       favoriteAccountPasteListElement.appendChild(favoriteAccountElement);
-      if (!this.hasBeenDisplayedOnce) {
+      if (!favoriteAccount.isListenedForPasteList) {
         favoriteAccountElement.addEventListener("click", () => {
           if (this.targetInputElement.value !== favoriteAccount.number) {
             this.setActiveFavoriteAccountElement(favoriteAccount);
             this.targetInputElement.addEventListener("keyup", this.resetActiveFavoriteAccountElement, {once: true});
           }
         });
+        favoriteAccount.isListenedForPasteList = true;
       }
     });
-    this.hasBeenDisplayedOnce = true;
     this.displayCount();
   }
 
