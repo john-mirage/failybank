@@ -6,6 +6,7 @@ export default defineConfig({
     base: "/failybank/",
     resolve: {
         alias: {
+            '@components': resolve(__dirname, 'src/components'),
             '@data': resolve(__dirname, 'src/data'),
             '@images': resolve(__dirname, 'src/images'),
             '@scripts': resolve(__dirname, 'src/scripts'),

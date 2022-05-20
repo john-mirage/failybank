@@ -6,6 +6,7 @@ import {NotificationList} from "@scripts/classes/notification-list";
 import {Tab} from "@scripts/classes/tab";
 import {TabList} from "@scripts/classes/tab-list";
 import {Dropdown} from "@scripts/classes/dropdown";
+import CustomDropdown from "@components/dropdown";
 import {Filter} from "@scripts/classes/filter";
 import {FilterList} from "@scripts/classes/filter-list";
 import {FavoriteAccount} from "@scripts/classes/favorite-account";
@@ -14,6 +15,10 @@ import {FavoriteAccountEditList} from "@scripts/classes/favorite-account-edit-li
 import {FavoriteAccountPasteList} from "@scripts/classes/favorite-account-paste-list";
 import {View} from "@scripts/classes/view";
 import {ViewSwitcher} from "@scripts/classes/view-switcher";
+
+customElements.define("app-dropdown", CustomDropdown);
+
+const customDropdown = document.querySelector("app-dropdown");
 
 const personalTransferAccountNumberInput = document.getElementById("personal-transfer-account-number-input");
 
@@ -131,6 +136,7 @@ function setPersonalLogListFilter(filter) {
   personalLogList.reset();
   personalFilterDropdown.close();
   personalFilterDropdown.updateLabel(filter.value ? `filtre: ${filter.name}` : "filtrer les résultats");
+  customDropdown.label = filter.value ? `filtre: ${filter.name}` : "filtrer les résultats";
 }
 
 const personalFilterList = new FilterList(
