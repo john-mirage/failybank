@@ -33,13 +33,7 @@ class Dropdown extends HTMLElement {
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08rem;
-      }
-      .dropdown__icon {
-          box-sizing: border-box;
-          display: block;
-          width: 2rem;
-          height: 2rem;
-          margin-right: 0.8rem;
+        margin-left: 8px;
       }
       .dropdown__content {
           box-sizing: border-box;
@@ -83,7 +77,8 @@ class Dropdown extends HTMLElement {
    * @param event {Event} - The event.
    */
   handleDocumentClick(event) {
-    const clickIsInsideDropdown = this.dropdownElement.contains(event.composedPath()[0]);
+    const paths = event.composedPath();
+    const clickIsInsideDropdown = paths.includes(this.dropdownElement);
     if (!clickIsInsideDropdown && this.dropdownElement.open) this.close();
   }
 

@@ -84,7 +84,10 @@
   </svg>
 
   <app-dropdown>
-    Dropdown content
+    <app-icon slot="dropdown-icon" shape="filter" size="20"></app-icon>
+    <div slot="dropdown-content">
+      <app-filter label="operation" icon="close"></app-filter>
+    </div>
   </app-dropdown>
 
   <!-- App -->
@@ -470,16 +473,25 @@
   <template id="template-dropdown">
     <details class="dropdown">
       <summary class="dropdown__button">
-        <svg class="dropdown__icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M0 0h24v24H0V0z" fill="none"/>
-          <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
-        </svg>
+        <slot name="dropdown-icon"></slot>
         <span class="dropdown__label">Filtrer les résultats</span>
       </summary>
       <div class="dropdown__content">
-        <slot></slot>
+        <slot name="dropdown-content"></slot>
       </div>
     </details>
+  </template>
+
+  <!-- Template | icon -->
+  <template id="template-icon">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"></svg>
+  </template>
+
+  <!-- Template | filter -->
+  <template id="template-filter">
+    <button class="filter">
+      <span class="filter__label"></span>
+    </button>
   </template>
 
   <!-- Template / favorite account / normal view -->

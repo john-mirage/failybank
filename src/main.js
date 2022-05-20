@@ -7,6 +7,8 @@ import {Tab} from "@scripts/classes/tab";
 import {TabList} from "@scripts/classes/tab-list";
 import {Dropdown} from "@scripts/classes/dropdown";
 import CustomDropdown from "@components/dropdown";
+import CustomFilter from "@components/filter";
+import CustomIcon from "@components/icon";
 import {Filter} from "@scripts/classes/filter";
 import {FilterList} from "@scripts/classes/filter-list";
 import {FavoriteAccount} from "@scripts/classes/favorite-account";
@@ -17,6 +19,8 @@ import {View} from "@scripts/classes/view";
 import {ViewSwitcher} from "@scripts/classes/view-switcher";
 
 customElements.define("app-dropdown", CustomDropdown);
+customElements.define("app-filter", CustomFilter);
+customElements.define("app-icon", CustomIcon);
 
 const customDropdown = document.querySelector("app-dropdown");
 
