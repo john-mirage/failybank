@@ -1,5 +1,28 @@
 export const bank = "fleeca";
 
+export const tabs = [
+  {
+    label: "Mon compte",
+    value: "personal"
+  },
+  {
+    label: "Opération",
+    value: "personal-operation"
+  },
+  {
+    label: "Transfert",
+    value: "personal-transfer"
+  },
+  {
+    label: "Entreprise",
+    value: "enterprise"
+  },
+  {
+    label: "Offshore",
+    value: "offshore"
+  }
+];
+
 export const data = {
   bank: "fleeca",
   hasEnterprise: true,

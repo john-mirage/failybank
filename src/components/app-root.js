@@ -17,18 +17,6 @@ class AppRoot extends HTMLElement {
         overflow: hidden;
         user-select: none;
       }
-      @media screen and (min-width: 1920px) {
-        :host {
-          width: 1600px;
-          height: 900px;
-        }
-      }
-      @media screen and (min-width: 3840px) {
-        :host {
-          width: 2560px;
-          height: 1440px;
-        }
-      }
       </style>
     `;
     this.shadowRoot.appendChild(fragment);

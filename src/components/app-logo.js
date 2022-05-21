@@ -21,8 +21,8 @@ class AppLogo extends HTMLElement {
       <style>
       .logo {
         display: block;
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         color: var(--color-bank);
       }
       </style>
