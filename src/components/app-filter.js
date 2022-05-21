@@ -1,4 +1,4 @@
-class Filter extends HTMLElement {
+class AppFilter extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode: "open"});
@@ -51,4 +51,4 @@ class Filter extends HTMLElement {
   }
 }
 
-export default Filter;
+export default AppFilter;

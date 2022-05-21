@@ -16,7 +16,61 @@
 @import "styles/top-app-bar.css";
 @import "styles/view.css";
 
+@font-face {
+    font-family: 'RedHatDisplay';
+    src: url("./assets/fonts/RedHatDisplayVF.woff2") format('woff2-variations');
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'RedHatDisplay';
+    src: url("./assets/fonts/RedHatDisplayVF-Italic.woff2") format('woff2-variations');
+    font-weight: 300 900;
+    font-style: italic;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'RedHatText';
+    src: url("./assets/fonts/RedHatTextVF.woff2") format('woff2-variations');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'RedHatText';
+    src: url("./assets/fonts/RedHatTextVF-Italic.woff2") format('woff2-variations');
+    font-weight: 300 700;
+    font-style: italic;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'RedHatMono';
+    src: url("./assets/fonts/RedHatMonoVF.woff2") format('woff2-variations');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'RedHatMono';
+    src: url("./assets/fonts/RedHatMonoVF-Italic.woff2") format('woff2-variations');
+    font-weight: 300 700;
+    font-style: italic;
+    font-display: fallback;
+}
+
 :root {
+    --font-fallback: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-fallback-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    --font-display: "RedHatDisplay", var(--font-fallback);
+    --font-text: "RedHatText", var(--font-fallback);
+    --font-mono: "RedHatMono", var(--font-fallback-mono);
+
     --color-app: hsl(210, 17%, 97%);
     --color-app-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
@@ -176,17 +230,6 @@
 
 html {
     font-size: 10px;
-    font-family:
-        "Red Hat Display",
-        system-ui,
-        -apple-system,
-        'Segoe UI',
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif,
-        'Apple Color Emoji',
-        'Segoe UI Emoji';
 }
 
 body {
@@ -195,8 +238,6 @@ body {
     width: 100%;
     min-height: 100vh;
     margin: 0;
-    padding-left: 24px;
-    padding-right: 24px;
 }
 
 .maze body {

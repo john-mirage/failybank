@@ -1,3 +1,5 @@
+export const bank = "fleeca";
+
 export const data = {
   bank: "fleeca",
   hasEnterprise: true,

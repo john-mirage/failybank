@@ -1,4 +1,4 @@
-class Dropdown extends HTMLElement {
+class AppDropdown extends HTMLElement {
 
   /**
    * @constructor
@@ -109,4 +109,4 @@ class Dropdown extends HTMLElement {
   }
 }
 
-export default Dropdown;
+export default AppDropdown;

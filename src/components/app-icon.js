@@ -9,7 +9,7 @@ const icon = {
   `,
 };
 
-class Icon extends HTMLElement {
+class AppIcon extends HTMLElement {
 
   static get observedAttributes() {
     return ["shape"];
@@ -18,9 +18,9 @@ class Icon extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode: "open"});
-    const template = document.getElementById("template-icon");
-    const iconFragment = template.content.cloneNode(true);
-    this.svg = iconFragment.querySelector(".icon");
+    const template = document.getElementById("template-app-icon");
+    const fragment = template.content.cloneNode(true);
+    this.svg = fragment.querySelector(".icon");
     const shape = this.shape;
     const size = this.size;
     this.svg.innerHTML = icon[shape];
@@ -33,7 +33,7 @@ class Icon extends HTMLElement {
       }
       </style>
     `;
-    this.shadowRoot.appendChild(this.svg);
+    this.shadowRoot.appendChild(fragment);
   }
 
   get shape() {
@@ -51,4 +51,4 @@ class Icon extends HTMLElement {
   }
 }
 
-export default Icon;
+export default AppIcon;

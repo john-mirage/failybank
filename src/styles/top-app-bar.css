@@ -18,7 +18,6 @@
 }
 
 .top-app-bar__section--middle {
-    height: 100%;
     display: flex;
     flex-direction: row;
 }
