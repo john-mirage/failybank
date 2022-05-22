@@ -8,7 +8,6 @@ class AppRoot extends HTMLElement {
       <style>
       :host {
         box-sizing: border-box;
-        display: flex;
         width: 1280px;
         height: 720px;
         margin: auto;

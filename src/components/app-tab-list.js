@@ -1,9 +1,9 @@
-import {tabs} from "@data/data";
-
 class AppTabList extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode: "open"});
+    const template = document.getElementById("template-app-tab-list");
+    const fragment = template.content.cloneNode(true);
     this.shadowRoot.innerHTML = `
       <style>
       :host {
@@ -13,13 +13,15 @@ class AppTabList extends HTMLElement {
       }
       </style>
     `;
-    this.tabs = tabs.map((tab) => {
-      const tabElement = document.createElement("app-tab");
-      tabElement.label = tab.label;
-      this.shadowRoot.appendChild(tabElement);
-      return tabElement;
-    });
-    this.tabs[0].activate();
+    this.shadowRoot.appendChild(fragment);
+  }
+
+  addTab(tab) {
+
+  }
+
+  setActiveTab(tab) {
+
   }
 }
 

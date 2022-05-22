@@ -14,13 +14,19 @@
   <app-root>
     <app-bar slot="bar">
       <app-logo slot="logo"></app-logo>
-      <app-tab-list slot="tab-list"></app-tab-list>
+      <app-tab-list slot="tab-list">
+        <app-tab label="Mon compte"></app-tab>
+        <app-tab label="Opération"></app-tab>
+        <app-tab label="Transfert"></app-tab>
+      </app-tab-list>
     </app-bar>
+    <app-view slot="view" name="my-account"></app-view>
   </app-root>
 
   <!-- Template | app root -->
   <template id="template-app-root">
     <slot name="bar"></slot>
+    <slot name="view"></slot>
   </template>
 
   <!-- Template | app bar -->
@@ -36,6 +42,36 @@
       <slot name="theme-button"></slot>
       <slot name="shutdown-button"></slot>
     </div>
+  </template>
+
+  <!-- Template | app view - my account -->
+  <template id="template-app-view-my-account">
+    <div class="grid grid--my-account"></div>
+  </template>
+
+  <!-- Template | app view - operation -->
+  <template id="template-app-view-operation">
+    <div class="grid grid--operation"></div>
+  </template>
+
+  <!-- Template | app view - transfer -->
+  <template id="template-app-view-transfer">
+    <div class="grid grid--transfer"></div>
+  </template>
+
+  <!-- Template | app view - enterprise -->
+  <template id="template-app-view-enterprise">
+    <div class="grid grid--enterprise"></div>
+  </template>
+
+  <!-- Template | app view - offshore -->
+  <template id="template-app-view-offshore">
+    <div class="grid grid--offshore"></div>
+  </template>
+
+  <!-- Template | app tab list -->
+  <template id="template-app-tab-list">
+    <slot></slot>
   </template>
 
   <!-- Template | app icon -->

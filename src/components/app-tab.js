@@ -1,9 +1,14 @@
 class AppTab extends HTMLElement {
+  static get observedAttributes() {
+    return ["label"];
+  }
+
   constructor() {
     super();
     this.attachShadow({mode: "open"});
     this.tab = document.createElement("button");
     this.tab.classList.add("tab");
+    this.tab.textContent = this.label;
     this.shadowRoot.innerHTML = `
       <style>
       :host {
@@ -35,8 +40,8 @@ class AppTab extends HTMLElement {
     this.shadowRoot.appendChild(this.tab);
   }
 
-  set label(label) {
-    this.tab.textContent = label;
+  get label() {
+    return this.getAttribute("label");
   }
 
   activate() {
@@ -47,6 +52,12 @@ class AppTab extends HTMLElement {
   disable() {
     this.tab.classList.remove("active");
     this.tab.removeAttribute("disabled");
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue && name === "label") {
+      this.tab.textContent = newValue;
+    }
   }
 }
 
